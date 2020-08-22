@@ -21,9 +21,37 @@
 }
 
 .react-player{
-    box-shadow: none;
+    position:absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
 }
 
 .react-player:focus{
     outline-color: black;
+}
+
+.back-btn{
+    position: absolute;
+    top: 1%;
+    left: 2%;
+    border-radius: 25px;
+    transform: scale(1.5,1.5);
+}
+
+.close-btn{
+    position: absolute;
+    top: 1%;
+    right: 2%;
+    border-radius: 25px;
+    transform: scale(1.5, 1.5);
+}
+
+.player-header{
+    z-index: 3;
+    display:block;
+}
+
+.player-header:hover{
+    display: block;
 }

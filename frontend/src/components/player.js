@@ -4,6 +4,8 @@ import Comments from './comments';
 import {getVideoLink} from '../utils/api'
 import './player.css';
 import play from './play.svg';
+import {RiCloseCircleFill} from "react-icons/ri";
+import {TiArrowBack} from "react-icons/ti";
 
 const watchProgress = (event) => {
     console.log(event);
@@ -31,9 +33,7 @@ export class player extends Component {
     }
 
     handleKeyPress = (event) => {
-        console.log(event.key);
-        if(['f','F'].includes(event.key)){
-        }
+        console.log(event);
     }
 
     disableRightClick = () => {
@@ -44,7 +44,11 @@ export class player extends Component {
 
     render() {
         return (
-                <div className="player-wrapper" onKeyPress = {this.handleKeyPress}>
+                <div className="player-wrapper" onMouseMove = {this.handleKeyPress}>
+                    <div className='player-header'>
+                        < TiArrowBack className = 'back-btn' / >
+                        < RiCloseCircleFill className= 'close-btn'/>
+                    </div>
                     < ReactPlayer 
                         className = 'react-player' 
                         url = {this.state=== null ? '' : this.state.videoUrl}
@@ -61,7 +65,6 @@ export class player extends Component {
                                     }
                                  }}}
                     />
-                    <Comments/>
                  </div>
         )
     }
