@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App:focus{
+  outline: none;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

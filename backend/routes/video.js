@@ -12,7 +12,7 @@ router.post('/',(req,res,next)=>{
     console.log(res.body);
     const file_name = 'anniversary2.mp4';
     const video = {
-        videoUrl: `${process.env.BASE_URL}/videos/${file_name}`
+        videoUrl: `https://storage.googleapis.com/coral-burner-287102/1TQ75EQHYSVC/22a_1598098882_40471.mp4`
     }
     res.json(video);
 });
