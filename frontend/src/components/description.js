@@ -4,7 +4,7 @@ export class description extends Component {
     render() {
         return (
             <div style={pageStyle}>
-                <h2> This is Description of the Episode with some trivia </h2>
+                <h2> This is Description of the Episode with some Trivia </h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.Mauris cursus finibus nisi sed egestas.Nam eget ligula volutpat, sollicitudin dolor tempor, varius elit.Fusce commodo ac sapien sit amet volutpat.Phasellus lectus libero, ultrices quis eros et, fermentum malesuada nisi.Nulla at tortor velit.Quisque eget luctus odio, non molestie erat.Curabitur ultrices erat augue, sed feugiat nisi fringilla id.Ut sodales aliquet massa, faucibus luctus felis mollis eget.Fusce eget ultrices leo, ac venenatis sem.Praesent congue diam vitae sem ornare, quis convallis neque lobortis.Phasellus malesuada, sapien vel rhoncus volutpat, arcu elit molestie metus, auctor bibendum quam felis quis tellus.Donec interdum viverra finibus.
 
@@ -23,6 +23,7 @@ export class description extends Component {
 
 const pageStyle = {
     zIndex: '-2',
+    position: 'absolute',
     marginTop: '53%'
 }
 
