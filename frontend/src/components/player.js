@@ -6,11 +6,14 @@ import './player.css';
 import play from './play.svg';
 import {RiCloseCircleFill} from "react-icons/ri";
 import {TiArrowBack} from "react-icons/ti";
+import {
+    Redirect,
+    useHistory
+} from "react-router-dom";
 
 const watchProgress = (event) => {
     console.log(event);
 }
-
 
 export class player extends Component {
     async componentDidMount(){
@@ -42,12 +45,17 @@ export class player extends Component {
         });
     }
 
+    sendBack = () => {
+        let path = this.props.backUrl ? this.props.backUrl : "/";
+    }
+
     render() {
         return (
-                <div className="player-wrapper" onMouseMove = {this.handleKeyPress}>
+                <div className="player-wrapper">
                     <div className='player-header'>
-                        < TiArrowBack className = 'back-btn' / >
-                        < RiCloseCircleFill className= 'close-btn'/>
+                         < TiArrowBack className = 'back-btn btn' onClick={this.sendBack} />
+                         Korukuno Basket S02E06
+                        < RiCloseCircleFill className= 'close-btn btn'/>
                     </div>
                     < ReactPlayer 
                         className = 'react-player' 
@@ -58,7 +66,7 @@ export class player extends Component {
                         playIcon = {play}
                         onProgress = {watchProgress}
                         wrapper = 'div'
-                        playing = {true}
+                        playing = {false}
                         config= {{ file: { 
                                     attributes: {
                                     controlsList: 'nodownload'

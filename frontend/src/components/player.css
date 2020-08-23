@@ -31,26 +31,35 @@
     outline-color: black;
 }
 
-.back-btn{
+.btn{
     position: absolute;
-    top: 1%;
-    left: 2%;
     border-radius: 25px;
-    transform: scale(1.5,1.5);
-}
-
-.close-btn{
-    position: absolute;
-    top: 1%;
-    right: 2%;
-    border-radius: 25px;
+    background-color: white;
     transform: scale(1.5, 1.5);
 }
 
+.btn:hover{
+    cursor: pointer;
+}
+
+.back-btn{  
+    top: 1%;
+    left: 2%;
+}
+
+.close-btn{
+    top: 1%;
+    right: 2%;
+}
+
 .player-header{
+    padding-top:1%;
     z-index: 3;
     display:block;
+    text-shadow: 0 0 3px #ffffff, 0 0 5px #ffffff;
+    
 }
+
 
 .player-header:hover{
     display: block;

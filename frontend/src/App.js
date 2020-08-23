@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom';
 import player from './components/player';
 import showRoom from './components/showRoom';
+import show from './components/show';
+
 require('dotenv').config();
 
 function App() {
@@ -17,7 +19,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={showRoom}/>
-          <Route path="/player" component={player} />
+          <Route path="/show" component={show}></Route>
+          <Route path="/player" component={player} props="{name: 'Helllo'}"></Route>
         </Switch>
       </Router>
     </div>
