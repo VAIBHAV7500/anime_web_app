@@ -55,7 +55,7 @@
 .player-header{
     padding-top:1%;
     z-index: 3;
-    display:block;
+    display:relative;
     text-shadow: 0 0 3px #ffffff, 0 0 5px #ffffff;
     
 }
@@ -63,4 +63,9 @@
 
 .player-header:hover{
     display: block;
+}
+
+
+.comments{
+    background-color: brown;
 }

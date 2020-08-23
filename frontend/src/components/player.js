@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ReactPlayer from 'react-player/lazy'
-import Comments from './comments';
+import Description from './description'
 import {getVideoLink} from '../utils/api'
 import './player.css';
 import play from './play.svg';
@@ -73,6 +73,7 @@ export class player extends Component {
                                     }
                                  }}}
                     />
+                    < Description className = 'description' />
                  </div>
         )
     }
