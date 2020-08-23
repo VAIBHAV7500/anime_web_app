@@ -47,11 +47,6 @@
     left: 2%;
 }
 
-.close-btn{
-    top: 1%;
-    right: 2%;
-}
-
 .player-header{
     text-align: center;
     padding-top:1%;
@@ -59,6 +54,46 @@
     display:relative;
     text-shadow: 0 0 3px #ffffff, 0 0 5px #ffffff;
     
+}
+
+.close-button{
+    margin-top: -19px;
+    margin-left: 97%;
+    background: #EE4540;
+    box-shadow: 0px 4px 12px rgba(136,18,56,0.15);
+    border-radius: 80px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index:3;
+}
+
+.close-button:hover{
+    background: black;   ;
+    box-shadow: 0px 4px 12px rgba(136, 18, 56, 0.15);
+    border-radius: 80px;
+}
+
+.close-button svg{
+    position: absolute;
+    display: block;
+    left: 50%;
+    top: 50%;
+    transform-origin: center center;
+    transform: translate(-50%,-50%);
+    transition: 400ms ease;
+}
+
+svg:hover{
+    stroke: black; 
+}
+
+.close-button:hover svg {
+    transform: translate(-50%,-50%) rotate(180deg);
+}
+
+.close-button:hover path{
+    stroke: #ffffff;
 }
 
 
