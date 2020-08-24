@@ -4,7 +4,7 @@ export class showRoom extends Component {
     render() {
         return (
             <div>
-                <h1> This is our showRoom</h1>
+                <h1 style={{marginTop:'0px'}}> This is our showRoom</h1>
             </div>
         )
     }
