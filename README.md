@@ -21,3 +21,16 @@
     npm install
     yarn install
     ```
+
+## How to Run
+* In terminal 1
+```
+cd backend
+npx nodemon app.js
+```
+* In terminal 2
+```
+cd frontend
+npm start
+```
+<strong>Note</strong> : We consider you are at the root folder of the app in both the terminals.
