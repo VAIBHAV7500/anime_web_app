@@ -4,8 +4,7 @@ import Description from './description'
 import {getVideoLink} from '../../utils/api'
 import './player.css';
 import play from './play.svg';
-import {RiCloseCircleFill} from "react-icons/ri";
-import {TiArrowBack} from "react-icons/ti";
+import {ImHome} from "react-icons/im";
 import {
     Redirect,
     useHistory
@@ -54,7 +53,7 @@ export class player extends Component {
         return (
                 <div className="player-wrapper">
                     <div className='player-header'>
-                         < TiArrowBack className = 'back-btn btn' onClick={this.sendBack} />
+                         < ImHome className = 'home-btn btn' onClick={this.sendBack} />
                          {this.state=== null ? 'Loading...' : this.state.title}
                         <div className='close-button btn'>
                             <svg width="10" height="10" viewBox = "0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

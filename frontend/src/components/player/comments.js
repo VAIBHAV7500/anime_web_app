@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './comments.css';
 
 export class comments extends Component {
     render() {
         return (
-            <div style={commentPageStyle}>
+            <div className="comment_wrapper">
                 <h2> This is comment and description Section </h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.Mauris cursus finibus nisi sed egestas.Nam eget ligula volutpat, sollicitudin dolor tempor, varius elit.Fusce commodo ac sapien sit amet volutpat.Phasellus lectus libero, ultrices quis eros et, fermentum malesuada nisi.Nulla at tortor velit.Quisque eget luctus odio, non molestie erat.Curabitur ultrices erat augue, sed feugiat nisi fringilla id.Ut sodales aliquet massa, faucibus luctus felis mollis eget.Fusce eget ultrices leo, ac venenatis sem.Praesent congue diam vitae sem ornare, quis convallis neque lobortis.Phasellus malesuada, sapien vel rhoncus volutpat, arcu elit molestie metus, auctor bibendum quam felis quis tellus.Donec interdum viverra finibus.
@@ -19,11 +20,6 @@ export class comments extends Component {
             </div>
         )
     }
-}
-
-const commentPageStyle = {
-    zIndex: '-2',
-    marginTop:'53%'
 }
 
 export default comments

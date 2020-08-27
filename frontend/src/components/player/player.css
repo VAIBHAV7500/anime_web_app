@@ -33,8 +33,7 @@
 
 .btn{
     position: absolute;
-    border-radius: 25px;
-    background-color: white;
+
     transform: scale(1.5, 1.5);
 }
 
@@ -42,9 +41,10 @@
     cursor: pointer;
 }
 
-.back-btn{  
+.home-btn{  
     top: 1%;
-    left: 2%;
+    left: 2%; 
+    color: white;
 }
 
 .player-header{
