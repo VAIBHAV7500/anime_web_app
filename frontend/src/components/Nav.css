@@ -20,6 +20,7 @@
 .nav_logo {
     position: fixed;
     left: 2%;
+    top:1%;
     width: 160px;
     -webkit-text-stroke: 2px white;
     object-fit: contain;
