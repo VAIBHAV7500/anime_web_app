@@ -24,10 +24,13 @@
     width: 160px;
     -webkit-text-stroke: 2px white;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .nav_avatar{
     position: fixed;
     right: 1%;
     object-fit: contain;
+    outline-color: white;
+    cursor: pointer;
 }

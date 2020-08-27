@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import ReactPlayer from 'react-player/lazy'
 import Description from './description'
-import {getVideoLink} from '../utils/api'
+import {getVideoLink} from '../../utils/api'
 import './player.css';
 import play from './play.svg';
 import {RiCloseCircleFill} from "react-icons/ri";

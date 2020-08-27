@@ -7,9 +7,9 @@ import {
   Switch,
   Link
 } from 'react-router-dom';
-import player from './components/player';
-import showRoom from './components/showRoom';
-import show from './components/show';
+import player from './components/player/player';
+import showRoom from './components/showRoom/showRoom';
+import show from './components/show/show';
 
 require('dotenv').config();
 

@@ -4,7 +4,12 @@ export class show extends Component {
     render() {
         return (
             <div>
-                <h1> This is to see Show </h1>
+                <h1
+                style={{
+                    textAlign: "center"
+                }}
+                > 
+                This is to see Show </h1>
             </div>
         )
     }
