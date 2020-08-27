@@ -69,7 +69,6 @@ export class player extends Component {
                         controls = {true}
                         playIcon = {play}
                         onProgress = {watchProgress}
-                        wrapper = 'div'
                         playing = {false}
                         config= {{ file: { 
                                     attributes: {

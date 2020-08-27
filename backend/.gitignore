@@ -119,3 +119,4 @@ bin
 
 .DS_Store
 
+public/videos/*

@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1",
     "react-full-screen": "^0.3.1",
     "react-icons": "^3.11.0",
+    "react-multi-carousel": "^2.5.5",
     "react-player": "^2.6.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

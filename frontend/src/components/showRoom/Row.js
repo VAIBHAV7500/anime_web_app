@@ -3,6 +3,7 @@ import axios from '../../utils/axios';
 import "./Row.css";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import ReactPlayer from 'react-player/lazy'
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -41,9 +42,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
           .catch((error) => console.log(error));
         }
   }
-
-//   console.log(movies);
-
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -59,7 +57,11 @@ function Row({ title, fetchUrl, isLargeRow }) {
           />
         ))}
       </div>
-      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+      {trailerUrl && < ReactPlayer  
+          url={`https://youtube.com/watch?v=${trailerUrl}`} 
+          height = "390px"
+          playing= {true}
+      />}
     </div>
   );
 }
