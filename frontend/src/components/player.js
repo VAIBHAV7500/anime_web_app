@@ -55,7 +55,7 @@ export class player extends Component {
                 <div className="player-wrapper">
                     <div className='player-header'>
                          < TiArrowBack className = 'back-btn btn' onClick={this.sendBack} />
-                         {this.state=== null ? 'Loading Title...' : this.state.title}
+                         {this.state=== null ? 'Loading...' : this.state.title}
                         <div className='close-button btn'>
                             <svg width="10" height="10" viewBox = "0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 1L10 10M19 19L10 10M10 10L19 1M10 10L1 19" stroke ='#FFAEC8' strokeWidth='2' />

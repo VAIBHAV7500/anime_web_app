@@ -1,4 +1,5 @@
 import React ,{ useState, useEffect } from 'react';
+import { FaUser } from "react-icons/fa";
 import "./Nav.css"
 
 function Nav() {
@@ -19,16 +20,20 @@ function Nav() {
 
     return (
         <div className={`nav ${show && "nav_black"}`}>
-            <img 
+            {/* <img 
                 className='nav_logo'
                 // src=""
                 alt="ANIMEI LOGO"
-            />
-            <img
+            /> */}
+            <h1 className="nav_logo">
+                    ANIMEI
+            </h1>
+            {/* <img
                 className="nav_avatar"
                 // src=""
                 alt="User Avatar"
-            />            
+            />   */}
+            <FaUser className="nav_avatar"></FaUser>          
         </div>
     )
 }

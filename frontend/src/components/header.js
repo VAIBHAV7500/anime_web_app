@@ -11,7 +11,7 @@ export class header extends Component {
 }
 
 const headerStyle = {
-    align: 'center'
+    align: 'center',
 }
 
 export default header

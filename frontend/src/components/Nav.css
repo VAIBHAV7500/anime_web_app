@@ -12,19 +12,21 @@
     transition: all 0.5s;
 }
 .nav_black{
-    background-color: #111;
+    background: rgb(2, 0, 6);
+    background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, rgba(77, 1, 163, 1) 42%);
+    color: white;
 }
 
 .nav_logo {
     position: fixed;
-    left: 20px;
+    left: 2%;
     width: 160px;
+    -webkit-text-stroke: 2px white;
     object-fit: contain;
 }
 
 .nav_avatar{
     position: fixed;
-    right: 20px;
-    width: 160px;
+    right: 1%;
     object-fit: contain;
 }
