@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var helmet = require('helmet');
+var nodeadmin = require('nodeadmin');
 
 require('dotenv').config();
 
@@ -32,6 +33,8 @@ app.use(cors({
 }));
 
 app.use(helmet());
+
+app.use(nodeadmin(app));
 
 app.use('/', indexRouter);
 app.use('/video', videoRouter);
