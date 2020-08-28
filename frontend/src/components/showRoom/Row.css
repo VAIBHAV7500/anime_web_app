@@ -1,6 +1,6 @@
 .row{
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 10px;
     color:white;
 }
 .row_posters{
@@ -8,6 +8,7 @@
     overflow-y: hidden;
     overflow-x: scroll;
     padding: 20px;
+    left:0;
 }
 
 .row_posters::-webkit-scrollbar {

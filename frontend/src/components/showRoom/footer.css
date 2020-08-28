@@ -1,0 +1,34 @@
+.footer{
+    background: rgba(77, 1, 163, 1);
+    opacity: 0.6;
+    height: 100px;
+}
+
+table{
+    float: left;
+    color: white;
+    margin-left: 75px;
+    font-size: 10px;
+}
+
+.content{
+    padding:20px;
+}
+
+.footer_table{
+    padding: 20px;
+}
+
+td{
+    padding-right:40px;
+}
+
+.footer_logo{
+    cursor: pointer;
+    float: right;
+    margin-right: 60px;
+    padding-top: 20px;
+    color: black;
+    font-size: 54px;
+     -webkit-text-stroke: 2px white;
+}

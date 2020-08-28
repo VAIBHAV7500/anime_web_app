@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Row from './Row';
-import Banner from './Banner'
-import requests from './requests'
-import Nav from './Nav'
+import Banner from './Banner';
+import requests from './requests';
+import Nav from './Nav';
+import Footer from './footer';
 
 export class showRoom extends Component {
     render() {
@@ -22,7 +23,9 @@ export class showRoom extends Component {
       <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
       <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
       <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
-
+      <footer>
+        <Footer/>
+      </footer>
     </div>
         )
     }

@@ -15,7 +15,6 @@
     background: rgb(2, 0, 6);
     background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, rgba(77, 1, 163, 1) 42%);
     opacity: 0.95;
-    color: white;
 }
 
 .nav_logo {
@@ -29,9 +28,23 @@
 }
 
 .nav_avatar{
+    height: 30px;
+    width: auto;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
     position: fixed;
     right: 1%;
     object-fit: contain;
-    outline-color: white;
-    cursor: pointer;
+    top: 15px;
 }
+
+.nav_avatar.nav_black{
+    color: black;
+    background-color: black;
+}
+
+.logo_white{
+    color: white;
+}
+

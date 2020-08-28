@@ -4,9 +4,9 @@ import './comments.css';
 export class comments extends Component {
     render() {
         return (
-            <div className="comment_wrapper">
+            <div style={bodyStyle}>
                 <h2> This is comment and description Section </h2>
-                <p>
+                <p >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.Mauris cursus finibus nisi sed egestas.Nam eget ligula volutpat, sollicitudin dolor tempor, varius elit.Fusce commodo ac sapien sit amet volutpat.Phasellus lectus libero, ultrices quis eros et, fermentum malesuada nisi.Nulla at tortor velit.Quisque eget luctus odio, non molestie erat.Curabitur ultrices erat augue, sed feugiat nisi fringilla id.Ut sodales aliquet massa, faucibus luctus felis mollis eget.Fusce eget ultrices leo, ac venenatis sem.Praesent congue diam vitae sem ornare, quis convallis neque lobortis.Phasellus malesuada, sapien vel rhoncus volutpat, arcu elit molestie metus, auctor bibendum quam felis quis tellus.Donec interdum viverra finibus.
 
                     Nunc fringilla suscipit odio, id elementum purus.Phasellus in enim vitae lorem varius placerat eu id odio.Donec at ex maximus, euismod nisl vitae, pellentesque lectus.Fusce vitae mauris eget diam vestibulum ultricies.Etiam placerat felis mauris, vitae ornare orci mattis quis.Nullam ultrices dictum augue id tristique.Etiam dignissim ipsum enim, vitae porta quam sollicitudin non.Morbi eget euismod odio.Nulla lacinia posuere vestibulum.Praesent fermentum, felis ac pulvinar gravida, ligula lacus vehicula dui, ut facilisis ante diam nec risus.Ut non rhoncus dolor.Sed semper, dui ut venenatis pretium, quam magna iaculis augue, eget facilisis enim est vel diam.In cursus, quam in vulputate viverra, turpis lectus egestas felis, imperdiet gravida diam lacus iaculis massa.Nunc nec felis finibus, interdum risus et, auctor nunc.
@@ -20,6 +20,10 @@ export class comments extends Component {
             </div>
         )
     }
+}
+
+const bodyStyle = {
+    color: "white"
 }
 
 export default comments

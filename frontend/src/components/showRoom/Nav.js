@@ -1,6 +1,12 @@
 import React ,{ useState, useEffect } from 'react';
 import { FaUser } from "react-icons/fa";
-import "./Nav.css"
+import "./Nav.css";
+
+const options = [
+        { name: 'Option 1', value: '1234' },
+        { name: 'Option 2', value: '5678' },
+        { name: 'Option 2', value: '91011' }
+      ];
 
 function Nav() {
     const [show , handleShow] = useState(false);
@@ -25,7 +31,7 @@ function Nav() {
                 // src=""
                 alt="ANIMEI LOGO"
             /> */}
-            <h1 className="nav_logo">
+            <h1 className={`nav_logo ${show && "logo_white"}`}>
                     ANIMEI
             </h1>
             {/* <img
@@ -33,7 +39,8 @@ function Nav() {
                 // src=""
                 alt="User Avatar"
             />   */}
-            <FaUser className="nav_avatar"></FaUser>          
+            
+            <FaUser className = "nav_avatar"></FaUser>
         </div>
     )
 }

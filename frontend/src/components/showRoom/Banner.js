@@ -7,7 +7,6 @@ import './Banner.css';
 
 const responsive = {
   superLargeDesktop: {
-    // the naming can be any, depends on you.
     breakpoint: {
       max: 4000,
       min: 3000
@@ -92,6 +91,7 @@ function Banner() {
       arrows = {false}
       showDots = {true}
       infinite = {true}
+      autoPlaySpeed={3000}
       >
             {generateBanners()}
       </Carousel>
