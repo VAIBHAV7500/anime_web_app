@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import axios from '../../utils/axios';
-import requests from './requests';
+import requests from '../../utils/requests';
 import './Banner.css';
 
 const responsive = {

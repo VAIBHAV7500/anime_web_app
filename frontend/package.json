@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1",
     "react-full-screen": "^0.3.1",
     "react-icons": "^3.11.0",
+    "react-infinite-scroll-component": "^5.0.5",
     "react-loader-spinner": "^3.1.14",
     "react-multi-carousel": "^2.5.5",
     "react-player": "^2.6.1",

@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
+import './description.css'
 
-export class description extends Component {
-    render() {
-        return (
-            <div style={pageStyle}>
-                <h2> This is Description of the Episode with some Trivia </h2>
+function description() {
+    return (
+        <div className="page">
+            <h2 className="title"> This is Description of the Episode with some Trivia </h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.Mauris cursus finibus nisi sed egestas.Nam eget ligula volutpat, sollicitudin dolor tempor, varius elit.Fusce commodo ac sapien sit amet volutpat.Phasellus lectus libero, ultrices quis eros et, fermentum malesuada nisi.Nulla at tortor velit.Quisque eget luctus odio, non molestie erat.Curabitur ultrices erat augue, sed feugiat nisi fringilla id.Ut sodales aliquet massa, faucibus luctus felis mollis eget.Fusce eget ultrices leo, ac venenatis sem.Praesent congue diam vitae sem ornare, quis convallis neque lobortis.Phasellus malesuada, sapien vel rhoncus volutpat, arcu elit molestie metus, auctor bibendum quam felis quis tellus.Donec interdum viverra finibus.
 
@@ -16,15 +16,8 @@ export class description extends Component {
 
                     Nulla facilisi.Praesent sed elit venenatis, rutrum velit eget, rhoncus ipsum.Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.Donec blandit sem id convallis congue.Nulla efficitur elit eu molestie tempor.Nam et sollicitudin orci.In mattis leo ac risus placerat, in hendrerit mi cursus.Sed pulvinar tellus ac mauris lacinia aliquet.Duis suscipit placerat eros ut lacinia.Morbi quam risus, vulputate et tempor ac, pretium eget metus.Nullam dolor tortor, convallis fermentum dolor sed, elementum maximus ex.
                 </p>
-            </div>
-        )
-    }
-}
-
-const pageStyle = {
-    zIndex: '-2',
-    position: 'absolute',
-    marginTop: '53%'
+        </div>
+    )
 }
 
 export default description

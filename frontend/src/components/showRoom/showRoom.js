@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Row from './Row';
 import Banner from './Banner';
-import requests from './requests';
-import Nav from './Nav';
+import requests from '../../utils/requests';
+import Nav from '../services/Nav';
 import Footer from './footer';
  import Loader from 'react-loader-spinner'
+ 
 
 export class showRoom extends Component {
   

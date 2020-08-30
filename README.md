@@ -13,6 +13,17 @@
     cd backend
     npm install
     ```
+* Check for MySQL
+    ```
+    which mysqld
+    ```
+    If it shows the path then continue otherwise install MySQL.
+* Setup config/dbConfig.json file with the user and password of your MySQL.
+
+* Create Database
+    ```
+    sh ./db.sh
+    ```
 
 ## Frontend
 * Install packages required.

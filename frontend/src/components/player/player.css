@@ -1,11 +1,11 @@
 .player-wrapper{
     height: 100vh;
-    background-color: black;
+    background-color: rgb(43, 42, 42);
     animation: fadeInAnimation ease 4s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    background: rgb(43, 42, 42)
 }
-
 @keyframes fadeInAnimation {
     0% {
         opacity: 0;

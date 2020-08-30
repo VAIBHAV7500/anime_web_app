@@ -5,10 +5,7 @@ import {getVideoLink} from '../../utils/api'
 import './player.css';
 import play from './play.svg';
 import {ImHome} from "react-icons/im";
-import {
-    Redirect,
-    useHistory
-} from "react-router-dom";
+import RouterButton from './homeButton';
 
 const watchProgress = (event) => {
     console.log(event);
@@ -17,6 +14,7 @@ const watchProgress = (event) => {
 export class player extends Component {
     async componentDidMount(){
         try{
+            document.body.style = 'background: rgb(43, 42, 42);';
             this.disableRightClick();
             let response = {};
             response = await getVideoLink();
@@ -45,15 +43,12 @@ export class player extends Component {
         });
     }
 
-    sendBack = () => {
-        let path = this.props.backUrl ? this.props.backUrl : "/";
-    }
 
     render() {
         return (
                 <div className="player-wrapper">
                     <div className='player-header'>
-                         < ImHome className = 'home-btn btn' onClick={this.sendBack} />
+                         < RouterButton path="/" />
                          {this.state=== null ? 'Loading...' : this.state.title}
                         <div className='close-button btn'>
                             <svg width="10" height="10" viewBox = "0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

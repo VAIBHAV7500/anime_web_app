@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var helmet = require('helmet');
 var nodeadmin = require('nodeadmin');
+var db = require('./db/index');
 
 require('dotenv').config();
 
@@ -15,6 +16,8 @@ var {
   anyError,
   errorHandler,
 }  = require('./services/middleware')
+
+global.connection = db.getConnection();
 
 var app = express();
 

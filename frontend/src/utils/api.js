@@ -16,6 +16,12 @@ const getVideoLink = () => {
     });
 }
 
+async function getEpisodeList(show_id = undefined) {
+    console.log('In episode list');
+    return await axios.get('https://run.mocky.io/v3/fd2d49f3-7213-4162-813f-3b415902c10a');
+}
+
 module.exports = {
-    getVideoLink
+    getVideoLink,
+    getEpisodeList
 }
