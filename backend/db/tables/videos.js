@@ -28,6 +28,19 @@ const createTable = (con) => {
     })
 }
 
+const find = async (id) => {
+    const sql = `SELECT * from videos where id = ${id} limit 1`;
+    const result = await runQuery(sql);
+    return result.length ? result[0] : undefined;
+}
+
+const create = async (body) => {
+    const sql = `INSERT INTO videos(${Object.keys(body).join()}) VALUES (?)`;
+    return await runQuery(sql, [Object.values(body)]);
+}
+
 module.exports = {
-    createTable
+    createTable,
+    find,
+    create,
 }
