@@ -12,8 +12,9 @@ const createTable = (con) => {
             closing_start_time TIME,
             closing_end_time TIME,
             quality INT,
+            type VARCHAR(255),
             show_id BIGINT,
-            created_at TIMESTAMP NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     `;

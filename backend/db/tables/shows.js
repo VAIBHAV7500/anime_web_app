@@ -12,7 +12,8 @@ const createTable = (con) => {
             release_date DATE,
             age_category INT,
             plan_id BIGINT,
-            created_at TIMESTAMP NOT NULL,
+            type VARCHAR(255),
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     `;

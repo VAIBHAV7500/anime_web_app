@@ -7,7 +7,7 @@ const createTable = (con) => {
             show_id BIGINT,
             video_id BIGINT,
             language VARCHAR(255),
-            created_at TIMESTAMP NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     `;

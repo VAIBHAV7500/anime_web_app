@@ -3,7 +3,7 @@ const createTable = (con) => {
         CREATE TABLE IF NOT EXISTS genre (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             category VARCHAR(255),
-            created_at TIMESTAMP NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     `;

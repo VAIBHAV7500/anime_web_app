@@ -5,7 +5,7 @@ const createTable = (con) => {
             episode_id BIGINT UNSIGNED,
             duration FLOAT,
             user_id BIGINT,
-            created_at TIMESTAMP NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     `;

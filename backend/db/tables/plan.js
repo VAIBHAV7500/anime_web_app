@@ -4,7 +4,7 @@ const createTable = (con) => {
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             screen INT,
             price DOUBLE,
-            created_at TIMESTAMP NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     `;
