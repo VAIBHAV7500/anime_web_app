@@ -6,9 +6,9 @@ const createTable = (con) => {
         CREATE TABLE IF NOT EXISTS users (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             password VARCHAR(255),
-            email VARCHAR(255),
+            email VARCHAR(255) UNIQUE NOT NULL,
             status INT,
-            mobile VARCHAR(15),
+            mobile VARCHAR(15) UNIQUE,
             plan_id INT,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -30,6 +30,13 @@ const find = async (id) =>{
     return result.length ? result[0] : undefined;
 }
 
+const find_by_email = async (email) => {
+    const sql = `SELECT * from users where email = "${email}" limit 1`;
+    const result = await runQuery(sql);
+    console.log(result);
+    return result.length ? result[0] : undefined;
+}
+
 const create = async (body) => {
     const sql = `INSERT INTO users(${Object.keys(body).join()}) VALUES (?)`;
     return await runQuery(sql,[Object.values(body)]);
@@ -39,6 +46,7 @@ module.exports = {
     createTable,
     find,
     create,
+    find_by_email
 }
 
 /*db = require('../index');

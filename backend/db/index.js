@@ -32,5 +32,5 @@ module.exports =  {
     videos,
     audios,
     subtitles,
-    getConnection
+    getConnection,
 }
