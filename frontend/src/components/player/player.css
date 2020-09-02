@@ -4,7 +4,8 @@
     animation: fadeInAnimation ease 4s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-    background: rgb(43, 42, 42)
+    background: rgb(43, 42, 42);
+    outline: none !important;
 }
 @keyframes fadeInAnimation {
     0% {
@@ -17,7 +18,7 @@
 }
 
 .player-wrapper:focus{
-    outline-color: black;
+    outline: none !important;
 }
 
 .react-player{
@@ -25,10 +26,11 @@
     left: 0px;
     top: 0px;
     z-index: -1;
+    outline: none;
 }
 
 .react-player:focus{
-    outline-color: black;
+    outline: none !important; 
 }
 
 .btn{
@@ -49,7 +51,7 @@
 
 .player-header{
     text-align: center;
-    padding-top:1%;
+    margin-top: 1%;     
     z-index: 3;
     display:relative;
     text-shadow: 0 0 3px #ffffff, 0 0 5px #ffffff;
