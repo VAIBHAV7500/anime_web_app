@@ -4,8 +4,6 @@ import "./Row.css";
 import movieTrailer from "movie-trailer";
 import ReactPlayer from 'react-player/lazy'
 
-const base_url = "https://image.tmdb.org/t/p/original/";
-
 
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
@@ -13,14 +11,20 @@ function Row({ title, fetchUrl, isLargeRow }) {
   useEffect(() => {
     // if [] , run once when the row loads , and don;t run again
     async function fetchData() {
-      const request = await axios.get(fetchUrl);      
-      setMovies(request.data.results);
-      return request;
+      console.log(fetchUrl);
+      if(fetchUrl){
+        const request = await axios.get(fetchUrl);
+        setMovies(request.data);
+        console.log(request);
+        return request;
+      }
     }
     fetchData();
   }, [fetchUrl]);
 
   console.log(movies);
+  console.log(process.env.REACT_APP_BASE_URL);
+  console.log(process.env.REACT_APP_SERVER_URL);
   const opts = {
     height: "390",
     width: "640",
@@ -51,7 +55,9 @@ function Row({ title, fetchUrl, isLargeRow }) {
             key={movie.id}
             onClick={() => handleClick(movie)}
             className={`row_poster ${isLargeRow && "row_posterLarge"}` }
-            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+            src = {
+              `${isLargeRow ? movie.poster_landscape_url : movie.poster_portrait_url}`
+            }
             alt={movie.name}
           />
         ))}

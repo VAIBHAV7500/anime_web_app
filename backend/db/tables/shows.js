@@ -3,17 +3,18 @@ const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS shows (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name TEXT,
-            genre_id JSON,
+            name TEXT NOT NULL,
+            genre_id TEXT,
             trailer_url TEXT,
             poster_portrait_url TEXT,
             poster_landscape_url TEXT,
             season INT,
-            total_view BIGINT,
+            total_view BIGINT DEFAULT 0,
             release_date DATE,
             age_category INT,
             plan_id BIGINT,
             type VARCHAR(255),
+            description TEXT,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
