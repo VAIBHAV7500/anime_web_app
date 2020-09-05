@@ -4,9 +4,10 @@ const apiVideo = require('@api.video/nodejs-sdk');
 const keys = require('../config/keys.json');
 const formidable = require("formidable");
 const db = require('../db/index');
+const { json } = require('express');
 
 const client = new apiVideo.ClientSandbox({
-    apiKey: keys["api.video"].apiKey
+    apiKey: keys["api_video"].apiKey
 });
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -43,30 +44,40 @@ router.post('/',(req,res,next)=>{
         show_id BIGINT,
  * }
  */
-router.post('/upload', (req,res,next)=>{
+router.post('/upload', async (req,res,next)=>{
     const form = new formidable.IncomingForm();
     form.uploadDir = process.env.UPLOAD_DIR;
     console.log(form.uploadDir);
-    form.parse(req,async (err,fields,files)=>{
+    form.parse(req,(err,fields,files)=>{
         if(err) throw err;
         console.log("Fields: ");
         console.log(JSON.stringify(fields));
         console.log("Files: " + JSON.stringify(files));
         let startUploadTimer = new Date().toLocaleString();
         console.log("Uploading Start at : ", startUploadTimer);
-
-        let result = await client.videos.upload(files.source.path, {
-            title: fields.title,
-            mp4Support: true
-        });
         startUploadTimer = new Date().toLocaleString();
         console.log("Uploading End at : ", startUploadTimer);
-        console.log(result);
-        fields["url"] = result.assets.hls,
-        db.videos.create(fields);
-    });
-    res.json({
-        message: "Happy Uploading"
+        client.videos.upload(files.source.path, {
+            title: fields.title,
+            mp4Support: true
+        }).then((result)=>{
+            fields["url"] = result.videoId,
+            db.videos.create(fields).then((dbRes)=>{
+                res.json({
+                    response: result
+                });
+            }).catch((err)=>{
+                res.status(500).json({
+                    error: err.message,
+                    stack: err.stack
+                });
+            });
+        }).catch((err)=>{
+            res.status(500).json({
+                error: err.message,
+                stack: err.stack
+            });
+        })
     });
 })
 
