@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import ReactPlayer from 'react-player/lazy'
+import ReactPlayer from 'react-player'
 import Description from './description'
 import {getVideoLink} from '../../utils/api'
 import './player.css';
@@ -65,6 +65,7 @@ export class player extends Component {
                         playIcon = {play}
                         onProgress = {watchProgress}
                         playing = {false}
+                        pip = {true}
                         config= {{ file: { 
                                     attributes: {
                                     controlsList: 'nodownload'

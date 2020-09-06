@@ -21,7 +21,7 @@ router.post('/',(req,res,next)=>{
     const file_name = 'anniversary2.mp4';
     const video = {
         //videoUrl: `http://gdurl.com/qELA`,
-        videoUrl: `https://cdn.api.video/vod/vi6a5paBPx5p3EdaXu5E6izq/hls/manifest.m3u8`,
+        videoUrl: `https://cdn.api.video/vod/vi3gPEltUuXJm8AvR11BAEm1/hls/manifest.m3u8`,
         title: 'Naruto Trailer'
     }
     res.json(video);
