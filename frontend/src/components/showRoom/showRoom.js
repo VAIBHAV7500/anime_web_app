@@ -16,7 +16,7 @@ export class showRoom extends Component {
               <Banner />
               <Row
                 title="Top Shows in India"
-                fetchUrl={requests.fetchNetflixOriginals}
+                fetchUrl={requests.fetchTopRated}
                 isLargeRow 
               />
               <Row title="Trending Now" fetchUrl={requests.fetchTrending} />

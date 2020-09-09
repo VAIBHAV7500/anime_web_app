@@ -41,9 +41,10 @@ function Banner() {
 
     useEffect(() => {
         async function fetchData(){
-            const request = await axios.get(requests.fetchNetflixOriginals);
+            const request = await axios.get(requests.fetchBanner);
+            console.log(request);
             setMovies(
-                request.data.results.slice(0,10)
+                request.data
             );
             return request;
 
@@ -66,7 +67,7 @@ function Banner() {
               {
                 backgroundSize: "cover",
                 backgroundImage: `url(
-                      "https://image.tmdb.org/t/p/original/${movies[i]?.backdrop_path}"
+                      "${movies[i]?.poster_landscape_url}"
                   )`,
                 backgroundPosition: "center center",
               }
@@ -74,7 +75,7 @@ function Banner() {
               <div className="banner_contents">
                 <h1 className="banner_title">{movies[i]?.title || movies[i]?.name || movies[i]?.original_name}</h1>
                 <h1 className="banner_description">
-                    {truncate(movies[i]?.overview,150)}
+                    {"Some description" }
                 </h1>
               </div>
               <div className="banner--fadeBottom" />

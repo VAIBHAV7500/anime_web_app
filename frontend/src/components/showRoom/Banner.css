@@ -12,7 +12,7 @@
 .banner_title {
     font-size: 3rem;
     font-weight: 800;
-    padding-bottom: 0.3rem;
+    padding-top: 230px;
 
 }
 .banner_description {
@@ -47,7 +47,7 @@
 }
 
 .banner--fadeBottom {
-    height:10.8rem ;
+    height:15.8rem ;
     background-image: linear-gradient(
         180deg,
         transparent,

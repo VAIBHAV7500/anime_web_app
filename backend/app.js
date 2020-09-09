@@ -12,6 +12,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 var videoRouter = require('./routes/video');
 var userRouter = require('./routes/user');
+var showsRouter = require('./routes/shows');
 
 var {
   anyError,
@@ -43,6 +44,7 @@ app.use(nodeadmin(app));
 app.use('/', indexRouter);
 app.use('/video', videoRouter);
 app.use('/user',userRouter);
+app.use('/shows',showsRouter);
 
 app.use(anyError);
 app.use(errorHandler);
