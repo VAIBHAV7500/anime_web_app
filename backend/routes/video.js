@@ -48,7 +48,7 @@ router.post('/upload', async (req,res,next)=>{
     const form = new formidable.IncomingForm();
     form.uploadDir = process.env.UPLOAD_DIR;
     console.log(form.uploadDir);
-    form.parse(req,(err,fields,files)=>{
+    form.parse(req,async (err,fields,files)=>{
         if(err) throw err;
         console.log("Fields: ");
         console.log(JSON.stringify(fields));
@@ -121,32 +121,6 @@ router.get('/banner', async (req, res, next) => {
                 rej(err);
             });
         }));
-        console.log("Files: " + JSON.stringify(files));
-        let startUploadTimer = new Date().toLocaleString();
-        console.log("Uploading Start at : ", startUploadTimer);
-        startUploadTimer = new Date().toLocaleString();
-        console.log("Uploading End at : ", startUploadTimer);
-        client.videos.upload(files.source.path, {
-            title: fields.title,
-            mp4Support: true
-        }).then((result)=>{
-            fields["url"] = result.videoId,
-            db.videos.create(fields).then((dbRes)=>{
-                res.json({
-                    response: result
-                });
-            }).catch((err)=>{
-                res.status(500).json({
-                    error: err.message,
-                    stack: err.stack
-                });
-            });
-        }).catch((err)=>{
-            res.status(500).json({
-                error: err.message,
-                stack: err.stack
-            });
-        })
     });
     const result = await Promise.all(promiseArray).catch((err) => {
         res.status(500).json({
