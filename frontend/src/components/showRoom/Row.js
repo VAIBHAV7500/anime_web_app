@@ -34,36 +34,27 @@ function Row({ title, fetchUrl, isLargeRow }) {
     },
   };
   const handleClick = (movie) => {
-      if(trailerUrl){
-        setTrailerUrl('');
-      }else{
-          movieTrailer(movie?.name || "")
-          .then(url =>{
-                const urlParams = new URLSearchParams(new URL(url).search);
-                setTrailerUrl(urlParams.get("v"));
-          })
-          .catch((error) => console.log(error));
-        }
+      setTrailerUrl(movie.trailer_url);
   }
   return (
     <div className="row">
       <h2>{title}</h2>
 
-      <div className="row_posters">
+      < div className = "cards row_posters" >
         {movies.map((movie) => (
           <img
             key={movie.id}
             onClick={() => handleClick(movie)}
-            className={`row_poster ${isLargeRow && "row_posterLarge"}` }
+             className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
             src = {
-              `${isLargeRow ? movie.poster_landscape_url : movie.poster_portrait_url}`
+              `${isLargeRow ? movie.poster_portrait_url : movie.poster_landscape_url}`
             }
             alt={movie.name}
           />
         ))}
       </div>
       {trailerUrl && < ReactPlayer  
-          url={`https://youtube.com/watch?v=${trailerUrl}`} 
+          url={`${trailerUrl}`} 
           height = "390px"
           playing= {true}
       />}

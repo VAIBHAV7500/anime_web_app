@@ -75,7 +75,7 @@ function Banner() {
               <div className="banner_contents">
                 <h1 className="banner_title">{movies[i]?.title || movies[i]?.name || movies[i]?.original_name}</h1>
                 <h1 className="banner_description">
-                    {truncate(movies[i]?.description,150)}
+                    {"Some description" }
                 </h1>
               </div>
               <div className="banner--fadeBottom" />

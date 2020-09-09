@@ -41,8 +41,14 @@ const create = async (body) => {
     return await runQuery(sql, [Object.values(body)]);
 }
 
+const getShowsByGenre = async (id) => {
+    const sql = `SELECT * from shows where genre_id like '%${id}%'`;
+    return await runQuery(sql);
+}
+
 module.exports = {
     createTable,
     find,
     create,
+    getShowsByGenre,
 }
