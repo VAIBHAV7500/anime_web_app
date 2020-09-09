@@ -4,6 +4,7 @@ const apiVideo = require('@api.video/nodejs-sdk');
 const keys = require('../config/keys.json');
 const formidable = require("formidable");
 const db = require('../db/index');
+const { json } = require('express');
 
 const client = new apiVideo.ClientSandbox({
     apiKey: keys.api_video.apiKey
@@ -26,12 +27,28 @@ router.post('/',(req,res,next)=>{
     res.json(video);
 });
 
-
+/**
+ * Schema for this upload would be 
+ * {
+ *     video: [filed]
+ *     title: [Name of the file]
+ *     video_length: [this is video's length]
+ *     intro_start_time: ,
+ *      intro_end_time TIME,
+        recap_start_time TIME,
+        recap_end_time TIME,
+        closing_start_time TIME,
+        closing_end_time TIME,
+        quality INT,
+        type VARCHAR(255),
+        show_id BIGINT,
+ * }
+ */
 router.post('/upload', async (req,res,next)=>{
     const form = new formidable.IncomingForm();
     form.uploadDir = process.env.UPLOAD_DIR;
     console.log(form.uploadDir);
-    form.parse(req,async (err,fields,files)=>{
+    form.parse(req,(err,fields,files)=>{
         if(err) throw err;
         console.log("Fields: ");
         console.log(JSON.stringify(fields));
@@ -104,6 +121,32 @@ router.get('/banner', async (req, res, next) => {
                 rej(err);
             });
         }));
+        console.log("Files: " + JSON.stringify(files));
+        let startUploadTimer = new Date().toLocaleString();
+        console.log("Uploading Start at : ", startUploadTimer);
+        startUploadTimer = new Date().toLocaleString();
+        console.log("Uploading End at : ", startUploadTimer);
+        client.videos.upload(files.source.path, {
+            title: fields.title,
+            mp4Support: true
+        }).then((result)=>{
+            fields["url"] = result.videoId,
+            db.videos.create(fields).then((dbRes)=>{
+                res.json({
+                    response: result
+                });
+            }).catch((err)=>{
+                res.status(500).json({
+                    error: err.message,
+                    stack: err.stack
+                });
+            });
+        }).catch((err)=>{
+            res.status(500).json({
+                error: err.message,
+                stack: err.stack
+            });
+        })
     });
     const result = await Promise.all(promiseArray).catch((err) => {
         res.status(500).json({
