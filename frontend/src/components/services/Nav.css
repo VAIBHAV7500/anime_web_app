@@ -13,7 +13,7 @@
 }
 .nav_black{
     background: rgb(2, 0, 6);
-    background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, rgba(77, 1, 163, 1) 42%);
+    background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, #4d01a3 42%);
     opacity: 0.95;
 }
 

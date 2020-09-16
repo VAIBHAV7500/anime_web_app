@@ -21,6 +21,7 @@
     max-height: 150px;
     margin-right: 10px;
     transition: transform 450ms;
+    cursor: pointer;
 }
 .row_poster:hover{
     transform: scale(1.3);
@@ -36,4 +37,101 @@
 }
 .row_posterLarge:hover{
     transform: scale(1.09);
+}
+
+.trailer_window{
+    overflow: hidden;
+    padding: 2%;
+    padding-right: 100px;
+    box-sizing: border-box;
+    background: radial-gradient(ellipse at bottom, #3e3d3f 0%, #090a0f 100%);
+}
+
+.player{
+    float: left;
+}
+
+
+.info{
+    position: absolute;
+    margin-left: 47%;
+}
+
+.trailer_name{
+    padding-top: 10px;
+    font-size: 80px;
+    font-size: 2.8vw;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.info_table{
+    font-size: 15px;
+    float: left;
+    margin-left: 1px;
+    font-weight: bold;
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.trailer_row{
+    height: 20px;
+}
+
+.rating{
+    border-width: 2px;
+    width: 40px;
+    height: 25px;
+}
+
+.rating_1{
+    color: #fd2828;
+}
+
+.rating_2{
+    color: rgb(255, 203, 32);
+}
+
+.rating_3{
+    color: #42a813
+}
+
+.rating_4 {
+    color: #42a813
+}
+
+.description{
+    font-weight: normal;
+}
+
+.season{
+    font-weight: 1
+}
+
+.trailer_btn {
+    position: relative;
+    margin-left: 50px;
+    margin-top: 60px;
+    margin-right: 30px;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #e9e9e9;
+    font-family: Arial;
+    font-size: 10px;
+    padding: 6px 24px;
+    text-decoration: none;
+    outline: none;
+    transform: scale(1.5, 1.5);
+}
+
+.trailer_btn:hover {
+    background-color: black;
+}
+
+.trailer_btn:active {
+    top: 1px;
 }

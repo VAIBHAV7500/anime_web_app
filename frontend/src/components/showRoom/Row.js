@@ -7,7 +7,8 @@ import ReactPlayer from 'react-player/lazy'
 
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState("");
+  const [trailer, setTrailer] = useState("");
+  let keyId = 1;
   useEffect(() => {
     // if [] , run once when the row loads , and don;t run again
     async function fetchData() {
@@ -34,7 +35,10 @@ function Row({ title, fetchUrl, isLargeRow }) {
     },
   };
   const handleClick = (movie) => {
-      setTrailerUrl(movie.trailer_url);
+      console.log(JSON.stringify(movie));
+      movie.rating = 1.4;
+      //movie.name = 'Lorem Ipsum Some dummy long name'
+      setTrailer(movie);
   }
   return (
     <div className="row">
@@ -43,7 +47,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
       < div className = "cards row_posters" >
         {movies.map((movie) => (
           <img
-            key={movie.id}
+            key={keyId++}
             onClick={() => handleClick(movie)}
              className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
             src = {
@@ -53,11 +57,60 @@ function Row({ title, fetchUrl, isLargeRow }) {
           />
         ))}
       </div>
-      {trailerUrl && < ReactPlayer  
-          url={`${trailerUrl}`} 
-          height = "390px"
-          playing= {true}
-      />}
+      {
+          trailer && <div className="trailer_window">
+          < ReactPlayer  
+            url={`${trailer.trailer_url}`} 
+            height = "390px"
+            playing= {true}
+            className="player"
+          />
+          <div className="info"> 
+            <div className="trailer_name">{trailer.name}</div><br/>
+            <table className="info_table">
+                <tr className="trailer_row">
+                  <td>
+                      Season: 
+                  </td>
+                  <td className="season">
+                      {trailer.season}
+                  </td>
+                </tr>
+                < tr className = "trailer_row" >
+                  <td>
+                    Rating: 
+                  </td>
+                  < td  >
+                    <div className = {
+                    `rating rating_${Math.ceil(trailer.rating/3)}`
+                  }>{trailer.rating}/10</div>
+                  </td>
+                </tr>
+                <tr className="trailer_row">
+                  <td>
+                      Genre: 
+                  </td>
+                  <td className="genre">
+                      {trailer.genre || 'Comedy, Adventure, Mystery, Thriller'}
+                  </td>
+                </tr>
+                <tr className="trailer_row">
+                  <td>
+                      Description: 
+                  </td>
+                  { trailer.description != '' && <td className="description">
+                      {
+                        trailer.description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500 s, when an unknown printer..."}
+                  </td> }
+                </tr>
+            </table>
+            < button className = "trailer_btn" > Go to Show
+            </button>
+            < button className = "trailer_btn" > Add to List
+            </button>
+          </div>
+        </div>
+      }
     </div>
   );
 }
