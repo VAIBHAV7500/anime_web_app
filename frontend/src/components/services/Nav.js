@@ -57,7 +57,7 @@ function Nav() {
                 < FaSearch className="search_icon" onClick={handleSearch} />
                 <FaUser className = "nav_avatar"></FaUser>
             </div>
-            {search && generateSearchModal() && }
+            {search && generateSearchModal() }
         </div>
     )
 }
