@@ -2,7 +2,8 @@ import React, { useState , useEffect } from 'react'
 import axios from '../../utils/axios';
 import "./Row.css";
 import movieTrailer from "movie-trailer";
-import ReactPlayer from 'react-player/lazy'
+import ReactPlayer from 'react-player/lazy';
+import { MdClose } from "react-icons/md";
 
 
 function Row({ title, fetchUrl, isLargeRow }) {
@@ -36,8 +37,13 @@ function Row({ title, fetchUrl, isLargeRow }) {
   };
   const handleClick = (movie) => {
       console.log(JSON.stringify(movie));
-      movie.rating = 1.4;
+      movie.rating = Math.round(((Math.random() * (10 - 8 + 1)) + 8) * 9) / 10;
       //movie.name = 'Lorem Ipsum Some dummy long name'
+      let description = movie.description;
+      if(description.length > 500){
+          description = description.substring(0,500) + '...';
+      }
+      movie.description = description;
       setTrailer(movie);
   }
   return (
@@ -59,6 +65,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
       </div>
       {
           trailer && <div className="trailer_window">
+          < MdClose className = "close-btn" onClick={()=>{setTrailer(undefined)}}/>
           < ReactPlayer  
             url={`${trailer.trailer_url}`} 
             height = "390px"
@@ -106,7 +113,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
             </table>
             < button className = "trailer_btn" > Go to Show
             </button>
-            < button className = "trailer_btn" > Add to List
+            < button className = "trailer_btn" > Add to WatchList
             </button>
           </div>
         </div>

@@ -63,6 +63,7 @@
     font-size: 2.8vw;
     text-align: center;
     font-weight: bolder;
+    z-index: 1;
 }
 
 .info_table{
@@ -111,7 +112,7 @@
 .trailer_btn {
     position: relative;
     margin-left: 50px;
-    margin-top: 60px;
+    margin-top: 30px;
     margin-right: 30px;
     box-shadow: inset 0px 1px 0px 0px #ffffff;
     background-color: transparent;
@@ -126,6 +127,7 @@
     text-decoration: none;
     outline: none;
     transform: scale(1.5, 1.5);
+    
 }
 
 .trailer_btn:hover {
@@ -134,4 +136,18 @@
 
 .trailer_btn:active {
     top: 1px;
+}
+
+.close-btn{
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    right: 2%;
+    height: 20px;
+    width: auto;
+    z-index: 5;
+}
+
+.close-btn:hover{
+    cursor: pointer;
 }

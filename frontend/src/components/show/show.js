@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 import Banner from './banner';
 import Nav from '../services/Nav';
 import Episodes from './episodes';
+import requests from '../../utils/requests';
 
 export class show extends Component {
+
+    componentDidMount(){
+        let params = queryString.parse(this.props.location.search);
+        console.log(params);
+        
+    }
     
     render() {
         return (

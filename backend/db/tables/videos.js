@@ -40,8 +40,15 @@ const create = async (body) => {
     return await runQuery(sql, [Object.values(body)]);
 }
 
+const getShows = async (id) => {
+    const sql = `SELECT * from videos where show_id = ${id}`;
+    const result = await runQuery(sql);
+    return result;
+}
+
 module.exports = {
     createTable,
     find,
     create,
+    getShows
 }

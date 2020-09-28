@@ -21,8 +21,8 @@ router.post('/',(req,res,next)=>{
     const file_name = 'anniversary2.mp4';
     const video = {
         //videoUrl: `http://gdurl.com/qELA`,
-        videoUrl: `https://cdn.api.video/vod/vi5oc75DKkfLPsVyjULX4A3d/hls/manifest.m3u8`,
-        title: 'Naruto Trailer'
+        videoUrl: `https://cdn.api.video/vod/viksunQEzGp5svYdVtzI5RW/hls/manifest.m3u8`,
+        title: 'Vinland Saga Trailer'
     }
     res.json(video);
 });
@@ -79,13 +79,50 @@ router.post('/upload', async (req,res,next)=>{
     });
 });
 
+router.get('/episodes', async(req,res,next)=>{
+    if(req.show_id){
+        result = await db.videos.getShows(req.show_id).catch((err)=>{
+            res.status(501).json({
+                success: false,
+                err: err.message,
+                stack: process.env.NODE_ENV="development" ?  err.stack : ""
+            });   
+            return;
+        });
+        res.json(result);
+    }else{
+        res.status(401).json({
+            success: false,
+            error: "No Show Id"
+        });
+        return;
+    }
+});
+
+router.post('/dummyCreate', async (req,res,next)=>{
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields) => {
+        console.log(fields);
+        db.videos.create(fields).then((response)=>{
+            res.json(response);
+        }).catch((err)=>{
+            res.status(501).json({
+                err: err.message,
+                stack: err.stack
+            });
+        });
+    });
+    //const response = await db.user.create(req.body);
+    //res.json({"message":response});
+});
+
 router.get('/trending',async (req,res,next)=>{
     if(!req.query.api_key || req.query.api_key !== keys.app.apiKey){
         res.status(401).json({
             message: "API KEY is missing or incorrect"
         })
     }
-    const videos = [1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,1,1,1,1,1,1];
+    const videos = [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3];
     const promiseArray = [];
     videos.forEach((id)=>{
         promiseArray.push(new Promise((res,rej)=>{
@@ -111,7 +148,7 @@ router.get('/banner', async (req, res, next) => {
             message: "API KEY is missing or incorrect"
         })
     }
-    const videos = [1, 2];
+    const videos = [1, 2, 3];
     const promiseArray = [];
     videos.forEach((id) => {
         promiseArray.push(new Promise((res, rej) => {

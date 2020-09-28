@@ -1,5 +1,5 @@
 import React ,{ useState, useEffect } from 'react';
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaSearch } from "react-icons/fa";
 import "./Nav.css";
 
 const options = [
@@ -10,6 +10,7 @@ const options = [
 
 function Nav() {
     const [show , handleShow] = useState(false);
+    const [search, setSearch] = useState(false);
 
     useEffect(() => {
         window.addEventListener("scroll",() => {
@@ -22,7 +23,20 @@ function Nav() {
         }
 
         
-    }, [])
+    }, []);
+
+    const handleSearch = () => {
+        console.log('Clicked');
+        setSearch(true);
+    }
+
+    const generateSearchModal = () => {
+        return <div className="search-modal">
+           <div className="search-box">
+                <input type="text" placeholder="Search" className="search-input"></input>
+           </div>
+        </div>
+    }
 
     return (
         <div className={`nav ${show && "nav_black"}`}>
@@ -39,8 +53,11 @@ function Nav() {
                 // src=""
                 alt="User Avatar"
             />   */}
-            
-            <FaUser className = "nav_avatar"></FaUser>
+            <div className="nav_rights">
+                < FaSearch className="search_icon" onClick={handleSearch} />
+                <FaUser className = "nav_avatar"></FaUser>
+            </div>
+            {search && generateSearchModal() && }
         </div>
     )
 }
