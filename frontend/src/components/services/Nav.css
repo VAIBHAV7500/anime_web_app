@@ -93,3 +93,16 @@
     -o-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
 }
+
+.shadow{
+    position:fixed;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background:rgba(17, 16, 16, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 25;
+}

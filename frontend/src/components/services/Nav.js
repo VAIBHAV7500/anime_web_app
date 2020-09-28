@@ -28,6 +28,9 @@ function Nav() {
     const handleSearch = () => {
         console.log('Clicked');
         setSearch(!search);
+        if(search){
+            document.body.classList.add("no-sroll")
+        }
     }
 
     const generateSearchModal = () => {
@@ -58,6 +61,7 @@ function Nav() {
                 <FaUser className = "nav_avatar"></FaUser>
             </div>
             {search && generateSearchModal()}
+            {search && <div className="shadow" onClick={handleSearch}></div>}
         </div>
     )
 }
