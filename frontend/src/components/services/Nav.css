@@ -10,6 +10,7 @@
     justify-content: space-between;
     transition-timing-function: ease-in;
     transition: all 0.5s;
+    z-index: 10;
 }
 .nav_black{
     background: rgb(2, 0, 6);

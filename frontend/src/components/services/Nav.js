@@ -3,6 +3,7 @@ import { FaUser, FaSearch } from "react-icons/fa";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import "./Nav.css";
+import {useHistory} from "react-router-dom";
 
 const options = [
         { name: 'Option 1', value: '1234' },
@@ -14,6 +15,7 @@ function Nav() {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
     const [searchSet, setSearchSet] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         window.addEventListener("scroll",() => {
@@ -31,9 +33,15 @@ function Nav() {
     const handleSearch = () => {
         console.log('Clicked');
         setSearch(!search);
-        if(search){
+    }
 
-        }
+    const goToShow = (id) => {
+        setSearch(false);
+        history.push(`/show/${id}`);
+    }
+
+    const goToHome = () => {
+        history.push('/');
     }
 
     const getSuggestions = async () => {
@@ -53,8 +61,8 @@ function Nav() {
            </div>
            <div className="suggestions">
                 {
-                    searchSet && searchSet.map((suggestion)=>{
-                        return <div className="suggestion-card" key={suggestion.item.id}>
+                    searchSet?.map((suggestion)=>{
+                        return <div className="suggestion-card" key={suggestion.item.id} onClick={()=>{ goToShow(suggestion.item.id)}}>
                         <img src={suggestion.item.poster_portrait_url} className="suggestion-image" ></img>
                         <div className="card-details">
                     <div className="card-name">{suggestion.item.name}</div>
@@ -73,7 +81,7 @@ function Nav() {
                 // src=""
                 alt="ANIMEI LOGO"
             /> */}
-            <h1 className={`nav_logo ${show && "logo_white"}`}>
+            <h1 className={`nav_logo ${show && "logo_white"}`} onClick={goToHome}>
                     ANIMEI
             </h1>
             {/* <img

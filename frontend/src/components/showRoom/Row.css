@@ -22,6 +22,7 @@
     margin-right: 10px;
     transition: transform 450ms;
     cursor: pointer;
+    z-index: 1;
 }
 .row_poster:hover{
     transform: scale(1.3);
@@ -31,6 +32,7 @@
         rgba(37,37,37,0.61),
         #111
     );
+    z-index: 2;
 }
 .row_posterLarge {
     max-height: 300px;
