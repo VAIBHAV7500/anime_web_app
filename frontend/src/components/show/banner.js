@@ -3,23 +3,8 @@ import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import './banner.css';
 
-function Banner() {
-    const [movie, setMovie] = useState([]);
-
-    useEffect(() => {
-        async function fetchData(){
-            const request = await axios.get(requests.fetchBanner);
-            setMovie(
-                request.data[
-                    Math.floor(Math.random() * request.data.length-1)
-                ]
-            );
-            return request;
-
-        }
-        fetchData();
-    }, []);
-
+function Banner(movie) {
+  
     function truncate(str , n){
         return str?.length > n ? str.substr(0 , n-1) + " ... ": str;
     }

@@ -5,12 +5,6 @@ import requests from '../../utils/requests';
 import "./Nav.css";
 import {useHistory} from "react-router-dom";
 
-const options = [
-        { name: 'Option 1', value: '1234' },
-        { name: 'Option 2', value: '5678' },
-        { name: 'Option 2', value: '91011' }
-      ];
-
 function Nav() {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
@@ -18,13 +12,18 @@ function Nav() {
     const history = useHistory();
 
     useEffect(() => {
+        let isMounted = true; // note this flag denote mount status
         window.addEventListener("scroll",() => {
-            if(window.scrollY > 100){
-                handleShow(true);
-            }else handleShow(false);
+            if(isMounted){
+                if (window.scrollY > 100) {
+                    handleShow(true);
+                } else
+                    handleShow(false);
+            }
         });
         return() => {
             //window.removeEventListener("scroll", handleMouseDown, true);
+            isMounted = false; // note this flag denote mount status
         }
 
         
@@ -63,7 +62,7 @@ function Nav() {
                 {
                     searchSet?.map((suggestion)=>{
                         return <div className="suggestion-card" key={suggestion.item.id} onClick={()=>{ goToShow(suggestion.item.id)}}>
-                        <img src={suggestion.item.poster_portrait_url} className="suggestion-image" ></img>
+                        <img src={suggestion.item.poster_portrait_url} alt={suggestion.item.name} className="suggestion-image" ></img>
                         <div className="card-details">
                     <div className="card-name">{suggestion.item.name}</div>
                         </div>

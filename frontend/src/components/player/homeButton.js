@@ -1,7 +1,7 @@
 import React from 'react'
 import {ImHome} from "react-icons/im";
 import './player.css';
-import {Redirect,useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 function HomeButton({path}) {
 

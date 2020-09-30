@@ -33,4 +33,16 @@ router.post('/create',async (req,res,next)=>{
     });
 });
 
+router.get('/details',async (req,res,next)=>{
+    const id = req.query.id;
+    if(!id){
+        res.status(401).json({
+            error: "No Id found",
+        });
+        return;
+    }
+    const data = await db.shows.find(id);
+    res.json(data);
+});
+
 module.exports = router;

@@ -4,7 +4,6 @@ import Banner from './Banner';
 import requests from '../../utils/requests';
 import Nav from '../services/Nav';
 import Footer from './footer';
- import Loader from 'react-loader-spinner'
  
 
 export class showRoom extends Component {

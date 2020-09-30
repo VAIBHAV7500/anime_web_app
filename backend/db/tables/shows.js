@@ -23,7 +23,6 @@ const createTable = (con) => {
     return new Promise((res, rej) => {
         con.query(sql, (err, result) => {
             if (err) {
-                console.log(err);
                 rej(err);
             }
             res(result);

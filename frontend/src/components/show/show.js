@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Banner from './banner';
 import Nav from '../services/Nav';
-import Episodes from './episodes';
 import requests from '../../utils/requests';
 import axios from '../../utils/axios';
 
@@ -10,27 +9,26 @@ export class show extends Component {
         console.log('Params');
         this.setState({});
         console.log(this.props.match.params);
-        try{
-            const showId = this.props.match.params.id
-            
-            const request = await axios.get(`${requests.fetchEpisodes}?show_id=${1}`);
-            console.log('Request');
-            console.log(request);
-            this.state.episodes = request.data;
-            this.setState(this.state);
-        }catch(err){
-            
-        }
+        console.log('Starting');
+        const showId = this.props.match.params.id
+        console.log(showId);
+        const showDetails = await axios.get(`${requests.fetchShowDetails}?id=${showId}`);
+        console.log(showDetails);
+        const request = await axios.get(`${requests.fetchEpisodes}?show_id=${1}`);
+        console.log('Request');
+        console.log(request);
+        this.state.episodes = request.data;
+        this.setState(this.state);
     }
     
     render() {
         return (
             <div>
                 <Nav/>
-                <Banner/>
+                <Banner movie={this.state?.episodes}/>
                 {
                     this.state && this.state.episodes && this.state.episodes.map((episode)=>{
-                        return <div>
+                        return <div key={episode.id}>
                             {episode.id}
                         </div>
                     })
@@ -41,10 +39,3 @@ export class show extends Component {
 }
 
 export default show
-
-
-const data = {
-    "episodes": [
-        1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
-    ]
-}

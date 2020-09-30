@@ -2,13 +2,6 @@ import React, { Component } from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
 import {getEpisodeList} from '../../utils/api';
 
-const style = {
-    height: 30,
-    border: "1px solid green",
-    margin: 6,
-    padding: 8
-};
-
 export class episodes extends Component {
     constructor(props) {
         super(props)

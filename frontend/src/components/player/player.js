@@ -4,7 +4,6 @@ import Description from './description'
 import {getVideoLink} from '../../utils/api'
 import './player.css';
 import play from './play.svg';
-import {ImHome} from "react-icons/im";
 import RouterButton from './homeButton';
 
 const watchProgress = (event) => {

@@ -1,11 +1,9 @@
 import React from 'react';
 import './App.css';
-import Header from './components/header';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link
 } from 'react-router-dom';
 import player from './components/player/player';
 import showRoom from './components/showRoom/showRoom';
