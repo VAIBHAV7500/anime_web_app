@@ -80,8 +80,8 @@ router.post('/upload', async (req,res,next)=>{
 });
 
 router.get('/episodes', async(req,res,next)=>{
-    if(req.show_id){
-        result = await db.videos.getShows(req.show_id).catch((err)=>{
+    if(req.query.show_id){
+        result = await db.videos.getShows(req.query.show_id).catch((err)=>{
             res.status(501).json({
                 success: false,
                 err: err.message,

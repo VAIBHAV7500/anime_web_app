@@ -5,7 +5,8 @@ var logger = require('morgan');
 var cors = require('cors');
 var helmet = require('helmet');
 var nodeadmin = require('nodeadmin');
-var db = require('./db/index');
+var db = require('./db');
+var { updateList } = require('./lib/search');
 
 require('dotenv').config();
 
@@ -13,6 +14,7 @@ var indexRouter = require('./routes/index');
 var videoRouter = require('./routes/video');
 var userRouter = require('./routes/user');
 var showsRouter = require('./routes/shows');
+var searchRouter = require('./routes/search');
 
 var {
   anyError,
@@ -22,6 +24,8 @@ var {
 global.connection = db.getConnection();
 
 var app = express();
+
+updateList(); // to load the search list
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,6 +49,7 @@ app.use('/', indexRouter);
 app.use('/video', videoRouter);
 app.use('/user',userRouter);
 app.use('/shows',showsRouter);
+app.use('/search',searchRouter);
 
 app.use(anyError);
 app.use(errorHandler);

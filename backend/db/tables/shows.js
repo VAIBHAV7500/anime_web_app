@@ -4,6 +4,7 @@ const createTable = (con) => {
         CREATE TABLE IF NOT EXISTS shows (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             name TEXT NOT NULL,
+            original_name TEXT,
             genre_id TEXT,
             trailer_url TEXT,
             poster_portrait_url TEXT,
@@ -46,9 +47,15 @@ const getShowsByGenre = async (id) => {
     return await runQuery(sql);
 }
 
+const getShowsTitle = async () => {
+    const sql = `SELECT id, name, original_name,poster_portrait_url from shows`;
+    return runQuery(sql);
+}
+
 module.exports = {
     createTable,
     find,
     create,
     getShowsByGenre,
+    getShowsTitle
 }

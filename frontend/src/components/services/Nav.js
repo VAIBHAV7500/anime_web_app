@@ -1,5 +1,7 @@
 import React ,{ useState, useEffect } from 'react';
 import { FaUser, FaSearch } from "react-icons/fa";
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
 import "./Nav.css";
 
 const options = [
@@ -11,6 +13,7 @@ const options = [
 function Nav() {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
+    const [searchSet, setSearchSet] = useState([]);
 
     useEffect(() => {
         window.addEventListener("scroll",() => {
@@ -19,7 +22,7 @@ function Nav() {
             }else handleShow(false);
         });
         return() => {
-            window.removeEventListener("scroll");
+            //window.removeEventListener("scroll", handleMouseDown, true);
         }
 
         
@@ -29,14 +32,36 @@ function Nav() {
         console.log('Clicked');
         setSearch(!search);
         if(search){
-            document.body.classList.add("no-sroll")
+
         }
+    }
+
+    const getSuggestions = async () => {
+        const word = document.getElementsByClassName('search-input')[0].value;
+        console.log(word);
+        const request = await axios.get(`${requests.fetchSuggestions}?key=${word}`);
+        console.log(JSON.stringify(request.data));
+        setSearchSet(request.data.results);
+        
     }
 
     const generateSearchModal = () => {
         return <div className="search-modal">
            <div className="search-box">
-                <input type="text" placeholder="Search" className="search-input"></input>
+                <input type="text" placeholder="Search" className="search-input" onKeyDown={getSuggestions}></input>
+                
+           </div>
+           <div className="suggestions">
+                {
+                    searchSet && searchSet.map((suggestion)=>{
+                        return <div className="suggestion-card" key={suggestion.item.id}>
+                        <img src={suggestion.item.poster_portrait_url} className="suggestion-image" ></img>
+                        <div className="card-details">
+                    <div className="card-name">{suggestion.item.name}</div>
+                        </div>
+                    </div>
+                    })
+                }
            </div>
         </div>
     }

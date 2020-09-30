@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={showRoom}/>
-          <Route path="/show" component={show}></Route>
+          <Route path="/show/:id" component={show}></Route>
           <Route path="/player" component={player} props="{name: 'Helllo'}"></Route>
         </Switch>
       </Router>

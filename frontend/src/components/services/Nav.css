@@ -61,8 +61,7 @@
 
 .search-modal{
     position: fixed;
-    top: 30%;
-    transform: translate(-50%, -50%);
+    top: 10%;
     z-index: 50;
     display: flex;
 }
@@ -86,8 +85,8 @@
     left: 200px;
     font-weight: bold;
     font-size: 20px;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    z-index: 30;
+
     -webkit-transition: width 1s ease-in-out;
     -moz-transition: width 1s ease-in-out;
     -o-transition: width 1s ease-in-out;
@@ -105,4 +104,75 @@
     background:rgba(17, 16, 16, 0.6);
     backdrop-filter: blur(8px);
     z-index: 25;
+}
+
+.search-box{ 
+    position: absolute;
+    z-index: 30;
+}
+.suggestions{
+     position: relative;
+     margin-top: 80px;
+     margin-left: 60px;
+}
+.suggestion-card{
+    position: relative;
+    float: left;
+    object-fit: contain;
+    min-height: 250px;
+    width:auto;
+    max-height: 350px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: 5px solid black;
+    border-radius: 15px;
+    background-image: linear-gradient(180deg,
+        transparent,
+        rgba(37, 37, 37, 0.91),
+        #111);
+    margin-bottom: 10px;
+    
+}
+.suggestion-image{
+    float: left;
+    height:80%;
+    max-height: 220px;
+    width: auto;
+
+}
+
+.suggestion-name{
+    font-weight: bold;
+    padding: 10px;
+}
+
+.card-name{
+    position:relative;
+    text-align: center;
+    font-weight: bolder;
+    color: #ffffff;
+    width: 100%;
+    float:left;
+}
+
+.card-details{
+    float:left;
+    position:relative;
+    color: white; 
+    clear:both;
+}
+
+.card-details{
+    position:absolute;
+    object-fit:contain;
+    bottom: 0px;
+    width:100%;
+    background-image: linear-gradient(180deg,
+        transparent,
+        rgba(37, 37, 37, 0.91),
+        #111);
+}
+
+.details{
+    text-align: left;
 }

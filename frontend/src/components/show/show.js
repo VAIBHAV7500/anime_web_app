@@ -5,13 +5,22 @@ import Banner from './banner';
 import Nav from '../services/Nav';
 import Episodes from './episodes';
 import requests from '../../utils/requests';
+import axios from '../../utils/axios';
 
 export class show extends Component {
 
-    componentDidMount(){
-        let params = queryString.parse(this.props.location.search);
-        console.log(params);
-        
+    async componentDidMount(){
+        console.log('Params');
+        console.log(this.props.match.params);
+        try{
+            const showId = this.props.match.params.id
+            
+            const request = await axios.get(`${requests.fetchEpisodes}?show_id=${1}`);
+            console.log('Request');
+            console.log(request);
+        }catch(err){
+
+        }
     }
     
     render() {

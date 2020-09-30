@@ -4,11 +4,14 @@ import "./Row.css";
 import movieTrailer from "movie-trailer";
 import ReactPlayer from 'react-player/lazy';
 import { MdClose } from "react-icons/md";
+import {Redirect,useHistory} from "react-router-dom";
+
 
 
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState("");
+  const history = useHistory();
   let keyId = 1;
   useEffect(() => {
     // if [] , run once when the row loads , and don;t run again
@@ -46,6 +49,13 @@ function Row({ title, fetchUrl, isLargeRow }) {
       movie.description = description;
       setTrailer(movie);
   }
+
+  const goToVideo = (trailer) => {
+    console.log('Clicked');
+    console.log(trailer);
+    history.push(`/show/${trailer.id}`);
+  }
+
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -111,7 +121,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                   </td> }
                 </tr>
             </table>
-            < button className = "trailer_btn" > Go to Show
+            < button className = "trailer_btn"  onClick={()=>{goToVideo(trailer)}}>Go to Show
             </button>
             < button className = "trailer_btn" > Add to WatchList
             </button>
