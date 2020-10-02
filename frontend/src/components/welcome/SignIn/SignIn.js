@@ -32,7 +32,6 @@ const Login = ()=>{
             }
         };
         var response = await axios(config);
-        console.log(response.data);
         if(response.data.message === "Successfully Entered"){
             return true;
         }
@@ -52,8 +51,6 @@ const Login = ()=>{
     }
 
     const handleSignIn = async (e)=>{  
-        
-    console.log(appbaseurl);
         e.preventDefault();
         startLoader();
         setState(prevState=>({
@@ -77,7 +74,6 @@ const Login = ()=>{
         };
         
         const response = await axios(config).catch(err=>{
-            console.log("Invalid Credentials");
             setState(prevState=>({
                 ...prevState,
                 errorShow : true

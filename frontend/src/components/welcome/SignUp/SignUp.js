@@ -69,7 +69,6 @@ export default function SignUp() {
     const handleSignUp = async (e)=>{
         e.preventDefault();
         startLoader();
-        console.log();
         const statusOfError = await errorHandler();
         if(!statusOfError){
             stopLoader();
@@ -155,3 +154,4 @@ export default function SignUp() {
         </div>
     )
 }
+

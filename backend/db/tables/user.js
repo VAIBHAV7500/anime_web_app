@@ -33,7 +33,6 @@ const find = async (id) =>{
 const find_by_email = async (email) => {
     const sql = `SELECT * from users where email = "${email}" limit 1`;
     const result = await runQuery(sql);
-    console.log(result);
     return result.length ? result[0] : undefined;
 }
 
