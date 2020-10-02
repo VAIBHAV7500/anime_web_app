@@ -1,12 +1,13 @@
 .banner {
     color: white;
     object-fit: contain;
-    height: 448px;
+    height: 300px;
+    background-color: rgb(22, 22, 22)
 }
 
 .banner_contents {
     margin-left: 30px;
-    padding-top: 140px;
+    padding-top: 10px;
     height: 190px;
 }
 
@@ -18,13 +19,14 @@
 }
 
 .banner_description {
-    width: 45rem;
+    position: absolute;
+    width: 100%;
     line-height: 1.3;
     padding-top: 1rem;
     font-size: 0.8rem;
-    max-width: 360px;
     height: 80px;
 }
+
 
 .banner_button {
     cursor: pointer;
@@ -48,10 +50,13 @@
     transition: all 02.s;
 }
 
-.banner--fadeBottom {
-    height: 7.4rem;
+.banner_fadeBottom {
+    height:5.8rem;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
     background-image: linear-gradient(180deg,
-            transparent,
-            rgba(37, 37, 37, 0.61),
-            #111);
+        transparent,
+        rgba(37, 37, 37, 0.21),
+        #111);
 }

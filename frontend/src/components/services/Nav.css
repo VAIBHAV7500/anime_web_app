@@ -12,10 +12,15 @@
     transition: all 0.5s;
     z-index: 10;
 }
+
 .nav_black{
     background: rgb(2, 0, 6);
     background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, #4d01a3 42%);
     opacity: 0.95;
+    -webkit-transition: background 500ms ease-in 2s;
+    -moz-transition: background 500ms ease-in 1s;
+    -o-transition: background 500ms ease-in 1s;
+    transition: background 500ms ease-in 2s;
 }
 
 .nav_logo {
@@ -23,9 +28,12 @@
     left: 2%;
     top:1%;
     width: 160px;
-    -webkit-text-stroke: 2px white;
+    -webkit-text-stroke: 0.5px black;
     object-fit: contain;
     cursor: pointer;
+      background: -webkit-linear-gradient(white, #38495a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
 }
 
 .nav_avatar{
@@ -43,6 +51,7 @@
 
 .logo_white{
     color: white;
+    -webkit-text-stroke: none;
 }
 
 .search_icon{
@@ -122,6 +131,7 @@
     object-fit: contain;
     min-height: 250px;
     width:auto;
+    min-width: 150px;
     max-height: 350px;
     margin-right: 10px;
     cursor: pointer;

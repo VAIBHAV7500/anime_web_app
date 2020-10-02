@@ -1,6 +1,6 @@
 .footer{
-    background: rgba(77, 1, 163, 1);
-    opacity: 0.6;
+    background: rgb(56, 1, 119);
+    opacity: 1;
     height: 100px;
 }
 
@@ -28,9 +28,11 @@ td{
     float: right;
     margin-right: 60px;
     padding-top: 20px;
-    color: black;
+    color: white;
     font-size: 54px;
-     -webkit-text-stroke: 2px white;
+      background: -webkit-linear-gradient(white, #38495a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
 }
 
 td{

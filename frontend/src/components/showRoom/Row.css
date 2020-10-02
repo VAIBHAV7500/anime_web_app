@@ -43,6 +43,7 @@
 
 .trailer_window{
     overflow: hidden;
+    object-fit: contain;
     padding: 2%;
     padding-right: 100px;
     box-sizing: border-box;
