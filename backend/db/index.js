@@ -8,6 +8,7 @@ const shows = require('./tables/shows');
 const videos = require('./tables/videos');
 const audios = require('./tables/audios');
 const subtitles = require('./tables/subtitles');
+const access_tokens = require('./tables/access_tokens');
 
 const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
@@ -33,4 +34,5 @@ module.exports =  {
     audios,
     subtitles,
     getConnection,
+    access_tokens
 }

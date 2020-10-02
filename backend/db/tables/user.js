@@ -10,7 +10,8 @@ const createTable = (con) => {
             mobile VARCHAR(15) UNIQUE,
             plan_id INT,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            CHECK(email != '')
         )
     `;
     return new Promise((res,rej)=>{
@@ -41,11 +42,23 @@ const create = async (body) => {
     return await runQuery(sql,[Object.values(body)]);
 }
 
+const doesEmailExist = async (email) => {
+    const sql = `SELECT * from users where email = "${email}" limit 1`;
+    const result = await runQuery(sql).catch(e=>{ return {
+        status : false,
+        message : "SQL ERROR"
+    }});
+    console.log(result);
+    return result.length ? {status : true, message : "User Exist"} : {status : false, message:"User not exist"};
+}
+
+
 module.exports = {
     createTable,
     find,
     create,
-    find_by_email
+    find_by_email,
+    doesEmailExist
 }
 
 /*db = require('../index');

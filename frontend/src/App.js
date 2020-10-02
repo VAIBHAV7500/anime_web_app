@@ -8,7 +8,8 @@ import {
 import player from './components/player/player';
 import showRoom from './components/showRoom/showRoom';
 import show from './components/show/show';
-
+import SignIn from './components/welcome/SignIn/SignIn'
+import SignUp from './components/welcome/SignUp/SignUp'
 require('dotenv').config();
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
           <Route exact path="/" component={showRoom}/>
           <Route path="/show/:id" component={show}></Route>
           <Route path="/player" component={player} props="{name: 'Helllo'}"></Route>
+          <Route path="/signup" component={SignUp}></Route>
+          <Route path="/signin" component={SignIn}></Route>
         </Switch>
       </Router>
     </div>

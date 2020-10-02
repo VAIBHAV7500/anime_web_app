@@ -8,6 +8,7 @@ const shows = require('./tables/shows');
 const videos = require('./tables/videos');
 const audios = require('./tables/audios');
 const subtitles = require('./tables/subtitles');
+const access_tokens = require('./tables/access_tokens');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -54,6 +55,8 @@ con.connect(async (err)=>{
         response = await audios.createTable(con);
         console.log(response);
         response = await subtitles.createTable(con);
+        console.log(response);
+        response = await access_tokens.createTable(con);
         console.log(response);
     }
     catch(err){
