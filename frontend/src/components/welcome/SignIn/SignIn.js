@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import './SignIn.css';
-import Spinner from '../Spinner/Spinner'
+import Spinner from '../Spinner/index'
 import { FaUnlock, FaEnvelope } from 'react-icons/fa';
 import FormGroup from '../Form-Group/FormGroup'
 import axios from '../../../utils/axios';

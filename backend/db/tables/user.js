@@ -42,24 +42,14 @@ const create = async (body) => {
     return await runQuery(sql,[Object.values(body)]);
 }
 
-const doesEmailExist = async (email) => {
-    const sql = `SELECT * from users where email = "${email}" limit 1`;
-    const result = await runQuery(sql).catch(e=>{ return {
-        status : false,
-        message : "SQL ERROR"
-    }});
-    console.log(result);
-    return result.length ? {status : true, message : "User Exist"} : {status : false, message:"User not exist"};
-}
-
 
 module.exports = {
     createTable,
     find,
     create,
     find_by_email,
-    doesEmailExist
 }
+
 
 /*db = require('../index');
 global.connection = db.getConnection();
@@ -73,5 +63,6 @@ body = {
 user = require('./user');
 user.create(body)
 */
+
 
 

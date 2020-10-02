@@ -5,7 +5,7 @@ const getClient = async (clientID, clientSecret, callback) => {
     clientID,
     clientSecret,
     grants: null,
-    redirectUris: null
+    redirectUris: null,
   }
   callback(false, client);
 }
@@ -22,7 +22,7 @@ const getUser = async (email, password, callback) => {
 const saveAccessToken = async (accessToken, clientID, expires, user, callback) => {
     userObject = {
         access_token : accessToken,
-        user_id : user.id
+        user_id : user.id,
     };
     results = await db.access_tokens.create(userObject).catch((e)=>{
         callback(e);return;
@@ -36,7 +36,7 @@ const getAccessToken = async (bearerToken, callback) => {
         user: {
         id: result.user_id,
         },
-        expires: null
+        expires: null,
     }
     callback(result.user_id == null ? true : false, result.user_id == null ? null : accessToken);
 }
@@ -46,5 +46,6 @@ module.exports = {
     saveAccessToken: saveAccessToken,
     getUser: getUser,
     grantTypeAllowed: grantTypeAllowed,
-    getAccessToken: getAccessToken
+    getAccessToken: getAccessToken,
 }
+

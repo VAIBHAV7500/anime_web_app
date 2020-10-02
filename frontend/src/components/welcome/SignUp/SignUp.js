@@ -5,7 +5,7 @@ import { FaUnlock, FaMobile, FaEnvelope} from 'react-icons/fa';
 import axios from '../../../utils/axios';
 import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
-import Spinner from '../Spinner/Spinner'
+import Spinner from '../Spinner/index'
 import { Link } from 'react-router-dom';
 export default function SignUp() {
     useEffect(() => {
