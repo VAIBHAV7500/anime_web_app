@@ -52,6 +52,7 @@
     font-weight: bold;
     min-height: 250px;
     font-size: 14px;
+
 }
 
 .genre{
@@ -82,7 +83,7 @@
 
 .synopsis{
     word-wrap: break-word;
-    width: 300px;
+    max-width: 80%;
     font-weight: normal;
     padding-top:20px;
     padding-bottom: 20px;
