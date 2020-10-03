@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
-import './signup.css'
+import styles from './signup.module.css'
+import styles2  from '../SignIn/SignIn.module.css'
 import FormGroup from '../Form-Group/FormGroup'
 import { FaUnlock, FaMobile, FaEnvelope} from 'react-icons/fa';
 import axios from '../../../utils/axios';
@@ -7,11 +8,13 @@ import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
 import Spinner from '../Spinner/index'
 import { Link } from 'react-router-dom';
+
+
 export default function SignUp() {
     useEffect(() => {
-        document.body.classList.add('body');
+        document.body.classList.add(styles2.body);
         return () => {
-            document.body.classList.remove('body');
+            document.body.classList.remove(styles2.body);
         }
     }, []);
 
@@ -48,7 +51,7 @@ export default function SignUp() {
 
     const errorAdd = ()=>{
         return (
-            <div className="error">
+            <div className={styles2.error}>
                 <strong>{state.error}</strong>
             </div>
         )
@@ -107,8 +110,8 @@ export default function SignUp() {
     }
     
     return (
-        <div className="sign-up-form">
-            <h1><strong>Sign Up</strong></h1>
+        <div className={styles.sign_up_form}>
+            <h1 className={styles2.title_name}><strong>Sign Up</strong></h1>
             {state.showerror? errorAdd() : ""}
             <form onSubmit={handleSignUp}>
                 <FormGroup
@@ -148,10 +151,11 @@ export default function SignUp() {
                     onChange={handleChange}
                     pattern="^(\+\d{1,3}[- ]?)?\d{10}$"
                 />
-                <button type="submit">{ state.loader? <Spinner/> : "Sign Up"}</button>
-                <p className="sign-in-p">Already have an account? <Link  className="sign-in" to="/signin"><strong>Sign In</strong></Link></p>
+                <button className={styles2.btn} type="submit">{ state.loader? <Spinner/> : "Sign Up"}</button>
+                <p className={`${styles.sign_in_p} ${styles2.para}`}>Already have an account? <Link  className={`${styles.sign_in} ${styles2.link}`} to="/signin"><strong>Sign In</strong></Link></p>
             </form>
         </div>
     )
 }
+
 

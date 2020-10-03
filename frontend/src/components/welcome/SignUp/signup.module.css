@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
-.sign-up-form {
+.sign_up_form {
     background: rgba(0, 0, 0, 0.4117647058823529);
     max-width: 500px;
     margin: 0 auto;
@@ -10,55 +10,29 @@
     margin-left: 11%;
 }
 
-.group {
-    display: flex;
-    padding: 10px 5px;
-    background-color: #ffffff;
-}
 
-.group i {
-    color: #c422d3;
-    font-size: 20px;
-    padding: 0 10px;
-}
-
-.inputField {
-    font-family: 'Balsamiq Sans', cursive;
-    font-size: 17px;
-    width: 100%;
-    border: none;
-    box-sizing: border-box;
-    background: transparent;
-    color: #000;
-    padding-left: 10px;
-}
-
-.inputField:focus {
-    outline: none;
-}
-
-p.sign-in-p {
+p.sign_in_p {
     color: #eee;
     font-size: 13px;
     text-align: center;
     margin-top: 2em;
 }
 
-.sign-in {
+.sign_in {
     color: white;
     text-decoration: none;
 }
-.sign-in:hover{
+.sign_in:hover{
     text-decoration: underline;
 }
 
 @media(max-width:480px) {
-    .sign-up-form {
+    .sign_up_form {
         margin: 0 3vw;
         margin-top: 5%;
         margin-left: 1%;
     }
-    .sign-in{
+    .sign_in{
         color: #8a0edd;
     }
 }

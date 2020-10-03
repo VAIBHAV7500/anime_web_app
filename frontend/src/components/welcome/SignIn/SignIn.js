@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import './SignIn.css';
+import styles from './SignIn.module.css';
 import Spinner from '../Spinner/index'
 import { FaUnlock, FaEnvelope } from 'react-icons/fa';
 import FormGroup from '../Form-Group/FormGroup'
@@ -17,9 +17,9 @@ const Login = ()=>{
         errorShow:false
     });
     useEffect(() => {
-        document.body.classList.add('body');
+        document.body.classList.add(styles.body);
         return () => {
-            document.body.classList.remove('body');
+            document.body.classList.remove(styles.body);
         }
     }, []);
     const handleAccessToken = async (token)=>{
@@ -100,14 +100,15 @@ const Login = ()=>{
     }
     const errorAdd = ()=>{
         return (
-            <div className="error">
+            <div className={styles.error}>
                 <strong>Invalid Credentials</strong>
             </div>
         )
     }
+
     return (
-        <div className="sign-in-form">
-        <h1><strong>Sign In</strong></h1>
+        <div className={styles.sign_in_form}>
+        <h1 className={styles.title_name}><strong>Sign In</strong></h1>
         {state.errorShow? errorAdd() : ""}
         <form onSubmit={handleSignIn}>
           <FormGroup
@@ -126,13 +127,13 @@ const Login = ()=>{
               value={state.password}
               onChange={handleChange}
           />
-          <div className="forgot">
-            <a href="">Forgot Password?</a>
-            <p><input type="checkbox" />Remember Me</p>
+          <div className={styles.forgot}>
+            <a className={styles.link} href="">Forgot Password?</a>
+            <p className={styles.para}><input type="checkbox" />Remember Me</p>
           </div>
-        <button type="submit" >{ state.loader? <Spinner/> : "Sign In"}</button>
+        <button className={styles.btn} type="submit" >{ state.loader? <Spinner/> : "Sign In"}</button>
         </form>
-    <p className="sign-up-p">Don't have an account? <Link  className="sign-up" to="/signup"><strong>Sign Up</strong></Link> </p>
+        <p className={`${styles.sign_up_p} ${styles.para}`}>Don't have an account? <Link className={`${styles.sign_up} ${styles.link}`} to="/signup"><strong>Sign Up</strong></Link> </p>
       </div>
     )
 }
