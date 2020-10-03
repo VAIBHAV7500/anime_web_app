@@ -5,28 +5,148 @@
     position:relative;
 }
 
-.settings{
+.number{
     position: relative;
     width: 100%;
-    transform: translateX(90%);
+    transform: translateX(84%);
     cursor: pointer;
+    margin-right: 10px;
 }
 
-  .neumorphism {
-      padding: 15px 10px;
-      border: none;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
-          7px 7px 20px 0 rgba(0, 0, 0, 0.2);
-      color: rgb(187, 185, 185);
-  }
+.number_input{
+    width: 100%;
+    max-width: 210px;
+    outline: none;
+    color: #ffff;
+    font-size: 15px;
+    background-color: rgba(255,255,255,0);
+    -webkit-appearance: none;
+    border: 0;
+}
 
-  .scrollable_div{
-    height: 300;
-    overflow: 'auto';
-    display: 'flex';
-    flex-direction: 'column-reverse';
-  }
+.neumorphism {
+    padding: 15px 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
+        7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    color: rgb(187, 185, 185);
+}
+
+.scrollable_div{
+min-height: 300px;
+overflow: 'auto';
+display: 'flex';
+flex-direction: 'column-reverse';
+margin:0 auto;
+}
+
+.episode_card{
+margin-left:auto;
+margin-top: 10px;
+margin-right:auto;
+min-width: 60%;
+max-width: 80%;
+margin-bottom: 10px;
+background-color: rgba(10, 9, 9, 0.7);
+min-height: 100px;
+cursor: pointer;
+}
+
+.episode_name{
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.episode_thumbnail{
+    object-fit:contain;
+    background-color: rgba(10, 9, 9, 0.7);
+    float: left;
+    width: 150px; 
+    background: white;
+    height: 95px;
+}
+
+.type{
+    float: right;
+    border: 1px solid white;
+    padding:3px;
+    color: black;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2%;
+    font-weight: bold;
+    font-size: 8px;
+    box-shadow: 1px 1px 20px 0px #000000;
+    -webkit-box-shadow: 1px 1px 20px 0px #000000;
+    -moz-box-shadow: 1px 1px 20px 0px #000000;
+    text-shadow: 1px 1px 20px #000000;
+    border:none;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+}
+
+.green{
+    background: #27c019;
+    background-image: -webkit-linear-gradient(top, #27c019, #0f7906);
+    background-image: -moz-linear-gradient(top, #27c019, #0f7906);
+    background-image: -ms-linear-gradient(top, #27c019, #0f7906);
+    background-image: -o-linear-gradient(top, #27c019, #0f7906);
+    background-image: linear-gradient(to bottom, #27c019, #0f7906);
+}
+
+.red{
+    background: #f06b49;
+    background-image: -webkit-linear-gradient(top, #f06b49, #a73012);
+    background-image: -moz-linear-gradient(top, #f06b49, #a73012);
+    background-image: -ms-linear-gradient(top, #f06b49, #a73012);
+    background-image: -o-linear-gradient(top, #f06b49, #a73012);
+    background-image: linear-gradient(to bottom, #f06b49, #a73012);
+}
+
+.episode_description{
+    margin-top: 3%;
+    padding-left: 15%;
+    text-transform: none;
+    font-weight: normal;
+    font-family: Sans-serif;
+}
+
+.progress{
+    height: 2px;
+    clear:both;
+    margin-top: 50px;
+    float:bottom;
+    display: flex;
+    align-items: flex-end;
+    bottom:0%;
+    background-color: rgba(136, 81, 238, 0.8);
+}
+
+@media (min-width:481px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+
+@media (min-width:641px) {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+}
+
+@media (min-width:961px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (min-width:1025px) {
+    /* big landscape tablets, laptops, and desktops */
+}
+
+@media (min-width:1281px) {
+    /* hi-res laptops and desktops */
+
+}

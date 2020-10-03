@@ -3,6 +3,7 @@ const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS videos (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            episode_number INT,
             name TEXT,
             url TEXT,
             video_length TIME,
@@ -40,8 +41,12 @@ const create = async (body) => {
     return await runQuery(sql, [Object.values(body)]);
 }
 
-const getShows = async (id) => {
-    const sql = `SELECT * from videos where show_id = ${id}`;
+const getShows = async (id, from, to) => {
+    from = from || 1;
+    let sql = `SELECT * from videos where show_id = ${id} and episode_number >= ${from}`;
+    sql += (to !== undefined) ? ` and episode_number <= ${to}` : "";
+    sql += ` order by episode_number asc`;
+    console.log(sql);
     const result = await runQuery(sql);
     return result;
 }

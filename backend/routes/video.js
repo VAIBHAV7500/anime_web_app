@@ -81,7 +81,9 @@ router.post('/upload', async (req,res,next)=>{
 
 router.get('/episodes', async(req,res,next)=>{
     if(req.query.show_id){
-        let result = await db.videos.getShows(req.query.show_id).catch((err)=>{
+        const from = req.query.from;
+        const to = req.query.to;
+        let result = await db.videos.getShows(req.query.show_id, from, to).catch((err)=>{
             res.status(501).json({
                 success: false,
                 err: err.message,
@@ -94,6 +96,7 @@ router.get('/episodes', async(req,res,next)=>{
                 id: x.id,
                 name: x.name,
                 type: x.type,
+                episode: x.episode_number,
             }
         });
         console.log(result);

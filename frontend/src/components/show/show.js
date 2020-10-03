@@ -9,7 +9,7 @@ import Episodes from './Episodes';
 
 export class show extends Component {
 
-    navItems = ['Series', 'Movies','Characters','Review','Stats', 'Crew', "OVA's \& related"];
+    navItems = ['Episodes','Characters','Review','Stats', 'Crew', "OVA's \& related"];
 
     fetchData = async () => {
         const showId = this.props.match.params.id
