@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
     "movie-trailer": "^2.0.6",
     "query-string": "^6.13.2",

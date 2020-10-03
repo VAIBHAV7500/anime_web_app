@@ -1,0 +1,41 @@
+.form_group {
+    margin: 20px 0;
+}
+
+.form_group .label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #d2d2d2;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.group {
+    display: flex;
+    padding: 10px 5px;
+    background-color: #ffffff;
+}
+
+.group .icon {
+    color: #c422d3;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+
+.inputField {
+    font-family: 'Balsamiq Sans', cursive;
+    font-size: 17px;
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    background: transparent;
+    color: #000;
+    padding-left: 10px;
+}
+
+.inputField:focus {
+    outline: none;
+}

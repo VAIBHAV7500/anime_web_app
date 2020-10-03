@@ -10,7 +10,8 @@ const createTable = (con) => {
             mobile VARCHAR(15) UNIQUE,
             plan_id INT,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            CHECK(email != '')
         )
     `;
     return new Promise((res,rej)=>{
@@ -32,7 +33,6 @@ const find = async (id) =>{
 const find_by_email = async (email) => {
     const sql = `SELECT * from users where email = "${email}" limit 1`;
     const result = await runQuery(sql);
-    console.log(result);
     return result.length ? result[0] : undefined;
 }
 
@@ -41,12 +41,14 @@ const create = async (body) => {
     return await runQuery(sql,[Object.values(body)]);
 }
 
+
 module.exports = {
     createTable,
     find,
     create,
-    find_by_email
+    find_by_email,
 }
+
 
 /*db = require('../index');
 global.connection = db.getConnection();
@@ -60,5 +62,6 @@ body = {
 user = require('./user');
 user.create(body)
 */
+
 
 

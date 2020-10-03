@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+.sign_up_form {
+    background: rgba(0, 0, 0, 0.4117647058823529);
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 3em;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 3%;
+    margin-left: 11%;
+}
+
+
+p.sign_in_p {
+    color: #eee;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.sign_in {
+    color: white;
+    text-decoration: none;
+}
+.sign_in:hover{
+    text-decoration: underline;
+}
+
+@media(max-width:480px) {
+    .sign_up_form {
+        margin: 0 3vw;
+        margin-top: 5%;
+        margin-left: 1%;
+    }
+    .sign_in{
+        color: #8a0edd;
+    }
+}
+
