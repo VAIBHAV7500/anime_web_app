@@ -7,9 +7,11 @@ import axios from '../../../utils/axios';
 import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
 import { Link } from 'react-router-dom';
+import {useHistory} from "react-router-dom";
 
 const Login = ()=>{
     const appbaseurl = process.env.REACT_APP_BASE_URL;
+    const history = useHistory();
     const [state,setState] = useState({
         loader : false,
         email:"",
@@ -33,6 +35,8 @@ const Login = ()=>{
         };
         var response = await axios(config);
         if(response.data.message === "Successfully Entered"){
+            console.log('Logged In');
+            history.push('/');
             return true;
         }
         return false;

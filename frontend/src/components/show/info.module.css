@@ -1,23 +1,22 @@
 .info{
-    background: radial-gradient(ellipse at bottom, #3e3d3f 0%, #090a0f 100%);
-    position:absolute;
-    object-fit: contain;
+    z-index:1;
 }
 
 .poster{
     position:relative;
     float:left;
     max-width: 100px;
-    min-width: 50px;
+    min-width: 100px;
     height: 150px;
     transform: translate(25%,-25%);
     border: 5px solid #ffff;
+    background-color: rgb(51, 49, 49);
 }
 
 .name{
     word-wrap: break-word;
     width: 800px;
-    padding-top: 5px;
+    padding-top: 25px;
     float:left;
     font-weight: bolder;
     font-size: 40px;
@@ -52,6 +51,7 @@
     color: #ffff;
     font-weight: bold;
     min-height: 250px;
+    font-size: 14px;
 }
 
 .genre{
@@ -113,8 +113,8 @@
         width: 100%;
     }
     .poster {
-        max-width: 200px;
-        min-width: 100px;
+        max-width: 300px;
+        min-width: 300px;
         height: 300px;
     }
 
@@ -139,7 +139,7 @@
     }
     .poster {
         max-width: 200px;
-        min-width: 100px;
+        min-width: 200px;
         height: 300px;
     }
 

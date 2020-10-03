@@ -16,11 +16,12 @@
 .nav_black{
     background: rgb(2, 0, 6);
     background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, #4d01a3 42%);
+    --background-color: rgb(43, 42, 42);
     opacity: 0.95;
-    -webkit-transition: background 500ms ease-in 2s;
-    -moz-transition: background 500ms ease-in 1s;
-    -o-transition: background 500ms ease-in 1s;
-    transition: background 500ms ease-in 2s;
+    -webkit-transition: background 100ms ease-in 1s;
+    -moz-transition: background 100ms ease-in 1s;
+    -o-transition: background 100ms ease-in 1s;
+    transition: background 100ms ease-in 1s;
 }
 
 .nav_logo {

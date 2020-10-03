@@ -45,4 +45,19 @@ router.get('/details',async (req,res,next)=>{
     res.json(data);
 });
 
+router.get('/create-group', async (req,res,next)=>{
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields) => {
+        console.log(fields);
+        db.group.create(fields).then((response) => {
+            res.json(response);
+        }).catch((err) => {
+            res.status(501).json({
+                err: err.message,
+                stack: err.stack
+            });
+        });
+    });
+});
+
 module.exports = router;

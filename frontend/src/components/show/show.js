@@ -5,9 +5,11 @@ import Nav from '../services/Nav';
 import requests from '../../utils/requests';
 import axios from '../../utils/axios';
 import styles from './show.module.css';
-import { FaThList } from 'react-icons/fa';
+import {EpisodeMemo} from './Episodes';
 
 export class show extends Component {
+
+    navItems = ['Content','Characters','Review','Stats', 'Crew', "OVA's \& related"];
 
     fetchData = async () => {
         const showId = this.props.match.params.id
@@ -29,22 +31,24 @@ export class show extends Component {
         const results = await Promise.all(promiseArray);
         const states = {
             show: results[0].data,
-            episodes: results[1].data
+            episodes: results[1].data,
+            nav_id: 0,
         };
         this.setState(states);
-        console.log(this.state);
     }
     async componentDidMount(){
         this.fetchData();
     }
 
     async componentDidUpdate(prevProps) {
-        console.log(prevProps);
         if (this.props.match.params.id !== prevProps.match.params.id) {
-            // call the fetch function again
-            console.log('Updated');
              this.fetchData();
         }
+    }
+
+    selectNav = (id) =>{
+        this.state.nav_id = id;
+        this.setState(this.state);
     }
     
     render() {
@@ -52,18 +56,17 @@ export class show extends Component {
             <div className={styles.show}>
                 <Nav/>
                 <Banner movie = {this.state?.show}/>
-                <Info movie = {this.state?.show}/>
+                <Info movie = {this.state?.show} className={styles.info}/>
                 <br className={styles.break}/>
-                {/* <div className={styles.sub_nav}>
-                    <div className={styles.sub_item}>Episodes</div>
-                </div> */}
-                {/* {
-                    this.state && this.state.episodes && this.state.episodes.map((episode)=>{
-                        return <div key={episode.id}>
-                            {episode.id}
-                        </div>
-                    })
-                } */}
+                    <div className={styles.sub_nav}>
+                        <div className={styles.filler}></div>
+                        {
+                            this.navItems.map((x, index) =>{
+                                return <div  key ={index} className= {`${styles.sub_item} ${styles.neumorphism} ${this.state?.nav_id === index ? styles.sub_item_active:""}`} onClick={()=>{this.selectNav(index)}}> {x} </div>
+                            })
+                        }
+                    </div>
+                { this.state?.nav_id === 0 ? <EpisodeMemo show_id={1} /> : ""}
                 <div className={styles.episodes}>
                     
                 </div>

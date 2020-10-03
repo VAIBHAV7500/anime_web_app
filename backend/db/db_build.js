@@ -9,6 +9,7 @@ const videos = require('./tables/videos');
 const audios = require('./tables/audios');
 const subtitles = require('./tables/subtitles');
 const access_tokens = require('./tables/access_tokens');
+const group = require('./tables/group');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -39,25 +40,27 @@ con.connect(async (err)=>{
         console.log("DB CONNECTION BUILT!!");
         let response = "";
         response = await createDB();
-        console.log(response);
+        console.log(`Created DB`);
         response = await user.createTable(con);
-        console.log(response);
+        console.log(`Craated User`);
         response = await sessions.createTable(con);
-        console.log(response);
+        console.log(`Created Sessions`);
         response = await plans.createTable(con);
-        console.log(response);
+        console.log(`Created Plans`);
         response = await genre.createTable(con);
-        console.log(response);
+        console.log(`Created Genre`);
         response = await shows.createTable(con);
-        console.log(response);
+        console.log(`Created Shows`);
         response = await videos.createTable(con);
-        console.log(response);
+        console.log(`Created Videos`);
         response = await audios.createTable(con);
-        console.log(response);
+        console.log(`Created Audios`);
         response = await subtitles.createTable(con);
-        console.log(response);
+        console.log(`Created Subtitles`);
         response = await access_tokens.createTable(con);
-        console.log(response);
+        console.log(`Created Access Token`);
+        response = await group.createTable(con);
+        console.log(`Created Group`);
     }
     catch(err){
         console.log(err);

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from '../../utils/axios';
-import requests from '../../utils/requests';
 import styles from './banner.module.css';
 
 function Banner({movie}) {

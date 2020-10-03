@@ -3,9 +3,6 @@ import { MdDescription } from 'react-icons/md';
 import styles from './info.module.css';
 
 function Info({movie}) {
-    console.log('in Info');
-    console.log(movie);
-    console.log(movie?.id);
     const [moreSyn, setSynopsis] = useState(false);
 
     function truncate(str , n){

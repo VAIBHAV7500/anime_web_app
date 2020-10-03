@@ -1,56 +1,32 @@
-import React, { Component } from 'react'
-import InfiniteScroll from "react-infinite-scroll-component";
-import {getEpisodeList} from '../../utils/api';
+import React, { useState, useEffect } from 'react';
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
 
-export class episodes extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            items: []
+function Episodes({show_id}) {
+    const [episodes, setEpisodes] = useState([]);
+    const cleanup = () => {
+        setEpisodes([]);
+    }
+    useEffect(() => {
+        const updateEpisodes = async () => {
+            if(!episodes.length){
+                const response = await axios.get(`${requests.fetchEpisodes}?show_id=${show_id}`);
+                console.log(response.data);
+                setEpisodes(response.data);
+                console.log(episodes);
+                console.log(episodes.length);
+            }
         }
-    }
-
-    async componentDidMount(){
-        const res = await getEpisodeList();
-        console.log(res.data);
-        this.setState({
-            items: res.data
-        })
-    } 
-
-    fetchMoreData = () => {
-        // a fake async api call like which sends
-        // 20 more records in 1.5 secs
-        getEpisodeList().then((res)=>{
-            this.setState({
-                items: this.state.items.concat(res.data)
-            });
-        });
-    };
-
-    reverseData = () => {
-        console.log('In Reverse')
-        this.setState({
-            items: this.state.items.reverse()
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>demo: react-infinite-scroll-component</h1>
-                <button onClick={this.reverseData}>Reverse</button>
-            {this.state.items ? <InfiniteScroll
-                dataLength={this.state.items.length}
-                next={this.fetchMoreData}
-                hasMore={true}
-                loader={<h4>Loading...</h4>}
-                >
-                {this.state.items[0]}
-            </InfiniteScroll> : ''}
-            </div>
-        )
-    }
+        updateEpisodes();
+        return () => {
+           //cleanup();
+        }
+    }, [show_id]);
+    return (
+        <div>
+            
+        </div>
+    )
 }
 
-export default episodes
+export const EpisodeMemo = Episodes;
