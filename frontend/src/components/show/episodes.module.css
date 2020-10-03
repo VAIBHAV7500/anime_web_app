@@ -1,0 +1,32 @@
+.episodes{
+    color: white;
+    padding: 10px;
+    width : 100%;
+    position:relative;
+}
+
+.settings{
+    position: relative;
+    width: 100%;
+    transform: translateX(90%);
+    cursor: pointer;
+}
+
+  .neumorphism {
+      padding: 15px 10px;
+      border: none;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
+          7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+      color: rgb(187, 185, 185);
+  }
+
+  .scrollable_div{
+    height: 300;
+    overflow: 'auto';
+    display: 'flex';
+    flex-direction: 'column-reverse';
+  }

@@ -65,7 +65,7 @@ function Nav() {
                         <img src={suggestion.item.poster_portrait_url} alt={suggestion.item.name} className="suggestion-image" ></img>
                         <div className="card-details">
                     <div className="card-name">{suggestion.item.name}</div>
-                        </div>
+                        </div> 
                     </div>
                     })
                 }
@@ -81,7 +81,7 @@ function Nav() {
                 alt="ANIMEI LOGO"
             /> */}
             <h1 className={`nav_logo ${show && "logo_white"}`} onClick={goToHome}>
-                    ANIMEI
+                    ANIMEI TV
             </h1>
             {/* <img
                 className="nav_avatar"

@@ -5,11 +5,11 @@ import Nav from '../services/Nav';
 import requests from '../../utils/requests';
 import axios from '../../utils/axios';
 import styles from './show.module.css';
-import {EpisodeMemo} from './Episodes';
+import Episodes from './Episodes';
 
 export class show extends Component {
 
-    navItems = ['Content','Characters','Review','Stats', 'Crew', "OVA's \& related"];
+    navItems = ['Series', 'Movies','Characters','Review','Stats', 'Crew', "OVA's \& related"];
 
     fetchData = async () => {
         const showId = this.props.match.params.id
@@ -66,7 +66,7 @@ export class show extends Component {
                             })
                         }
                     </div>
-                { this.state?.nav_id === 0 ? <EpisodeMemo show_id={1} /> : ""}
+                { this.state?.nav_id === 0 ? <Episodes show_id={1} /> : ""}
                 <div className={styles.episodes}>
                     
                 </div>
