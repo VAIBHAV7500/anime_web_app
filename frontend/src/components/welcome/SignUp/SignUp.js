@@ -151,7 +151,7 @@ export default function SignUp() {
                     onChange={handleChange}
                     pattern="^(\+\d{1,3}[- ]?)?\d{10}$"
                 />
-                <button className={styles2.btn} type="submit">{ state.loader? <Spinner/> : "Sign Up"}</button>
+                <button className={styles2.btn} type="submit">{ state.loader? <Spinner/> : <strong>Sign Up</strong>}</button>
                 <p className={`${styles.sign_in_p} ${styles2.para}`}>Already have an account? <Link  className={`${styles.sign_in} ${styles2.link}`} to="/signin"><strong>Sign In</strong></Link></p>
             </form>
         </div>

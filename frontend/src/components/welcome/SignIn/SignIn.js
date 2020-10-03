@@ -131,7 +131,7 @@ const Login = ()=>{
             <a className={styles.link} href="">Forgot Password?</a>
             <p className={styles.para}><input type="checkbox" />Remember Me</p>
           </div>
-        <button className={styles.btn} type="submit" >{ state.loader? <Spinner/> : "Sign In"}</button>
+        <button className={styles.btn} type="submit" >{ state.loader? <Spinner/> : <strong>Sign In</strong>}</button>
         </form>
         <p className={`${styles.sign_up_p} ${styles.para}`}>Don't have an account? <Link className={`${styles.sign_up} ${styles.link}`} to="/signup"><strong>Sign Up</strong></Link> </p>
       </div>
