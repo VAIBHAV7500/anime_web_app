@@ -27,7 +27,7 @@ const find = async (id) => {
 }
 
 const findByGenre = async (genre) => {
-    const sql = `SELECT id from genre where category='${genre}' limit 1`;
+    const sql = `SELECT id from genre where category like '${genre}' limit 1`;
     console.log(sql);
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;

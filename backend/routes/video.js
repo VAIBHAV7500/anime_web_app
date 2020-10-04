@@ -181,11 +181,6 @@ router.get('/banner', async (req, res, next) => {
 });
 
 router.get('/genre',async (req,res,next)=>{
-    if (!req.query.api_key || req.query.api_key !== keys.app.apiKey) {
-        res.status(401).json({
-            message: "API KEY is missing or incorrect"
-        })
-    }
     const id = req.query.genre_id;
     if(!id)
     {
@@ -194,13 +189,14 @@ router.get('/genre',async (req,res,next)=>{
         });
         return;
     }
-    let result = await db.shows.getShowsByGenre(id).catch((err)=>{
+    const genre_id = await db.genre.findByGenre(id); // Later remove it
+    console.log(genre_id);
+    let result = await db.shows.getShowsByGenre(genre_id.id).catch((err)=>{
         res.status(401).json({
             err: err.message,
             stack: err.stack
         });
     });
-    result = result.concat(result,result,result);
     res.json(result);
 });
 

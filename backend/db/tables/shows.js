@@ -44,7 +44,8 @@ const create = async (body) => {
 }
 
 const getShowsByGenre = async (id) => {
-    const sql = `SELECT * from shows where genre_id like '%${id}%'`;
+    const sql = `SELECT * from shows where genre_id like '%,${id}%,'`;
+    console.log(sql);
     return await runQuery(sql);
 }
 
