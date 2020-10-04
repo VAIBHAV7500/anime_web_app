@@ -97,6 +97,7 @@ router.get('/episodes', async(req,res,next)=>{
                 name: x.name,
                 type: x.type,
                 episode: x.episode_number,
+                thumbnail_url: x.thumbnail_url,
             }
         });
         console.log(result);
@@ -133,7 +134,7 @@ router.get('/trending',async (req,res,next)=>{
             message: "API KEY is missing or incorrect"
         })
     }
-    const videos = [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3];
+    const videos = [12,13,10,9,8,6];
     const promiseArray = [];
     videos.forEach((id)=>{
         promiseArray.push(new Promise((res,rej)=>{

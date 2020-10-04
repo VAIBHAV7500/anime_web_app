@@ -5,7 +5,7 @@ import Nav from '../services/Nav';
 import requests from '../../utils/requests';
 import axios from '../../utils/axios';
 import styles from './show.module.css';
-import Episodes from './Episodes';
+import Episodes from './episodes';
 
 export class show extends Component {
 
@@ -22,7 +22,7 @@ export class show extends Component {
             });
         }));
         promiseArray.push(new Promise((res, rej) => {
-            axios.get(`${requests.fetchEpisodes}?show_id=${1}`).then((result) => {
+            axios.get(`${requests.fetchEpisodes}?show_id=${showId}`).then((result) => {
                 res(result);
             }).catch((err) => {
                 rej(err)
@@ -66,7 +66,7 @@ export class show extends Component {
                             })
                         }
                     </div>
-                { this.state?.nav_id === 0 ? <Episodes show_id={1} /> : ""}
+                { this.state?.nav_id === 0 ? <Episodes show_id={this.props.match.params.id} /> : ""}
                 <div className={styles.episodes}>
                     
                 </div>

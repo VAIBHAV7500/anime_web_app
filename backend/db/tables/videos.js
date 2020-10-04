@@ -6,6 +6,7 @@ const createTable = (con) => {
             episode_number INT,
             name TEXT,
             url TEXT,
+            thumbnail_url TEXT,
             video_length TIME,
             intro_start_time TIME,
             intro_end_time TIME,
@@ -51,9 +52,17 @@ const getShows = async (id, from, to) => {
     return result;
 }
 
+const findByEpisodeName = async (name,show_id)=>{
+    const sql = `SELECT id from videos where name="${name}" and show_id=${show_id} limit 1`;
+    console.log(sql);
+    const result = await runQuery(sql);
+    return result.length ? result[0] : undefined;
+}
+
 module.exports = {
     createTable,
     find,
     create,
-    getShows
+    getShows,
+    findByEpisodeName,
 }

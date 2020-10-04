@@ -53,10 +53,31 @@ const getShowsTitle = async () => {
     return runQuery(sql);
 }
 
+const findByOriginalName = async (orignalName)=>{
+    console.log(orignalName);
+    const sql = `SELECT id from shows where original_name="${orignalName}" limit 1`;
+    console.log(sql);
+    const result = await runQuery(sql);
+    return result.length ? result[0] : undefined;
+}
+
+const addShows = async(body)=>{
+    const sql = `INSERT INTO shows(${Object.keys(body).join()}) VALUES (?)`;
+    console.log(sql);
+    const response =  await runQuery(sql, [Object.values(body)]);
+    if(response){
+        const result = await findByOriginalName(body.original_name);
+        console.log(result);
+        return result;
+    }
+}
+
 module.exports = {
     createTable,
     find,
     create,
     getShowsByGenre,
-    getShowsTitle
+    getShowsTitle,
+    findByOriginalName,
+    addShows
 }

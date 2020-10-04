@@ -18,7 +18,9 @@ var showsRouter = require('./routes/shows');
 var searchRouter = require('./routes/search');
 var authRouter = require('./routes/authRoutes');
 var oAuthModel = require('./services/accessTokenModel');
-
+var genreRouter = require('./routes/insertGenre');
+var insertShowRouter = require('./routes/insertShows');
+var insertVideosRouter = require('./routes/insertVideos');
 var {
   anyError,
   errorHandler,
@@ -57,6 +59,9 @@ app.use('/video', videoRouter);
 app.use('/user',userRouter);
 app.use('/shows',showsRouter);
 app.use('/search',searchRouter);
+app.use('/insertGenre',genreRouter);
+app.use('/insertShows',insertShowRouter);
+app.use('/insertVideos',insertVideosRouter);
 app.use('/auth',authRouter);
 app.post('/auth/login',app.oauth.grant());
 app.post('/restrictedArea/enter',app.oauth.authorise(),(req,res)=>{res.json({message : "Successfully Entered"})});
