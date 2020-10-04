@@ -1,5 +1,6 @@
 .info{
     z-index:1;
+    display: flex;
 }
 
 .poster{
@@ -14,13 +15,12 @@
 }
 
 .name{
-    word-wrap: break-word;
-    width: auto;
     padding-top: 25px;
     float:left;
     font-weight: bolder;
-    font-size: 40px;
     color: #ffff;
+    display: block;
+    max-width: 100%;
 }
 
 .age{
@@ -41,6 +41,7 @@
     7px 7px 20px 0 rgba(0, 0, 0, 0.2);
     color: rgb(187, 185, 185);
     cursor: default;
+    display: inline-table;
 }
 
 .description{
@@ -52,7 +53,7 @@
     font-weight: bold;
     min-height: 250px;
     font-size: 14px;
-
+    margin-left: 10%;
 }
 
 .genre{
@@ -84,7 +85,7 @@
 .synopsis{
     word-wrap: break-word;
     font-weight: normal;
-    max-width: 90%;
+    max-width: 100%;
     padding-top:20px;
     padding-bottom: 20px;
 }
@@ -96,9 +97,9 @@
 }
 
 .select{
-    margin-top: 18px;
-    margin-left: 44px;
-    width: 142px;
+    margin-top: 35px;
+    margin-left: 25px;
+    width: 270px;
     padding: 2%;
     background-color: rgba(255,255,255,0);
     border: none;
@@ -148,9 +149,6 @@
         height: 300px;
     }
 
-    .description {
-        transform: translateX(25%);
-    }
 
     .name {
         font-size: 50px;
@@ -176,9 +174,6 @@
         height: 300px;
     }
 
-    .description{
-        transform: translateX(25%);
-    }
 
     .name {
         font-size: 50px;

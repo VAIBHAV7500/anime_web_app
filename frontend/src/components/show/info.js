@@ -28,12 +28,18 @@ function Info({movie}) {
 
     return (
         <div className={styles.info}>
-            <img src={movie?.poster_portrait_url} className={styles.poster}/>
+            <div>
+                <img src={movie?.poster_portrait_url} className={styles.poster}/>
+            </div>
             <div className={styles.description}>
-                <div className={styles.name}>{movie?.name}</div>
-                { movie?.age_category  && <div className={styles.age}>{movie?.age_category}+</div>}
-                <br className={styles.break}/>
-                <div className={styles.make_flex}>
+            <div className={styles.make_flex}>
+                <div className={styles.wrapper}>
+                    <div className={styles.make_flex}>
+                        <div className={styles.name}>{movie?.name}</div>
+                        { movie?.age_category  && <div className={styles.age}>{movie?.age_category}+</div>}
+                    </div>
+                    <br className={styles.break}/>
+                
                     <div className={styles.wrapper}>
                         <div className={styles.genre}>
                             {movie?.genres?.map((genre,index)=>{
@@ -45,21 +51,21 @@ function Info({movie}) {
                             {moreSyn ? movie?.description : truncate(movie?.description,400)}<a className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</a>
                         </div>
                     </div>
-                    <div>
-                            <select id="season-group" className={`${styles.select} ${styles.neumorphism}`} value={movie?.id} onFocus={()=>{changeGroupSize(5)}} size={`1`} onBlur={()=>{changeGroupSize(1)}} onChange={()=>{changeGroupSize(1,true)}}>
-                                {/*Load options */}
-                                {
-                                    movie?.groups?.map((group)=>{
-                                        return <option className={styles.option} key={group.id} value={group.id} onClick={()=>{goToShow(group.id)}}>
-                                            {group.name}
-                                        </option>
-                                    })
-                                }
-                            </select> 
-                        </div>
+                </div>
+                <div>
+                    <select id="season-group" className={`${styles.select} ${styles.neumorphism}`} value={movie?.id} onFocus={()=>{changeGroupSize(5)}} size={`1`} onBlur={()=>{changeGroupSize(1)}} onChange={()=>{changeGroupSize(1,true)}}>
+                        {/*Load options */}
+                        {
+                            movie?.groups?.map((group)=>{
+                                return <option className={styles.option} key={group.id} value={group.id} onClick={()=>{goToShow(group.id)}}>
+                                    {group.name}
+                                </option>
+                            })
+                        }
+                    </select> 
                 </div>    
-                
-            </div>
+            </div>     
+        </div>
         </div>
     )
 }
