@@ -8,7 +8,6 @@ import styles from './showRoom.module.css';
  
 
 export class showRoom extends Component {
-  
     render() {
         return (
             <div>

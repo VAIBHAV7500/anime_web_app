@@ -18,12 +18,12 @@ function Info({movie}) {
             <img src={movie?.poster_portrait_url} className={styles.poster}/>
             <div className={styles.description}>
                 <div className={styles.name}>{movie?.name}</div>
-                <div className={styles.age}>{movie?.age_category}+</div>
+                { movie?.age_category  && <div className={styles.age}>{movie?.age_category}+</div>}
                 <br className={styles.break}/>
                 <div className={styles.genre}>
-                    <div className={styles.genre_card}>Comedy</div>
-                    <div className={styles.genre_card}>Action</div>
-                    <div className={styles.genre_card}>Fantasy</div>
+                    {movie?.genres?.map((genre)=>{
+                        return <div className={styles.genre_card}>{genre}</div>
+                    })}
                 </div>
                 <br className={styles.break}/>
                 <div className={styles.synopsis}>
