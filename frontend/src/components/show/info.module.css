@@ -84,6 +84,7 @@
 .synopsis{
     word-wrap: break-word;
     font-weight: normal;
+    max-width: 90%;
     padding-top:20px;
     padding-bottom: 20px;
 }
@@ -109,8 +110,6 @@
     padding: 15px 10px;
     border: none;
     font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
         7px 7px 20px 0 rgba(0, 0, 0, 0.2);
@@ -119,12 +118,12 @@
 
 .option{
     color: #ffff;
+    padding: 3px 0px;
 }
 
 .make_flex{
     display: flex;
 }
-
 
 @media (min-width:481px) {
     /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
@@ -156,6 +155,9 @@
     .name {
         font-size: 50px;
 
+    }
+    .wrapper {
+      max-width: 70%;
     }
 
     .synopsis {

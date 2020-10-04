@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { MdDescription } from 'react-icons/md';
+import { MdDescription, MdOndemandVideo } from 'react-icons/md';
 import styles from './info.module.css';
+import {useHistory} from "react-router-dom";
 
 function Info({movie}) {
     const [moreSyn, setSynopsis] = useState(false);
+    const history = useHistory();
     function truncate(str , n){
         return str?.length > n ? str.substr(0 , n-1) + " ... ": str;
     }
@@ -20,6 +22,10 @@ function Info({movie}) {
         }
     }
 
+    const goToShow = (id) => {
+        history.push(`/show/${id}`);
+    }
+
     return (
         <div className={styles.info}>
             <img src={movie?.poster_portrait_url} className={styles.poster}/>
@@ -28,10 +34,10 @@ function Info({movie}) {
                 { movie?.age_category  && <div className={styles.age}>{movie?.age_category}+</div>}
                 <br className={styles.break}/>
                 <div className={styles.make_flex}>
-                    <div>
+                    <div className={styles.wrapper}>
                         <div className={styles.genre}>
-                            {movie?.genres?.map((genre)=>{
-                                return <div className={styles.genre_card}>{genre}</div>
+                            {movie?.genres?.map((genre,index)=>{
+                                return <div className={styles.genre_card} key={index}>{genre}</div>
                             })}
                         </div>
                         <br className={styles.break}/>
@@ -40,21 +46,15 @@ function Info({movie}) {
                         </div>
                     </div>
                     <div>
-                            <select id="season-group" className={`${styles.select} ${styles.neumorphism}`} onFocus={()=>{changeGroupSize(5)}} size={`1`} onBlur={()=>{changeGroupSize(1)}} onChange={()=>{changeGroupSize(1,true)}}>
+                            <select id="season-group" className={`${styles.select} ${styles.neumorphism}`} value={movie?.id} onFocus={()=>{changeGroupSize(5)}} size={`1`} onBlur={()=>{changeGroupSize(1)}} onChange={()=>{changeGroupSize(1,true)}}>
                                 {/*Load options */}
-                                <option value="volvo" className={styles.option}>Volvo</option>
-                                <option value="saab" className={styles.option}>Saab</option>
-                                <option value="vw"  className={styles.option} >VW</option>
-                                <option value="audi" className={styles.option} selected="">Audi</option>
-                                <option value="volvo" className={styles.option}>Volvo</option>
-                                <option value="saab" className={styles.option}>Saab</option>
-                                <option value="vw" className={styles.option}>VW</option>
-                                <option value="volvo" className={styles.option}>Volvo</option>
-                                <option value="saab" className={styles.option}>Saab</option>
-                                <option value="vw" className={styles.option}>VW</option>
-                                <option value="volvo" className={styles.option}>Volvo</option>
-                                <option value="saab" className={styles.option}>Saab</option>
-                                <option value="vw" className={styles.option}>VW</option>
+                                {
+                                    movie?.groups?.map((group)=>{
+                                        return <option className={styles.option} key={group.id} value={group.id} onClick={()=>{goToShow(group.id)}}>
+                                            {group.name}
+                                        </option>
+                                    })
+                                }
                             </select> 
                         </div>
                 </div>    

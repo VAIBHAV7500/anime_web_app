@@ -41,9 +41,23 @@ router.get('/details',async (req,res,next)=>{
     }
     let data = await db.shows.find(id, true);
     const genre_ids = data.genre_id;
-    const genres = await db.genre.bulkFindCategory(genre_ids);
-    data.genres = genres;
-
+    const promiseArray = [];
+    promiseArray.push(new Promise((res,rej)=>{
+        db.genre.bulkFindCategory(genre_ids).then((result)=>{
+            res(result);
+        }).catch((err)=>{
+            rej(err);
+        });
+    }));
+    promiseArray.push(new Promise((res, rej) => {
+        db.shows.getShowsByGroupId(data.group_id).then((result) => {
+            res(result);
+        }).catch((err) => {
+            rej(err);
+        });
+    }));
+    const result = await Promise.all(promiseArray);
+    [data.genres,data.groups] = result;
     res.json(data);
 });
 

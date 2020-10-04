@@ -68,6 +68,13 @@ const forBanner = async () => {
     return response;
 }
 
+const getShowsByGroupId = async (group_id) => {
+    const sql = `SELECT id,name from shows where group_id = ${group_id} order by release_date, season`;
+    console.log(sql);
+    const response = await runQuery(sql);
+    return response;
+}
+
 module.exports = {
     createTable,
     find,
@@ -76,6 +83,7 @@ module.exports = {
     getShowsTitle,
     findByOriginalName,
     forBanner,
+    getShowsByGroupId,
 }
 /*
 <div style="display:flex;">

@@ -13,7 +13,6 @@ function Episodes({show_id}) {
             if(episodes.length === 0){
                 const response = await axios.get(`${requests.fetchEpisodes}?show_id=${show_id}&from=0&to=${chunkSize}`);
                 setEpisodes(response.data);
-                console.log(episodes);
                 return response;
             }
         }
@@ -22,6 +21,19 @@ function Episodes({show_id}) {
             cleanup()
         }   
     });
+
+    useEffect(()=>{
+        console.log('Show Id change');
+         const updateEpisodes = async () => {
+            const response = await axios.get(`${requests.fetchEpisodes}?show_id=${show_id}&from=0&to=${chunkSize}`);
+            setEpisodes(response.data);
+            return response;
+        }
+        updateEpisodes();
+        return () => {
+            cleanup();
+        }
+    },[show_id]);
 
     const cleanup = () => {
         document.removeEventListener('scroll', trackScrolling);
@@ -34,9 +46,7 @@ function Episodes({show_id}) {
     const trackScrolling = () => {
         const wrappedElement = document.getElementById('scrollable_div');
         if (isBottom(wrappedElement)) {
-            console.log('header bottom reached');
             fetchMoreData();
-            //document.removeEventListener('scroll', trackScrolling);
         }
     };
 
@@ -46,12 +56,10 @@ function Episodes({show_id}) {
     }
 
     const fetchMoreData = async () => {
-        console.log('Fetching Data');
         const from = episodes.length ? episodes[episodes.length-1].episode + 1 : 0;
         const to = from + chunkSize;
         const response = await fetchEps(from,to);
         setEpisodes(episodes.concat(response.data));
-        console.log(episodes);
         return response;
     }
 
