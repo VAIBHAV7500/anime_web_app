@@ -67,7 +67,7 @@ const forBanner = async () => {
     const response = await runQuery(sql);
     return response;
 }
-l
+
 module.exports = {
     createTable,
     find,
@@ -77,5 +77,42 @@ module.exports = {
     findByOriginalName,
     forBanner,
 }
+/*
+<div style="display:flex;">
+<div class="info_synopsis__3qJPs">Asta is a young boy who dreams of becoming the greatest mage in the kingdom. Only one problem – he can't use any magic! Luckily for Asta, he receives the incredibly rare five-leaf clover grimoire that gives him the power of anti-magic. Can someone who can't use magic really become the Wizard King? One thing's for sure – Asta will never give up!&lt;br&gt;&lt;br&gt;
 
+(Source: VIZ Media)<a class="info_see_more__2s8rr">See More</a>
+</div>
+<div class="wrapper">
+    <select id="cars" style="margin-left: 44px;width: 142px;padding: 2%;" onfocus="this.size=5;" size="1" onblur="this.size=1;" onchange="this.size=1; this.blur();">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="vw">VW</option>
+  <option value="audi" selected="">Audi</option>
+<option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="vw">VW</option>
+<option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="vw">VW</option>
+<option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="vw">VW</option>
+    <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="vw">VW</option>
+    <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="vw">VW</option>
+</select>
+</div>    
+
+</div>
+
+
+    margin-left: -1px;
+    width: 142px;
+    padding: 2%;
+
+*/
 

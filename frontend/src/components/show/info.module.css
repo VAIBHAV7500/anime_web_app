@@ -15,7 +15,7 @@
 
 .name{
     word-wrap: break-word;
-    width: 800px;
+    width: auto;
     padding-top: 25px;
     float:left;
     font-weight: bolder;
@@ -24,12 +24,12 @@
 }
 
 .age{
-    float:right;
+    float:left;
     bottom:0;
     right:0px;
     margin-left: 20px;
     min-width: 15px;
-    margin-top: 15px;
+    margin-top: 36px;
     padding: 15px 10px;
     border: none;
     border-radius: 50%;
@@ -93,6 +93,37 @@
     font-weight: bold;
     color: #f0b922;
     cursor: pointer;
+}
+
+.select{
+    margin-top: 18px;
+    margin-left: 44px;
+    width: 142px;
+    padding: 2%;
+    background-color: rgba(255,255,255,0);
+    border: none;
+    outline: none;
+    color: #ffff;
+}
+
+.neumorphism {
+    padding: 15px 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
+        7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    color: rgb(187, 185, 185);
+}
+
+.option{
+    color: #ffff;
+}
+
+.make_flex{
+    display: flex;
 }
 
 
