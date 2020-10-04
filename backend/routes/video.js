@@ -111,21 +111,29 @@ router.get('/episodes', async(req,res,next)=>{
     }
 });
 
-router.post('/dummyCreate', async (req,res,next)=>{
-    const form = new formidable.IncomingForm();
-    form.parse(req, (err, fields) => {
-        console.log(fields);
-        db.videos.create(fields).then((response)=>{
-            res.json(response);
-        }).catch((err)=>{
-            res.status(501).json({
-                err: err.message,
-                stack: err.stack
-            });
+router.post('/create', async (req, res, next)=>{
+    req.body = JSON.parse(JSON.stringify(req.body));
+    const result = await db.videos.findByEpisodeName(req.body.name,req.body.show_id).catch(e=>{
+        console.log(e);
+        res.json({
+            message : e
         });
     });
-    //const response = await db.user.create(req.body);
-    //res.json({"message":response});
+    if(result){
+        res.json({
+            message : "already added episode " + req.body.episode_number
+        })
+    }else{
+        await db.videos.create(req.body).catch(e=>{
+            console.log(e);
+            res.json({
+                message : e
+            });
+        });
+        res.json({
+            message : "added episode " + req.body.episode_number,
+        })
+    }
 });
 
 router.get('/trending',async (req,res,next)=>{
@@ -202,3 +210,5 @@ router.get('/genre',async (req,res,next)=>{
 
 
 module.exports = router;
+
+

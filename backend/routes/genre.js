@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db/index');
-router.post('/:genre', async (req, res, next)=>{
+
+router.post('/insert-genre/:genre', async (req, res, next)=>{
     const result = await db.genre.findByGenre(req.params.genre).catch(e=>{
         console.log(e);
         res.json({
@@ -28,3 +29,4 @@ router.post('/:genre', async (req, res, next)=>{
 });
 
 module.exports = router;
+

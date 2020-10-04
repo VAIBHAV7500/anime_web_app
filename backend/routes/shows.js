@@ -4,8 +4,6 @@ const keys = require('../config/keys.json');
 const formidable = require("formidable");
 const db = require('../db/index');
 
-
-
 router.post('/create',async (req,res,next)=>{
     const form = new formidable.IncomingForm();
     form.uploadDir = process.env.UPLOAD_DIR;
@@ -60,4 +58,42 @@ router.get('/create-group', async (req,res,next)=>{
     });
 });
 
+router.post('/insert-show', async (req, res, next)=>{
+    req.body = JSON.parse(JSON.stringify(req.body));
+    const result = await db.shows.findByOriginalName(req.body.original_name).catch(e=>{
+        console.log(e);
+        res.json({
+            message : e
+        });
+    });
+    if(result){
+        res.json({
+            show_id : result.id,
+            message : req.body.name+" (Season) already added"
+        });
+    }else{
+        const newResponse = await db.shows.create(req.body).catch(e=>{
+            console.log(e);
+            res.json({
+                message : e
+            });
+        });
+        if(newResponse){
+            const data = await db.shows.findByOriginalName(req.body.original_name).catch(e=>{
+                console.log(e);
+                res.json({
+                    message : e
+                });
+            });
+            if(data){
+                res.json({
+                    show_id : data.id,
+                    message : req.body.name+" (Season) already added"
+                });
+            }
+        }
+    }
+});
+
 module.exports = router;
+
