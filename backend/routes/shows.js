@@ -41,7 +41,11 @@ router.get('/details',async (req,res,next)=>{
         });
         return;
     }
-    const data = await db.shows.find(id);
+    let data = await db.shows.find(id, true);
+    const genre_ids = data.genre_id;
+    const genres = await db.genre.bulkFindCategory(genre_ids);
+    data.genres = genres;
+
     res.json(data);
 });
 

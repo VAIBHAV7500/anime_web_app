@@ -29,7 +29,7 @@ const updateList = async () => {
 
 const search = (pattern) => {
     console.log(list);
-    return fuse.search(pattern);
+    return fuse.search(pattern,{limit: 10});
 }
 
 module.exports = {

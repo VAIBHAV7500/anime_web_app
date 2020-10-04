@@ -105,7 +105,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                   </tr>
                 </tbody>
             </table>
-            < button className = "trailer_btn"  onClick={()=>{goToVideo(trailer)}}>Go to Show
+            < button className = "trailer_btn neumorphism"  onClick={()=>{goToVideo(trailer)}}>Go to Show
             </button>
             < button className = "trailer_btn" > Add to WatchList
             </button>

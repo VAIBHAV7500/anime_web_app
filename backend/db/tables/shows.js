@@ -32,7 +32,7 @@ const createTable = (con) => {
     })
 }
 
-const find = async (id) => {
+const find = async (id, genre) => {
     const sql = `SELECT * from shows where id = ${id} limit 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
@@ -62,7 +62,7 @@ const findByOriginalName = async (orignalName)=>{
     return result.length ? result[0] : undefined;
 }
 
-const addShows = async(body)=>{
+const addShows = async (body)=>{
     const sql = `INSERT INTO shows(${Object.keys(body).join()}) VALUES (?)`;
     console.log(sql);
     const response =  await runQuery(sql, [Object.values(body)]);
@@ -73,6 +73,12 @@ const addShows = async(body)=>{
     }
 }
 
+const forBanner = async () => {
+    const sql = `SELECT id, name, original_name,poster_landscape_url from shows order by total_view desc limit 10`;
+    const response = await runQuery(sql);
+    return response;
+}
+
 module.exports = {
     createTable,
     find,
@@ -80,5 +86,6 @@ module.exports = {
     getShowsByGenre,
     getShowsTitle,
     findByOriginalName,
-    addShows
+    addShows,
+    forBanner,
 }

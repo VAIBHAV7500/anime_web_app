@@ -155,28 +155,12 @@ router.get('/trending',async (req,res,next)=>{
 });
 
 router.get('/banner', async (req, res, next) => {
-    if (!req.query.api_key || req.query.api_key !== keys.app.apiKey) {
-        res.status(401).json({
-            message: "API KEY is missing or incorrect"
-        })
-    }
-    const videos = [1, 2, 3];
-    const promiseArray = [];
-    videos.forEach((id) => {
-        promiseArray.push(new Promise((res, rej) => {
-            db.shows.find(id).then((show) => {
-                res(show);
-            }).catch((err) => {
-                rej(err);
-            });
-        }));
-    });
-    const result = await Promise.all(promiseArray).catch((err) => {
-        res.status(500).json({
+    const result = await db.shows.forBanner().catch((err)=>{
+        return res.status(501).json({
             error: err.message,
-            stack: err.stack
-        })
-    });
+            stack: err.stack,
+        });
+    }) 
     res.json(result);
 });
 

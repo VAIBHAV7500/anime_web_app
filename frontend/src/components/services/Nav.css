@@ -124,6 +124,8 @@
      position: relative;
      margin-top: 80px;
      margin-left: 60px;
+     width: 100%;
+     overflow-y: scroll;
 }
 .suggestion-card{
     position: relative;
