@@ -4,13 +4,13 @@ import requests from '../../utils/requests';
 import styles from './episodes.module.css';
 
 function Episodes({show_id}) {
-    const [episodes, setEpisodes] = useState([]);
+    const [episodes, setEpisodes] = useState();
     const chunkSize = 2;
 
     useEffect(() => {
         document.addEventListener('scroll', trackScrolling);
         const updateEpisodes = async () => {
-            if(episodes.length === 0){
+            if(episodes === undefined ){
                 const response = await axios.get(`${requests.fetchEpisodes}?show_id=${show_id}&from=0&to=${chunkSize}`);
                 setEpisodes(response.data);
                 return response;
@@ -92,7 +92,7 @@ function Episodes({show_id}) {
             id="scrollable_div"
             className={styles.scrollable_div}
             >    
-                {episodes.map((episode, index) => (
+                {episodes?.map((episode, index) => (
                     <div className= {`${styles.episode_card} ${styles.neumorphism}`} key={index} onClick={()=>{goToPlayer(episode.id)}}>
                         <img className={styles.episode_thumbnail} src={episode.thumbnail_url}/>
                         <div className={styles.episode_name}>{episode.episode} - {episode.name}</div>
