@@ -28,7 +28,7 @@
     position: fixed;
     left: 2%;
     top:1%;
-    width: 160px;
+    width: auto;
     -webkit-text-stroke: 0.5px black;
     object-fit: contain;
     cursor: pointer;
@@ -125,8 +125,13 @@
      margin-top: 80px;
      margin-left: 60px;
      width: 100%;
-     overflow-y: scroll;
+     overflow-y: initial !important
 }
+.suggestion-dialog{
+    height: 540px;
+    overflow-y: auto;
+}
+  
 .suggestion-card{
     position: relative;
     float: left;

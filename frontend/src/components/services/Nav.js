@@ -24,10 +24,17 @@ function Nav() {
         return() => {
             //window.removeEventListener("scroll", handleMouseDown, true);
             isMounted = false; // note this flag denote mount status
-        }
-
-        
+        }    
     }, []);
+
+    useEffect(()=>{
+        if(search==true){
+            document.querySelector(".search-input").focus();
+            document.body.style.overflow="hidden";
+        }else{
+            document.body.style.overflow="auto";
+        }
+    },[search])
 
     const handleSearch = () => {
         console.log('Clicked');
@@ -49,7 +56,6 @@ function Nav() {
         const request = await axios.get(`${requests.fetchSuggestions}?key=${word}`);
         console.log(JSON.stringify(request.data));
         setSearchSet(request.data.results);
-        
     }
 
     const generateSearchModal = () => {
@@ -59,6 +65,7 @@ function Nav() {
                 
            </div>
            <div className="suggestions">
+               <div className="suggestion-dialog">
                 {
                     searchSet?.map((suggestion)=>{
                         return <div className="suggestion-card" key={suggestion.item.id} onClick={()=>{ goToShow(suggestion.item.id)}}>
@@ -69,18 +76,19 @@ function Nav() {
                     </div>
                     })
                 }
+                </div>
            </div>
         </div>
     }
 
     return (
-        <div className={`nav ${show && "nav_black"}`}>
+        <div className={`nav ${!search && show && "nav_black"}`}>
             {/* <img 
                 className='nav_logo'
                 // src=""
                 alt="ANIMEI LOGO"
             /> */}
-            <h1 className={`nav_logo ${show && "logo_white"}`} onClick={goToHome}>
+            <h1 className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome}>
                     ANIMEI TV
             </h1>
             {/* <img
