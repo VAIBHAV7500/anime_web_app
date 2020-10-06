@@ -40,7 +40,7 @@ function Info({movie}) {
                     </div>
                     <br className={styles.break}/>
                 
-                    <div className={styles.wrapper}>
+                    <div >
                         <div className={styles.genre}>
                             {movie?.genres?.map((genre,index)=>{
                                 return <div className={styles.genre_card} key={index}>{genre}</div>

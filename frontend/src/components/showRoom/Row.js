@@ -7,22 +7,10 @@ import {useHistory} from "react-router-dom";
 
 
 
-function Row({ title, fetchUrl, isLargeRow }) {
-  const [movies, setMovies] = useState([]);
+function Row({ title, movies, isLargeRow }) {
   const [trailer, setTrailer] = useState("");
   const history = useHistory();
   let keyId = 1;
-  useEffect(() => {
-    // if [] , run once when the row loads , and don;t run again
-    async function fetchData() {
-      if(fetchUrl){
-        const request = await axios.get(fetchUrl);
-        setMovies(request.data);
-        return request;
-      }
-    }
-    fetchData();
-  }, [fetchUrl]);
   const handleClick = (movie) => {
       movie.rating = Math.round(((Math.random() * (10 - 8 + 1)) + 8) * 9) / 10;
       //movie.name = 'Lorem Ipsum Some dummy long name'
