@@ -56,7 +56,7 @@ function Episodes({show_id}) {
     }
 
     const fetchMoreData = async () => {
-        const from = episodes.length ? episodes[episodes.length-1].episode + 1 : 0;
+        const from = episodes?.length ? episodes[episodes.length-1].episode + 1 : 0;
         const to = from + chunkSize;
         const response = await fetchEps(from,to);
         setEpisodes(episodes.concat(response.data));
