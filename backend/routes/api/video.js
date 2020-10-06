@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const apiVideo = require('@api.video/nodejs-sdk');
-const keys = require('../config/keys.json');
+const keys = require('../../config/keys.json');
 const formidable = require("formidable");
-const db = require('../db/index');
+const db = require('../../db');
 const { json } = require('express');
 
 const client = new apiVideo.ClientSandbox({

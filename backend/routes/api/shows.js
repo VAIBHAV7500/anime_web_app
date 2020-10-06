@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const keys = require('../config/keys.json');
+const keys = require('../../config/keys.json');
 const formidable = require("formidable");
-const db = require('../db/index');
+const db = require('../../db/index');
 
 router.post('/create',async (req,res,next)=>{
     const form = new formidable.IncomingForm();

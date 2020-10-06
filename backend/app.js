@@ -10,15 +10,10 @@ var { updateList } = require('./lib/search');
 const oAuth2Server = require('node-oauth2-server')
 
 require('dotenv').config();
-
-var indexRouter = require('./routes/index');
-var videoRouter = require('./routes/video');
-var userRouter = require('./routes/user');
-var showsRouter = require('./routes/shows');
-var searchRouter = require('./routes/search');
+var indexRouter = require('./routes');
 var authRouter = require('./routes/authRoutes');
 var oAuthModel = require('./services/accessTokenModel');
-var genreRouter = require('./routes/genre');
+
 var {
   anyError,
   errorHandler,
@@ -53,11 +48,6 @@ app.use(helmet());
 app.use(nodeadmin(app));
 
 app.use('/', indexRouter);
-app.use('/video', videoRouter);
-app.use('/user',userRouter);
-app.use('/shows',showsRouter);
-app.use('/search',searchRouter);
-app.use('/genre',genreRouter);
 app.use('/auth',authRouter);
 app.post('/auth/login',app.oauth.grant());
 app.post('/restrictedArea/enter',app.oauth.authorise(),(req,res)=>{res.json({message : "Successfully Entered"})});
@@ -66,9 +56,10 @@ app.use(app.oauth.errorHandler());
 app.use(anyError);
 app.use(errorHandler);
 
-const port = process.env.PORT || 4200;
-app.listen(port,()=>{
-  console.log(`Started listening at http://localhost:${port}`);
+let port = process.env.PORT || 4200;
+let host = 'localhost';
+app.listen(port,host,()=>{
+  console.log(`Started listening at http://${host}:${port}`);
 });
 
 module.exports = app;

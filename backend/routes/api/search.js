@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {search} = require('../lib/search');
+const {search} = require('../../lib/search');
 
 /* GET users listing. */
 router.get('/suggestions', async function (req, res, next) {

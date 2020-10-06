@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../db/index');
-const { response } = require('../app');
+var db = require('../../db/index');
+const { response } = require('../../app');
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
