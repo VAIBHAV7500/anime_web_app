@@ -5,7 +5,7 @@ const {
 global.connection = db.getConnection();
 
 
-const groups = ['One-Punch Man', 'Naruto', 'My Hero Academia', 'Attack on Titan', 'Haikyu', 'Assassination Classroom'];
+const groups = ['Food Wars','One-Punch Man', 'Naruto', 'My Hero Academia', 'Attack on Titan', 'Haikyu', 'Assassination Classroom'];
 
 groups.forEach(async (group) => {
     let sql = `SELECT id FROM animeApp.show_group where name = '${group}'`;
@@ -22,3 +22,18 @@ groups.forEach(async (group) => {
     result = await runQuery(sql);
     console.log(`Updated Show \n Group ${group} \n Group Id: ${group_id} \n Message: ${result.message}`);
 });
+
+const type = ['manga canon','filler','mixed canon'];
+
+
+(async () => {
+    let sql = `SELECT id, name from videos`;
+    let rows = await runQuery(sql);
+    rows.forEach(async (row)=>{
+        const random = Math.floor(Math.random() * 3);
+        const value = type[random];
+        sql = `UPDATE animeApp.videos set type = '${value}' where id = ${row.id}`;
+        result = await runQuery(sql);
+        console.log(`Episode: ${row.name} | Type: ${value}`);
+    });
+})();
