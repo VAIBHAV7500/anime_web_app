@@ -1,16 +1,18 @@
 import React ,{ useState, useEffect } from 'react';
-import { FaUser, FaSearch } from "react-icons/fa";
+import { FaUser, FaSearch, FaFilter, FaSlidersH } from "react-icons/fa";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import "./Nav.css";
+import Filter from '../Filter'
 import {useHistory} from "react-router-dom";
 
 function Nav() {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
     const [searchSet, setSearchSet] = useState([]);
+    const [filter,setFilter] = useState(false);
     const history = useHistory();
-
+    const [animation,setAnimation] = useState(false);
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
         window.addEventListener("scroll",() => {
@@ -62,16 +64,19 @@ function Nav() {
         return <div className="search-modal">
            <div className="search-box">
                 <input type="text" placeholder="Search" className="search-input" onKeyDown={getSuggestions}></input>
-                
+                <FaSlidersH onClick={()=>{setFilter(!filter)}} className="filter-svg"></FaSlidersH>
            </div>
-           <div className="suggestions">
+           <div className={`filter-box ${filter ? "show_filter" :"" }`} >
+                <Filter onChange={setFilter} />
+           </div>
+           <div className={`suggestions`}>
                <div className="suggestion-dialog">
                 {
                     searchSet?.map((suggestion)=>{
                         return <div className="suggestion-card" key={suggestion.item.id} onClick={()=>{ goToShow(suggestion.item.id)}}>
                         <img src={suggestion.item.poster_portrait_url} alt={suggestion.item.name} className="suggestion-image" ></img>
                         <div className="card-details">
-                    <div className="card-name">{suggestion.item.name}</div>
+                        <div className="card-name">{suggestion.item.name}</div>
                         </div> 
                     </div>
                     })

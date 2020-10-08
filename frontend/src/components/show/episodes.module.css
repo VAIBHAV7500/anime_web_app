@@ -74,7 +74,7 @@ cursor: pointer;
 .type{
     float: right;
     border: 1px solid white;
-    padding:3px;
+    padding:5px;
     color: black;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -90,6 +90,7 @@ cursor: pointer;
     display: inline-block;
     cursor: pointer;
     text-align: center;
+    width: 90px; 
 }
 
 .green{
@@ -103,11 +104,21 @@ cursor: pointer;
 
 .red{
     background: #f06b49;
+    font-weight: bolder;
     background-image: -webkit-linear-gradient(top, #f06b49, #a73012);
     background-image: -moz-linear-gradient(top, #f06b49, #a73012);
     background-image: -ms-linear-gradient(top, #f06b49, #a73012);
     background-image: -o-linear-gradient(top, #f06b49, #a73012);
     background-image: linear-gradient(to bottom, #f06b49, #a73012);
+}
+
+.orange{
+    background: #f0a32f;
+    background-image: -webkit-linear-gradient(top, #f0a32f, #e08803);
+    background-image: -moz-linear-gradient(top, #f0a32f, #e08803);
+    background-image: -ms-linear-gradient(top, #f0a32f, #e08803);
+    background-image: -o-linear-gradient(top, #f0a32f, #e08803);
+    background-image: linear-gradient(to bottom, #f0a32f, #e08803);
 }
 
 .episode_description{

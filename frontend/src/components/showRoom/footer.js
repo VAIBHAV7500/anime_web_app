@@ -5,36 +5,22 @@ function footer() {
     return (
         <div className="footer">
             <table className="footer_table">
-                <tbody>
-                    <tr>
-                        <td>
-                            Terms and Condition
-                        </td>
-                        <td>
-                            Audio Description
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Support
-                        </td>
-                        <td>
-                            Investor Relations
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Audio and Subtitles
-                        </td>
-                        <td>
-                            Legal Notices
-                        </td>
-                    </tr>
-                </tbody>
+                <div>
+                    <p>Terms and Condition</p>
+                    <p>Support</p>
+                    <p>Audio and Subtitles</p>
+                </div>
+                <div>
+                    <p>Audio Description</p>
+                    <p>Investor Relations</p>
+                    <p>Legal Notices</p>
+                </div>
+                <div className="footer_logo_div">
+                    <h1 className="footer_logo">
+                        ANIMEI
+                    </h1>
+                </div>
             </table>
-            <h1 className="footer_logo">
-                    ANIMEI
-            </h1>
         </div>
     )
 }

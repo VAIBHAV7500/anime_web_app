@@ -39,9 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-}));
+app.use(cors());
 
 app.use(helmet());
 
@@ -57,7 +55,7 @@ app.use(anyError);
 app.use(errorHandler);
 
 let port = process.env.PORT || 4200;
-let host = 'localhost';
+let host = '192.168.2.7';
 app.listen(port,host,()=>{
   console.log(`Started listening at http://${host}:${port}`);
 });

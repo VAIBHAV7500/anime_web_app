@@ -13,10 +13,10 @@ function Row({ title, movies, isLargeRow }) {
   let keyId = 1;
   const handleClick = (movie) => {
       movie.rating = Math.round(((Math.random() * (10 - 8 + 1)) + 8) * 9) / 10;
-      //movie.name = 'Lorem Ipsum Some dummy long name'
       let description = movie.description;
-      if(description.length > 400){
-          description = description.substring(0,400) + '...';
+      let truncLength = window.screen.availWidth < 520 ? 200 : 400;
+      if(description.length > truncLength){
+          description = description.substring(0,truncLength) + '...';
       }
       movie.description = description;
       setTrailer(movie);
@@ -29,9 +29,8 @@ function Row({ title, movies, isLargeRow }) {
   return (
     <div className="row">
       <h2>{title}</h2>
-
       < div className = "cards row_posters" >
-        {movies.map((movie) => (
+        {movies && movies.map((movie) => (
           <img
             key={keyId++}
             onClick={() => handleClick(movie)}
@@ -44,11 +43,12 @@ function Row({ title, movies, isLargeRow }) {
         ))}
       </div>
       {
-          trailer && <div className="trailer_window">
+          window.screen.availWidth>514 ?( trailer && <div className="trailer_window">
           < MdClose className = "close-btn" onClick={()=>{setTrailer(undefined)}}/>
           < ReactPlayer  
             url={`${trailer.trailer_url}`} 
             height = "390px"
+            width = "640px"
             playing= {true}
             className="player"
           />
@@ -88,7 +88,7 @@ function Row({ title, movies, isLargeRow }) {
                     </td>
                     { trailer.description !== '' && <td className="description">
                         {
-                          trailer.description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500 s, when an unknown printer..."}
+                          trailer.description}
                     </td> }
                   </tr>
                 </tbody>
@@ -98,7 +98,7 @@ function Row({ title, movies, isLargeRow }) {
             < button className = "trailer_btn" > Add to WatchList
             </button>
           </div>
-        </div>
+        </div>) : trailer && goToVideo(trailer) 
       }
     </div>
   );

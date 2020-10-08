@@ -26,3 +26,7 @@ code {
   background: #4d01a3;
   width: 6px;
 }
+
+button{
+  cursor: pointer;
+}
