@@ -70,7 +70,7 @@ function Nav() {
                 <FaSlidersH onClick={()=>{setFilter(!filter)}} className="filter-svg"></FaSlidersH>
            </div>
            <div className={`filter_box ${filter ? "show_filter" :"" }`} >
-                <Filter submit={getData} />
+                <Filter showFilter={setFilter} submit={getData} />
            </div>
            <div className={`suggestions`}>
                <div className="suggestion-dialog">

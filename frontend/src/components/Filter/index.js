@@ -42,6 +42,7 @@ export default class browse extends Component {
         )
     }
     setFilter = ()=>{
+        this.props.showFilter(false);
         this.props.submit(this.state);
     }
 
