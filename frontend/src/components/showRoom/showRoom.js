@@ -82,7 +82,7 @@ export class showRoom extends Component {
               <div  className={styles.spaces}/>
               {
                 this.state.rows?.map((row)=>{
-                  {console.log(row)}
+                  console.log(row)
                   return <Row title = {row.name} movies = {row.movies} isLargeRow />
                 })
               }

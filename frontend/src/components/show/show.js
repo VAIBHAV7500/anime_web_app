@@ -9,7 +9,7 @@ import Episodes from './episodes';
 
 export class show extends Component {
 
-    navItems = ['Episodes','Characters','Review','Stats', 'Crew', "OVA's \& related"];
+    navItems = ['Episodes','Characters','Review','Stats', 'Crew', "OVA's & related"];
 
     fetchData = async () => {
         const showId = this.props.match.params.id
@@ -47,8 +47,10 @@ export class show extends Component {
     }
 
     selectNav = (id) =>{
-        this.state.nav_id = id;
-        this.setState(this.state);
+        this.setState(prevState=>({
+            ...prevState,
+            nav_id : id
+        }));
     }
     
     render() {

@@ -132,7 +132,7 @@ const Login = ()=>{
               onChange={handleChange}
           />
           <div className={styles.forgot}>
-            <a className={styles.link} href="">Forgot Password?</a>
+            <a href="/#" className={styles.link} >Forgot Password?</a>
             <p className={styles.para}><input type="checkbox" />Remember Me</p>
           </div>
         <button className={styles.btn} type="submit" >{ state.loader? <Spinner/> : <strong>Sign In</strong>}</button>

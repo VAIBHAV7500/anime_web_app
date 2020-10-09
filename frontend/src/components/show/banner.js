@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from './banner.module.css';
 
 function Banner({movie}) {
 
-    function truncate(str , n){
-        return str?.length > n ? str.substr(0 , n-1) + " ... ": str;
-    }
+    // function truncate(str , n){
+    //     return str?.length > n ? str.substr(0 , n-1) + " ... ": str;
+    // }
     return (
       <header
         className = {styles.banner}
@@ -23,3 +23,4 @@ function Banner({movie}) {
 }
 
 export default Banner
+

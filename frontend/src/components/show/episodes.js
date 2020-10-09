@@ -24,15 +24,12 @@ function Episodes({show_id}) {
 
     useEffect(()=>{
         console.log('Show Id change');
-         const updateEpisodes = async () => {
+        const updateEpisodes = async () => {
             const response = await axios.get(`${requests.fetchEpisodes}?show_id=${show_id}&from=0&to=${chunkSize}`);
             setEpisodes(response.data);
             return response;
         }
         updateEpisodes();
-        return () => {
-            cleanup();
-        }
     },[show_id]);
 
     const cleanup = () => {
@@ -94,9 +91,9 @@ function Episodes({show_id}) {
             >    
                 {episodes?.map((episode, index) => (
                     <div className= {`${styles.episode_card} ${styles.neumorphism}`} key={index} onClick={()=>{goToPlayer(episode.id)}}>
-                        <img className={styles.episode_thumbnail} src={episode.thumbnail_url}/>
+                        <img alt="Episode Thumbnail" className={styles.episode_thumbnail} src={episode.thumbnail_url}/>
                         <div className={styles.episode_name}>{episode.episode} - {episode.name}</div>
-                        <div className={`${styles.type} ${episode.type == "filler" ? styles.red : styles.green }`}>{episode.type}</div>
+                        <div className={`${styles.type} ${episode.type.toLowerCase() === "filler" ? styles.red : ( episode.type.toLowerCase() === 'manga canon' ? styles.green : styles.orange)  }`}>{episode.type}</div>
                         <div className={styles.episode_description}>{"Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King."}</div>
                         <div className={styles.progress} style={{width: `${Math.floor(Math.random() * 100)}%`}}/>
                     </div>

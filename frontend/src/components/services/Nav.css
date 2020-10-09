@@ -73,7 +73,6 @@
     position: fixed;
     top: 10%;
     z-index: 50;
-    display: flex;
 }
 
 .blur {
@@ -96,11 +95,27 @@
     font-weight: bold;
     font-size: 20px;
     z-index: 30;
-
     -webkit-transition: width 1s ease-in-out;
     -moz-transition: width 1s ease-in-out;
     -o-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
+}
+
+.filter-svg{
+    top: 12%;
+    font-size: 30px;
+    position: fixed;
+    right: 14%;
+    color: white;
+    cursor: pointer;
+}
+
+.filter-box{
+    display: none;
+    position: relative;
+    width: 1000px;
+    margin-left: 153px;
+    margin-top: 2px;
 }
 
 .shadow{
@@ -111,7 +126,7 @@
     left:0;
     width: 100%;
     height: 100%;
-    background:rgba(17, 16, 16, 0.6);
+    background:rgba(17, 16, 16, 0.8);
     backdrop-filter: blur(8px);
     z-index: 25;
 }
@@ -120,13 +135,16 @@
     position: absolute;
     z-index: 30;
 }
+
 .suggestions{
-     position: relative;
-     margin-top: 80px;
-     margin-left: 60px;
-     width: 100%;
-     overflow-y: initial !important
+    display: block;
+    position: relative;
+    margin-top: 80px;
+    margin-left: 60px;
+    width: 100%;
+    overflow-y: initial !important
 }
+
 .suggestion-dialog{
     height: 540px;
     overflow-y: auto;
@@ -156,7 +174,6 @@
     height:80%;
     max-height: 220px;
     width: auto;
-
 }
 
 .suggestion-name{
@@ -193,4 +210,8 @@
 
 .details{
     text-align: left;
+}
+
+.show_filter{
+    display: block;
 }
