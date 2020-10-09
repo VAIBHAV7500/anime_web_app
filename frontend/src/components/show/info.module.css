@@ -126,6 +126,21 @@
     display: flex;
 }
 
+.play_btn {
+    width: 150px;
+    height: 20px;
+    align-content: center;
+    margin-left: 90px;
+    margin-top: 60px;
+    text-align: center;
+    background-color: rgb(80, 14, 141);
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
 @media (min-width:481px) {
     /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
 }
