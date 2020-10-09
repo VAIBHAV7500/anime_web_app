@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './index.module.css';
+import styles from './filter.module.css';
 import constants from '../../constants';
 export default class browse extends Component {
     componentDidMount = () => {

@@ -3,7 +3,7 @@ import { FaUser, FaSearch, FaSlidersH } from "react-icons/fa";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import "./Nav.css";
-import Filter from '../Filter'
+import Filter from './filter'
 import {useHistory} from "react-router-dom";
 
 function Nav() {
