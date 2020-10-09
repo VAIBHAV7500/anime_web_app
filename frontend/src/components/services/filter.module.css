@@ -4,7 +4,7 @@
     width: 77%;
     backdrop-filter: blur(15px);
     text-transform: uppercase;
-    overflow-y: initial !important
+    overflow-y: initial !important;
 }
 
 .container{
@@ -72,6 +72,9 @@
     height: 4vh;
     border-radius: 3%;
 }
+
+
+/*      FOR RESPONSIVE          */
 
 @media(max-width:990px){
     .filterBar{

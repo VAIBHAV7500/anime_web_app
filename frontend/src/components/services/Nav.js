@@ -77,7 +77,7 @@ function Nav() {
                 {
                     searchSet?.map((suggestion)=>{
                         return <div className="suggestion-card" key={suggestion.item.id} onClick={()=>{ goToShow(suggestion.item.id)}}>
-                        <img src={suggestion.item.poster_portrait_url} alt={suggestion.item.name} className="suggestion-image" ></img>
+                        <img draggable="false" src={suggestion.item.poster_portrait_url} alt={suggestion.item.name} className="suggestion-image" ></img>
                         <div className="card-details">
                         <div className="card-name">{suggestion.item.name}</div>
                         </div> 

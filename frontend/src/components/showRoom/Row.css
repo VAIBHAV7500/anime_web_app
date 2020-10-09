@@ -22,12 +22,12 @@
     width: 100%;
     min-width: 210px;
     margin-right: 15px;
+    max-width: 0;
     transition: transform 450ms;
     cursor: pointer;
     z-index: 1;
     background-color: rgb(29, 29, 29);
     padding: 0px;
-
     max-height: 300px;
 }
 .row_poster:hover{

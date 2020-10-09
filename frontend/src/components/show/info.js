@@ -28,7 +28,7 @@ function Info({movie}) {
     return (
         <div className={styles.info}>
             <div>
-                <img alt="poster" src={movie?.poster_portrait_url} className={styles.poster}/>
+                <img draggable="false" alt="poster" src={movie?.poster_portrait_url} className={styles.poster}/>
             </div>
             <div className={styles.description}>
             <div className={styles.make_flex}>

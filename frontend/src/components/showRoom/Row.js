@@ -31,6 +31,7 @@ function Row({ title, movies, isLargeRow }) {
       < div className = "cards row_posters" >
         {movies && movies.map((movie) => (
           <img
+            draggable="false"
             key={keyId++}
             onClick={() => handleClick(movie)}
              className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
