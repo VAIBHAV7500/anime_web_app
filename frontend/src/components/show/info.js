@@ -47,7 +47,7 @@ function Info({movie}) {
                         </div>
                         <br className={styles.break}/>
                         <div className={styles.synopsis}>
-                            {moreSyn ? movie?.description : truncate(movie?.description,400)}<a href="/#" className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</a>
+                            {moreSyn ? movie?.description : truncate(movie?.description,400)}<p className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</p>
                         </div>
                     </div>
                 </div>

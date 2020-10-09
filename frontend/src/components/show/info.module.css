@@ -47,7 +47,6 @@
 .description{
     position:relative;
     float:left;
-    --transform: translateX(25%);
     padding-left: 30px;
     color: #ffff;
     font-weight: bold;

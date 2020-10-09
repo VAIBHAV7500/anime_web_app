@@ -59,15 +59,18 @@ function Nav() {
         console.log(JSON.stringify(request.data));
         setSearchSet(request.data.results);
     }
+    const getData = (data)=>{
+        console.log(data);
+    }
 
     const generateSearchModal = () => {
         return <div className="search-modal">
            <div className="search-box">
-                <input type="text" placeholder="Search" className="search-input" onKeyDown={getSuggestions}></input>
+                <input type="text" placeholder="Search" className="search-input" onChange={getSuggestions}></input>
                 <FaSlidersH onClick={()=>{setFilter(!filter)}} className="filter-svg"></FaSlidersH>
            </div>
-           <div className={`filter-box ${filter ? "show_filter" :"" }`} >
-                <Filter onChange={setFilter} />
+           <div className={`filter_box ${filter ? "show_filter" :"" }`} >
+                <Filter submit={getData} />
            </div>
            <div className={`suggestions`}>
                <div className="suggestion-dialog">

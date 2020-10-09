@@ -22,7 +22,9 @@ export default class browse extends Component {
             }
             arr.push(e.target.value);
         }
-        this.setState(prevState=>({...prevState,arrType : arr}));
+        // eslint-disable-next-line
+        this.state[arrType] = arr;
+        this.setState(this.state);
     }
 
     filterRow(type,arr,data,styleClass,oneElement=false){
@@ -39,18 +41,8 @@ export default class browse extends Component {
             </div>
         )
     }
-    filter = ()=>{
-        this.props.onChange(false);
-        console.log("genre Array");
-        console.log(this.genre_arr);
-        console.log("Score Array");
-        console.log(this.score_arr);
-        console.log("Type Array");
-        console.log(this.type_arr);
-        console.log("Episode No Array");
-        console.log(this.episodeNo_arr);
-        console.log("Age Category Array");
-        console.log(this.age_category_arr);
+    setFilter = ()=>{
+        this.props.submit(this.state);
     }
 
     render() {
@@ -59,7 +51,7 @@ export default class browse extends Component {
              <div className={`${styles.filterBar} ${styles.neumorphism}`}>
                 <div className={`${styles.container} ${styles.make_flex}`}>
                     <div className={styles.left_filter_column}>
-                        {this.filterRow("Genres",this.genreArr,constants.genres,`${styles.genre}`)}
+                        {this.filterRow("Genres",'genre_arr',constants.genres,`${styles.genre}`)}
                     </div>
                     <div className={styles.right_filter_column}>
                         {this.filterRow("Minimum Episode",'episode_arr',constants.minimum_episodes,'',true)}
@@ -68,7 +60,7 @@ export default class browse extends Component {
                         {this.filterRow("Age Category",'age_category_arr',constants.age_categories)}
                     </div>
                 </div>
-                <button className={`${styles.filter_submit_button} ${styles.filter_button_active} ${styles.filter_button}`} onClick={this.filter}>Submit</button>
+                <button className={`${styles.filter_submit_button} ${styles.filter_button_active} ${styles.filter_button}`} onClick={this.setFilter}>Submit</button>
              </div>
         )
     }
