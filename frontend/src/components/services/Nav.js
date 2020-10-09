@@ -1,5 +1,5 @@
 import React ,{ useState, useEffect } from 'react';
-import { FaUser, FaSearch, FaFilter, FaSlidersH } from "react-icons/fa";
+import { FaUser, FaSearch, FaSlidersH } from "react-icons/fa";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import "./Nav.css";
@@ -12,7 +12,7 @@ function Nav() {
     const [searchSet, setSearchSet] = useState([]);
     const [filter,setFilter] = useState(false);
     const history = useHistory();
-    const [animation,setAnimation] = useState(false);
+    
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
         window.addEventListener("scroll",() => {
@@ -30,7 +30,7 @@ function Nav() {
     }, []);
 
     useEffect(()=>{
-        if(search==true){
+        if(search === true){
             document.querySelector(".search-input").focus();
             document.body.style.overflow="hidden";
         }else{

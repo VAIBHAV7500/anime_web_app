@@ -55,7 +55,7 @@ app.use(anyError);
 app.use(errorHandler);
 
 let port = process.env.PORT || 4200;
-let host = '192.168.2.7';
+let host = process.env.HOST || 'localhost';
 app.listen(port,host,()=>{
   console.log(`Started listening at http://${host}:${port}`);
 });

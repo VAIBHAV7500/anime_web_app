@@ -7,10 +7,9 @@
 
 .number{
     position: relative;
-    width: 100%;
-    transform: translateX(84%);
+    width: 17%;
     cursor: pointer;
-    margin-right: 10px;
+    margin-left: 78%;
 }
 
 .number_input{

@@ -3,18 +3,17 @@ import styles from './index.module.css';
 import constants from '../../constants';
 export default class browse extends Component {
     componentDidMount = () => {
-        this.state = {
+        this.setState({
             genre_arr: [],
             episode_arr: [],
             score_arr: [],
             type_arr: [],
             age_category_arr: []
-        }
-        this.setState(this.state);
+        });
     }
 
-    toggler = (e,arr_type,oneElement=false)=>{
-        let arr = this.state[arr_type] || [];
+    toggler = (e,arrType,oneElement=false)=>{
+        let arr = this.state[arrType] || [];
         if(arr.indexOf(e.target.value) !==-1){
             arr = arr.filter(x => x !== e.target.value);
         }else{
@@ -23,15 +22,14 @@ export default class browse extends Component {
             }
             arr.push(e.target.value);
         }
-        this.state[arr_type] = arr;
-        this.setState(this.state);
+        this.setState(prevState=>({...prevState,arrType : arr}));
     }
 
     filterRow(type,arr,data,styleClass,oneElement=false){
         let btnArr = []
-        {data.forEach((element,index) => {
+        data.forEach((element,index) => {
         btnArr.push(<button key={"type"+index} onClick={(e)=>{this.toggler(e,arr,oneElement)}} value={element} className={`${styleClass} ${styles.filter_button } ${styles.neumorphism} ${ this.state &&  this?.state[arr] && this?.state[arr].indexOf(element) !== -1 ? styles.filter_button_active : ''}`}>{element}</button>)
-        })}
+        })
         return (
             <div className={styles.filter_row}>   
                 Filter By {type} :
@@ -76,35 +74,3 @@ export default class browse extends Component {
     }
 }
 
-
-//  {/*
-
-//                 To Do
-
-//                 Search
-//             1) Character
-//             2) Season
-//             3) Title
-
-//                 Filter
-//              1) Genre
-//              2) Episode Limit
-//              3) Score
-//              4) Type ( series || Movies || OVA'S and related)
-//              5) Age Category
-//              6) PRODUCTION HOUSE ETC.
-
-//                 Sort
-//              1) Release Date
-//              2) Popularity (Higest Rating First)
-//              3) name A-Z (asc)
-
-//              */}
-
-//              {/*
-
-
-//                 1) SHOW ALL CARD ON MAIN SCREEN
-//                 2) SEARCH GENRE SEARCH ANIME APPLY FILTER TOP RIGHT  A APANEL THAT OPERATE FILTER  IT SHOULD BE MODAL I GUESS  NON ON MODAL DIRECT AEK BOX USKE NICHE SE ANIME SHOW KRENGE OR FIR DATATABSE SE UPDATED LIST DENTGE FILTER COMPLETE K BAAD
-
-//              */}

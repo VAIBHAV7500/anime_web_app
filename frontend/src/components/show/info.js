@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { MdDescription, MdOndemandVideo } from 'react-icons/md';
 import styles from './info.module.css';
 import {useHistory} from "react-router-dom";
 
@@ -29,7 +28,7 @@ function Info({movie}) {
     return (
         <div className={styles.info}>
             <div>
-                <img src={movie?.poster_portrait_url} className={styles.poster}/>
+                <img alt="poster" src={movie?.poster_portrait_url} className={styles.poster}/>
             </div>
             <div className={styles.description}>
             <div className={styles.make_flex}>
@@ -48,7 +47,7 @@ function Info({movie}) {
                         </div>
                         <br className={styles.break}/>
                         <div className={styles.synopsis}>
-                            {moreSyn ? movie?.description : truncate(movie?.description,400)}<a className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</a>
+                            {moreSyn ? movie?.description : truncate(movie?.description,400)}<a href="/#" className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</a>
                         </div>
                     </div>
                 </div>

@@ -144,11 +144,9 @@
         width: 100%;
     }
     .poster {
-        max-width: 300px;
-        min-width: 300px;
-        height: 300px;
+        min-width: 203px;
+        height: auto;
     }
-
 
     .name {
         font-size: 50px;

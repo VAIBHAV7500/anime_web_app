@@ -1,5 +1,4 @@
-import React, { useState , useEffect } from 'react'
-import axios from '../../utils/axios';
+import React, { useState } from 'react'
 import "./Row.css";
 import ReactPlayer from 'react-player/lazy';
 import { MdClose } from "react-icons/md";
@@ -43,7 +42,7 @@ function Row({ title, movies, isLargeRow }) {
         ))}
       </div>
       {
-          window.screen.availWidth>514 ?( trailer && <div className="trailer_window">
+          window.screen.availWidth > 514 ?( trailer && <div className="trailer_window">
           < MdClose className = "close-btn" onClick={()=>{setTrailer(undefined)}}/>
           < ReactPlayer  
             url={`${trailer.trailer_url}`} 
