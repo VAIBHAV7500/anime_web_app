@@ -1,17 +1,18 @@
 .filterBar{
-    height: auto;
-    margin-top: 10%;
+    margin-top: 117px;
     margin-left: 5%;
-    width: calc(100% - 290px);
+    width: 77%;
     backdrop-filter: blur(15px);
     text-transform: uppercase;
-    animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    overflow-y: initial !important
 }
 
 .container{
+    height: 250px;
     padding: 1%;
     padding-top: 0%;
     margin-top: -7px;
+    overflow-y: auto;
 }
 
 .neumorphism {
@@ -53,9 +54,11 @@
 }
 .left_filter_column{
     width: 500px;
+    text-align: center;
 }
 
 .right_filter_column{
+    padding-left: 50px;
     width: 50%;
 }
 .genre{
@@ -70,3 +73,63 @@
     border-radius: 3%;
 }
 
+@media(max-width:990px){
+    .filterBar{
+        width: 100%;
+        margin-left: -9%;
+    }
+}
+@media(max-width:757px){
+    .filterBar{
+        width: 115%;
+        margin-left: -20%;
+    }
+}
+@media(max-width:757px){
+    .filterBar{
+        width: 115%;
+        margin-left: -20%;
+    }
+}
+@media(max-width:656px){
+    .filterBar{
+        width: 120%;
+        margin-left: -22%;
+    }
+    .right_filter_column{
+        width: 100%;
+    }
+}
+@media(max-width:500px){
+    .container{
+        display: block;
+    }
+    .left_filter_column{
+        width: 90%;
+    }
+    .right_filter_column{
+        margin-top: 3%;
+        text-align: center;
+        padding-left: 0;
+    }
+    .filter_submit_button{
+        margin-left: 0;
+        width: 100%;
+        height: 5vh;
+        max-height: 5vh;
+        font-weight: bold;
+    }
+    .filterBar{
+        padding-bottom: 0;
+    }
+}
+@media(max-width:454px){
+    .filterBar{
+        margin-left: -25%;
+    }
+}
+@media(max-width:317px){
+    .filterBar{
+        margin-left: -28%;
+    }
+}

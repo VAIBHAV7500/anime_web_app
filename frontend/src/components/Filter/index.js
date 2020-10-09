@@ -34,7 +34,7 @@ export default class browse extends Component {
         })
         return (
             <div className={styles.filter_row}>   
-                Filter By {type} :
+                Filter By {type} 
                 <div className={styles.filter_row_wrapper}>
                     {btnArr}
                 </div>
