@@ -5,11 +5,9 @@ require('dotenv').config();
 const getVideoLink = () => {
     const body = {
         message: 'Something'
-    };
-    console.log('In apI CALL');
+    }
     return new Promise((res,rej)=>{
         const endPoint = `http://localhost:4200/video`;
-        console.log(endPoint);
         axios.post(endPoint, body).then((response)=>{
             res(response);
         });
@@ -17,7 +15,6 @@ const getVideoLink = () => {
 }
 
 async function getEpisodeList(show_id = undefined) {
-    console.log('In episode list');
     return await axios.get('https://run.mocky.io/v3/fd2d49f3-7213-4162-813f-3b415902c10a');
 }
 

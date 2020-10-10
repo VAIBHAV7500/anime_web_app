@@ -81,9 +81,9 @@ export class showRoom extends Component {
               <Banner />
               <div  className={styles.spaces}/>
               {
-                this.state.rows?.map((row)=>{
+                this.state.rows?.map((row,index)=>{
                   console.log(row)
-                  return <Row title = {row.name} movies = {row.movies} isLargeRow />
+                  return <Row title = {row.name} movies = {row.movies} isLargeRow  key={index}/>
                 })
               }
               <footer>

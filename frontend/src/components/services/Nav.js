@@ -39,7 +39,6 @@ function Nav() {
     },[search])
 
     const handleSearch = () => {
-        console.log('Clicked');
         setSearch(!search);
     }
 
@@ -52,15 +51,24 @@ function Nav() {
         history.push('/');
     }
 
-    const getSuggestions = async () => {
+    const getSuggestions = async (fiter = false,data) => {
         const word = document.getElementsByClassName('search-input')[0].value;
-        console.log(word);
-        const request = await axios.get(`${requests.fetchSuggestions}?key=${word}`);
-        console.log(JSON.stringify(request.data));
-        setSearchSet(request.data.results);
+        let baseUrl = requests.fetchSuggestions;
+        let body = {};
+        if(word){
+            body = {
+                key: word,
+            }
+        }
+        if(filter){
+            baseUrl += '?filter=true';
+            body = Object.assign(body,data);
+        }
+        let request = await axios.post(baseUrl, body);
+        setSearchSet(request.data);
     }
     const getData = (data)=>{
-        console.log(data);
+        getSuggestions(true,data);
     }
 
     const generateSearchModal = () => {
@@ -76,10 +84,10 @@ function Nav() {
                <div className="suggestion-dialog">
                 {
                     searchSet?.map((suggestion)=>{
-                        return <div className="suggestion-card" key={suggestion.item.id} onClick={()=>{ goToShow(suggestion.item.id)}}>
-                        <img draggable="false" src={suggestion.item.poster_portrait_url} alt={suggestion.item.name} className="suggestion-image" ></img>
+                        return <div className="suggestion-card" key={suggestion.id} onClick={()=>{ goToShow(suggestion.id)}}>
+                        <img draggable="false" src={suggestion.poster_portrait_url} alt={suggestion.name} className="suggestion-image" ></img>
                         <div className="card-details">
-                        <div className="card-name">{suggestion.item.name}</div>
+                        <div className="card-name">{suggestion.name}</div>
                         </div> 
                     </div>
                     })
@@ -91,19 +99,9 @@ function Nav() {
 
     return (
         <div className={`nav ${!search && show && "nav_black"}`}>
-            {/* <img 
-                className='nav_logo'
-                // src=""
-                alt="ANIMEI LOGO"
-            /> */}
             <h1 className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome}>
                     ANIMEI TV
             </h1>
-            {/* <img
-                className="nav_avatar"
-                // src=""
-                alt="User Avatar"
-            />   */}
             <div className="nav_rights">
                 < FaSearch className="search_icon" onClick={handleSearch} />
                 <FaUser className = "nav_avatar"></FaUser>
