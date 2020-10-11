@@ -23,6 +23,7 @@
     transition: background 100ms ease-in 1s;
 }
 
+
 .nav_logo {
     position: fixed;
     left: 2%;
@@ -221,6 +222,11 @@
 .show_filter{
     display: block;
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              Responsive media                              */
+/* -------------------------------------------------------------------------- */
+
 @media(max-width:994px) {
     .filter-svg{
         font-size: 42px;

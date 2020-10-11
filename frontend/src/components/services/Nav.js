@@ -28,6 +28,7 @@ function Nav() {
             isMounted = false; // note this flag denote mount status
         }    
     }, []);
+    
 
     useEffect(()=>{
         if(search === true){
