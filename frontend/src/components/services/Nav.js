@@ -5,6 +5,9 @@ import requests from '../../utils/requests';
 import "./Nav.css";
 import Filter from './filter'
 import {useHistory} from "react-router-dom";
+import {useDispatch} from 'react-redux';
+import {LoginFailure} from '../../redux/Auth/authAction';
+import { useCookies } from 'react-cookie';
 
 function Nav() {
     const [show , handleShow] = useState(false);
@@ -12,6 +15,8 @@ function Nav() {
     const [searchSet, setSearchSet] = useState([]);
     const [filter,setFilter] = useState(false);
     const history = useHistory();
+    const [, , removeCookie] = useCookies(['loginCookie']);
+    const dispatch = useDispatch();
     
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
@@ -41,6 +46,9 @@ function Nav() {
 
     const handleSearch = () => {
         setSearch(!search);
+        if(!search){
+            setSearchSet([]);
+        }
     }
 
     const goToShow = (id) => {
@@ -66,6 +74,7 @@ function Nav() {
             body = Object.assign(body,data);
         }
         let request = await axios.post(baseUrl, body);
+        console.log(request.data);
         setSearchSet(request.data);
     }
     const getData = (data)=>{
@@ -73,8 +82,8 @@ function Nav() {
     }
 
     const generateSearchModal = () => {
-        return <div className="search-modal">
-           <div className="search-box">
+        return <div className={`search-modal`}>
+           <div className={`search-box slide-in-top`}>
                 <input type="text" placeholder="Search" className="search-input" onChange={getSuggestions}></input>
                 <FaSlidersH onClick={()=>{setFilter(!filter)}} className="filter-svg"></FaSlidersH>
            </div>
@@ -97,13 +106,19 @@ function Nav() {
            </div>
         </div>
     }
-
+    
+    
+    const logout = ()=>{
+        dispatch(LoginFailure());
+        removeCookie('loginCookie');
+    }
     return (
         <div className={`nav ${!search && show && "nav_black"}`}>
             <h1 className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome}>
                     ANIMEI TV
             </h1>
             <div className="nav_rights">
+                <button onClick={logout}>Logout</button>
                 < FaSearch className="search_icon" onClick={handleSearch} />
                 <FaUser className = "nav_avatar"></FaUser>
             </div>

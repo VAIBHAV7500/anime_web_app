@@ -85,7 +85,7 @@ export default function SignUp() {
         });
         var config = {
             method: 'post',
-            url: appbaseurl + '/auth/register',
+            url: appbaseurl + 'auth/register',
             headers: { 
             'Content-Type': 'application/x-www-form-urlencoded'
             },
