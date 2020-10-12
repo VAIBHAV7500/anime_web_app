@@ -7,7 +7,7 @@ body {
   background-color: rgb(39, 37, 37);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  
   background: radial-gradient(ellipse at bottom, #3e3d3f 0%, #090a0f 100%);
 }
 

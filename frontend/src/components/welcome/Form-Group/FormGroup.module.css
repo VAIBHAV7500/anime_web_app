@@ -9,7 +9,6 @@
     color: #d2d2d2;
     letter-spacing: 2px;
     margin-bottom: 10px;
-    font-style: italic;
 }
 
 .group {
@@ -26,8 +25,7 @@
 
 
 .inputField {
-    font-family: 'Balsamiq Sans', cursive;
-    font-size: 17px;
+    font-size: 15px;
     width: 100%;
     border: none;
     box-sizing: border-box;

@@ -5,13 +5,19 @@ import requests from '../../utils/requests';
 import "./Nav.css";
 import Filter from './filter'
 import {useHistory} from "react-router-dom";
+import {useDispatch} from 'react-redux';
+import {LoginFailure} from '../../redux/Auth/authAction';
+import { useCookies } from 'react-cookie';
 
 function Nav() {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
     const [searchSet, setSearchSet] = useState([]);
     const [filter,setFilter] = useState(false);
+    const [dropDown,setDropdown] = useState(false);
     const history = useHistory();
+    const [, , removeCookie] = useCookies(['loginCookie']);
+    const dispatch = useDispatch();
     
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
@@ -41,6 +47,9 @@ function Nav() {
 
     const handleSearch = () => {
         setSearch(!search);
+        if(!search){
+            setSearchSet([]);
+        }
     }
 
     const goToShow = (id) => {
@@ -73,8 +82,8 @@ function Nav() {
     }
 
     const generateSearchModal = () => {
-        return <div className="search-modal">
-           <div className="search-box">
+        return <div className={`search-modal`}>
+           <div className={`search-box slide-in-top`}>
                 <input type="text" placeholder="Search" className="search-input" onChange={getSuggestions}></input>
                 <FaSlidersH onClick={()=>{setFilter(!filter)}} className="filter-svg"></FaSlidersH>
            </div>
@@ -97,7 +106,11 @@ function Nav() {
            </div>
         </div>
     }
-
+    
+    const logout = ()=>{
+        dispatch(LoginFailure());
+        removeCookie('loginCookie');
+    }
     return (
         <div className={`nav ${!search && show && "nav_black"}`}>
             <h1 className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome}>
@@ -105,7 +118,18 @@ function Nav() {
             </h1>
             <div className="nav_rights">
                 < FaSearch className="search_icon" onClick={handleSearch} />
-                <FaUser className = "nav_avatar"></FaUser>
+                <FaUser onClick={()=>{
+                    if(dropDown===true){
+                        document.querySelector('.dropdown_content').classList.remove('slide-in-right')
+                        document.querySelector('.dropdown_content').className+=" slide-out-right";
+                        setTimeout(()=>{setDropdown(!dropDown)},500);
+                    }else{
+                        setDropdown(!dropDown);
+                    }
+                }} className = "nav_avatar"></FaUser>
+            </div>
+            <div className={`dropdown_content  ${dropDown? "show_block slide-in-right" : ""}`} >
+                    <button className="signOut_Button" onClick={logout}><strong>Sign Out</strong></button>
             </div>
             {search && generateSearchModal()}
             {search && <div className="shadow" onClick={handleSearch}></div>}

@@ -8,10 +8,13 @@ import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
 import { Link } from 'react-router-dom';
 import {useHistory} from "react-router-dom";
-
-const Login = ()=>{
+import {useDispatch} from 'react-redux';
+import {LoginSuccess} from '../../../redux/Auth/authAction';
+import { useCookies } from 'react-cookie';
+const Login = (props)=>{
     const appbaseurl = process.env.REACT_APP_BASE_URL;
     const history = useHistory();
+    const dispatch = useDispatch();
     const [state,setState] = useState({
         loader : false,
         email:"",
@@ -24,10 +27,11 @@ const Login = ()=>{
             document.body.classList.remove(styles.body);
         }
     }, []);
+    const [, setCookie] = useCookies(['loginCookie']);
     const handleAccessToken = async (token)=>{
         var config = {
             method: 'post',
-            url: appbaseurl + '/restrictedArea/enter',
+            url: appbaseurl + 'restrictedArea/enter',
             headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Bearer '+ token
@@ -35,7 +39,6 @@ const Login = ()=>{
         };
         var response = await axios(config);
         if(response.data.message === "Successfully Entered"){
-            console.log('Logged In');
             history.push('/');
             return true;
         }
@@ -70,7 +73,7 @@ const Login = ()=>{
         });
         var config = {
             method: 'post',
-            url: appbaseurl + '/auth/login',
+            url: appbaseurl + 'auth/login',
             headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -90,6 +93,9 @@ const Login = ()=>{
                     ...prevState,
                     errorShow : true
                 }));
+            }else{
+                dispatch(LoginSuccess((state.email).trim()));
+                setCookie('loginCookie', response.data.access_token , { path: '/' });
             }
         }
         stopLoader();
