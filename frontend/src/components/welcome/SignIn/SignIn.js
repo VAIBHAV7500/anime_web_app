@@ -39,7 +39,6 @@ const Login = (props)=>{
         };
         var response = await axios(config);
         if(response.data.message === "Successfully Entered"){
-            console.log('Logged In');
             history.push('/');
             return true;
         }

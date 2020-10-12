@@ -23,7 +23,6 @@ function Episodes({show_id}) {
     });
 
     useEffect(()=>{
-        console.log('Show Id change');
         const updateEpisodes = async () => {
             const response = await axios.get(`${requests.fetchEpisodes}?show_id=${show_id}&from=0&to=${chunkSize}`);
             setEpisodes(response.data);
@@ -62,7 +61,6 @@ function Episodes({show_id}) {
 
     const setNewRange = async () =>{
         const epNum = document.getElementsByClassName(styles.number_input)[0].value;
-        console.log(epNum);
         if(epNum){
             const from = epNum;
             const to = epNum + chunkSize;

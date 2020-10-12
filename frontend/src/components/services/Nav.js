@@ -75,7 +75,6 @@ function Nav() {
             body = Object.assign(body,data);
         }
         let request = await axios.post(baseUrl, body);
-        console.log(request.data);
         setSearchSet(request.data);
     }
     const getData = (data)=>{
