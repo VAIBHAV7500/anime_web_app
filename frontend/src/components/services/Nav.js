@@ -14,6 +14,7 @@ function Nav() {
     const [search, setSearch] = useState(false);
     const [searchSet, setSearchSet] = useState([]);
     const [filter,setFilter] = useState(false);
+    const [dropDown,setDropdown] = useState(false);
     const history = useHistory();
     const [, , removeCookie] = useCookies(['loginCookie']);
     const dispatch = useDispatch();
@@ -107,7 +108,6 @@ function Nav() {
         </div>
     }
     
-    
     const logout = ()=>{
         dispatch(LoginFailure());
         removeCookie('loginCookie');
@@ -118,9 +118,19 @@ function Nav() {
                     ANIMEI TV
             </h1>
             <div className="nav_rights">
-                <button onClick={logout}>Logout</button>
                 < FaSearch className="search_icon" onClick={handleSearch} />
-                <FaUser className = "nav_avatar"></FaUser>
+                <FaUser onClick={()=>{
+                    if(dropDown===true){
+                        document.querySelector('.dropdown_content').classList.remove('slide-in-right')
+                        document.querySelector('.dropdown_content').className+=" slide-out-right";
+                        setTimeout(()=>{setDropdown(!dropDown)},500);
+                    }else{
+                        setDropdown(!dropDown);
+                    }
+                }} className = "nav_avatar"></FaUser>
+            </div>
+            <div className={`dropdown_content  ${dropDown? "show_block slide-in-right" : ""}`} >
+                    <button className="signOut_Button" onClick={logout}><strong>Sign Out</strong></button>
             </div>
             {search && generateSearchModal()}
             {search && <div className="shadow" onClick={handleSearch}></div>}
