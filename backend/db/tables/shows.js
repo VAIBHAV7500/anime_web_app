@@ -6,6 +6,7 @@ const createTable = (con) => {
             name TEXT NOT NULL,
             original_name TEXT,
             group_id BIGINT NOT NULL,
+            genre_id TEXT,
             next_show_id BIGINT,
             trailer_url TEXT,
             poster_portrait_url TEXT,
