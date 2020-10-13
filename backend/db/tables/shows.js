@@ -5,7 +5,6 @@ const createTable = (con) => {
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             name TEXT NOT NULL,
             original_name TEXT,
-            genre_id TEXT,
             group_id BIGINT NOT NULL,
             next_show_id BIGINT,
             trailer_url TEXT,
@@ -33,7 +32,7 @@ const createTable = (con) => {
     })
 }
 
-const find = async (id, genre) => {
+const find = async (id) => {
     const sql = `SELECT * from shows where id = ${id} limit 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
@@ -45,8 +44,7 @@ const create = async (body) => {
 }
 
 const getShowsByGenre = async (id) => {
-    const sql = `SELECT * from shows where genre_id like '%,${id}%,' order by total_view desc limit 20`;
-    console.log(sql);
+    const sql = `SELECT shows.* from shows inner join genre_show_mapping as gsm on shows.id = gsm.show_id where gsm.genre_id = ${id} order by total_view desc limit 20`;
     return await runQuery(sql);
 }
 
@@ -56,9 +54,7 @@ const getShowsData = async () => {
 }
 
 const findByOriginalName = async (orignalName)=>{
-    console.log(orignalName);
     const sql = `SELECT id from shows where original_name="${orignalName}" limit 1`;
-    console.log(sql);
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }
@@ -71,7 +67,6 @@ const forBanner = async () => {
 
 const getShowsByGroupId = async (group_id) => {
     const sql = `SELECT id,name from shows where group_id = ${group_id} order by release_date, season`;
-    console.log(sql);
     const response = await runQuery(sql);
     return response;
 }

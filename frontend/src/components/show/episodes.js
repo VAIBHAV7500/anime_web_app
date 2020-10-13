@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import styles from './episodes.module.css';
+import {useHistory} from "react-router-dom";
 
 function Episodes({show_id}) {
     const [episodes, setEpisodes] = useState();
     const chunkSize = 2;
+    const history = useHistory();
 
     useEffect(() => {
         document.addEventListener('scroll', trackScrolling);
@@ -76,6 +78,7 @@ function Episodes({show_id}) {
 
     const goToPlayer = (id) =>{
         console.log(id);
+        history.push(`/player/${id}`);
     }
 
     return (

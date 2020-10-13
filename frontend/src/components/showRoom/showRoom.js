@@ -82,7 +82,7 @@ export class showRoom extends Component {
               <div  className={styles.spaces}/>
               {
                 this.state.rows?.map((row,index)=>{
-                  return <Row title = {row.name} movies = {row.movies} isLargeRow  key={index}/>
+                  return <Row title = {row.name} movies = {row.movies} isLargeRow  key={index} className={styles.row}/>
                 })
               }
               <footer>

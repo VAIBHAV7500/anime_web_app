@@ -5,10 +5,8 @@ const { response } = require('../../app');
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
-    console.log(req.query);
     //need to put checks
     const resp = await db.user.find_by_email(req.query.email);
-    console.log(resp);
     res.send(resp);
 });
 

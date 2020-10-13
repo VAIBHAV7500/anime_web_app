@@ -29,14 +29,12 @@ const find = async (id) => {
 const bulkFindCategory = async (ids) => {
     const trim = ids.replace(/(^,)|(,$)/g, "");
     const sql = `SELECT category from genre where id in (${trim})`;
-    console.log(sql);
     const result = await runQuery(sql);
     return result.map(x => x.category);
 }
 
 const findByGenre = async (genre) => {
     const sql = `SELECT id from genre where category like '${genre}' limit 1`;
-    console.log(sql);
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }
@@ -46,7 +44,6 @@ const create = async (body) => {
     const response =  await runQuery(sql, [Object.values(body)]);
     if(response){
         const result = await findByGenre(body.category);
-        console.log(result);
         return result;
     }
 }

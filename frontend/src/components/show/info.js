@@ -63,7 +63,7 @@ function Info({movie}) {
                         }
                     </select> 
                     <div className={`${styles.play_btn} ${styles.neumorphism}`}>
-                        Start
+                        Start Watching
                     </div>
                 </div>    
             </div>     

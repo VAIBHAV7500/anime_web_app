@@ -16,3 +16,7 @@
 .showRoom{
     overflow-x: hidden;
 }
+
+.row{
+    padding: 120px;
+}

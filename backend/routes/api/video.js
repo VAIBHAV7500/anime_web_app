@@ -17,7 +17,6 @@ router.get('/', function (req, res, next) {
 router.post('/',(req,res,next)=>{
     //1. PROCESS THE REQUEST HERE 
     //2. SEND THE VIDEO
-    console.log(res.body);
     const file_name = 'anniversary2.mp4';
     const video = {
         //videoUrl: `http://gdurl.com/qELA`,
@@ -47,24 +46,16 @@ router.post('/',(req,res,next)=>{
 router.post('/upload', async (req,res,next)=>{
     const form = new formidable.IncomingForm();
     form.uploadDir = process.env.UPLOAD_DIR;
-    console.log(form.uploadDir);
     form.parse(req,async (err,fields,files)=>{
         if(err) throw err;
-        console.log("Fields: ");
-        console.log(JSON.stringify(fields));
         if(fields.api_key && fields.api_key === keys.app.apiKey){
-            console.log("Api Key Matched");
-            console.log("Files: " + JSON.stringify(files));
             let startUploadTimer = new Date().toLocaleString();
-            console.log("Uploading Start at : ", startUploadTimer);
 
             let result = await client.videos.upload(files.source.path, {
                 title: fields.title,
                 mp4Support: true
             });
             startUploadTimer = new Date().toLocaleString();
-            console.log("Uploading End at : ", startUploadTimer);
-            console.log(result);
             fields["url"] = result.assets.hls,
             db.videos.create(fields);
             res.json({
@@ -100,7 +91,6 @@ router.get('/episodes', async(req,res,next)=>{
                 thumbnail_url: x.thumbnail_url,
             }
         });
-        console.log(result);
         res.json(result);
     }else{
         res.status(401).json({
@@ -114,7 +104,6 @@ router.get('/episodes', async(req,res,next)=>{
 router.post('/create', async (req, res, next)=>{
     req.body = JSON.parse(JSON.stringify(req.body));
     const result = await db.videos.findByEpisodeName(req.body.name,req.body.show_id).catch(e=>{
-        console.log(e);
         res.json({
             message : e
         });
@@ -125,7 +114,6 @@ router.post('/create', async (req, res, next)=>{
         })
     }else{
         await db.videos.create(req.body).catch(e=>{
-            console.log(e);
             res.json({
                 message : e
             });
@@ -142,7 +130,7 @@ router.get('/trending',async (req,res,next)=>{
             message: "API KEY is missing or incorrect"
         })
     }
-    const videos = [12,13,10,9,8,6];
+    const videos = [12,13,10,9,8,6,2,15];
     const promiseArray = [];
     videos.forEach((id)=>{
         promiseArray.push(new Promise((res,rej)=>{

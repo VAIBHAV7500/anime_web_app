@@ -10,6 +10,9 @@ const audios = require('./tables/audios');
 const subtitles = require('./tables/subtitles');
 const access_tokens = require('./tables/access_tokens');
 const group = require('./tables/group');
+const genre_show_mapping = require('./tables/genre_show_mapping');
+const characters = require('./tables/characters');
+const character_show_mapping = require('./tables/character_show_mapping');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -61,6 +64,12 @@ con.connect(async (err)=>{
         console.log(`Created Access Token`);
         response = await group.createTable(con);
         console.log(`Created Group`);
+        response = await genre_show_mapping.createTable(con);
+        console.log(`Created genre_show_mapping`);
+        response = await characters.createTable(con);
+        console.log(`Created characters`);
+        response = await character_show_mapping.createTable(con);
+        console.log(`Created character_show_mapping`);
     }
     catch(err){
         console.log(err);

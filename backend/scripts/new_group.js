@@ -5,7 +5,15 @@ const {
 global.connection = db.getConnection();
 
 
-const groups = ['Food Wars','One-Punch Man', 'Naruto', 'My Hero Academia', 'Attack on Titan', 'Haikyu', 'Assassination Classroom'];
+const groups = [
+'Food Wars',
+'One-Punch Man',
+'Naruto',
+'My Hero Academia',
+'Attack on Titan',
+'Haikyu',
+'Assassination Classroom'
+];
 
 groups.forEach(async (group) => {
     let sql = `SELECT id FROM animeApp.show_group where name = '${group}'`;

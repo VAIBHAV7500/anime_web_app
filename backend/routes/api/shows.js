@@ -7,7 +7,6 @@ const db = require('../../db/index');
 router.post('/create',async (req,res,next)=>{
     const form = new formidable.IncomingForm();
     form.uploadDir = process.env.UPLOAD_DIR;
-    console.log(form.uploadDir);
     form.parse(req,(err,fields)=>{
         if(err){throw err};
         if(fields.api_key && fields.api_key === keys.app.apiKey){
@@ -64,7 +63,6 @@ router.get('/details',async (req,res,next)=>{
 router.get('/create-group', async (req,res,next)=>{
     const form = new formidable.IncomingForm();
     form.parse(req, (err, fields) => {
-        console.log(fields);
         db.group.create(fields).then((response) => {
             res.json(response);
         }).catch((err) => {
@@ -79,7 +77,6 @@ router.get('/create-group', async (req,res,next)=>{
 router.post('/insert-show', async (req, res, next)=>{
     req.body = JSON.parse(JSON.stringify(req.body));
     const result = await db.shows.findByOriginalName(req.body.original_name).catch(e=>{
-        console.log(e);
         res.json({
             message : e
         });
@@ -91,14 +88,12 @@ router.post('/insert-show', async (req, res, next)=>{
         });
     }else{
         const newResponse = await db.shows.create(req.body).catch(e=>{
-            console.log(e);
             res.json({
                 message : e
             });
         });
         if(newResponse){
             const data = await db.shows.findByOriginalName(req.body.original_name).catch(e=>{
-                console.log(e);
                 res.json({
                     message : e
                 });

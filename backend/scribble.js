@@ -18,3 +18,7 @@ db.shows.create(body).then((res)=>{
 }).catch((err)=>{
     console.log(err);
 });
+
+ for(let i=1;i<=10;i++){
+     console.log(`UPDATE videos SET episode_number = ${i} where id = ${i};`)
+ }
