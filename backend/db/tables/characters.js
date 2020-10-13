@@ -27,7 +27,13 @@ const find = async (id) => {
     return result.length ? result[0] : undefined;
 }
 
+const getCharactersByShows = async (show_id) => {
+    const sql = `SELECT characters.* from characters JOIN character_show_mapping as csm on csm.character_id = characters.id where csm.show_id = ${show_id}`;
+    return runQuery(sql);
+}
+
 module.exports = {
     createTable,
     find,
+    getCharactersByShows,
 }

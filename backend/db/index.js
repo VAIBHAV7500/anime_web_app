@@ -11,6 +11,8 @@ const subtitles = require('./tables/subtitles');
 const access_tokens = require('./tables/access_tokens');
 const group = require('./tables/group');
 const genre_show_mapping = require('./tables/genre_show_mapping');
+const characters = require('./tables/characters');
+const character_show_mapping = require('./tables/character_show_mapping');
 
 const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
@@ -39,4 +41,6 @@ module.exports =  {
     access_tokens,
     group,
     genre_show_mapping,
+    characters,
+    character_show_mapping
 }
