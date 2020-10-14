@@ -22,7 +22,13 @@ const createTable = (con) => {
     })
 }
 
+const create = async (body) => {
+    const sql = `INSERT INTO character_show_mapping(${Object.keys(body).join()}) VALUES (?)`;
+    return await runQuery(sql, [Object.values(body)]);
+}
+
 
 module.exports = {
     createTable,
+    create
 }

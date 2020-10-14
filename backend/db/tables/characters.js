@@ -7,6 +7,8 @@ const createTable = (con) => {
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255),
             description TEXT,
+            role TEXT,
+            image_url TEXT,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
@@ -32,8 +34,14 @@ const getCharactersByShows = async (show_id) => {
     return runQuery(sql);
 }
 
+const create = async (body) => {
+    const sql = `INSERT INTO characters(${Object.keys(body).join()}) VALUES (?)`;
+    return await runQuery(sql, [Object.values(body)]);
+}
+
 module.exports = {
     createTable,
     find,
     getCharactersByShows,
+    create,
 }

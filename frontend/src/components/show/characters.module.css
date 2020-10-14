@@ -1,0 +1,41 @@
+.characters{
+    min-height: 500px;
+    width: 100%;
+    margin: 50px 100px;;
+}
+
+.character{
+    margin: 10px;
+    float: left;
+    background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
+}
+
+.neumorphism {
+    padding: 15px 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
+        7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    color: rgb(187, 185, 185);
+}
+
+.character_image{
+    margin: 10px;
+    max-width: 270px;   
+    min-width: 270px;
+    min-height: 380px;
+    max-height: 380px;
+    object-fit: cover;
+    border: 2px solid #ffff;
+    background-color: rgb(22, 22, 22);
+    border-radius: 5%;
+}
+
+.name{
+    text-align: center;
+    color: #f0b922;
+    font-weight: bold;
+}

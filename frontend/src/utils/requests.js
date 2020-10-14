@@ -13,6 +13,7 @@ const requests = {
     fetchEpisodes: `api/video/episodes`,
     fetchSuggestions: `api/search/suggestions`,
     fetchShowDetails: `api/shows/details`,
+    characters: `/api/character`,
 }
 
 export default requests;

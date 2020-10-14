@@ -6,6 +6,7 @@ import requests from '../../utils/requests';
 import axios from '../../utils/axios';
 import styles from './show.module.css';
 import Episodes from './episodes';
+import Characters from './characters';
 
 export class show extends Component {
 
@@ -69,6 +70,7 @@ export class show extends Component {
                         }
                     </div>
                 { this.state?.nav_id === 0 ? <Episodes show_id={this.props.match.params.id} /> : ""}
+                { this.state?.nav_id === 1 ? <Characters show_id={this.props.match.params.id} /> : ""}
                 <div className={styles.episodes}>
                     
                 </div>

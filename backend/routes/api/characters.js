@@ -15,4 +15,39 @@ router.get('/', async (req,res,next)=>{
     }
 });
 
+router.post('/create', async (req,res,next)=>{
+    const body = req.body;
+    const characterBody = {
+        name: body.name,
+        description: body.description,
+        role: body.role,
+        image_url: body.image_url,
+    }
+    const record = await db.characters.create(characterBody).catch((err)=>{
+        res.status(501).json({
+            error: err.message,
+            stack: err.stack,
+        });
+        return;
+    })
+    console.log(JSON.stringify(record));
+    const id = record.insertId;
+    console.log(id);
+    const mappingBody = {
+        show_id: body.show_id,
+        character_id: id
+    }
+    const mappingResponse = await db.character_show_mapping.create(mappingBody).catch((err)=>{
+        res.status(501).json({
+            error: err.message,
+            stack: err.stack,
+        })
+        return;
+    });
+    res.json({
+        character_id: id,
+        mapping_id: mappingResponse.insertId,
+    });
+});
+
 module.exports = router;
