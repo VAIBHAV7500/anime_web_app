@@ -49,7 +49,7 @@ const getShowsByGenre = async (id) => {
 }
 
 const getShowsData = async () => {
-    const sql = `SELECT shows.id, shows.name, shows.original_name, shows.poster_portrait_url, shows.total_episodes, shows.age_category,shows.type,genre_id from shows `;
+    const sql = `SELECT shows.id, shows.name, shows.original_name, shows.poster_portrait_url, shows.total_episodes, shows.age_category,shows.type from shows `;
     return runQuery(sql);
 }
 

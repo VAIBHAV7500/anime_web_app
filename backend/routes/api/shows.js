@@ -42,7 +42,7 @@ router.get('/details',async (req,res,next)=>{
     const genre_ids = data.genre_id;
     const promiseArray = [];
     promiseArray.push(new Promise((res,rej)=>{
-        db.genre.bulkFindCategory(genre_ids).then((result)=>{
+        db.genre.bulkFindCategory(id).then((result)=>{
             res(result);
         }).catch((err)=>{
             rej(err);

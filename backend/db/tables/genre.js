@@ -26,9 +26,8 @@ const find = async (id) => {
     return result.length ? result[0] : undefined;
 }
 
-const bulkFindCategory = async (ids) => {
-    const trim = ids.replace(/(^,)|(,$)/g, "");
-    const sql = `SELECT category from genre where id in (${trim})`;
+const bulkFindCategory = async (id) => {
+    const sql = `SELECT category from genre inner join genre_show_mapping as gsm on genre.id = gsm.genre_id where show_id = ${id}`;
     const result = await runQuery(sql);
     return result.map(x => x.category);
 }
