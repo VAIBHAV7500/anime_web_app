@@ -13,6 +13,7 @@ const watchProgress = (event) => {
 export class player extends Component {
 
     fetchData = async () => {
+        window.scrollTo(0, 0);
         const showId = this.props.match.params.id
         try {
             document.body.style = 'background: rgb(43, 42, 42);';

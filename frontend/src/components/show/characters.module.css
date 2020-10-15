@@ -1,7 +1,8 @@
 .characters{
     min-height: 500px;
     width: 100%;
-    margin: 50px 100px;;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 .character{
