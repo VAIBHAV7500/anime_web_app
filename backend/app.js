@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var helmet = require('helmet');
-var nodeadmin = require('nodeadmin');
 var db = require('./db');
 var { updateList } = require('./lib/search');
 const oAuth2Server = require('node-oauth2-server')
@@ -42,8 +41,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use(helmet());
-
-app.use(nodeadmin(app));
 
 app.use('/', indexRouter);
 app.use('/auth',authRouter);
