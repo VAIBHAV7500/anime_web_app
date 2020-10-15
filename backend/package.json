@@ -23,7 +23,6 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "node-oauth2-server": "^2.4.0",
-    "nodeadmin": "^0.1.2",
     "nodemon": "^2.0.4"
   }
 }
