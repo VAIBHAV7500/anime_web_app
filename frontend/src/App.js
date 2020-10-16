@@ -37,9 +37,9 @@ const getUserId = async (token)=>{
 }
 
 
-const check = (token,dispatch)=>{
+const check = async (token,dispatch)=>{
   if(token){
-      let userId = getUserId(token);
+      let userId = await getUserId(token);
       if(userId){
         dispatch(LoginSuccess(userId));
       }else{

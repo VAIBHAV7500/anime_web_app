@@ -10,7 +10,7 @@ const reducer = (state = initialState,action)=>{
         case authTypes.loginFailure : return{
             ...state,
             login: false,
-            user : ''
+            userId : ''
         }
         case authTypes.loginSuccess : return{
             ...state,
