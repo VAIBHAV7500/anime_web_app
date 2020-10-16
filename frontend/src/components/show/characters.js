@@ -9,6 +9,7 @@ function Characters({show_id}) {
     const updateCharacters = async () => {
         const response = await axios.get(`${requests.characters}?show_id=${show_id}`);
         if (response.data) {
+            console.log(response.data);
             setCharacters(response.data);
             console.log(characters);
         } else {
@@ -27,8 +28,15 @@ function Characters({show_id}) {
             {
                 characters?.map((character)=>{
                     return <div className={`${styles.character} ${styles.neumorphism}`}>
-                        <img src={character.image_url} className={styles.character_image}></img>
+                        <div className={styles.wrap_description}>
+                            <img src={character.image_url} className={styles.character_image}></img>
+                            <div className={styles.description}>
+                                <h1>{character.role}</h1>
+                                <p className={styles.character_description}>{character.description}</p>
+                            </div>
+                        </div>
                         <div className={styles.name}>{character.name}</div>
+                        
                     </div>
                 })
             }

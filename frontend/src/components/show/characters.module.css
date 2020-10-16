@@ -8,8 +8,32 @@
 .character{
     margin: 10px;
     float: left;
+    width: 17%;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
 }
+.wrap_description{
+    overflow: auto;
+    height: 385px;
+    border-radius: 16px;
+    border: 2px solid #ffff;
+    overflow: hidden;
+}
+.wrap_description:hover .description{
+    transform: translateY(-390px);
+}
+  
+.description{
+    padding-top: 20px;
+    color: white;
+    background:rgba(17, 16, 16, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 6%;
+    text-align: center;
+    transition: 1s;
+    height: 100%;
+    overflow: auto;
+}
+
 
 .neumorphism {
     padding: 15px 10px;
@@ -22,17 +46,16 @@
         7px 7px 20px 0 rgba(0, 0, 0, 0.2);
     color: rgb(187, 185, 185);
 }
-
+.character_description{
+    margin-top: 8%;
+}
 .character_image{
-    margin: 10px;
-    max-width: 270px;   
-    min-width: 270px;
-    min-height: 380px;
-    max-height: 380px;
+    max-width: 285px;
+    min-width: 285px;
+    min-height: 386px;
+    max-height: 386px;
     object-fit: cover;
-    border: 2px solid #ffff;
     background-color: rgb(22, 22, 22);
-    border-radius: 5%;
 }
 
 .name{
