@@ -4,7 +4,7 @@ import './footer.css'
 function footer() {
     return (
         <div className="footer">
-            <table className="footer_table">
+            <div className="footer_table">
                 <div>
                     <p>Terms and Condition</p>
                     <p>Support</p>
@@ -20,7 +20,7 @@ function footer() {
                         ANIMEI
                     </h1>
                 </div>
-            </table>
+            </div>
         </div>
     )
 }

@@ -1,10 +1,10 @@
 import authTypes from './authTypes';
 
-const LoginSuccess = (email) => {
+const LoginSuccess = (id) => {
     return{
         type : authTypes.loginSuccess,
         payload : {
-            email : email
+            user_id : id,
         }
     }
 }

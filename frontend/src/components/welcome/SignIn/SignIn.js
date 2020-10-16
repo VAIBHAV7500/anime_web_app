@@ -7,9 +7,9 @@ import axios from '../../../utils/axios';
 import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
 import { Link } from 'react-router-dom';
-import {useHistory} from "react-router-dom";
-import {useDispatch} from 'react-redux';
-import {LoginSuccess} from '../../../redux/Auth/authAction';
+import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { LoginSuccess } from '../../../redux/Auth/authAction';
 import { useCookies } from 'react-cookie';
 const Login = (props)=>{
     const appbaseurl = process.env.REACT_APP_BASE_URL;
@@ -25,9 +25,10 @@ const Login = (props)=>{
         document.body.classList.add(styles.body);
         return () => {
             document.body.classList.remove(styles.body);
+
         }
     }, []);
-    const [, setCookie] = useCookies(['loginCookie']);
+    const [, setCookie] = useCookies(['token']);
     const handleAccessToken = async (token)=>{
         var config = {
             method: 'post',
@@ -94,11 +95,28 @@ const Login = (props)=>{
                     errorShow : true
                 }));
             }else{
-                dispatch(LoginSuccess((state.email).trim()));
-                setCookie('loginCookie', response.data.access_token , { path: '/' });
+                const userId = await getUser(state.email);
+                stopLoader();
+                setCookie('token', response.data.access_token , { path: '/' });
+                dispatch(LoginSuccess(userId));
             }
         }
         stopLoader();
+    }
+    const getUser = async (email)=>{
+        var data = qs.stringify({
+            'email': email 
+        });
+        var config = {
+            method: 'post',
+            url: process.env.REACT_APP_BASE_URL +'api/user/getID',
+            headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data : data,
+        };
+        const response = await axios(config)
+        return response.data.id;
     }
 
     const handleChange = (e)=>{
