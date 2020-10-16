@@ -14,47 +14,54 @@ import SignUp from './components/welcome/SignUp/SignUp'
 import {useSelector} from 'react-redux';
 import { useCookies } from 'react-cookie';
 import axios from './utils/axios';
+import {useDispatch} from 'react-redux';
+import {LoginSuccess,LoginFailure} from './redux/Auth/authAction';
+import qs from 'qs';
 require('dotenv').config();
 
-const handleAccessToken = async (token)=>{
-  var config = {
-      method: 'post',
-      url: process.env.REACT_APP_BASE_URL + 'restrictedArea/enter',
-      headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer '+ token
-      }
-  };
-  var response = await axios(config);
-  if(response.data.message === "Successfully Entered"){
-      return true;
-  }
-  return false;
+
+const getUserId = async (token)=>{
+  var data = qs.stringify({
+    'token': token 
+   });
+   var config = {
+     method: 'post',
+     url: process.env.REACT_APP_BASE_URL + 'api/accessToken/getID',
+     headers: { 
+       'Content-Type': 'application/x-www-form-urlencoded'
+     },
+     data : data
+   };
+  const response = await axios(config);
+  return response.data.id;
 }
 
-const isLogin = (loginStatus,token)=>{
-  let status = false;
-  if((token && handleAccessToken(token)) || loginStatus){
-    status = true;
-  }
-  if(status){
-    // have to check the ip of the user
-  }
-  return status;
+
+const check = (token,dispatch)=>{
+  if(token){
+      let userId = getUserId(token);
+      if(userId){
+        dispatch(LoginSuccess(userId));
+      }else{
+        dispatch(LoginFailure());
+      }
+    }
 }
 
 const App = ()=>{
+  const dispatch = useDispatch();
   const loginStatus = useSelector(state=>state.login);
   const [cookies] = useCookies(['loginCookie']);
+  check(cookies['loginCookie'],dispatch);
   return (
     <div className="App">
-      {isLogin(loginStatus,cookies['loginCookie'])? 
+      {loginStatus ? 
       <Router>
         <Switch>
           <Route exact path="/" component={showRoom}/>
           <Route path="/show/:id" component={show}></Route>
           <Route path="/player" component={player} props="{name: 'Helllo'}"></Route>
-          <Redirect to={showRoom}></Redirect>
+          <Redirect to='/'></Redirect>
         </Switch>
       </Router>
       :
@@ -62,7 +69,7 @@ const App = ()=>{
         <Switch>
           <Route exact path="/signup" component={SignUp}></Route>
           <Route exact path="/" component={SignIn}></Route>
-          <Redirect to={SignIn}></Redirect>
+          <Redirect to='/'></Redirect>
         </Switch>
       </Router>
       }

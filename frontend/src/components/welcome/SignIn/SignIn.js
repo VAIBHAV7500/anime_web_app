@@ -94,11 +94,27 @@ const Login = (props)=>{
                     errorShow : true
                 }));
             }else{
-                dispatch(LoginSuccess((state.email).trim()));
+                const userId = await getUser(state.email);
+                dispatch(LoginSuccess(userId));
                 setCookie('loginCookie', response.data.access_token , { path: '/' });
             }
         }
         stopLoader();
+    }
+    const getUser = async (email)=>{
+        var data = qs.stringify({
+            'email': email 
+        });
+        var config = {
+            method: 'post',
+            url: process.env.REACT_APP_BASE_URL +'api/user/getID',
+            headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data : data
+        };
+        const response = await axios(config)
+        return response.data.id;
     }
 
     const handleChange = (e)=>{
