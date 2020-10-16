@@ -108,9 +108,8 @@ function Nav() {
     }
     
     const logout = ()=>{
+        removeCookie('loginCookie', { path: '/' });
         dispatch(LoginFailure());
-        removeCookie('loginCookie');
-        history.push('/');
     }
     return (
         <div className={`nav ${!search && show && "nav_black"}`}>
