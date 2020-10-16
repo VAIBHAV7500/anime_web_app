@@ -108,7 +108,7 @@ function Nav() {
     }
     
     const logout = ()=>{
-        removeCookie('loginCookie', { path: '/' });
+        removeCookie('token', { path: '/' });
         dispatch(LoginFailure());
     }
     return (

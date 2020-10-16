@@ -25,9 +25,10 @@ const Login = (props)=>{
         document.body.classList.add(styles.body);
         return () => {
             document.body.classList.remove(styles.body);
+
         }
     }, []);
-    const [, setCookie] = useCookies(['loginCookie']);
+    const [, setCookie] = useCookies(['token']);
     const handleAccessToken = async (token)=>{
         var config = {
             method: 'post',
@@ -95,8 +96,9 @@ const Login = (props)=>{
                 }));
             }else{
                 const userId = await getUser(state.email);
+                stopLoader();
+                setCookie('token', response.data.access_token , { path: '/' });
                 dispatch(LoginSuccess(userId));
-                setCookie('loginCookie', response.data.access_token , { path: '/' });
             }
         }
         stopLoader();

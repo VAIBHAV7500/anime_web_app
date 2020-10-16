@@ -13,9 +13,9 @@ import SignIn from './components/welcome/SignIn/SignIn'
 import SignUp from './components/welcome/SignUp/SignUp'
 import {useSelector} from 'react-redux';
 import { useCookies } from 'react-cookie';
-import axios from './utils/axios';
 import {useDispatch} from 'react-redux';
 import {LoginSuccess,LoginFailure} from './redux/Auth/authAction';
+import axios from './utils/axios';
 import qs from 'qs';
 require('dotenv').config();
 
@@ -36,23 +36,21 @@ const getUserId = async (token)=>{
   return response.data.id;
 }
 
-
-const check = async (token,dispatch)=>{
+const check = (token,dispatch)=>{
   if(token){
-      let userId = await getUserId(token);
-      if(userId){
-        dispatch(LoginSuccess(userId));
-      }else{
-        dispatch(LoginFailure());
-      }
-    }
+    getUserId(token).then((id)=>{
+      dispatch(LoginSuccess(id));
+    }); 
+    return true;
+  }else{
+    return false;
+  }
 }
 
 const App = ()=>{
+  const [cookies] = useCookies(['token']);
   const dispatch = useDispatch();
-  const loginStatus = useSelector(state=>state.login);
-  const [cookies] = useCookies(['loginCookie']);
-  check(cookies['loginCookie'],dispatch);
+  const loginStatus = useSelector(state=>state.login) || check(cookies['token'],dispatch);
   return (
     <div className="App">
       {loginStatus ? 
@@ -68,8 +66,8 @@ const App = ()=>{
       <Router>
         <Switch>
           <Route exact path="/signup" component={SignUp}></Route>
-          <Route exact path="/" component={SignIn}></Route>
-          <Redirect to='/'></Redirect>
+          <Route exact path="/signin" component={SignIn}></Route>
+          <Redirect to='/signin'></Redirect>
         </Switch>
       </Router>
       }
