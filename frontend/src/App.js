@@ -11,10 +11,10 @@ import showRoom from './components/showRoom/showRoom';
 import show from './components/show/show';
 import SignIn from './components/welcome/SignIn/SignIn'
 import SignUp from './components/welcome/SignUp/SignUp'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import {useDispatch} from 'react-redux';
-import {LoginSuccess,LoginFailure} from './redux/Auth/authAction';
+import { useDispatch } from 'react-redux';
+import { LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
 import qs from 'qs';
 require('dotenv').config();
@@ -30,7 +30,7 @@ const getUserId = async (token)=>{
      headers: { 
        'Content-Type': 'application/x-www-form-urlencoded'
      },
-     data : data
+     data : data,
    };
   const response = await axios(config);
   return response.data.id;

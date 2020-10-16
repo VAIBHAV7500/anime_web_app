@@ -2,7 +2,7 @@ import authTypes from './authTypes';
 
 const initialState = {
     login: false,
-    userId : ''
+    user_id : ''
 }
 
 const reducer = (state = initialState,action)=>{
@@ -10,12 +10,12 @@ const reducer = (state = initialState,action)=>{
         case authTypes.loginFailure : return{
             ...state,
             login: false,
-            userId : ''
+            user_id : ''
         }
         case authTypes.loginSuccess : return{
             ...state,
             login: true,
-            userId : action.payload.userId
+            user_id : action.payload.user_id
         }
         default : return state;
     }

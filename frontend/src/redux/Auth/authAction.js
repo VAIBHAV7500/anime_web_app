@@ -4,7 +4,7 @@ const LoginSuccess = (id) => {
     return{
         type : authTypes.loginSuccess,
         payload : {
-            userId : id,
+            user_id : id,
         }
     }
 }

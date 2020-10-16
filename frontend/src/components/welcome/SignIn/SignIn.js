@@ -7,9 +7,9 @@ import axios from '../../../utils/axios';
 import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
 import { Link } from 'react-router-dom';
-import {useHistory} from "react-router-dom";
-import {useDispatch} from 'react-redux';
-import {LoginSuccess} from '../../../redux/Auth/authAction';
+import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { LoginSuccess } from '../../../redux/Auth/authAction';
 import { useCookies } from 'react-cookie';
 const Login = (props)=>{
     const appbaseurl = process.env.REACT_APP_BASE_URL;
@@ -113,7 +113,7 @@ const Login = (props)=>{
             headers: { 
             'Content-Type': 'application/x-www-form-urlencoded'
             },
-            data : data
+            data : data,
         };
         const response = await axios(config)
         return response.data.id;
