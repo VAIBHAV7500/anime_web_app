@@ -7,6 +7,7 @@ const showsRouter = require('./shows');
 const searchRouter = require('./search');
 const genreRouter = require('./genre');
 const characterRouter = require('./characters');
+const reviewRouter = require('./review');
 
 
 router.use('/video', videoRouter);
@@ -15,5 +16,6 @@ router.use('/shows', showsRouter);
 router.use('/search', searchRouter);
 router.use('/genre', genreRouter);
 router.use('/character', characterRouter);
+router.use('/review', reviewRouter);
 
 module.exports = router;

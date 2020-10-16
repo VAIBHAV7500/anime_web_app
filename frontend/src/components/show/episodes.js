@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
 
 function Episodes({show_id}) {
     const [episodes, setEpisodes] = useState();
-    const chunkSize = 2;
+    const chunkSize = 12;
     const history = useHistory();
 
     useEffect(() => {

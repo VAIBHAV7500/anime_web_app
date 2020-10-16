@@ -8,7 +8,6 @@
 .editor{
     width: 90%;
     margin-left: 30px;
-    background-color: black;
     height: 100%;
     margin-bottom: 50px;
 }
@@ -16,7 +15,47 @@
 .tiny_editor{
     width: 100%;
     height: 300px;
-    background-color: black;
-    border-radius: 10px;
     margin-bottom: 50px;
+}
+
+.neumorphism {
+    padding: 15px 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
+        7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    color: rgb(255, 255, 255);
+}
+
+.post_button{
+    float: right;
+    padding-top: 8px;
+    margin: 20px;
+    width: 120px;
+    height: 12px;
+    background-color: rgba(80, 14, 141, 0.8);
+    align-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.seperator{
+    clear:both;
+    width: 80%;
+    height: 2px;
+    align-content: center;
+    margin-left: 5%;
+    margin-top:100px;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+.review_container{
+    
 }

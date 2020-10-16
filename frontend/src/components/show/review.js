@@ -4,16 +4,43 @@ import axios from '../../utils/axios';
 import requests from '../../utils/requests';
  import { Editor } from '@tinymce/tinymce-react';
 
-function Review() {
+function Review({show_id}) {
 
-    const handleEditorChange = (content, editor) => {
-        console.log('Content was updated:', content);
-        console.log('Editor: ', editor);
+    const [reviews, setReviews] = useState([]);
+
+    const init = async () => {
+        const endPoint = `${requests.reviews}/shows?id=${show_id}`;
+        const response = await axios.get(endPoint);
+        console.log(response);
     }
 
     useEffect(() => {
-        console.log(process.env.REACT_APP_TINY_API_KEY);
-    })
+        init();
+    },[show_id]);
+
+    let finalContent = '';
+    let textEditor;
+
+    const handleEditorChange = (content, editor) => {
+        finalContent = content;
+        textEditor = editor;
+    }
+
+    const postReview = async () => {
+        console.log(finalContent);
+        const endPoint = `${requests.reviews}/create`;
+        const body = {
+            show_id,
+            user_id: 1,
+            review: finalContent
+        }
+        const response = await axios.post(endPoint,body).catch((err)=>{
+            console.log(err);
+            //Something went wrong
+        });
+        console.log(response);  
+        textEditor.setContent('');
+    }
 
     return (
         <div className={styles.reviews}>
@@ -21,11 +48,15 @@ function Review() {
                 <Editor
                     className={styles.tiny_editor}
                     apiKey = {process.env.REACT_APP_TINY_API_KEY}
-                    initialValue="<p>This is the initial content of the editor</p>"
+                    initialValue=""
+                    placeHolder = "Jot down your review here"
                     init={{
                     menubar: false,
                     min_height: 300,
                     max_height: 400,
+                    branding: false,
+                    themes: "modern",
+                    placeholder: "Jot down your review here",
                     skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
                     content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default'),
                     content_style: 'div { margin: 10px; border: 5px solid red; padding: 3px; }',
@@ -40,6 +71,11 @@ function Review() {
                     }}
                     onEditorChange={handleEditorChange}
                 />
+                <div className={`${styles.post_button} ${styles.neumorphism}`} onClick={postReview}>POST</div>
+            </div>
+            <div className={styles.seperator} />
+            <div className={styles.review_container}>
+                
             </div>
         </div>
     )

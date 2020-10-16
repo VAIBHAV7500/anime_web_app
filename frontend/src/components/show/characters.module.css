@@ -8,7 +8,7 @@
 .character{
     margin: 10px;
     float: left;
-    width: 17%;
+    width: 289px;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
 }
 .wrap_description{
@@ -62,4 +62,5 @@
     text-align: center;
     color: #f0b922;
     font-weight: bold;
+    margin-top: 10px;
 }

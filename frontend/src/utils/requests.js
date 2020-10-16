@@ -14,6 +14,7 @@ const requests = {
     fetchSuggestions: `api/search/suggestions`,
     fetchShowDetails: `api/shows/details`,
     characters: `/api/character`,
+    reviews: `/api/review`,
 }
 
 export default requests;
