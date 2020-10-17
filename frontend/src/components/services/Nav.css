@@ -13,22 +13,21 @@
 }
 
 .nav_black{
-    background: rgb(2, 0, 6);
-    background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, #4d01a3 42%);
-    --background-color: rgb(43, 42, 42);
-    opacity: 0.95;
-    -webkit-transition: background 100ms ease-in 1s;
-    -moz-transition: background 100ms ease-in 1s;
-    -o-transition: background 100ms ease-in 1s;
-    transition: background 100ms ease-in 1s;
+    background: #641ba8cc;
+    background-image: -webkit-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: -moz-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: -ms-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: -o-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
 }
-
 
 .nav_logo {
     position: fixed;
     left: 2%;
     top:1%;
-    width: auto;
+    width: 200px;
+    margin-top: 8px;
+    font-size: 30px;
     -webkit-text-stroke: 0.5px black;
     object-fit: contain;
     cursor: pointer;
@@ -67,7 +66,7 @@
     position: fixed;
     right: 1%;
     object-fit: contain;
-    top: 15px;
+    top: 20px;
     width: 7%;
 }
 

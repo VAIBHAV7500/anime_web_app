@@ -45,3 +45,16 @@ cd frontend
 npm start
 ```
 <strong>Note</strong> : We consider you are at the root folder of the app in both the terminals.
+
+
+## Code Standardization
+
+Camel Case => helloHowAreYou.
+SnakeCase => hello_how_are_you.
+
+FileNames: Snake Case
+JavaScript Code: Camel Case
+JSONs: Snake Case
+Tables & Columns: Snake Case
+CSS: Snake Case
+API Paths: Snake Case
