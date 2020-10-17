@@ -7,7 +7,6 @@ import Footer from './footer';
 import PageLoader from '../services/page_loader';
 import styles from './showRoom.module.css';
 import axios from '../../utils/axios';
- 
 
 export class showRoom extends Component {
     constructor(props) {

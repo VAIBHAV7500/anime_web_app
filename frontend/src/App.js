@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -14,11 +14,10 @@ import SignUp from './components/welcome/SignUp/SignUp'
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
-import { LoginSuccess } from './redux/Auth/authAction';
+import { LoginFailure, LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
 import qs from 'qs';
 require('dotenv').config();
-
 
 const getUserId = async (token)=>{
   var data = qs.stringify({
@@ -36,21 +35,36 @@ const getUserId = async (token)=>{
   return response.data.id;
 }
 
-const check = (token,dispatch)=>{
+const check = (token,dispatch,removeCookie)=>{
   if(token){
-    getUserId(token).then((id)=>{
-      dispatch(LoginSuccess(id));
+    return getUserId(token).then((id)=>{
+      if(id==null){
+        removeCookie('token', { path: '/' });
+        dispatch(LoginFailure());
+        return false;
+      }else{
+        dispatch(LoginSuccess(id));
+        return true;
+      }
+    }).catch(e=>{
+      removeCookie('token', { path: '/' });
+      dispatch(LoginFailure());
+      console.log(e);
     }); 
-    return true;
   }else{
+    removeCookie('token', { path: '/' });
+    dispatch(LoginFailure());
     return false;
   }
 }
 
 const App = ()=>{
-  const [cookies] = useCookies(['token']);
+  const [cookies,,removeCookie] = useCookies(['token']);
   const dispatch = useDispatch();
-  const loginStatus = useSelector(state=>state.login) || check(cookies['token'],dispatch);
+  const loginStatus = useSelector(state=>state.login) || check(cookies['token'],dispatch,removeCookie);
+  useEffect(() => {
+    check(cookies['token'],dispatch,removeCookie);
+  },[cookies['token']]);
   return (
     <div className="App">
       {loginStatus ? 
@@ -65,8 +79,8 @@ const App = ()=>{
       :
       <Router>
         <Switch>
-          <Route exact path="/signup" component={SignUp}></Route>
           <Route exact path="/signin" component={SignIn}></Route>
+          <Route exact path="/signup" component={SignUp}></Route>
           <Redirect to='/signin'></Redirect>
         </Switch>
       </Router>
