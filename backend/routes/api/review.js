@@ -17,13 +17,82 @@ router.get('/', async (req, res, next) => {
 
 router.get('/shows', async (req, res, next)=>{
     const show_id = req.query.id;
-    const response = await db.reviews.findByShows(show_id).catch((err)=>{
-        res.status(502),json({
+    const user_id = req.query.user_id;
+    const response = await db.reviews.findByShows(show_id,user_id).catch((err)=>{
+        res.status(502).json({
             error: err.message,
             stack: err.stack
         });
     });
-    res.json(response);
+    const review_ids = response.map((x) => x.id);
+    let likes = await db.user_review.findReviewByUser(review_ids,user_id);
+    likes = likes.map(x => x.review_id);
+    const body = [];
+    response.forEach((review)=>{
+        body.push(Object.assign(review, {
+            current_user: (likes.indexOf(review.id) !== -1 ? true : false)
+        }));
+    })
+    res.json(body);
+});
+
+router.post('/like', async (req, res, next) => {
+    const body = req.body;
+    if(body){
+        const review_id = body.review_id;
+        const promiseArray = [];
+        promiseArray.push(new Promise((res,rej)=>{
+            db.reviews.likeAction(review_id, 1).then(result => res(result)).catch(err => rej(err));
+        }));
+        promiseArray.push(new Promise((res,rej)=>{
+            db.user_review.create(body).then(result => res(result)).catch(err => rej(err));
+        }));
+        await Promise.all(promiseArray).catch((err)=>{
+            res.status(501).json({
+                error: err.message,
+                stack: err.stack
+            })
+        });
+        res.json({
+            success: true
+        });
+        
+    }else{
+        res.status(401).json({
+            message: "No Body Found"
+        });
+    }
+});
+
+router.delete('/unlike', async (req, res, next) => {
+    const id = req.query.id;
+    const user_id = req.query.user_id;
+    console.log(id);
+    console.log(user_id);
+    if (id && user_id) {
+        const promiseArray = [];
+        promiseArray.push(new Promise((res, rej) => {
+            db.reviews.likeAction(id, -1).then(result => res(result)).catch(err => rej(err));
+        }));
+        promiseArray.push(new Promise((res, rej) => {
+            db.user_review.deleteRecord(id, user_id).then(result => res(result)).catch(err => rej(err));
+        }));
+        await Promise.all(promiseArray).catch((err) => {
+            res.status(501).json({
+                error: err.message,
+                stack: err.stack
+            })
+        });
+
+        res.json({
+            success: true
+        });
+
+    } else {
+        res.status(401).json({
+            message: "No Body Found"
+        });
+    }
 });
 
 router.post('/create', async (req, res, next) => {

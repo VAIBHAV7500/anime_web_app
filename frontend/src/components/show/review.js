@@ -12,7 +12,7 @@ function Review({show_id}) {
     const userId = useSelector(state => state.user_id);
 
     const init = async () => {
-        const endPoint = `${requests.reviews}/shows?id=${show_id}`;
+        const endPoint = `${requests.reviews}/shows?id=${show_id}&user_id=${userId}`;
         const response = await axios.get(endPoint);
         console.log(response);
         response.data = response.data.reverse();
@@ -55,6 +55,31 @@ function Review({show_id}) {
         };
     }
 
+    const handleLike = (review_id) => {
+        const className = styles.red_heart;
+        console.log(className);
+        const element = document.getElementById(review_id);
+        const likeNumber = document.getElementById(`like_${review_id}`);
+        console.log(element);
+        console.log(likeNumber.innerText);
+        if(element.classList.contains(className)){
+            element.classList.remove(className);
+            likeNumber.innerText = (parseInt(likeNumber.innerText) - 1).toString();
+            const endPoint = `${requests.reviews}/unlike?id=${review_id}&user_id=${userId}`;
+            axios.delete(endPoint);
+        }else{
+            element.classList.add(className);
+            likeNumber.innerText = (parseInt(likeNumber.innerText) + 1).toString();
+            const body = {
+                user_id: userId,
+                show_id,
+                review_id
+            }
+            const endPoint = `${requests.reviews}/like`;
+            axios.post(endPoint, body);
+        }
+    }
+
     return (
         <div className={styles.reviews}>
             <div className={styles.editor}>
@@ -94,8 +119,8 @@ function Review({show_id}) {
                         <div className={styles.review_text} dangerouslySetInnerHTML={createMarkup(review)}/>
                         <div className={styles.bottom_container}>
                             <div className={styles.reviewer}>By {review.email} </div>
-                            <AiFillHeart className={styles.heart} />  
-                            <div className={styles.likes}>{review.likes}</div>      
+                            <AiFillHeart id={review.id} className={`${styles.heart} ${review.current_user ? styles.red_heart : ""}`} onClick={()=>{handleLike(review.id)}} />  
+                            <div className={styles.likes} id={`like_${review.id}`}>{review.likes}</div>      
                         </div>
                     </div>
                 }) }

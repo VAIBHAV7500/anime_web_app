@@ -14,6 +14,7 @@ const genre_show_mapping = require('./tables/genre_show_mapping');
 const characters = require('./tables/characters');
 const character_show_mapping = require('./tables/character_show_mapping');
 const reviews = require('./tables/reviews');
+const user_review = require('./tables/user_review');
 
 const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
@@ -45,4 +46,5 @@ module.exports =  {
     characters,
     character_show_mapping,
     reviews,
+    user_review,
 }

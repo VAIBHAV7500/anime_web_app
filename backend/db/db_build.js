@@ -14,6 +14,7 @@ const genre_show_mapping = require('./tables/genre_show_mapping');
 const characters = require('./tables/characters');
 const character_show_mapping = require('./tables/character_show_mapping');
 const reviews = require('./tables/reviews');
+const user_review = require('./tables/user_review');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -73,6 +74,8 @@ con.connect(async (err)=>{
         console.log(`Created character_show_mapping`);
         response = await reviews.createTable(con);
         console.log(`Created reviews`);
+        response = await user_review.createTable(con);
+        console.log(`Created user_review`);
     }
     catch(err){
         console.log(err);

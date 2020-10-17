@@ -44,7 +44,7 @@
     clear:both;
     width: 80%;
     align-content: center;
-    margin-left: 5%;
+    padding-left: 100px;
     margin-top:100px;
     border-radius: 1px; 
 }
@@ -76,12 +76,17 @@
     width: 30px;
     color:white;
     cursor: pointer;
+    
     /* color: rgb(209, 23, 23); */
+}
+
+.red_heart{
+    color: rgb(233, 21, 21);
 }
 
 .review_text{
     padding: 30px;
-
+    line-height: 18px;
 }
 
 .likes{

@@ -37,14 +37,28 @@ const create = async (body) => {
     return await runQuery(sql, [Object.values(body)]);
 }
 
-const findByShows = async (show_id) => {
-    const sql = `SELECT reviews.*, users.email as email from reviews inner join users on users.id = reviews.user_id where show_id = ${show_id}`;
+const findByShows = async (show_id, user_id) => {
+    const sql = `SELECT reviews.*,
+    users.email as email
+    FROM reviews 
+    inner join users on users.id = reviews.user_id 
+    where reviews.show_id = ${show_id}
+     `;
     return await runQuery(sql);
 }
+
+const likeAction = async (id, like) => {
+    let sql = `SELECT likes from reviews where id = ${id} limit 1`;
+    const response = await runQuery(sql);
+    response[0].likes += like;
+    sql = `UPDATE reviews SET likes = ${response[0].likes} WHERE id = ${id}`;
+    return runQuery(sql); 
+} 
  
 module.exports = {
     createTable,
     find,
     create,
     findByShows,
+    likeAction,
 }
