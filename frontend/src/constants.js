@@ -4,5 +4,6 @@ module.exports = {
     scores : ['9','8','7','6','5','4','3','2','1'],
     types : ["series","movie","ova"],
     age_categories : ["13","18"],
+    review_word_limit : 700,
 };
 

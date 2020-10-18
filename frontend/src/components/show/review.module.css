@@ -1,3 +1,4 @@
+
 .reviews {
     min-height: 500px;
     width: 100%;
@@ -38,6 +39,11 @@
     font-size: 15px;
     font-weight: bolder;
     cursor: pointer;
+    color: white;
+}
+.post_button:active{
+    position: relative;
+    top: 1px;
 }
 
 .review_container{
@@ -50,45 +56,84 @@
 }
 
 .review{
-  margin-top: 10px;
+  margin-top: -13px;
   margin-right:auto;
   margin-bottom: 10px;
-  color: black;
+  color: white;
   font-size:14px;
   margin-bottom: 40px;
-  background-color: rgb(248, 246, 246);
+  background-color: transparent;
   border-radius: 10px;
   cursor: default;
+  padding-right: 313px;
+  padding-left: 1px;
+  border-bottom: 1px solid grey;
+  padding-bottom: 35px;
 }
+
 
 .reviewer{
     padding-top: 10px;
     font-weight: bolder;
     color: white;
-    font-size: 14px;
+    font-size: 16px;
+}
+.avatar{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: 6px;
+}
+.review_detail{
+    margin-left: 20px;
+    word-spacing: 3px;
+    font-size: 16px;
+}
+.review_text p {
+    margin-bottom: 20px;
+}
+.review_text p:last-child {
+    margin-bottom: 0px;
+}
+.review_text p:only-child {
+    margin-top: 0px;
 }
 
 .heart{
     position:relative;
-    margin-top:-25px;
     float: right;
-    height: 30px;
-    width: 30px;
-    color:white;
+    padding-right: 7px;
+    padding-top: 8px;
+    color:rgb(216, 198, 198);
     cursor: pointer;
-    
+    font-size: 22px;
     /* color: rgb(209, 23, 23); */
 }
-
+.heart:active{
+    position: relative;
+    top: 1px;
+}
+.showMore{
+    color: #f0b922;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 6px;
+}
+.showMore:hover{
+    text-decoration: underline;
+}
+.make_flex{
+    display: flex;
+}
 .red_heart{
     color: rgb(233, 21, 21);
+    animation: beatHeart .8s infinite;
 }
 
-.review_text{
-    padding: 30px;
+.review_text {
     line-height: 18px;
-    max-height: 300px;
-    overflow-y: scroll;
+    padding-top: 5px;
 }
 
 .likes{
@@ -96,7 +141,7 @@
     position:block;
     font-size: 15px;
     font-weight: bold;
-    margin-top: -20px;
+    padding-top: 8px;
 }
 
 .bottom_container{
@@ -110,4 +155,22 @@
     background-image: -ms-linear-gradient(top, #641ba8cc, #3a0968cc);
     background-image: -o-linear-gradient(top, #641ba8cc, #3a0968cc);
     background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
+}
+
+@keyframes beatHeart {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.3);
+    }
+    40% {
+      transform: scale(1.2);
+    }
+    60% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
 }

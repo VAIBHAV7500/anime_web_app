@@ -226,8 +226,8 @@
 
 .dropdown_content{
     display: none;
-    background: linear-gradient(0deg, rgba(2, 0, 6, 1) 0%, #4d01a3 42%);
-    --background-color: rgb(43, 42, 42);
+    background: #641ba8cc;
+    background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
     text-align: center;
     margin-left: 89%;
     margin-top: 22px;

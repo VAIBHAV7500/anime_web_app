@@ -40,7 +40,6 @@ router.post('/getId', async (req,res,next)=>{
             message : "No Email exist"
         });
     }
-    
 })
 
 module.exports = router;
