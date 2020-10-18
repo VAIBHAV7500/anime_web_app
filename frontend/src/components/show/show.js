@@ -11,7 +11,7 @@ import Review from './review';
 
 export class show extends Component {
 
-    navItems = ['Episodes','Characters','Review','Stats', 'Crew', "OVA's & related"];
+    navItems = ['Episodes','Characters','Review','Stats', 'Crew', "Similar Shows"];
 
     fetchData = async () => {
         const showId = this.props.match.params.id

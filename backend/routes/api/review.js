@@ -67,8 +67,6 @@ router.post('/like', async (req, res, next) => {
 router.delete('/unlike', async (req, res, next) => {
     const id = req.query.id;
     const user_id = req.query.user_id;
-    console.log(id);
-    console.log(user_id);
     if (id && user_id) {
         const promiseArray = [];
         promiseArray.push(new Promise((res, rej) => {

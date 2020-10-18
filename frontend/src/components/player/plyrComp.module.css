@@ -1,0 +1,10 @@
+:root {
+    --plyr-color-main: #641ba8cc;
+    
+}
+
+.player{
+    height: 100%;
+    width: 100%;
+    border-radius: 30px;
+}
