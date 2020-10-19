@@ -4,7 +4,6 @@ import 'plyr-react/dist/plyr.css';
 import styles from './plyrComp.module.css';
 
 function PlyrComp() {
-
     const player = new Plyr('#player');
     console.log(player);
     player.source = {
@@ -22,12 +21,29 @@ function PlyrComp() {
             },
         ],
     }
-    console.log(player);
+
+    player.on('progress', (event)=>{
+        //console.log(event);
+        console.log(player.currentTime);
+    });
+
+    useEffect(() => {
+
+        const elements = document.getElementsByClassName('plyr');
+        if(elements[0]?.innerHTML){
+           // elements[0].innerHTML = <button>SKIP VIDEO</button> + elements[0].innerHTML;
+           //elements[0].insertAdjacentHTML('beforeend', `<button style="transform: translate(600px, -50px);">SKIP VIDEO</button>`);
+        }
+
+        return () => {
+            player.destroy();
+        }
+    });
+
     return (
         <div className={styles.player}>
-            <video id="player" playsinline controls data-poster="/path/to/poster.jpg">
-
-                <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />
+            <video id="player" playsInline controls autoPlay={true} title={"Some Title"}>
+                <track kind="captions" label="English captions" src="/path/to/captions.vtt" srcLang="en" default />
             </video>
         </div>
     )

@@ -50,11 +50,18 @@ npm start
 ## Code Standardization
 
 Camel Case => helloHowAreYou.
+
 SnakeCase => hello_how_are_you.
 
+
 FileNames: Snake Case
+
 JavaScript Code: Camel Case
+
 JSONs: Snake Case
+
 Tables & Columns: Snake Case
+
 CSS: Snake Case
+
 API Paths: Snake Case

@@ -25,14 +25,16 @@ router.get('/shows', async (req, res, next)=>{
         });
     });
     const review_ids = response.map((x) => x.id);
-    let likes = await db.user_review.findReviewByUser(review_ids,user_id);
-    likes = likes.map(x => x.review_id);
     const body = [];
-    response.forEach((review)=>{
-        body.push(Object.assign(review, {
-            current_user: (likes.indexOf(review.id) !== -1 ? true : false)
-        }));
-    })
+    if(review_ids.length){
+        let likes = await db.user_review.findReviewByUser(review_ids,user_id);
+        likes = likes.map(x => x.review_id);
+        response.forEach((review)=>{
+            body.push(Object.assign(review, {
+                current_user: (likes.indexOf(review.id) !== -1 ? true : false)
+            }));
+        })
+    }
     res.json(body);
 });
 
