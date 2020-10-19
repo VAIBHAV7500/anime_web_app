@@ -11,6 +11,7 @@
     overflow-x: scroll;
     padding: 20px;
     left:0;
+    scroll-behavior: smooth;
 }
 
 .row_posters::-webkit-scrollbar {
@@ -40,6 +41,28 @@
     );
     z-index: 2;
 }
+
+.slider,.slider_back{
+    position: absolute;
+    z-index: 3;
+    color: transparent;
+    background-color: transparent;
+    padding: 110px 11px;
+    font-size: 60px;
+    transition: 0.3s;
+}
+.slider{
+    right: 0;
+}
+.slider_back{
+    left: 0;
+}
+.slider_back:hover , .slider:hover{
+    color: white;
+    background-color: rgba(17, 17, 17, 0.651);
+}
+
+
 
 .row_posterLarge:hover{
     transform: scale(1.09);
