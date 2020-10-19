@@ -15,6 +15,7 @@ const characters = require('./tables/characters');
 const character_show_mapping = require('./tables/character_show_mapping');
 const reviews = require('./tables/reviews');
 const user_review = require('./tables/user_review');
+const user_ip = require('./tables/user_ip');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -76,6 +77,8 @@ con.connect(async (err)=>{
         console.log(`Created reviews`);
         response = await user_review.createTable(con);
         console.log(`Created user_review`);
+        response = await user_ip.createTable(con);
+        console.log(`Created user_ip`);
     }
     catch(err){
         console.log(err);

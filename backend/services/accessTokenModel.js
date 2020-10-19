@@ -16,7 +16,6 @@ const grantTypeAllowed = async (clientID, grantType, callback) => {
 
 const getUser = async (email, password, callback) => {
     result = await db.user.find_by_email(email).catch(e=>{callback(null,null); return;});
-    console.log(result);
     callback(null,result ? result.password == password ? result : null :null);
 }
 

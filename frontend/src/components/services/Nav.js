@@ -106,7 +106,15 @@ function Nav() {
            </div>
         </div>
     }
-    
+    const showSignOutButton = ()=>{
+        if(dropDown===true){
+            document.querySelector('.dropdown_content').classList.remove('slide-in-right')
+            document.querySelector('.dropdown_content').className+=" slide-out-right";
+            setTimeout(()=>{setDropdown(!dropDown)},500);
+        }else{
+            setDropdown(!dropDown);
+        }
+    };
     const logout = ()=>{
         removeCookie('token', { path: '/' });
         dispatch(LoginFailure());
@@ -118,15 +126,7 @@ function Nav() {
             </h1>
             <div className="nav_rights">
                 < FaSearch className="search_icon" onClick={handleSearch} />
-                <FaUser onClick={()=>{
-                    if(dropDown===true){
-                        document.querySelector('.dropdown_content').classList.remove('slide-in-right')
-                        document.querySelector('.dropdown_content').className+=" slide-out-right";
-                        setTimeout(()=>{setDropdown(!dropDown)},500);
-                    }else{
-                        setDropdown(!dropDown);
-                    }
-                }} className = "nav_avatar"></FaUser>
+                <span onClick={showSignOutButton} ><FaUser className = "nav_avatar"></FaUser><span className="arrow-down"></span></span>
             </div>
             <div className={`dropdown_content  ${dropDown? "show_block slide-in-right" : ""}`} >
                     <button className="signOut_Button" onClick={logout}><strong>Sign Out</strong></button>

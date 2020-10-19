@@ -71,7 +71,6 @@
   padding-bottom: 35px;
 }
 
-
 .reviewer{
     padding-top: 10px;
     font-weight: bolder;
@@ -95,9 +94,7 @@
 .review_text p:last-child {
     margin-bottom: 0px;
 }
-.review_text p:only-child {
-    margin-top: 0px;
-}
+
 
 .heart{
     position:relative;
@@ -135,7 +132,6 @@
     line-height: 18px;
     padding-top: 5px;
 }
-
 .likes{
     float:right;
     position:block;

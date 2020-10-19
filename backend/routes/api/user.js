@@ -16,30 +16,4 @@ router.post('/create', async (req, res, next) => {
     res.json({"message":response});
 });
 
-router.post('/getId', async (req,res,next)=>{
-    if(req.body.email){
-        const response = await db.user.find_by_email(req.body.email).catch((err)=>{
-            res.status(401).json({
-                error: err.message,
-                stack: err.stack
-            });
-        });
-        if(response){
-            res.json({
-                id : response.id
-            });
-        }else{
-            res.status(404).json({
-                id : null,
-                message : "No Email exist"
-            });
-        }
-    }else{
-        res.status(404).json({
-            id : null,
-            message : "No Email exist"
-        });
-    }
-})
-
 module.exports = router;
