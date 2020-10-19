@@ -5,6 +5,7 @@
     min-height: 300px;
     width: 100%;
 }
+
 .row_posters{
     display: flex;
     overflow-y: hidden;
@@ -13,6 +14,7 @@
     left:0;
     scroll-behavior: smooth;
 }
+
 
 .row_posters::-webkit-scrollbar {
     display: none;
