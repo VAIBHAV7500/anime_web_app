@@ -8,18 +8,29 @@ module.exports = (app)=>{
         const resp = await db.user.create(req.body).catch(err=>{
             errMessage = err.sqlMessage;
             if(errMessage.includes("email")){
-                res.json({message : "Email Already Taken"});
+                res.status(409).json({
+                    message : "Email Already Taken",
+                    stack : err.stack,
+                });
             }
             else if(errMessage.includes("mobile")){
-                res.json({message : "Mobile No. Already Taken"});
+                res.status(409).json({
+                    message : "Mobile No. Already Taken",
+                    stack : err.stack,
+                });
             }
             else{
-                res.json({message : "Registration Failed"});
+                res.status(403).json({
+                    message : "Registration Failed",
+                    stack : err.stack,
+                });
             }
             return;
         }); 
         if(resp){
-            res.json({message : "Registration Successfull"});
+            res.status(200).json({
+                message : "Registration Successfull"
+            });
         }
     });
     

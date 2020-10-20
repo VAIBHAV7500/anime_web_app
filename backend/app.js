@@ -51,7 +51,6 @@ app.use(helmet());
 app.use('/', indexRouter);
 app.use('/auth',authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
-
 app.use(app.oauth.errorHandler());
 app.use(anyError);
 app.use(errorHandler);
