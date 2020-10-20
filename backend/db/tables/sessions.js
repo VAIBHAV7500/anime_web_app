@@ -20,7 +20,7 @@ const createTable = (con) => {
 }
 
 const find = async (id) => {
-    const sql = `SELECT * from sessions where id = ${id} limit 1`;
+    const sql = `SELECT * FROM sessions where id = ${id} LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }

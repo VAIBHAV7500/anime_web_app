@@ -3,13 +3,13 @@ import "./Row.css";
 import ReactPlayer from 'react-player/lazy';
 import { MdClose } from "react-icons/md";
 import {useHistory} from "react-router-dom";
-
-
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 function Row({ title, movies, isLargeRow }) {
   const [trailer, setTrailer] = useState("");
   const history = useHistory();
   let keyId = 1;
+  let curTimeOut;
   const handleClick = (movie) => {
       movie.rating = Math.round(((Math.random() * (10 - 8 + 1)) + 8) * 9) / 10;
       let description = movie.description;
@@ -25,10 +25,42 @@ function Row({ title, movies, isLargeRow }) {
     history.push(`/show/${trailer.id}`);
   }
 
+  const handleSlider = (e,click=false) => {
+    e.persist();
+    let slide = e.target.closest('.cards');
+    slide.scrollBy(1000,0);
+    if(click){
+      handleSliderStop();
+      return;
+    }
+    curTimeOut = setTimeout(() => {
+      handleSlider(e);
+    },2000); 
+  }
+
+  const handleSliderBack = (e,click=false) => {
+    e.persist();
+    let slide = e.target.closest('.cards');
+    slide.scrollBy(-1000,0);
+    if(click){
+      handleSliderStop();
+      return;
+    }
+    curTimeOut = setTimeout(() => {
+      handleSliderBack(e);
+    },2000); 
+  }
+  const handleSliderStop = () => {
+    clearTimeout(curTimeOut)
+  }
+
   return (
     <div className="row">
       <h2>{title}</h2>
       < div className = "cards row_posters" >
+        <div className="slider_back" onClick={(e)=>{handleSliderBack(e,true)}} onMouseOut={handleSliderStop} onMouseOver={handleSliderBack}>
+          <FaAngleLeft/>
+        </div>
         {movies && movies.map((movie) => (
           <img
             draggable="false"
@@ -41,6 +73,9 @@ function Row({ title, movies, isLargeRow }) {
             alt={movie.name}
           />
         ))}
+        <div className="slider" onClick={(e)=>{handleSlider(e,true)}} onMouseOut={handleSliderStop} onMouseOver={handleSlider}>
+          <FaAngleRight/>
+        </div>
       </div>
       {
           window.screen.availWidth > 514 ?( trailer && <div className="trailer_window">

@@ -15,6 +15,7 @@ const characters = require('./tables/characters');
 const character_show_mapping = require('./tables/character_show_mapping');
 const reviews = require('./tables/reviews');
 const user_review = require('./tables/user_review');
+const user_ip = require('./tables/user_ip');
 
 const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
@@ -47,4 +48,5 @@ module.exports =  {
     character_show_mapping,
     reviews,
     user_review,
+    user_ip,
 }

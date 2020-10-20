@@ -16,35 +16,39 @@ import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { LoginFailure, LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
-import qs from 'qs';
 require('dotenv').config();
 
-const getUserId = async (token)=>{
-  var data = qs.stringify({
-    'token': token 
-   });
-   var config = {
-     method: 'post',
-     url: process.env.REACT_APP_BASE_URL + 'api/accessToken/getID',
-     headers: { 
-       'Content-Type': 'application/x-www-form-urlencoded'
-     },
-     data : data,
-   };
-  const response = await axios(config);
-  return response.data.id;
+const handleAccessToken = async (token)=>{
+  var config = {
+      method: 'post',
+      url: process.env.REACT_APP_BASE_URL + 'restrictedArea/enter',
+      headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer '+ token
+      }
+  };
+  var response = await axios(config);
+  if(response.data.message === "Successfully Entered"){
+      return {
+          check : true,
+          user_id : response.data.user_id,
+      };
+  }
+  return {
+      check : false,
+  };
 }
 
 const check = (token,dispatch,removeCookie)=>{
   if(token){
-    return getUserId(token).then((id)=>{
-      if(id==null){
+    return handleAccessToken(token).then((result)=>{
+      if(result.check){
+        dispatch(LoginSuccess(result.user_id));
+        return true;
+      }else{
         removeCookie('token', { path: '/' });
         dispatch(LoginFailure());
         return false;
-      }else{
-        dispatch(LoginSuccess(id));
-        return true;
       }
     }).catch(e=>{
       removeCookie('token', { path: '/' });

@@ -1,6 +1,5 @@
-const {
-    runQuery
-} = require('../db_utils');
+const { runQuery } = require('../db_utils');
+
 const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS characters (
@@ -24,13 +23,13 @@ const createTable = (con) => {
 }
 
 const find = async (id) => {
-    const sql = `SELECT * from characters where id = ${id} limit 1`;
+    const sql = `SELECT * FROM characters WHERE id = ${id} LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }
 
 const getCharactersByShows = async (show_id) => {
-    const sql = `SELECT characters.* from characters JOIN character_show_mapping as csm on csm.character_id = characters.id where csm.show_id = ${show_id}`;
+    const sql = `SELECT characters.* FROM characters JOIN character_show_mapping AS csm ON csm.character_id = characters.id WHERE csm.show_id = ${show_id}`;
     return runQuery(sql);
 }
 
