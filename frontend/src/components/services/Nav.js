@@ -107,7 +107,7 @@ function Nav() {
         </div>
     }
     const showSignOutButton = () => {
-        if(dropDown === strue){
+        if(dropDown === true){
             document.querySelector('.dropdown_content').classList.remove('slide-in-right')
             document.querySelector('.dropdown_content').className += " slide-out-right";
             setTimeout(()=>{setDropdown(!dropDown)},500);
