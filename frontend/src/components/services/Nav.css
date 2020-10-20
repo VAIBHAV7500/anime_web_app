@@ -235,6 +235,19 @@
     top: 53px;
     border-radius: 12px;
 }
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid white;
+    position: fixed;
+    top: 31px;
+    right: 25px;
+    cursor: pointer;
+}
+
 .signOut_Button{
     background: transparent;
     outline: none;
@@ -243,6 +256,7 @@
     height: 4vh;
     color:white;
 }
+
 .show_block{
     display: block;
 }

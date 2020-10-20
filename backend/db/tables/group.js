@@ -1,6 +1,5 @@
-const {
-    runQuery
-} = require('../db_utils');
+const { runQuery } = require('../db_utils');
+
 const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS show_group(
@@ -21,7 +20,7 @@ const createTable = (con) => {
 }
 
 const find = async (id) => {
-    const sql = `SELECT * from show_group where id = ${id} limit 1`;
+    const sql = `SELECT * FROM show_group WHERE id = ${id} LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }

@@ -41,9 +41,14 @@ const Login = (props)=>{
         var response = await axios(config);
         if(response.data.message === "Successfully Entered"){
             history.push('/');
-            return true;
+            return {
+                check : true,
+                user_id : response.data.user_id,
+            };
         }
-        return false;
+        return {
+            check : false,
+        };
     }
     const stopLoader = ()=>{
         setState(prevState => ({
@@ -89,34 +94,19 @@ const Login = (props)=>{
         });
         if(response){
             const status = await handleAccessToken(response.data.access_token);
-            if(!status){
+            if(!status.check){
                 setState(prevState=>({
                     ...prevState,
                     errorShow : true
                 }));
             }else{
-                const userId = await getUser(state.email);
+                const userId = status.user_id;
                 stopLoader();
                 setCookie('token', response.data.access_token , { path: '/' });
                 dispatch(LoginSuccess(userId));
             }
         }
         stopLoader();
-    }
-    const getUser = async (email)=>{
-        var data = qs.stringify({
-            'email': email 
-        });
-        var config = {
-            method: 'post',
-            url: process.env.REACT_APP_BASE_URL +'api/user/getID',
-            headers: { 
-            'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data : data,
-        };
-        const response = await axios(config)
-        return response.data.id;
     }
 
     const handleChange = (e)=>{

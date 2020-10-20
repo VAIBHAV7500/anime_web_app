@@ -16,7 +16,6 @@ const grantTypeAllowed = async (clientID, grantType, callback) => {
 
 const getUser = async (email, password, callback) => {
     result = await db.user.find_by_email(email).catch(e=>{callback(null,null); return;});
-    console.log(result);
     callback(null,result ? result.password == password ? result : null :null);
 }
 
@@ -33,13 +32,17 @@ const saveAccessToken = async (accessToken, clientID, expires, user, callback) =
 
 const getAccessToken = async (bearerToken, callback) => {
     result = await db.access_tokens.findAccessToken(bearerToken).catch(e=>{callback(true,null);return;});
-    const accessToken = {
-        user: {
-        id: result.user_id,
-        },
-        expires: null,
+    if(result){
+        const accessToken = {
+            user: {
+                id: result.user_id,
+            },
+            expires: null,
+        }
+        callback(result.user_id == null ? true : false, result.user_id == null ? null : accessToken);
+    }else{
+        callback(true,null);
     }
-    callback(result.user_id == null ? true : false, result.user_id == null ? null : accessToken);
 }
 
 module.exports = {
