@@ -36,7 +36,7 @@ function Nav() {
     }, []);
     
 
-    useEffect(()=>{
+    useEffect(() => {
         if(search === true){
             document.querySelector(".search-input").focus();
             document.body.style.overflow="hidden";
@@ -106,16 +106,16 @@ function Nav() {
            </div>
         </div>
     }
-    const showSignOutButton = ()=>{
-        if(dropDown===true){
+    const showSignOutButton = () => {
+        if(dropDown === strue){
             document.querySelector('.dropdown_content').classList.remove('slide-in-right')
-            document.querySelector('.dropdown_content').className+=" slide-out-right";
+            document.querySelector('.dropdown_content').className += " slide-out-right";
             setTimeout(()=>{setDropdown(!dropDown)},500);
         }else{
             setDropdown(!dropDown);
         }
     };
-    const logout = ()=>{
+    const logout = () => {
         removeCookie('token', { path: '/' });
         dispatch(LoginFailure());
     }

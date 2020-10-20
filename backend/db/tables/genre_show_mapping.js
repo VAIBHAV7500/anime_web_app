@@ -1,6 +1,5 @@
-const {
-    runQuery
-} = require('../db_utils');
+const { runQuery } = require('../db_utils');
+
 const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS genre_show_mapping (
@@ -22,13 +21,13 @@ const createTable = (con) => {
 }
 
 const findShowsByGenre = async (genre_id) => {
-    const sql = `SELECT * from genre_show_mapping where genre_id = ${genre_id}`;
+    const sql = `SELECT * FROM genre_show_mapping WHERE genre_id = ${genre_id}`;
     const result = await runQuery(sql);
     return result;
 }
 
 const findGenreByShows = async (show_id) => {
-    const sql = `SELECT * from genre_show_mapping where show_id = ${show_id}`;
+    const sql = `SELECT * FROM genre_show_mapping WHERE show_id = ${show_id}`;
     const result = await runQuery(sql);
     return result;
 }

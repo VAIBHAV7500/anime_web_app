@@ -32,7 +32,7 @@ const createTable = (con) => {
 }
 
 const find = async (id) => {
-    const sql = `SELECT * from videos where id = ${id} limit 1`;
+    const sql = `SELECT * FROM videos WHERE id = ${id} LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }
@@ -44,7 +44,7 @@ const create = async (body) => {
 
 const getShows = async (id, from, to) => {
     from = from || 1;
-    let sql = `SELECT * from videos where show_id = ${id} and episode_number >= ${from}`;
+    let sql = `SELECT * FROM videos WHERE show_id = ${id} AND episode_number >= ${from}`;
     sql += (to !== undefined) ? ` and episode_number <= ${to}` : "";
     sql += ` order by episode_number asc`;
     console.log(sql);
@@ -53,7 +53,7 @@ const getShows = async (id, from, to) => {
 }
 
 const findByEpisodeName = async (name,show_id)=>{
-    const sql = `SELECT id from videos where name="${name}" and show_id=${show_id} limit 1`;
+    const sql = `SELECT id FROM videos WHERE name="${name}" AND show_id=${show_id} LIMIT 1`;
     console.log(sql);
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;

@@ -1,6 +1,5 @@
-const {
-    runQuery
-} = require('../db_utils');
+const { runQuery } = require('../db_utils');
+
 const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS user_ip (
@@ -28,14 +27,14 @@ const create = async (body) => {
 }
 
 const findByUserId = async (userId) => {
-    const sql = `SELECT ip from user_ip where user_id = "${userId}"`;
+    const sql = `SELECT ip FROM user_ip WHERE user_id = "${userId}"`;
     const result = await runQuery(sql);
     return result.length ? result : undefined;
 }
 
 const deleteIp = async (ip,userId) => {
-    const sql = `delete from user_ip where ip = "${ip}" and user_id=${userId}`;
-    const result = await runQuery(sql);
+    const sql = `DELETE FROM user_ip WHERE ip = "${ip}" AND user_id=${userId}`;
+    await runQuery(sql);
 }
  
 module.exports = {

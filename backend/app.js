@@ -7,7 +7,6 @@ var helmet = require('helmet');
 var db = require('./db');
 var { updateList } = require('./lib/search');
 const oAuth2Server = require('node-oauth2-server')
-require('dotenv').config();
 var oAuthModel = require('./services/accessTokenModel');
 var app = express();
 app.oauth = oAuth2Server({
@@ -15,10 +14,8 @@ app.oauth = oAuth2Server({
   grants: ['password'],
   debug: true
 })
-var {
-  anyError,
-  errorHandler,
-}  = require('./services/middleware');
+var { anyError, errorHandler, }  = require('./services/middleware');
+require('dotenv').config();
 
 /* -------------------------------------------------------------------------- */
 /*                          Routers Declaration Start                         */

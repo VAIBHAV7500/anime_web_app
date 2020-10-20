@@ -25,7 +25,7 @@ const createTable = (con) => {
 }
 
 const findAccessToken = async (accessToken) => {
-    const sql = `SELECT user_id from access_tokens where access_token = '${accessToken}' limit 1`;
+    const sql = `SELECT user_id FROM access_tokens WEHRE access_token = '${accessToken}' LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }

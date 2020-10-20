@@ -1,6 +1,4 @@
-const {
-    runQuery
-} = require('../db_utils');
+const { runQuery } = require('../db_utils');
 
 const createTable = (con) => {
     const sql = `

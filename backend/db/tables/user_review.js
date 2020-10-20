@@ -1,6 +1,5 @@
-const {
-    runQuery
-} = require('../db_utils');
+const { runQuery } = require('../db_utils');
+
 const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS user_review (
@@ -29,12 +28,12 @@ const create = async (body) => {
 }
 
 const deleteRecord = async (id, user_id) => {
-    const sql = `DELETE from user_review where review_id = ${id} and user_id = ${user_id}`;
+    const sql = `DELETE FROM user_review WHERE review_id = ${id} AND user_id = ${user_id}`;
     return runQuery(sql);
 }
 
 const findReviewByUser = (ids, user_id) => {
-    const sql = `SELECT review_id from user_review where review_id in (${ids.join(',')}) and user_id = ${user_id}`;
+    const sql = `SELECT review_id FROM user_review WHERE review_id IN (${ids.join(',')}) AND user_id = ${user_id}`;
     return runQuery(sql);
 }
 

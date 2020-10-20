@@ -9,7 +9,7 @@ function Row({ title, movies, isLargeRow }) {
   const [trailer, setTrailer] = useState("");
   const history = useHistory();
   let keyId = 1;
-  let curTimeout;
+  let curTimeOut;
   const handleClick = (movie) => {
       movie.rating = Math.round(((Math.random() * (10 - 8 + 1)) + 8) * 9) / 10;
       let description = movie.description;
@@ -25,7 +25,7 @@ function Row({ title, movies, isLargeRow }) {
     history.push(`/show/${trailer.id}`);
   }
 
-  const handleSlider = (e,click=false)=>{
+  const handleSlider = (e,click=false) => {
     e.persist();
     let slide = e.target.closest('.cards');
     slide.scrollBy(1000,0);
@@ -33,12 +33,12 @@ function Row({ title, movies, isLargeRow }) {
       handleSliderStop();
       return;
     }
-    curTimeout = setTimeout(()=>{
+    curTimeOut = setTimeout(() => {
       handleSlider(e);
     },2000); 
   }
 
-  const handleSliderBack = (e,click=false)=>{
+  const handleSliderBack = (e,click=false) => {
     e.persist();
     let slide = e.target.closest('.cards');
     slide.scrollBy(-1000,0);
@@ -46,12 +46,12 @@ function Row({ title, movies, isLargeRow }) {
       handleSliderStop();
       return;
     }
-    curTimeout = setTimeout(()=>{
+    curTimeOut = setTimeout(() => {
       handleSliderBack(e);
     },2000); 
   }
-  const handleSliderStop = ()=>{
-    clearTimeout(curTimeout)
+  const handleSliderStop = () => {
+    clearTimeout(curTimeOut)
   }
 
   return (

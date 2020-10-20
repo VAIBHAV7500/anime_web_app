@@ -1,6 +1,5 @@
-const {
-    runQuery
-} = require('../db_utils');
+const { runQuery } = require('../db_utils');
+
 const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS genre (
@@ -21,19 +20,19 @@ const createTable = (con) => {
 }
 
 const find = async (id) => {
-    const sql = `SELECT * from genre where id = ${id} limit 1`;
+    const sql = `SELECT * FROM genre WHERE id = ${id} LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }
 
 const bulkFindCategory = async (id) => {
-    const sql = `SELECT category from genre inner join genre_show_mapping as gsm on genre.id = gsm.genre_id where show_id = ${id}`;
+    const sql = `SELECT category FROM genre inner JOIN genre_show_mapping AS gsm ON genre.id = gsm.genre_id WHERE show_id = ${id}`;
     const result = await runQuery(sql);
     return result.map(x => x.category);
 }
 
 const findByGenre = async (genre) => {
-    const sql = `SELECT id from genre where category like '${genre}' limit 1`;
+    const sql = `SELECT id FROM genre WHERE category LIKE '${genre}' LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }
