@@ -147,14 +147,16 @@
     display: block;
     position: relative;
     margin-top: 50px;
-    margin-left: 138px;
-    width: 100%;
-    overflow-y: initial !important
+    width: 109%;
+    margin-left: 7%;
+    overflow-y: initial !important;
+    height : 100%
 }
 
 .suggestion-dialog{
     height: 540px;
     overflow-y: auto;
+    margin-right: 6%;
 }
   
 .suggestion-card{
@@ -383,31 +385,242 @@
 /*                              Responsive media                              */
 /* -------------------------------------------------------------------------- */
 
+@media(max-width:1519px) {
+    .suggestions{
+        margin-left: 6%;
+    }  
+    .suggestion-dialog{
+        margin-right: 5.5%;
+    } 
+}
+@media(max-width:1494px) {
+    .suggestions{
+        margin-left: 5%;
+    }  
+    .suggestion-dialog{
+        margin-right: 4.5%;
+    } 
+}
+@media(max-width:1467px) {
+    .suggestions{
+        margin-left: 3%;
+    } 
+    .suggestion-dialog{
+        margin-right: 2.5%;
+    }  
+}
+@media(max-width:1447px) {
+    .suggestions{
+        margin-left: 10%;
+        width: 96%;
+    }  
+    .suggestion-dialog{
+        margin-right: -3%;
+    }  
+}
+@media(max-width:1413px) {
+    .suggestions{
+        margin-left: 9%;
+    }  
+    .suggestion-dialog{
+        margin-right: -4%;
+    }  
+}
+@media(max-width:1368px) {
+    .suggestions{
+        margin-left: 7%;
+    }  
+    .suggestion-dialog{
+        margin-right: -6%;
+    }  
+}
+
+@media(max-width:1309px) {
+    .suggestions{
+        margin-left: 4%;
+    }  
+    .suggestion-dialog{
+        margin-right: -9%;
+    }  
+}
+
+@media(max-width:1262px) {
+    .suggestions{
+        margin-left: 2%;
+    }  
+    .suggestion-dialog{
+        margin-right: -11%;
+    }  
+}
+
+@media(max-width:1218px) {
+    .suggestions{
+        margin-left: 8%;
+    }  
+    .suggestion-dialog{
+        margin-right: -5%;
+    }  
+}
+
+@media(max-width:1152px) {
+    .suggestions{
+        margin-left: 6%;
+    }  
+    .suggestion-dialog{
+        margin-right: -7%;
+    }  
+}
+
+@media(max-width:1114px) {
+    .suggestions{
+        margin-left: 4%;
+    }  
+    .suggestion-dialog{
+        margin-right: -9%;
+    }  
+}
+
+@media(max-width:1073px) {
+    .suggestions{
+        margin-left: 2%;
+    }  
+    .suggestion-dialog{
+        margin-right: -11%;
+    }  
+}
+
+@media(max-width:1073px) {
+    .search-box{
+        margin-left: 23%;
+    }
+    .suggestions{
+        margin-left: 10%;
+    }  
+    .suggestion-dialog{
+        margin-right: -2%;
+    }  
+}
+
 @media(max-width:994px) {
     .filter-svg{
         font-size: 42px;
     }
 }
 
+@media(max-width:983px) {
+    .suggestions{
+        margin-left: 7%;
+    }  
+    .suggestion-dialog{
+        margin-right: -5%;
+    }  
+}
+
+@media(max-width:938px) {
+    .suggestions{
+        margin-left: 4%;
+    }  
+    .suggestion-dialog{
+        margin-right: -8%;
+    }  
+}
+
+@media(max-width:900px) {
+    .suggestions{
+        margin-left: 2%;
+    }  
+    .suggestion-dialog{
+        margin-right: -10%;
+    }  
+}
+
+@media(max-width:879px) {
+    .suggestions{
+        margin-left: 12%;
+    }  
+    .suggestion-dialog{
+        margin-right: 0%;
+    }  
+}
+
+
 @media(max-width:840px) {
     .filter-svg{
         font-size: 40px;
     }
 }
+
 @media(max-width:840px){
     .filter-svg{
         margin-top: 0px;
         font-size: 50px;
     }
 }
+
+
+@media(max-width:829px) {
+    .suggestions{
+        margin-left: 9%;
+    }  
+    .suggestion-dialog{
+        margin-right: -3%;
+    }  
+}
+
+@media(max-width:768px) {
+    .suggestions{
+        margin-left: 5%;
+    }  
+    .suggestion-dialog{
+        margin-right: -7%;
+    }  
+}
+
+@media(max-width:734px) {
+    .suggestions{
+        margin-left: 2%;
+    }  
+    .suggestion-dialog{
+        margin-right: -10%;
+    }  
+}
+
+@media(max-width:704px) {
+    .suggestions{
+        margin-left: 15%;
+    }  
+    .suggestion-dialog{
+        margin-right: 4%;
+    }  
+}
+
+@media(max-width:630px) {
+    .suggestions{
+        margin-left: 9%;
+    }  
+    .suggestion-dialog{
+        margin-right: -2%;
+    }  
+}
+
 @media(max-width:590px) {
     .filter-svg{
         position: absolute;
         font-size: 20px;
-        left: 78%;
+        left: 89%;
         margin-top: 15px;
     }
 }
+
+@media(max-width:536px) {
+    .suggestions{
+        margin-left: 5%;
+    }  
+    .suggestion-dialog{
+        margin-right: -6%;
+    }  
+}
+
 @media(max-width:500px) {
     .filter-svg{
         left: 90%;
@@ -421,14 +634,66 @@
     }
     .search-input{
         margin-left: 8%;
-    }
+    } 
+    
 }
-@media(width:360px){
-    .search-box{
-        width: 100%;    
-    }
-    .filter-svg{
-        left: 90%;
-    }
 
+
+@media(max-width:480px){
+    .suggestions{
+        margin-left: 11%;
+    }  
+    .suggestion-dialog{
+        margin-right: 2%;
+    } 
+}
+
+
+@media(max-width:418px){
+    .suggestions{
+        margin-left: 7%;
+    }  
+    .suggestion-dialog{
+        margin-right: -2%;
+    } 
+}
+
+@media(max-width:384px){
+    .suggestions{
+        margin-left: 3%;
+    }  
+    .suggestion-dialog{
+        margin-right: -5%;
+    } 
+}
+
+@media(max-width:372px){
+    .suggestion-image{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .suggestions{
+        margin-left: 13%;
+    }  
+    .suggestion-dialog{
+        margin-right: 5%;
+    } 
+}
+
+@media(max-width:327px){
+    .suggestions{
+        margin-left: 8%;
+    }  
+    .suggestion-dialog{
+        margin-right: 1%;
+    } 
+}
+
+@media(max-width:302px){
+    .suggestions{
+        margin-left: 4%;
+    }  
+    .suggestion-dialog{
+        margin-right: -2%;
+    } 
 }
