@@ -2,9 +2,11 @@
     margin-top: 117px;
     margin-left: 5%;
     width: 77%;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(30px);
     text-transform: uppercase;
     overflow-y: initial !important;
+    background-color: rgba(74, 9, 112, 0.035);
+    border-radius: 20px;
 }
 
 .container{
@@ -50,7 +52,7 @@
 
 .filter_button_active{
     border: none;
-    background-color:#4f108a ;
+    background-color:#370b61 ;
 }
 .left_filter_column{
     width: 500px;

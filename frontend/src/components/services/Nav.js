@@ -40,6 +40,7 @@ function Nav() {
         if(search === true){
             document.querySelector(".search-input").focus();
             document.body.style.overflow="hidden";
+            setFilter(false);
         }else{
             document.body.style.overflow="auto";
         }
