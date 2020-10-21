@@ -4,8 +4,8 @@ import 'plyr-react/dist/plyr.css';
 import styles from './plyrComp.module.css';
 
 function PlyrComp() {
+    let el;
     const player = new Plyr('#player');
-    console.log(player);
     player.source = {
         type: 'video',
         title: 'Some Title',
@@ -22,23 +22,79 @@ function PlyrComp() {
         ],
     }
 
-    player.on('progress', (event)=>{
-        //console.log(event);
-        console.log(player.currentTime);
-    });
+    const createButton = (text,id,styleClasses=[],onClick,reverse=false) => {
+        var btn = document.createElement("BUTTON");   
+        btn.innerHTML = text; 
+        btn.id = id;
+        btn.classList.add(styles.player_btn);
+        styleClasses.forEach(element => {
+            btn.classList.add(element);
+        });
+        if(reverse){
+            btn.classList.add(styles.slide_in_left);
+        }else{
+            btn.classList.add(styles.slide_in_right);
+        }
+        btn.onclick = onClick;
+        el.insertAdjacentElement('afterend',btn);
+    }
 
+    const removeButton = (id) => {
+        let el = document.querySelector('#' + id);
+        el.remove();
+    }
+
+    const createPlayerButtons = () => {
+        createButton("Skip Intro","skip_intro",[styles.click_me_player_btn],() => {
+            console.log("clicked");
+        });
+        createButton("Back","back",[styles.back_player_btn],()=>{
+            removeButton("skip_intro");
+        },true);
+    }
+
+    player.on('controlsshown',()=>{
+        let PlyrButtonArray = document.querySelectorAll('.' + styles.player_btn);
+        PlyrButtonArray.forEach(btn => {
+            if(!btn.classList.contains(styles.player_btn_show)){
+                btn.classList.add(styles.player_btn_show);
+            }
+        });
+    })
+    
+    player.on('controlshidden',()=>{
+        let PlyrButtonArray = document.querySelectorAll('.' + styles.player_btn);
+        PlyrButtonArray.forEach(btn =>{
+            if(btn.classList.contains(styles.slide_in_left) && !btn.classList.contains(styles.slide_out_left)){
+                btn.classList.add(styles.slide_out_left);
+            }else if(btn.classList.contains(styles.slide_in_right) && !btn.classList.contains(styles.slide_out_right)){
+                btn.classList.add(styles.slide_out_right);
+            }
+        });
+        setTimeout(() => {
+            PlyrButtonArray.forEach(btn => {
+                if(btn.classList.contains(styles.slide_out_left)){
+                    btn.classList.remove(styles.slide_out_left);
+                }else if(btn.classList.contains(styles.slide_out_right)){
+                    btn.classList.remove(styles.slide_out_right);
+                }
+                if(btn.classList.contains(styles.player_btn_show)){
+                    btn.classList.remove(styles.player_btn_show);
+                }
+            });
+        },50);
+    })
+    
     useEffect(() => {
-
-        const elements = document.getElementsByClassName('plyr');
-        if(elements[0]?.innerHTML){
-           // elements[0].innerHTML = <button>SKIP VIDEO</button> + elements[0].innerHTML;
-           //elements[0].insertAdjacentHTML('beforeend', `<button style="transform: translate(600px, -50px);">SKIP VIDEO</button>`);
-        }
-
-        return () => {
-            player.destroy();
-        }
-    });
+        var findEl = setInterval(() => {
+            el = document.querySelector('.plyr__captions');
+            if(el){
+                clearInterval(findEl);
+                createPlayerButtons();
+            }
+        },200);
+        
+    },[]);
 
     return (
         <div className={styles.player}>
