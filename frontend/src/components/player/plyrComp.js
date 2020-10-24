@@ -2,10 +2,14 @@ import React, {useEffect, useState} from 'react';
 import Plyr from 'plyr';
 import 'plyr-react/dist/plyr.css';
 import styles from './plyrComp.module.css';
+import {useHistory} from "react-router-dom";
+
 
 function PlyrComp() {
     let el;
     const player = new Plyr('#player');
+    const history = useHistory();
+    //const [player, setPlayer] = useState(new player('#player'));
     player.source = {
         type: 'video',
         title: 'Some Title',
@@ -44,13 +48,18 @@ function PlyrComp() {
         el.remove();
     }
 
+    const skipIntro = () => {
+        console.log(player);
+        player.currentTime = 10;
+    }
+
+    const backButton = () => {
+        history.goBack();
+    }
+
     const createPlayerButtons = () => {
-        createButton("Skip Intro","skip_intro",[styles.click_me_player_btn],() => {
-            console.log("clicked");
-        });
-        createButton("Back","back",[styles.back_player_btn],()=>{
-            removeButton("skip_intro");
-        },true);
+        createButton("Skip Intro","skip_intro",[styles.click_me_player_btn],skipIntro);
+        createButton("Back","back",[styles.back_player_btn],backButton,true);
     }
 
     player.on('controlsshown',()=>{
@@ -95,6 +104,12 @@ function PlyrComp() {
         },200);
         
     },[]);
+
+    player.on('progress', event => {
+        const instance = event.detail.plyr;
+        console.log(instance);
+        //player.fullscreen.enter();
+      });
 
     return (
         <div className={styles.player}>

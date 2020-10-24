@@ -12,7 +12,7 @@
 .player_btn {
     display: none;
     position: absolute;
-    background-color: rgb(107, 23, 146);
+    background-color: rgba(107, 23, 146,0.8);
     color: white;
     font-weight: bolder !important;
     outline: none;
@@ -23,7 +23,7 @@
 }
 
 .player_btn:hover {
-    background-color:white;
+    background-color:rgba(255,255,255,0.8);
     color:  rgb(107, 23, 146);
     border: 2px solid rgb(107, 23, 146);
 }
@@ -44,9 +44,10 @@
 
 .back_player_btn{
     top: 10px;
-    left: 10px;
+    left: 15px;
     border: none;
     background-color: transparent;
+    border: 2px solid white;
 }
 
 

@@ -26,9 +26,12 @@ const findShowsByGenre = async (genre_id) => {
     return result;
 }
 
-const findGenreByShows = async (show_id) => {
-    const sql = `SELECT * FROM genre_show_mapping WHERE show_id = ${show_id}`;
-    const result = await runQuery(sql);
+const findGenreByShows = async (show_ids) => {
+    let result = [];
+    if(show_ids.length){
+        const sql = `SELECT gsm.show_id, genre.category FROM genre_show_mapping as gsm INNER JOIN genre ON genre.id = gsm.genre_id WHERE show_id in (${show_ids.join(',')})`;
+        result = await runQuery(sql);
+    }
     return result;
 }
 

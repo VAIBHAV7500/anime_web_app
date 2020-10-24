@@ -62,6 +62,7 @@ export class showRoom extends Component {
         });
         await Promise.all(promiseArray).catch((err) => {
            // redirect in this case
+           console.log(err);
         })
         this.state.pageLoader = false;
         this.state.rows = this.rows;

@@ -177,6 +177,14 @@ router.get('/genre',async (req,res,next)=>{
             stack: err.stack
         });
     });
+    const show_ids = result.map(x => x.id);
+    console.log(show_ids);
+    const genres = await db.genre_show_mapping.findGenreByShows(show_ids);
+    result.map((show)=>{
+        const genre = genres.filter(x => x.show_id === show.id).map(x => x.category);
+        show['genres'] = genre;
+        return show;
+    });
     res.json(result);
 });
 

@@ -25,45 +25,25 @@ function Row({ title, movies, isLargeRow }) {
     history.push(`/show/${trailer.id}`);
   }
 
-  const handleSlider = (e,click=false) => {
-    e.persist();
+  const handleSlider = (e) => {
     let slide = e.target.closest('.cards');
-    slide.scrollBy(1000,0);
-    if(click){
-      handleSliderStop();
-      return;
-    }
-    curTimeOut = setTimeout(() => {
-      handleSlider(e);
-    },2000); 
+    slide.scrollBy(1000,0); 
   }
 
-  const handleSliderBack = (e,click=false) => {
-    e.persist();
+  const handleSliderBack = (e) => {
     let slide = e.target.closest('.cards');
     slide.scrollBy(-1000,0);
-    if(click){
-      handleSliderStop();
-      return;
-    }
-    curTimeOut = setTimeout(() => {
-      handleSliderBack(e);
-    },2000); 
-  }
-  const handleSliderStop = () => {
-    clearTimeout(curTimeOut)
   }
 
   return (
     <div className="row">
       <h2>{title}</h2>
       < div className = "cards row_posters" >
-        <div className="slider_back" onClick={(e)=>{handleSliderBack(e,true)}} onMouseOut={handleSliderStop} onMouseOver={handleSliderBack}>
+        <div className="slider slider_back" onClick={handleSliderBack}>
           <FaAngleLeft/>
         </div>
         {movies && movies.map((movie) => (
           <img
-            
             draggable="false"
             key={keyId++}
             onClick={() => handleClick(movie)}
@@ -74,7 +54,7 @@ function Row({ title, movies, isLargeRow }) {
             alt={movie.name}
           />
         ))}
-        <div className="slider" onClick={(e)=>{handleSlider(e,true)}} onMouseOut={handleSliderStop} onMouseOver={handleSlider}>
+        <div className="slider slider_front" onClick={handleSlider}>
           <FaAngleRight/>
         </div>
       </div>
@@ -115,7 +95,7 @@ function Row({ title, movies, isLargeRow }) {
                         Genre: 
                     </td>
                     <td className="genre">
-                        {trailer.genre || 'Comedy, Adventure, Mystery, Thriller'}
+                        {trailer.genres?.join(', ') || 'Comedy, Adventure, Mystery, Thriller'}
                     </td>
                   </tr>
                   <tr className="trailer_row">

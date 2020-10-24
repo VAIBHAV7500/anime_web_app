@@ -4,6 +4,11 @@
     color:white;
     min-height: 300px;
     width: 100%;
+    z-index: 2;
+}
+
+.row:hover{
+    z-index: 0;
 }
 
 .row_posters{
@@ -13,8 +18,8 @@
     padding: 20px;
     left:0;
     scroll-behavior: smooth;
+    z-index: inherit;
 }
-
 
 .row_posters::-webkit-scrollbar {
     display: none;
@@ -24,14 +29,14 @@
     display: block;
     width: 100%;
     min-width: 210px;
-    margin-right: 55px;
+    margin-right: 25px;
     max-width: 0;
     transition: transform 450ms;
     cursor: pointer;
-    z-index: 1;
     background-color: rgb(29, 29, 29);
     padding: 0px;
     max-height: 300px;
+    z-index: inherit;
 }
 
 .row_poster:hover{
@@ -42,31 +47,37 @@
         rgba(37,37,37,0.61),
         #111
     );
-    z-index: 2;
     box-shadow: -12px -7px 20px 0 rgba(38, 36, 39, 0.4),
             10px 8px 12px 0 rgba(136, 81, 238, 0.6);
 }
 
 .slider,.slider_back{
     position: absolute;
-    z-index: 3;
+    z-index: 1;
     color: transparent;
     background-color: transparent;
     padding: 110px 11px;
     font-size: 60px;
     transition: 0.3s;
 }
-.slider{
+
+.slider_front{
     right: 0;
 }
+
 .slider_back{
     left: 0;
 }
-.slider_back:hover , .slider:hover{
+
+.slider{
     color: white;
     background-color: rgba(17, 17, 17, 0.651);
 }
 
+.slider:hover{
+    background-color: rgba(0, 0, 0,0.8);
+    cursor: pointer;
+}
 
 .trailer_window{
     overflow: hidden;

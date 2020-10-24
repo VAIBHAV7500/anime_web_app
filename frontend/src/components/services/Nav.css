@@ -154,7 +154,7 @@
 }
 
 .suggestion-dialog{
-    height: 540px;
+    height: 70vh;
     overflow-y: auto;
     margin-right: 6%;
 }
