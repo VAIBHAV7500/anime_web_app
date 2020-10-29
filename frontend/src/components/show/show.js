@@ -8,10 +8,11 @@ import styles from './show.module.css';
 import Episodes from './episodes';
 import Characters from './characters';
 import Review from './review';
+import Similar from './similar';
 
 export class show extends Component {
 
-    navItems = ['Episodes','Characters','Review','Stats', 'Crew', "Similar Shows"];
+    navItems = ['Episodes','Characters','Review', "Similar Shows & Movies"];
 
     fetchData = async () => {
         const showId = this.props.match.params.id
@@ -38,11 +39,13 @@ export class show extends Component {
         };
         this.setState(states);
     }
-    async componentDidMount(){
+    async componentDidMount(){  
+        window.scrollTo(0, 0);
         this.fetchData();
     }
 
     async componentDidUpdate(prevProps) {
+        window.scrollTo(0, 0);
         if (this.props.match.params.id !== prevProps.match.params.id) {
              this.fetchData();
         }
@@ -73,6 +76,8 @@ export class show extends Component {
                 { this.state?.nav_id === 0 ? <Episodes show_id={this.props.match.params.id} /> : ""}
                 { this.state?.nav_id === 1 ? <Characters show_id={this.props.match.params.id} /> : ""}
                 { this.state?.nav_id === 2 ? <Review show_id={this.props.match.params.id} /> : ""}
+                { this.state?.nav_id === 3 ? <Similar show_id={this.props.match.params.id} /> : ""}
+
                 <div className={styles.episodes}>
                     
                 </div>

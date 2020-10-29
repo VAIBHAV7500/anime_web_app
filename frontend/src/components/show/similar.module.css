@@ -1,0 +1,49 @@
+.similar{
+    min-height: 500px;
+    width: 100%;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.show{
+    margin: 10px;
+    float: left;
+    width: 289px;
+    background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
+    align-content: center;
+    cursor: pointer;
+}
+
+.neumorphism {
+    padding: 15px 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
+        7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    color: rgb(187, 185, 185);
+}
+
+.wrap_description{
+    overflow: auto;
+    height: 385px;
+    overflow: hidden;
+}
+
+.show_image{
+    max-width: 285px;
+    min-width: 285px;
+    min-height: 386px;
+    max-height: 386px;
+    align-content: center;
+    background-color: rgb(22, 22, 22);
+
+}
+
+.name{
+    text-align: center;
+    color: #f0b922;
+    font-weight: bold;
+    margin-top: 10px;
+}

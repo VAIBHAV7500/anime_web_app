@@ -3,6 +3,7 @@ var router = express.Router();
 const keys = require('../../config/keys.json');
 const formidable = require("formidable");
 const db = require('../../db/index');
+const {search} = require('../../lib/search');
 
 router.post('/create',async (req,res,next)=>{
     const form = new formidable.IncomingForm();
@@ -72,6 +73,29 @@ router.get('/create-group', async (req,res,next)=>{
             });
         });
     });
+});
+
+router.get('/similar', async (req,res,next) => {
+    const id = req.query.id;
+    if(!id){
+        res.status(401).json({
+            message: "No Show Id"
+        });
+    }else{
+        const genres = await db.genre.bulkFindCategory(id);
+        const body = {
+            genre_arr: genres
+        };
+        let result = search(body,true).map((x)=>{
+            return {
+                id: x.item.id,
+                name: x.item.name,
+                original_name: x.item.original_name,
+                poster_portrait_url: x.item.poster_portrait_url
+            }
+        }).splice(0,10);
+        res.json(result);
+    }
 });
 
 router.post('/insert-show', async (req, res, next)=>{

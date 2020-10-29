@@ -33,6 +33,7 @@
     height: 91.5%;
     overflow: auto;
     border-radius: 17px;
+    font-size: 14px;
 }
 .description::-webkit-scrollbar-track {
     margin-top: 10px;
@@ -43,9 +44,6 @@
 .neumorphism {
     padding: 15px 10px;
     border: none;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 2px;
     box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
         7px 7px 20px 0 rgba(0, 0, 0, 0.2);
     color: rgb(187, 185, 185);

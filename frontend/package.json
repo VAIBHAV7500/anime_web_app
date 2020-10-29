@@ -11,6 +11,7 @@
     "bootstrap": "^4.5.2",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
+    "hls.js": "^0.14.16",
     "movie-trailer": "^2.0.6",
     "plyr-react": "^3.0.5",
     "query-string": "^6.13.2",

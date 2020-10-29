@@ -37,7 +37,7 @@ const FilterOptions = {
     keys: [
         "name",
         "original_name",
-        "genre_id",
+        "genres",
         "episode_number",
         "type",
         "age_category"
@@ -49,7 +49,10 @@ let fuse = new Fuse(list, options);
 let filterList = new Fuse(list, FilterOptions);
 
 const updateList = async () => {
-    list = await db.shows.getShowsData();
+    const shows = await db.shows.getShowsData();
+    if(shows){
+        list = await db.genre.attachGenres(shows);
+    }
     fuse = new Fuse(list, options);
     filterList = new Fuse(list, FilterOptions);
 }
@@ -61,7 +64,7 @@ const generatePattern = (data) => {
         andArr.push({
             $or: data["genre_arr"].map((x) => {
                 return {
-                    genre_id: `,${x},`
+                    genres: x
                 };
             })
         });

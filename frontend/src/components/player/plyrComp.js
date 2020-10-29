@@ -3,27 +3,67 @@ import Plyr from 'plyr';
 import 'plyr-react/dist/plyr.css';
 import styles from './plyrComp.module.css';
 import {useHistory} from "react-router-dom";
+import Hls from "hls.js";
 
 
 function PlyrComp() {
     let el;
-    const player = new Plyr('#player');
+    //const player = new Plyr('#player');
     const history = useHistory();
     //const [player, setPlayer] = useState(new player('#player'));
+    // player.source = {
+    //     type: 'video',
+    //     title: 'Some Title',
+    //     sources: [{
+    //             src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    //             type: 'video/mp4',
+    //             size: 720,
+    //         },
+    //         {
+    //             src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+    //             type: 'video/mp4',
+    //             size: 1080,
+    //         },
+    //     ],
+    // }
+
+    const source = 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8';
+	const video = document.querySelector('video');
+	
+	// For more options see: https://github.com/sampotts/plyr/#options
+	// captions.update is required for captions to work with hls.js
+	const player = new Plyr('#player', {
+        controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
+        captions: {
+            active: true,
+            update: true,
+            language: 'en'
+        },
+        quality: {
+            default: 480,
+            options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]
+        },
+        settings: ['captions', 'quality', 'speed', 'loop'],
+        autoplay: true,
+        keyboard: { focused: true, global: true }
+    });
+
     player.source = {
-        type: 'video',
-        title: 'Some Title',
-        sources: [{
-                src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                type: 'video/mp4',
-                size: 720,
-            },
-            {
-                src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-                type: 'video/mp4',
-                size: 1080,
-            },
-        ],
+        title: 'Demo Player'
+    }
+	
+	if (!Hls.isSupported()) {
+		video.src = source;
+	} else {
+        // For more Hls.js options, see https://github.com/dailymotion/hls.js
+		const hls = new Hls();
+		hls.loadSource(source);
+		hls.attachMedia(video);
+        window.hls = hls;
+        player.on('languagechange', () => {
+            // Caption support is still flaky. See: https://github.com/sampotts/plyr/issues/994
+            setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
+        });
     }
 
     const createButton = (text,id,styleClasses=[],onClick,reverse=false) => {
@@ -92,7 +132,11 @@ function PlyrComp() {
                 }
             });
         },50);
-    })
+    });
+
+    player.on('seeked', ()=>{
+        console.log('Seeked');
+    });
     
     useEffect(() => {
         var findEl = setInterval(() => {
@@ -102,8 +146,10 @@ function PlyrComp() {
                 createPlayerButtons();
             }
         },200);
-        
-    },[]);
+        return () => {
+            player.destroy();
+        }
+    });
 
     player.on('progress', event => {
         const instance = event.detail.plyr;

@@ -7,6 +7,7 @@ const {search} = require('../../lib/search');
 router.post('/suggestions', async function (req, res, next) {
     const body = req.body;
     const filter = req.query.filter ? true : false;
+    const top = req.query.top;
     let result = search(body,filter);
     const resultJson = result.map((x)=>{
         return {
@@ -15,8 +16,12 @@ router.post('/suggestions', async function (req, res, next) {
             original_name: x.item.original_name,
             poster_portrait_url: x.item.poster_portrait_url,
         }
-    })
-    res.json(resultJson);
+    });
+    if(top){
+        res.json(resultJson.slice(0,top));
+    }else{
+        res.json(resultJson);
+    }
 });
 
 

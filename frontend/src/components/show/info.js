@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './info.module.css';
 import {useHistory} from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 
 function Info({movie}) {
     const [moreSyn, setSynopsis] = useState(false);
@@ -62,8 +63,11 @@ function Info({movie}) {
                             })
                         }
                     </select> 
-                    <div className={`${styles.play_btn} ${styles.neumorphism}`}>
+                    <div className={`${styles.btn} ${styles.play_btn} ${styles.neumorphism}`}>
                         Start Watching
+                    </div>
+                    <div className={`${styles.btn} ${styles.watch_list_btn} ${styles.neumorphism}`}>
+                        <AiOutlinePlus className={styles.plus} /> Watch List
                     </div>
                 </div>    
             </div>     

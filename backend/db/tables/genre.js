@@ -46,10 +46,22 @@ const create = async (body) => {
     }
 }
 
+const attachGenres = async (shows) => {
+    const show_ids = shows.map(x => x.id).join(',');
+    const sql = `SELECT category, gsm.show_id FROM genre inner JOIN genre_show_mapping AS gsm ON genre.id = gsm.genre_id WHERE show_id in (${show_ids})`;
+    const response = await runQuery(sql);
+    shows.map((show)=>{
+        show['genres'] = response.filter(x => x.show_id === show.id).map(x => x.category);
+        return show;
+    });
+    return shows;
+}
+
 module.exports = {
     createTable,
     find,
     create,
     findByGenre,
     bulkFindCategory,
+    attachGenres
 }

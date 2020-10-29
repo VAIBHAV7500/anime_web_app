@@ -15,6 +15,7 @@ const requests = {
     fetchShowDetails: `api/shows/details`,
     characters: `/api/character`,
     reviews: `/api/review`,
+    relatedShows: `/api/shows/similar`
 }
 
 export default requests;
