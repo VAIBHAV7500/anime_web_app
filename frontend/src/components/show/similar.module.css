@@ -8,7 +8,7 @@
 .show{
     margin: 10px;
     float: left;
-    width: 289px;
+    width: 270px;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
     align-content: center;
     cursor: pointer;
@@ -32,13 +32,12 @@
 }
 
 .show_image{
-    max-width: 285px;
-    min-width: 285px;
+    max-width: 265px;
+    min-width: 265px;
     min-height: 386px;
     max-height: 386px;
-    align-content: center;
+    border-radius: 20px;
     background-color: rgb(22, 22, 22);
-
 }
 
 .name{

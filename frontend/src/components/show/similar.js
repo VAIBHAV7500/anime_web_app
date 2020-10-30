@@ -34,7 +34,7 @@ function Similar({show_id}) {
                 similar.map((show)=>{
                     return <div className={`${styles.show} ${styles.neumorphism}`} onClick={()=>{goToShow(show.id)}}>
                         <div className={styles.wrap_description}>
-                            <img src={show.poster_portrait_url} className={styles.character_image}></img>
+                            <img src={show.poster_portrait_url} className={styles.show_image}></img>
                         </div>
                         <div className={styles.name}>{show.name}</div>
                     </div>
