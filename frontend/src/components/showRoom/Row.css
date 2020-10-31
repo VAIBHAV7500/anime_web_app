@@ -20,6 +20,8 @@
     left:0;
     scroll-behavior: smooth;
     z-index: inherit;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 
 .row_posters::-webkit-scrollbar {
@@ -37,8 +39,10 @@
     background-color: rgb(29, 29, 29);
     padding: 0px;
     max-height: 300px;
+    min-height: 300px;
     z-index: inherit;
     border: 4px solid white;
+    border-radius: 10px;
 }
 
 .row_poster:hover{

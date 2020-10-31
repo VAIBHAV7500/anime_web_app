@@ -59,7 +59,7 @@ function Row({ title, movies, isLargeRow }) {
         </div>
       </div>
       {
-          window.screen.availWidth > 514 ?( trailer && <div className="trailer_window">
+          window.screen.availWidth > 514 ?( trailer && <div className="trailer_window" id="trailer_window">
           < MdClose className = "close-btn" onClick={()=>{setTrailer(undefined)}}/>
           < ReactPlayer  
             url={`${trailer.trailer_url}`} 

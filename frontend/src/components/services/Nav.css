@@ -2,9 +2,10 @@
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 30px;
     height: 30px;
-    z-index: 1;
     display: flex;
     justify-content: space-between;
     transition-timing-function: ease-in;
@@ -23,9 +24,9 @@
 
 .nav_logo {
     position: fixed;
-    left: 2%;
     top:1%;
     width: 200px;
+    height: 50px;
     margin-top: 8px;
     font-size: 30px;
     -webkit-text-stroke: 0.5px black;

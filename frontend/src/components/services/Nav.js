@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import {LoginFailure} from '../../redux/Auth/authAction';
 import { useCookies } from 'react-cookie';
+import mainLogo from './logo_transparent.png';
 
 function Nav() {
     const [show , handleShow] = useState(false);
@@ -122,9 +123,7 @@ function Nav() {
     }
     return (
         <div className={`nav ${!search && show && "nav_black"}`}>
-            <h1 className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome}>
-                    ANIMEI TV
-            </h1>
+            <img className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
             <div className="nav_rights">
                 < FaSearch className="search_icon" onClick={handleSearch} />
                 <span onClick={showSignOutButton} ><FaUser className = "nav_avatar"></FaUser><span className="arrow-down"></span></span>
