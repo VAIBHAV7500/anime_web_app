@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import './Banner.css';
+import {useHistory} from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,6 +39,11 @@ const responsive = {
 
 function Banner() {
     const [movies, setMovies] = useState([]);
+    const history = useHistory();
+
+    const goToShow = (id) => {
+      history.push(`/show/${id}`);
+    }
 
     useEffect(() => {
         async function fetchData(){
@@ -51,45 +57,37 @@ function Banner() {
         fetchData();
     }, []);
 
-    function generateBanners(){
-      const elements = [];
-      for(var i=0;i<movies.length;i++){
-            elements.push(
-              <div 
+    return (
+      <Carousel 
+      className="carousal"
+      responsive={responsive}
+      autoPlay= {true}
+      arrows = {true}
+      showDots = {false}
+      infinite = {true}
+      autoPlaySpeed={3000}
+      >
+          {movies.map((movie,i)=>{
+            return <div 
             className = "banner"
             key = {i}
+            onClick={()=>{goToShow(movie?.id)}}
             style = {
               {
                 backgroundSize: "cover",
                 backgroundImage: `url(
-                      "${movies[i]?.poster_landscape_url}"
+                      "${movie?.poster_landscape_url}"
                   )`,
                 backgroundPosition: "center center",
               }
             } >
               <div className="banner_contents">
-                <h1 className="banner_title">{movies[i]?.title || movies[i]?.name || movies[i]?.original_name}</h1>
-                <h1 className="banner_description">
-                    {"Some description" }
-                </h1>
+                <h1 className="banner_title">{movie?.title || movie?.name || movie?.original_name}</h1>
+                
               </div>
-              <div className="banner--fadeBottom" />
+              <div className="banner_fadeBottom" />
             </div>
-          );
-      }
-      return elements;
-    }
-
-    return (
-      <Carousel 
-      responsive={responsive}
-      autoPlay= {true}
-      arrows = {false}
-      showDots = {true}
-      infinite = {true}
-      autoPlaySpeed={3000}
-      >
-            {generateBanners()}
+          })}
       </Carousel>
     );
 }

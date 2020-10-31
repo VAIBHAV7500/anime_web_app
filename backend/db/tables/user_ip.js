@@ -4,7 +4,7 @@ const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS user_ip (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            ip varchar(255) UNIQUE NOT NULL,
+            ip varchar(255) NOT NULL,
             user_id BIGINT UNSIGNED NOT NULL,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
