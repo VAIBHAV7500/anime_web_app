@@ -28,7 +28,7 @@ function Profile() {
         component: null
       },
       { 
-        title : "Review",
+        title : "My Reviews",
         component: null
       }
     ];

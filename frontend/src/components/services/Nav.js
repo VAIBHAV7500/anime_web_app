@@ -5,7 +5,7 @@ import requests from '../../utils/requests';
 import "./Nav.css";
 import Filter from './filter'
 import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {LoginFailure} from '../../redux/Auth/authAction';
 import { useCookies } from 'react-cookie';
 import mainLogo from './logo_transparent.png';
@@ -21,7 +21,6 @@ function Nav() {
     const [, , removeCookie] = useCookies(['loginCookie']);
     const dispatch = useDispatch();
     let hideTimeout;
-    let id = useSelector(state=>state.user_id);
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
         window.addEventListener("scroll",() => {
@@ -118,7 +117,7 @@ function Nav() {
     };
 
     const hideShowButton = (fastRelease = false) => {
-        let timeoutTime = 2000;
+        let timeoutTime = 1000;
         if(fastRelease===true){
             timeoutTime=0;
         }
@@ -135,7 +134,7 @@ function Nav() {
     }
 
     const goToProfile = () => {
-        history.push(`/user/${id}`);
+        history.push(`/user`);
     }
 
     const dropdownContent = [
@@ -163,7 +162,7 @@ function Nav() {
                     <div onMouseOver={showSignOutButton} onMouseLeave={()=>{hideShowButton(true)}} className={`dropdown_container`}>
                         {
                             dropdownContent.map((field,index) =>(
-                                <button className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
+                                <button key={index} className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
                             ))
                         }
                     </div>

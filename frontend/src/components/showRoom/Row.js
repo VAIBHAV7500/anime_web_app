@@ -44,6 +44,7 @@ function Row({ title, movies, isLargeRow }) {
         </div>
         {movies && movies.map((movie) => (
           <img
+            loading="lazy"
             draggable="false"
             key={keyId++}
             onClick={() => handleClick(movie)}

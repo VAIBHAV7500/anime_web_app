@@ -2,9 +2,9 @@
     color: white;
     object-fit: contain;
     height: 550px;
-    -webkit-box-shadow: inset 0px -140px 46px -33px rgba(27,27,27,1);
-    -moz-box-shadow: inset 0px -140px 46px -33px rgba(27,27,27,1);
-    box-shadow: inset 0px -150px 46px -33px rgba(27,27,27,1);
+    -webkit-box-shadow: inset 0px -160px 50px -33px rgba(27,27,27,1);
+    -moz-box-shadow: inset 0px -160px 50px -33px rgba(27,27,27,1);
+    box-shadow: inset 0px -160px 50px -33px rgba(27,27,27,1);
     cursor: pointer;
 }
 
@@ -20,7 +20,7 @@
     padding-right: 30px;
     font-size: 3rem;
     font-weight: 800;
-    padding-top: 115px;
+    padding-top: 160px;
     color: rgb(247, 244, 244); 
     font: bold 52px Helvetica, Arial, Sans-Serif;
 }

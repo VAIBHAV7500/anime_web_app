@@ -75,7 +75,7 @@ const App = ()=>{
           <Route exact path="/" component={showRoom}/>
           <Route path="/show/:id" component={show}></Route>
           <Route path="/player" component={player} props="{name: 'Helllo'}"></Route>
-          <Route path="/user/:id" component={Profile}></Route>
+          <Route path="/user" component={Profile}></Route>
           <Redirect to='/'></Redirect>
         </Switch>
       </Router>
