@@ -55,6 +55,10 @@ min-height: 100px;
 cursor: pointer;
 }
 
+.episode_card:hover{
+    background-color: rgba(34, 33, 33, 0.7);
+}
+
 .episode_name{
     float: left;
     font-size: 20px;
