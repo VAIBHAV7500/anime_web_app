@@ -4,8 +4,8 @@
     color:white;
     min-height: 300px;
     width: 100%;
-    z-index: 2;
-    transform: translateY(-115px);
+    z-index: 3;
+    transform: translateY(-105px);
 }
 
 .row:hover{
@@ -43,6 +43,7 @@
     z-index: inherit;
     border: 4px solid white;
     border-radius: 10px;
+    transition: 0.5s;
 }
 
 .row_poster:hover{
@@ -54,13 +55,14 @@
         #111
     );
     z-index: 1;
+    border-radius: 20px;
     box-shadow: -12px -7px 20px 0 rgba(38, 36, 39, 0.4),
             10px 8px 12px 0 rgba(64, 14, 156, 0.788);
 }
 
-.slider,.slider_back{
+.slider{
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     color: transparent;
     background-color: transparent;
     padding: 115px 11px;
