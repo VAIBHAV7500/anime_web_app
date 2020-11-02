@@ -16,6 +16,7 @@ import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { LoginFailure, LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
+import Profile from './components/profile';
 require('dotenv').config();
 
 const handleAccessToken = async (token)=>{
@@ -44,11 +45,9 @@ const check = (token,dispatch,removeCookie)=>{
     return handleAccessToken(token).then((result)=>{
       if(result.check){
         dispatch(LoginSuccess(result.user_id));
-        return true;
       }else{
         removeCookie('token', { path: '/' });
         dispatch(LoginFailure());
-        return false;
       }
     }).catch(e=>{
       removeCookie('token', { path: '/' });
@@ -58,7 +57,6 @@ const check = (token,dispatch,removeCookie)=>{
   }else{
     removeCookie('token', { path: '/' });
     dispatch(LoginFailure());
-    return false;
   }
 }
 
@@ -77,6 +75,7 @@ const App = ()=>{
           <Route exact path="/" component={showRoom}/>
           <Route path="/show/:id" component={show}></Route>
           <Route path="/player" component={player} props="{name: 'Helllo'}"></Route>
+          <Route path="/user/:id" component={Profile}></Route>
           <Redirect to='/'></Redirect>
         </Switch>
       </Router>

@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
 
 function Episodes({show_id}) {
     const [episodes, setEpisodes] = useState();
-    const chunkSize = 12;
+    const chunkSize = 2;
     const history = useHistory();
 
     useEffect(() => {
@@ -83,6 +83,12 @@ function Episodes({show_id}) {
 
     return (
         <div className={styles.episodes}>
+            <div className={styles.toggle_switch}>
+                <label className={styles.switch}>
+                    <input type="checkbox"/>
+                    <span className={`${styles.slider} ${styles.round} `}></span>
+                </label>
+            </div>
             <div className={`${styles.number} ${styles.neumorphism}`}>
                 <input type="number" placeholder="Episode to Start From" min="1" max="999" className={`${styles.number_input}`} onChange={setNewRange}/>
             </div>

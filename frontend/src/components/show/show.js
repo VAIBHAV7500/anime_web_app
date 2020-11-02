@@ -45,9 +45,9 @@ export class show extends Component {
     }
 
     async componentDidUpdate(prevProps) {
-        window.scrollTo(0, 0);
         if (this.props.match.params.id !== prevProps.match.params.id) {
-             this.fetchData();
+            window.scrollTo(0, 0);
+            this.fetchData();
         }
     }
 

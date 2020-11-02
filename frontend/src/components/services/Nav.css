@@ -227,17 +227,6 @@
     display: block;
 }
 
-.dropdown_content{
-    display: none;
-    background: #641ba8cc;
-    background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
-    text-align: center;
-    margin-left: 89%;
-    margin-top: 22px;
-    position: fixed;
-    top: 53px;
-    border-radius: 12px;
-}
 
 .arrow-down {
     width: 0; 
@@ -251,18 +240,61 @@
     cursor: pointer;
 }
 
-.signOut_Button{
+.dropdown_button{
     background: transparent;
     outline: none;
     border: none;
-    width: 156px;
-    height: 4vh;
+    display: block;
     color:white;
+    width: 136px;
+    height: 4vh;
+}
+
+.dropdown_content{
+    display: none;
+    background: #641ba8cc;
+    background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
+    padding: 0px 10px 0px 10px;
+    text-align: center;
+    margin-left: 89%;
+    margin-top: 40px;
+    position: fixed;
+    top: 53px;
+    border-radius: 5px;
+}
+.dropdown_content::after{
+    content: "";
+    display: inline-block; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #641ba8ee;
+    position: absolute;
+    margin-top: -84px;
+    margin-left: 50px;
 }
 
 .show_block{
     display: block;
 }
+
+.dropdown_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+}
+.dropdown_container button{
+    font-weight: bold;
+}
+
+.dropdown_container button:hover{
+    background-color: #9c8bace1;
+    
+}
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                                 Animations                                 */
@@ -313,8 +345,8 @@
  */
 
  .slide-in-right {
-	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-right 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
  @-webkit-keyframes slide-in-right {

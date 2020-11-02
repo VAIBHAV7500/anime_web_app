@@ -37,8 +37,7 @@
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
-    7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: -2px -2px 10px #333235, 4px 3px 10px #0d0c0f;
     color: rgb(187, 185, 185);
     cursor: default;
     display: inline-table;
@@ -60,10 +59,10 @@
 }
 
 .genre_card{
-    float:left;
-    margin-right: 5px;
+    float: left;
+    margin-right: 10px;
     min-width: 50px;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 15px 10px;
     border: none;
     border-radius: 25px;
@@ -71,8 +70,7 @@
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
-    7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: -2px -2px 10px #333235, 2px 2px 15px #0d0c0f;
     color: rgb(187, 185, 185);
     cursor: default;
 }
@@ -111,8 +109,7 @@
     border: none;
     font-size: 12px;
     letter-spacing: 2px;
-    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
-        7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: -2px -2px 10px #333235, 4px 3px 10px #0d0c0f;
     color: rgb(187, 185, 185);
 }
 
@@ -134,6 +131,8 @@
 }
 
 .plus{
+    margin-right: 7px;
+    font-size: 19px;
     
 }
 
@@ -150,6 +149,12 @@
     font-weight: bolder;
     border-radius: 20px;
     cursor: pointer;
+    padding: 15px 10px;
+    border: none;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

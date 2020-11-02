@@ -5,10 +5,11 @@ import requests from '../../utils/requests';
 import "./Nav.css";
 import Filter from './filter'
 import {useHistory} from "react-router-dom";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {LoginFailure} from '../../redux/Auth/authAction';
 import { useCookies } from 'react-cookie';
 import mainLogo from './logo_transparent.png';
+import sideLogo from './logo1.png';
 
 function Nav() {
     const [show , handleShow] = useState(false);
@@ -19,7 +20,8 @@ function Nav() {
     const history = useHistory();
     const [, , removeCookie] = useCookies(['loginCookie']);
     const dispatch = useDispatch();
-    
+    let hideTimeout;
+    let id = useSelector(state=>state.user_id);
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
         window.addEventListener("scroll",() => {
@@ -108,28 +110,63 @@ function Nav() {
            </div>
         </div>
     }
+
     const showSignOutButton = () => {
-        if(dropDown === true){
+        if(hideTimeout)
+            clearTimeout(hideTimeout);   
+        setDropdown(true);
+    };
+
+    const hideShowButton = (fastRelease = false) => {
+        let timeoutTime = 2000;
+        if(fastRelease===true){
+            timeoutTime=0;
+        }
+        hideTimeout = setTimeout(() => {
             document.querySelector('.dropdown_content').classList.remove('slide-in-right')
             document.querySelector('.dropdown_content').className += " slide-out-right";
-            setTimeout(()=>{setDropdown(!dropDown)},500);
-        }else{
-            setDropdown(!dropDown);
-        }
-    };
+            setTimeout(()=>{setDropdown(false)},500);
+        },timeoutTime);
+    }
+
     const logout = () => {
         removeCookie('token', { path: '/' });
         dispatch(LoginFailure());
     }
+
+    const goToProfile = () => {
+        history.push(`/user/${id}`);
+    }
+
+    const dropdownContent = [
+        {
+            name : "Profile",
+            onclick : goToProfile,
+            class : null,
+        },
+        {
+            name : "Sign Out",
+            onclick : logout,
+            class : "signOut_Button",
+        },
+        
+    ]
+    
     return (
         <div className={`nav ${!search && show && "nav_black"}`}>
-            <img className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
+            <img draggable="false" className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
             <div className="nav_rights">
                 < FaSearch className="search_icon" onClick={handleSearch} />
-                <span onClick={showSignOutButton} ><FaUser className = "nav_avatar"></FaUser><span className="arrow-down"></span></span>
+                <span  onMouseOver={showSignOutButton} onMouseLeave={hideShowButton} ><FaUser className = "nav_avatar"></FaUser><span className="arrow-down"></span></span>
             </div>
             <div className={`dropdown_content  ${dropDown? "show_block slide-in-right" : ""}`} >
-                    <button className="signOut_Button" onClick={logout}><strong>Sign Out</strong></button>
+                    <div onMouseOver={showSignOutButton} onMouseLeave={()=>{hideShowButton(true)}} className={`dropdown_container`}>
+                        {
+                            dropdownContent.map((field,index) =>(
+                                <button className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
+                            ))
+                        }
+                    </div>
             </div>
             {search && generateSearchModal()}
             {search && <div className="shadow" onClick={handleSearch}></div>}

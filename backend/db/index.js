@@ -16,6 +16,9 @@ const character_show_mapping = require('./tables/character_show_mapping');
 const reviews = require('./tables/reviews');
 const user_review = require('./tables/user_review');
 const user_ip = require('./tables/user_ip');
+const completed_shows = require('./tables/completed_shows');
+const currently_watching = require('./tables/currently_watching');
+const watchlist = require('./tables/watchlist');
 
 const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
@@ -49,4 +52,7 @@ module.exports =  {
     reviews,
     user_review,
     user_ip,
+    completed_shows,
+    currently_watching,
+    watchlist,
 }

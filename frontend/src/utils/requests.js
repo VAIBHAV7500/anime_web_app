@@ -15,7 +15,10 @@ const requests = {
     fetchShowDetails: `api/shows/details`,
     characters: `/api/character`,
     reviews: `/api/review`,
-    relatedShows: `/api/shows/similar`
+    relatedShows: `/api/shows/similar`,
+    fetchWatchlist : `/api/list/watchlist`,
+    fetchCurrentlyWatching : `/api/list/currently-watching`,
+    fetchCompletedShows : `/api/list/completed`
 }
 
 export default requests;

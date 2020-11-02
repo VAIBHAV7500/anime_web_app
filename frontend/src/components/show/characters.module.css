@@ -10,6 +10,7 @@
     float: left;
     width: 289px;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
+    overflow-x: hidden;
 }
 .wrap_description{
     overflow: auto;

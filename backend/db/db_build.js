@@ -16,6 +16,9 @@ const character_show_mapping = require('./tables/character_show_mapping');
 const reviews = require('./tables/reviews');
 const user_review = require('./tables/user_review');
 const user_ip = require('./tables/user_ip');
+const completed_shows = require('./tables/completed_shows');
+const currently_watching = require('./tables/currently_watching');
+const watchlist = require('./tables/watchlist');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -79,6 +82,12 @@ con.connect(async (err)=>{
         console.log(`Created user_review`);
         response = await user_ip.createTable(con);
         console.log(`Created user_ip`);
+        response = await completed_shows.createTable(con);
+        console.log(`Created completed_shows`);
+        response = await currently_watching.createTable(con);
+        console.log(`Created currently_watching`);
+        response = await watchlist.createTable(con);
+        console.log(`Created watchlist`);
     }
     catch(err){
         console.log(err);

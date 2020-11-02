@@ -29,6 +29,7 @@ const checkIp = async (ip,userId) => {
         }
     }
     await db.user_ip.create(ipObj).catch((err) => {
+        console.log(err);
         throw new Error({
             message : err,
             stack : err.stack,
@@ -41,6 +42,7 @@ module.exports = (app)=>{
     router.post('/enter',app.oauth.authorise(),async (req,res)=>{
         var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         await checkIp(ip,req.oauth.bearerToken.user.id).catch((err)=>{
+        console.log(err.status);
           res.status(err.status).json({
             message : err.message,
             stack : err.stack,

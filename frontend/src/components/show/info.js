@@ -43,7 +43,7 @@ function Info({movie}) {
                     <div >
                         <div className={styles.genre}>
                             {movie?.genres?.map((genre,index)=>{
-                                return <div className={styles.genre_card} key={index}>{genre}</div>
+                                return <div className={styles.genre_card}  key={index}>{genre}</div>
                             })}
                         </div>
                         <br className={styles.break}/>
@@ -63,10 +63,10 @@ function Info({movie}) {
                             })
                         }
                     </select> 
-                    <div className={`${styles.btn} ${styles.play_btn} ${styles.neumorphism}`}>
+                    <div className={`${styles.btn} ${styles.play_btn} `}>
                         Start Watching
                     </div>
-                    <div className={`${styles.btn} ${styles.watch_list_btn} ${styles.neumorphism}`}>
+                    <div className={`${styles.btn} ${styles.watch_list_btn}`}>
                         <AiOutlinePlus className={styles.plus} /> Watch List
                     </div>
                 </div>    

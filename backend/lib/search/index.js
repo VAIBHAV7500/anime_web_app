@@ -64,7 +64,7 @@ const generatePattern = (data) => {
         andArr.push({
             $or: data["genre_arr"].map((x) => {
                 return {
-                    genres: x
+                    genres: `${x}`
                 };
             })
         });

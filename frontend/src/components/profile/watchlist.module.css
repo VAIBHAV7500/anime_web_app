@@ -1,0 +1,66 @@
+.watchlist{
+    padding: 2%;
+    min-height: 50vh;
+    width: 80%;
+}
+
+.container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-right: auto;
+}
+
+.card{
+    display: inline;
+    background-size: auto 100%;
+    background-position: center;
+    color: white;
+    width: 379px;
+    height: 25vh;
+    margin: 20px 0px 0px 20px ;
+    text-align: center;
+    border-radius: 16px;
+    cursor: pointer;
+    border: 3px solid black !important;
+    transition: transform ease-out 0.5s;
+    -webkit-box-shadow: inset -18px -34px 300px 121px rgba(0,0,0,0.65);
+    -moz-box-shadow: inset -18px -34px 300px 121px rgba(0,0,0,0.65);
+    box-shadow: inset -18px -34px 300px 121px rgba(0,0,0,0.65);
+}
+
+.card:hover{
+    border-color: white !important;
+    transform: scale(1.05);
+}
+
+.wrapper{
+    transition: 0.1s;
+}
+
+.card:hover .wrapper{
+    transform: scale(0);
+}
+
+.show_title{
+    margin: 13px 0px 43px 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.show_description{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+}
+
+.neumorphism{
+    padding: 15px 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
