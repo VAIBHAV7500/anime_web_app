@@ -368,3 +368,7 @@
 .video-js .vjs-current-time {
   padding-left: 10px;
 }
+
+.video-js .vjs-icon-picture-in-picture-enter{
+  background-color: pink;
+}

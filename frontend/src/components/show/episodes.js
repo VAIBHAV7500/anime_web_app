@@ -14,11 +14,15 @@ function Episodes() {
     const [episodes, setEpisodes] = useState([]);
     const [cookies,setCookie] = useCookies(['order-track']);
     let [latest, setLatest] = useState(cookies['order-track'] === 'true' ? true : false);
+    const [hasMore, setMore] = useState(true);
     const history = useHistory();
     let location = useLocation();
     let chunkSize = 10;
 
     const updateEpisodes = async () => {
+        setEpisodes([]);
+        setMore(true);
+        episodeArray = [];
         let endPoint = `${requests.fetchEpisodes}?show_id=${id}`;
         if(latest){
             endPoint += `&offset=${chunkSize}&latest=true`;
@@ -32,8 +36,6 @@ function Episodes() {
     }
 
     useEffect(() => {
-        setEpisodes([]);
-        episodeArray = [];
         updateEpisodes();
         return () => {}   
     },[]);
@@ -64,11 +66,15 @@ function Episodes() {
             const response = await fetchEps(from);  
             setEpisodes(episodeArray?.concat(response));
             episodeArray = episodeArray.concat(response);
+            if(from - chunkSize <= 1){
+                setMore(false);
+            }
         }
     }
 
     const setNewRange = async () =>{
         const epNum = document.getElementsByClassName(styles.number_input)[0].value;
+        setEpisodes([]);
         if(epNum){
             const from = epNum;
             const response = await fetchEps(from);
@@ -111,7 +117,7 @@ function Episodes() {
                 <InfiniteScroll
                     dataLength={episodes.length} //This is important field to render the next data
                     next={fetchMoreData}
-                    hasMore={true}
+                    hasMore={hasMore}
                     loader={<h4>Loading...</h4>}
                     endMessage={
                       <p style={{ textAlign: 'center' }}>

@@ -3,15 +3,18 @@
     display: flex;
 }
 
-.poster{
-    position:relative;
-    float:left;
-    max-width: 100px;
-    min-width: 100px;
-    height: 150px;
+.image_wrapper{
+    min-width: 200px;
+    height: 300px;
+    background-color: rgb(39, 38, 38);
     transform: translate(25%,-25%);
     border: 5px solid #ffff;
-    background-color: rgb(51, 49, 49);
+}
+
+.poster{
+    float:left;
+    width: 300px;
+    height: 300px;
 }
 
 .name{

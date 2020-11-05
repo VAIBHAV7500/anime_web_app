@@ -40,6 +40,7 @@ const createDB = async () => {
     })
 }
 
+console.log('Creating Tables');
 con.connect(async (err)=>{
     if(err){
         throw err;
@@ -88,6 +89,10 @@ con.connect(async (err)=>{
         console.log(`Created currently_watching`);
         response = await watchlist.createTable(con);
         console.log(`Created watchlist`);
+
+        
+        console.log('Running Migrations');
+        
     }
     catch(err){
         console.log(err);

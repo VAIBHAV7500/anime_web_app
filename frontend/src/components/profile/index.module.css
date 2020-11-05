@@ -10,26 +10,7 @@
     width: 80%;
     color: white;
     background-color: rgb(182, 182, 241);
-    background-image: radial-gradient(ellipse at center,#641ba8a9, black 100%);
-}
-.banner::after{
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 28vh;
-    margin-right: 10%;
-    right: 0;
-    background: repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(0, 0, 0, 0.2) 1px, rgba(255, 255, 255, 0.1) 10px);
-}
-
-.banner::before{
-    content: '';
-    left: 0;
-    position: absolute;
-    width: 80%;
-    margin-left: 10%;
-    height: 28vh;
-    background: repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(0, 0, 0, 0.2) 1px, rgba(255, 255, 255, 0.1) 10px);
+    background-image: radial-gradient(ellipse at center,#8627dfa9, black 100%);
 }
 
 .user_img{
