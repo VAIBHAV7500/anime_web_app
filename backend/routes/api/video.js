@@ -71,10 +71,18 @@ router.post('/upload', async (req,res,next)=>{
 });
 
 router.get('/episodes', async(req,res,next)=>{
-    if(req.query.show_id){
-        const from = req.query.from;
-        const to = req.query.to;
-        let result = await db.videos.getShows(req.query.show_id, from, to).catch((err)=>{
+    if(req.query.show_id || req.query.offset){ 
+        const latest = req.query.latest === 'true' ? true : false;
+        let from = parseInt(req.query.from || 1);
+        if(latest && req.query.from === undefined){
+            const rows = await db.shows.totalShows(req.query.show_id);
+            if(rows && rows.length != 0){
+                from = rows[0].total_episodes;
+            }
+        }
+        const offset = parseInt(req.query.offset);
+        const to = from + (latest ? -1 : 1) * offset;
+        let result = await db.videos.getShows(req.query.show_id, from, to, latest).catch((err)=>{
             res.status(501).json({
                 success: false,
                 err: err.message,
@@ -82,16 +90,23 @@ router.get('/episodes', async(req,res,next)=>{
             });   
             return;
         });
-        result = result.map((x)=>{
-            return {
-                id: x.id,
-                name: x.name,
-                type: x.type,
-                episode: x.episode_number,
-                thumbnail_url: x.thumbnail_url,
-            }
+        let totalEpisodes = 0;
+        if(result && result.length){
+            totalEpisodes = result[0].total_episodes;
+            result = result.map((x)=>{
+                return {
+                    id: x.id,
+                    name: x.name,
+                    type: x.type,
+                    episode: x.episode_number,
+                    thumbnail_url: x.thumbnail_url,
+                }
+            });
+        }
+        res.json({
+            result,
+            total_episodes: totalEpisodes
         });
-        res.json(result);
     }else{
         res.status(401).json({
             success: false,

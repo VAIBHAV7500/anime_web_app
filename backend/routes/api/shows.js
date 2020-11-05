@@ -40,6 +40,12 @@ router.get('/details',async (req,res,next)=>{
         return;
     }
     let data = await db.shows.find(id, true);
+    if(!data){
+        res.status(404).json({
+            error: "Show Id not found",
+        });
+        return;
+    }
     const genre_ids = data.genre_id;
     const promiseArray = [];
     promiseArray.push(new Promise((res,rej)=>{
@@ -86,7 +92,7 @@ router.get('/similar', async (req,res,next) => {
         const body = {
             genre_arr: genres
         };
-        let result = search(body,true).map((x)=>{
+        let result = search(body,true).filter(x => x.id !== id).map((x)=>{
             return {
                 id: x.item.id,
                 name: x.item.name,

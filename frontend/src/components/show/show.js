@@ -12,7 +12,23 @@ import Similar from './similar';
 
 export class show extends Component {
 
-    navItems = ['Episodes','Characters','Review', "Similar Shows & Movies"];
+    navItems = [{
+        title: 'Episodes',
+        component: <Episodes show_id={this.props.match.params.id}/>
+      },
+      {
+        title: 'Characters',
+        component: <Characters show_id={this.props.match.params.id}/>
+      },
+      {
+        title: 'Review',
+        component: <Review show_id={this.props.match.params.id}/> 
+      },
+      {
+        title: 'Similar Shows & Movies',
+        component: <Similar show_id={this.props.match.params.id}/>
+      }
+    ] 
 
     fetchData = async () => {
         const showId = this.props.match.params.id
@@ -24,18 +40,11 @@ export class show extends Component {
                 rej(err)
             });
         }));
-        promiseArray.push(new Promise((res, rej) => {
-            axios.get(`${requests.fetchEpisodes}?show_id=${showId}`).then((result) => {
-                res(result);
-            }).catch((err) => {
-                rej(err)
-            });
-        }));
         const results = await Promise.all(promiseArray);
         const states = {
             show: results[0].data,
-            episodes: results[1].data,
             nav_id: 0,
+            show_id: showId
         };
         this.setState(states);
     }
@@ -69,18 +78,11 @@ export class show extends Component {
                         <div className={styles.filler}></div>
                         {
                             this.navItems.map((x, index) =>{
-                                return <div  key ={index} className= {`${styles.sub_item} ${styles.neumorphism} ${this.state?.nav_id === index ? styles.sub_item_active:""}`} onClick={()=>{this.selectNav(index)}}> {x} </div>
+                                return <div  key ={index} className= {`${styles.sub_item} ${styles.neumorphism} ${this.state?.nav_id === index ? styles.sub_item_active:""}`} onClick={()=>{this.selectNav(index)}}> {x.title} </div>
                             })
                         }
                     </div>
-                { this.state?.nav_id === 0 ? <Episodes show_id={this.props.match.params.id} /> : ""}
-                { this.state?.nav_id === 1 ? <Characters show_id={this.props.match.params.id} /> : ""}
-                { this.state?.nav_id === 2 ? <Review show_id={this.props.match.params.id} /> : ""}
-                { this.state?.nav_id === 3 ? <Similar show_id={this.props.match.params.id} /> : ""}
-
-                <div className={styles.episodes}>
-                    
-                </div>
+                {this.navItems[this.state?.nav_id || 0]?.component}
             </div>
         )
     }

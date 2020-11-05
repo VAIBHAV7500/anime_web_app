@@ -53,6 +53,11 @@ const getShowsData = async () => {
     return runQuery(sql);
 }
 
+const totalShows = (id) => {
+    const sql = `SELECT total_episodes from shows where id = (?)`;
+    return runQuery(sql,[id]);
+}
+
 const findByOriginalName = async (orignalName)=>{
     const sql = `SELECT id FROM shows WHERE original_name="${orignalName}" LIMIT 1`;
     const result = await runQuery(sql);
@@ -80,5 +85,6 @@ module.exports = {
     findByOriginalName,
     forBanner,
     getShowsByGroupId,
+    totalShows,
 }
 

@@ -42,19 +42,22 @@ const create = async (body) => {
     return await runQuery(sql, [Object.values(body)]);
 }
 
-const getShows = async (id, from, to) => {
+const getShows = async (id, from, to, latest) => {
     from = from || 1;
+    let order = 'asc'
+    if(latest){
+        [from,to] = [to,from];
+        order = 'desc'
+    }
     let sql = `SELECT * FROM videos WHERE show_id = ${id} AND episode_number >= ${from}`;
     sql += (to !== undefined) ? ` and episode_number <= ${to}` : "";
-    sql += ` order by episode_number asc`;
-    console.log(sql);
+    sql += ` order by episode_number ${order}`;
     const result = await runQuery(sql);
     return result;
 }
 
 const findByEpisodeName = async (name,show_id)=>{
     const sql = `SELECT id FROM videos WHERE name="${name}" AND show_id=${show_id} LIMIT 1`;
-    console.log(sql);
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }

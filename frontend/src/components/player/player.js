@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import ReactPlayer from 'react-player'
-import Description from './description'
-import {getVideoLink} from '../../utils/api'
+import ReactPlayer from 'react-player';
+import Description from './description';
+import {getVideoLink} from '../../utils/api';
 import './player.css';
-import PlyrComp from './plyrComp';
+import VideoPlayerComp from './VideoPlayerComp';
 
 const watchProgress = (event) => {
     console.log(event);
@@ -31,7 +31,7 @@ export class player extends Component {
 
             this.setState(prevState => ({
                 ...prevState,
-                videoUrl: `https://animeitv-vod-hls.cdnvideo.ru/animeitv-vod/_definst_/mp4:5f840e56ef3db5506ecfaada/playlist.m3u8`
+                videoUrl: `https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8`
             }));
         } catch (error) {
             console.log(error.message);
@@ -61,7 +61,7 @@ export class player extends Component {
     render() {
         return (
                 <div className="player-wrapper">
-                    <PlyrComp url={this.state?.videoUrl} />
+                    <VideoPlayerComp src={this.state?.videoUrl} />
                  </div>
         )
     }

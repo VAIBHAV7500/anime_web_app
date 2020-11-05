@@ -28,7 +28,7 @@ const Login = (props)=>{
 
         }
     }, []);
-    const [, setCookie] = useCookies(['token']);
+    const [_, setCookie] = useCookies(['token']);
     const handleAccessToken = async (token)=>{
         var config = {
             method: 'post',

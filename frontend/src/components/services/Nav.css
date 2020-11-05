@@ -262,16 +262,15 @@
     top: 53px;
     border-radius: 5px;
 }
-.dropdown_content::after{
+.dropdown_content::before{
     content: "";
     display: inline-block; 
     height: 0; 
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid #641ba8ee;
-    position: absolute;
-    margin-top: -84px;
-    margin-left: 50px;
+    float: right;
+    margin-top: -10px;
 }
 
 .show_block{
