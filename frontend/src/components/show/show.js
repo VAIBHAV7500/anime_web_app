@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Pace from 'react-pace-progress';
 import Banner from './banner';
 import Info from './info';
 import Nav from '../services/Nav';
@@ -33,6 +34,11 @@ export class show extends Component {
     fetchData = async () => {
         const showId = this.props.match.params.id
         const promiseArray = [];
+        this.setState({
+            show_id: showId,
+            nav_id: 0,
+            loading:true
+        });
         promiseArray.push(new Promise((res, rej) => {
             axios.get(`${requests.fetchShowDetails}?id=${showId}`).then((result) => {
                 res(result);
@@ -44,7 +50,8 @@ export class show extends Component {
         const states = {
             show: results[0].data,
             nav_id: 0,
-            show_id: showId
+            show_id: showId,
+            loading:false,
         };
         this.setState(states);
     }
@@ -70,6 +77,12 @@ export class show extends Component {
     render() {
         return (
             <div className={styles.show}>
+                {
+                  this.state?.loading && <Pace 
+                    color="#641ba8"
+                    height = {10}
+                    />
+                }
                 <Nav/>
                 <Banner movie = {this.state?.show}/>
                 <Info movie = {this.state?.show} className={styles.info}/>
