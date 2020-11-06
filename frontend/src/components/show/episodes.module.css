@@ -6,21 +6,22 @@
 }
 
 .number{
-    position: relative;
-    width: 17%;
+    width: 30%;
     cursor: pointer;
     margin-left: 78%;
+    position: absolute;
+    right: 10%;
 }
 
 .number_input{
-    width: 100%;
-    max-width: 210px;
-    outline: none;
-    color: #ffff;
-    font-size: 15px;
-    background-color: rgba(255,255,255,0);
-    -webkit-appearance: none;
-    border: 0;
+  width: 100%;
+  max-width: 210px;
+  outline: none;
+  color: #ffff;
+  font-size: 15px;
+  background-color: rgba(255,255,255,0);
+  -webkit-appearance: none;
+  border: 0;
 }
 
 .neumorphism {
@@ -36,23 +37,22 @@
 }
 
 .scrollable_div{
-min-height: 300px;
-overflow: 'auto';
-display: 'flex';
-flex-direction: 'column-reverse';
-margin:0 auto;
+  min-height: 300px;
+  overflow: 'auto';
+  display: 'flex';
+  flex-direction: 'column-reverse';
+  margin:0 auto;
 }
 
 .episode_card{
-margin-left:auto;
-margin-top: 10px;
-margin-right:auto;
-min-width: 60%;
-max-width: 80%;
-margin-bottom: 10px;
-background-color: rgba(10, 9, 9, 0.7);
-min-height: 100px;
-cursor: pointer;
+  margin-top: 10px;
+  min-width: 60%;
+  max-width: 80%;
+  margin-bottom: 10px;
+  background-color: rgba(10, 9, 9, 0.7);
+  min-height: 100px;
+  cursor: pointer;
+  padding-bottom: 2px;
 }
 
 .episode_card:hover{
@@ -60,10 +60,12 @@ cursor: pointer;
 }
 
 .episode_name{
-    float: left;
     font-size: 20px;
     font-weight: bold;
-    padding-left: 20px;
+    width: 61%;
+}
+.wrapper{
+  display:flex;
 }
 
 .episode_thumbnail{
@@ -72,6 +74,7 @@ cursor: pointer;
     float: left;
     width: 150px; 
     height: 95px;
+    margin-right: 20px;
 }
 
 .type{
@@ -94,6 +97,9 @@ cursor: pointer;
     cursor: pointer;
     text-align: center;
     width: 90px; 
+    margin-top: -28px;
+    align-self: center;
+    margin-left: auto;
 }
 
 .green{
@@ -126,7 +132,6 @@ cursor: pointer;
 
 .episode_description{
     margin-top: 3%;
-    padding-left: 15%;
     text-transform: none;
     font-weight: normal;
     font-family: Sans-serif;
@@ -135,12 +140,18 @@ cursor: pointer;
 .progress{
     height: 2px;
     clear:both;
-    margin-top: 50px;
     float:bottom;
     display: flex;
-    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
+    margin-top: 20px;
     bottom:0%;
     background-color: rgba(136, 81, 238, 0.8);
+}
+.inf_scroll{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
@@ -216,28 +227,24 @@ cursor: pointer;
     text-transform: capitalize;
     font-weight: bold;
   }
+
+
+  .wrap{
+    height: 10vh;
+  }
+
   
-
-
-
-@media (min-width:481px) {
-    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-}
-
-@media (min-width:641px) {
-    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-}
-
-@media (min-width:961px) {
-    /* tablet, landscape iPad, lo-res laptops ands desktops */
-}
-
-@media (min-width:1025px) {
-    /* big landscape tablets, laptops, and desktops */
-    
-}
-
-@media (min-width:1281px) {
-    /* hi-res laptops and desktops */
+@media (max-width: 800px) {
+  .episode_thumbnail{
+    display: none;
+  }
+  .progress{
+    margin-top: 20px;
+  }
+  .episode_card{
+    padding: 20px;
+    border-radius: 15px;
+    margin-right: 20px;
+  }
 
 }

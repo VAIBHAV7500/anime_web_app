@@ -19,6 +19,7 @@ function Info({movie}) {
         element.size = size;
         if(blur){
             element.blur();
+            goToShow(element.value);
         }
     }
 
@@ -27,51 +28,40 @@ function Info({movie}) {
     }
 
     return (
-        <div className={styles.info}>
-            <div className={styles.image_wrapper}>
-               {movie?.poster_portrait_url && <img draggable="false" alt="poster" src={movie?.poster_portrait_url.replace('medium','large')} className={styles.poster} onError={(event)=>{console.log(event);}} />} 
+        <div className={styles.body}>
+            <div className={`${styles.poster}`}>
+                {movie?.poster_portrait_url && <img loading="lazy" draggable="false" alt="poster" src={movie?.poster_portrait_url.replace('medium','large')} className={styles.poster_img} onError={(event)=>{console.log(event);}} />}
             </div>
-            <div className={styles.description}>
-            <div className={styles.make_flex}>
-                <div className={styles.wrapper}>
-                    <div className={styles.make_flex}>
-                        <div className={styles.name}>{movie?.name}</div>
-                        { movie?.age_category  && <div className={styles.age}>{movie?.age_category}+</div>}
-                    </div>
-                    <br className={styles.break}/>
-                
-                    <div >
-                        <div className={styles.genre}>
-                            {movie?.genres?.map((genre,index)=>{
-                                return <div className={styles.genre_card}  key={index}>{genre}</div>
-                            })}
-                        </div>
-                        <br className={styles.break}/>
-                        <div className={styles.synopsis}>
-                            {moreSyn ? movie?.description : truncate(movie?.description,400)}<p className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</p>
-                        </div>
-                    </div>
+            <div className={`${styles.info}`}>
+                <div name={movie?.age_category} className={`${styles.show_title}`}>{movie?.name}</div>
+                <div className={styles.genre}>
+                    {movie?.genres?.map((genre,index)=>{
+                        return <div className={styles.genre_card}  key={index}>{genre}</div>
+                    })}
                 </div>
-                <div>
-                    <select id="season-group" className={`${styles.select} ${styles.neumorphism}`} value={movie?.id} onFocus={()=>{changeGroupSize(5)}} size={`1`} onBlur={()=>{changeGroupSize(1)}} onChange={()=>{changeGroupSize(1,true)}}>
-                        {/*Load options */}
-                        {
-                            movie?.groups?.map((group)=>{
-                                return <option className={styles.option} key={group.id} value={group.id} onClick={()=>{goToShow(group.id)}}>
-                                    {group.name}
-                                </option>
-                            })
-                        }
-                    </select> 
-                    <div className={`${styles.btn} ${styles.play_btn} `}>
+                <div className={styles.synopsis}>
+                    {moreSyn ? movie?.description : truncate(movie?.description,400)}<p className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</p>
+                </div>
+            </div>
+            <div className={`${styles.group_change}`}>
+                <select id="season-group" className={`${styles.select} ${styles.neumorphism}`} value={movie?.id} onFocus={()=>{changeGroupSize(5)}} size={`1`} onBlur={()=>{changeGroupSize(1)}} onChange={()=>{changeGroupSize(1,true)}}>        
+                    {
+                        movie?.groups?.map((group)=>{
+                            return <option className={styles.option} key={group.id} value={group.id}>
+                                {group.name}
+                            </option>
+                        })
+                    }
+                </select> 
+                <div className={`${styles.btn_wrapper}`}>
+                    <div className={`${styles.play_btn} `}>
                         Start Watching
                     </div>
-                    <div className={`${styles.btn} ${styles.watch_list_btn}`}>
+                    <div className={`${styles.watch_list_btn}`}>
                         <AiOutlinePlus className={styles.plus} /> Watch List
                     </div>
-                </div>    
-            </div>     
-        </div>
+                </div>
+            </div>
         </div>
     )
 }

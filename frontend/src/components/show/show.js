@@ -44,10 +44,12 @@ export class show extends Component {
         const states = {
             show: results[0].data,
             nav_id: 0,
-            show_id: showId
+            show_id: showId,
+            episodes: []
         };
         this.setState(states);
     }
+    
     async componentDidMount(){  
         window.scrollTo(0, 0);
         this.fetchData();
@@ -74,14 +76,13 @@ export class show extends Component {
                 <Banner movie = {this.state?.show}/>
                 <Info movie = {this.state?.show} className={styles.info}/>
                 <br className={styles.break}/>
-                    <div className={styles.sub_nav}>
-                        <div className={styles.filler}></div>
-                        {
-                            this.navItems.map((x, index) =>{
-                                return <div  key ={index} className= {`${styles.sub_item} ${styles.neumorphism} ${this.state?.nav_id === index ? styles.sub_item_active:""}`} onClick={()=>{this.selectNav(index)}}> {x.title} </div>
-                            })
-                        }
-                    </div>
+                <div className={styles.sub_nav}>
+                    {
+                        this.navItems.map((x, index) =>{
+                            return <div  key ={index} className= {`${styles.sub_item} ${styles.neumorphism} ${this.state?.nav_id === index ? styles.sub_item_active:""}`} onClick={()=>{this.selectNav(index)}}> {x.title} </div>
+                        })
+                    }
+                </div>
                 {this.navItems[this.state?.nav_id || 0]?.component}
             </div>
         )

@@ -28,9 +28,12 @@
         width: 100%;
         height: 70px;
         margin:0 auto;
-        overflow-y: scroll;   
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        word-wrap: none;
+        overflow-x: auto;
+        display: flex;
+    }
+    .sub_nav::-webkit-scrollbar {
+        display: none;
     }
 
     .neumorphism{
@@ -46,12 +49,17 @@
 
     .sub_item{
         float:left;
+        display: inline;
         padding: 15px 20px;
         color: #ffff;
         border-radius: 10px;
         margin-right: 19px;
         cursor:pointer;
         margin-top: 10px;
+        object-fit: contain;
+        white-space: nowrap;
+        width: auto;
+        height: 1.5vh;
     }
 
     .sub_item:hover{
