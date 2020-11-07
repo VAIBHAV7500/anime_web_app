@@ -4,6 +4,7 @@ import styles from './VideoPlayerComp.module.css';
 import videojs from 'video.js';
 import 'videojs-hotkeys';
 import './videoPlayer.css';
+import 'videojs-event-tracking';
 function VideoPlayerComp({src}) {
   const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8";
   const playerRef = useRef();
@@ -39,7 +40,8 @@ function VideoPlayerComp({src}) {
       }
     },
     plugins: {
-      hotkeys: {}
+      hotkeys: {},
+      eventTracking: true
     }
   }
 
@@ -63,6 +65,10 @@ function VideoPlayerComp({src}) {
     });
     videojs.registerComponent('MyButton', MyButton);
     player.addChild('MyButton', {});
+    
+    setInterval(function(){
+       console.log(player?.currentTime()); 
+    }, 3000);
     return () => {
       player.dispose();
     };

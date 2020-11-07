@@ -78,6 +78,7 @@ function Episodes() {
         if(epNum){
             const from = epNum;
             const response = await fetchEps(from);
+            setEpisodes(response);
             episodeArray = response;
         }else{
             const from = 1;

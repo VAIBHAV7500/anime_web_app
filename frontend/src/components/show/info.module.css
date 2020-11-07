@@ -15,6 +15,7 @@
     min-width: 200px;
     max-width: 244px;
     max-height: 348px;
+    min-height: 250px;
     transform: translate(25%,-25%);
     border-radius: 16px;
     border: 3px solid white;
@@ -22,8 +23,7 @@
 
 .poster_img{
     width: 100%;
-    height: auto;
-    border-radius: 16px;
+    height: 100%;
 }
 
 .info{

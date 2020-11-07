@@ -69,6 +69,8 @@
     padding: 115px 11px;
     font-size: 60px;
     transition: 0.3s;
+    color: white;
+    background-color: rgba(17, 17, 17, 0.651);
     
 }
 
@@ -80,10 +82,6 @@
     left: 0;
 }
 
-.slider{
-    color: white;
-    background-color: rgba(17, 17, 17, 0.651);
-}
 
 .slider:hover{
     background-color: rgba(0, 0, 0,0.8);
