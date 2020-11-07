@@ -39,7 +39,7 @@
 
 
 .btn {
-    background: #9411a5;
+    background: #9432f0cc;
     color: #ffffff;
     font-size: 13px;
     text-transform: uppercase;
@@ -49,12 +49,12 @@
     cursor: pointer;
     width: 100%;
     border-radius: 6px;
-    outline-color: rgb(180, 25, 180);
+    outline: none;
 }
 
-.btn:hover {
-    background-color: #e220e2;
-    transition-duration: 5s;
+.btn:active{
+    position: relative;
+    top: 1px;
 }
 
 .forgot {
@@ -150,10 +150,10 @@
 
 @media(max-width:480px) {
     .title_name{
-        color: #940fa0;
+        color:  #aa51fdcc;
     }
     .sign_up{
-        color: #8a0edd;
+        color:  #aa51fdcc
     }
     .body{
         background : none;

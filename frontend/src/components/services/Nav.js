@@ -152,23 +152,27 @@ function Nav() {
     ]
     
     return (
+        <div className="nav_wrapper">
         <div className={`nav ${!search && show && "nav_black"}`}>
-            <img draggable="false" className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
-            <div className="nav_rights">
-                < FaSearch className="search_icon" onClick={handleSearch} />
-                <span  onMouseOver={showSignOutButton} onMouseLeave={hideShowButton} ><FaUser className = "nav_avatar"></FaUser><span className="arrow-down"></span></span>
+            <span>
+                <img draggable="false" className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
+            </span>
+            < FaSearch className="search_icon" onClick={handleSearch} />
+            <span className="avatar_span"  onMouseOver={showSignOutButton} onMouseLeave={hideShowButton} >
+                    <FaUser className = "nav_avatar"></FaUser>
+            </span>
+        </div>
+        {<div className={`dropdown_content ${!search && show ? "dropdown_content_separator" : ""}  ${dropDown? "show_block slide-in-right" : ""}`} >
+            <div onMouseOver={showSignOutButton} onMouseLeave={()=>{hideShowButton(true)}} className={`dropdown_container`}>
+                {
+                    dropdownContent.map((field,index) =>(
+                        <button key={index} className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
+                    ))
+                }
             </div>
-            <div className={`dropdown_content  ${dropDown? "show_block slide-in-right" : ""}`} >
-                    <div onMouseOver={showSignOutButton} onMouseLeave={()=>{hideShowButton(true)}} className={`dropdown_container`}>
-                        {
-                            dropdownContent.map((field,index) =>(
-                                <button key={index} className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
-                            ))
-                        }
-                    </div>
-            </div>
-            {search && generateSearchModal()}
-            {search && <div className="shadow" onClick={handleSearch}></div>}
+        </div>}
+        {search && generateSearchModal()}
+        {search && <div className="shadow" onClick={handleSearch}></div>}
         </div>
     )
 }

@@ -1,13 +1,13 @@
 .characters{
     min-height: 500px;
     width: 100%;
-    margin-left: 50px;
-    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 70vh;
 }
 
 .character{
-    margin: 10px;
-    float: left;
     width: 289px;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
     overflow-x: hidden;

@@ -1,6 +1,10 @@
 .form_group {
     margin: 20px 0;
 }
+.form_group:active{
+    top: 1px;
+    position: relative;
+}
 
 .form_group .label {
     display: block;
@@ -18,11 +22,10 @@
 }
 
 .group .icon {
-    color: #c422d3;
+    color: #7e1cdacc;
     font-size: 20px;
     padding: 0 10px;
 }
-
 
 .inputField {
     font-size: 15px;
@@ -33,6 +36,7 @@
     color: #000;
     padding-left: 10px;
 }
+
 
 .inputField:focus {
     outline: none;

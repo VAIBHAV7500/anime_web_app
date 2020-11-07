@@ -135,6 +135,10 @@
     text-transform: none;
     font-weight: normal;
     font-family: Sans-serif;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
 }
 
 .progress{
@@ -149,6 +153,7 @@
     background-color: rgba(136, 81, 238, 0.8);
 }
 .inf_scroll{
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;

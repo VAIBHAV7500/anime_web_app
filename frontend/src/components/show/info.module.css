@@ -12,17 +12,16 @@
 
 .poster{
     background-color: rgb(43, 42, 42);
-    min-width: 200px;
-    max-width: 244px;
-    max-height: 348px;
+    width: 280px;
+    height: 377px;
     transform: translate(25%,-25%);
     border-radius: 16px;
     border: 3px solid white;
 }
 
 .poster_img{
-    width: 100%;
-    height: auto;
+    width: 247px;
+    height: 370px;
     border-radius: 16px;
 }
 
@@ -169,13 +168,14 @@
     .poster{
         margin-right: auto;
         margin-left: auto;
-        max-width: 200px;
-        max-height: 285px;
+        width: 200px;
+        height: 280px;
         transform: translate(-20px, -25%);
     }
 
     .poster_img{
-        max-width: 200px;
+        width: 192px;
+        height: 274px;
     }
     
     .info{
@@ -217,9 +217,12 @@
 }
 
 @media(max-width : 570px){
+    
     .group_change{
         display: flex;
         flex-direction: column;
+        width: 93%;
+        margin-left: 0px;
     }
     .btn_wrapper{
         margin-top: 40px;
@@ -227,6 +230,10 @@
     }
     .select{
         width: 50%;
+    }
+    .btn_wrapper{
+        width: 100%;
+        justify-content: space-evenly;
     }
 }
 

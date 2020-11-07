@@ -38,9 +38,16 @@
     width: 79%;
     height: 7vh;
     align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.nav::-webkit-scrollbar {
+    display: none;
 }
 
 .nav_field_item{
+    white-space: nowrap;
     padding: 15px 20px;
     color: #ffff;
     border-radius: 10px;

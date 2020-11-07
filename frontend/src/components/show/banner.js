@@ -14,7 +14,7 @@ function Banner({movie}) {
           backgroundImage: `url(
                 "${movie?.poster_landscape_url}"
             )`,
-          backgroundPosition: "center center",
+          backgroundPosition: "center",
         }}
       >
       <div className={styles.banner_fadeBottom}/>
