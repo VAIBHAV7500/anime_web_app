@@ -65,11 +65,12 @@ function VideoPlayerComp({src}) {
     });
     videojs.registerComponent('MyButton', MyButton);
     player.addChild('MyButton', {});
-    
-    setInterval(function(){
+
+    const checkTime = setInterval(function(){
        console.log(player?.currentTime()); 
     }, 3000);
     return () => {
+      clearInterval(checkTime);
       player.dispose();
     };
   },[]);
