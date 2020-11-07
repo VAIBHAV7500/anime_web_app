@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import ReactPlayer from 'react-player';
 import Description from './description';
 import {getVideoLink} from '../../utils/api';
-import './player.css';
+import styles from './player.module.css';
 import VideoPlayerComp from './VideoPlayerComp';
 
 const watchProgress = (event) => {
@@ -60,7 +60,7 @@ export class player extends Component {
 
     render() {
         return (
-                <div className="player-wrapper">
+                <div className={styles.player_wrapper}>
                     <VideoPlayerComp src={this.state?.videoUrl} />
                  </div>
         )

@@ -372,3 +372,64 @@
 .video-js .vjs-icon-picture-in-picture-enter{
   background-color: pink;
 }
+
+
+/*
+*
+*  For Video JS Menu
+*
+*/
+
+.vjs-menu-button-popup .vjs-menu .vjs-menu-content{
+  background-color: rgba(20, 18, 20, 0.6);
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
+  7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.vjs-menu-button-popup .vjs-menu li{
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.vjs-menu-button-popup .vjs-menu li:hover{
+  background-color: rgba(108, 13, 163, 0.6);
+}
+
+.vjs-menu-button-popup .vjs-menu li.vjs-selected{
+  background-color: rgba(108, 13, 163, 1);
+  color: white;
+}
+
+/*
+Control Buttons Images
+*/
+
+.vjs-subs-caps-button .vjs-icon-placeholder::before{
+  background-image: url("https://img.icons8.com/metro/26/000000/closed-captioning.png");
+  background-color: white;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  border: 2px solid black;
+}
+
+.vjs-audio-button button .vjs-icon-placeholder::before{
+  background-image: url("https://img.icons8.com/metro/26/000000/closed-captioning.png");
+  background-color: white;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  border: 2px solid black;
+}
+
+.vjs-picture-in-picture-control .vjs-icon-placeholder::before{
+  background-image: url("https://img.icons8.com/metro/26/000000/closed-captioning.png");
+  background-color: white;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  border: 2px solid black;
+}
+

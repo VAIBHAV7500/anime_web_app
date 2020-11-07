@@ -65,7 +65,7 @@ const findByOriginalName = async (orignalName)=>{
 }
 
 const forBanner = async () => {
-    const sql = `SELECT id, name, original_name,poster_landscape_url FROM shows ORDER BY total_view desc LIMIT 10`;
+    const sql = `SELECT id, name, original_name,poster_landscape_url FROM shows where id in (31,12,19,28,9,6,12,53,57,48)`;
     const response = await runQuery(sql);
     return response;
 }
