@@ -52,7 +52,7 @@
     outline: none;
 }
 
-.btn:active{
+.btn:active {
     position: relative;
     top: 1px;
 }
@@ -73,7 +73,7 @@
     color: #ffffff;
     text-align: center;
     margin: 0px;
-	font-size: 13px;
+    font-size: 13px;
 }
 
 .sign_up {
@@ -81,12 +81,12 @@
     text-decoration: none;
 }
 
-.sign_up:hover{
+.sign_up:hover {
     text-decoration: underline;
 }
 
 
-.error{
+.error {
     text-align: center;
     background-color: rgb(236, 166, 35);
     border-radius: 11px;
@@ -100,23 +100,25 @@
 
 @-webkit-keyframes icon-spin {
     0% {
-      -webkit-transform: rotate(0deg);
-              transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      -webkit-transform: rotate(359deg);
-              transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
     }
 }
 
 @keyframes icon-spin {
     0% {
-      -webkit-transform: rotate(0deg);
-              transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      -webkit-transform: rotate(359deg);
-              transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
     }
 }
 
@@ -149,25 +151,30 @@
 }
 
 @media(max-width:480px) {
-    .title_name{
-        color:  #aa51fdcc;
+    .title_name {
+        color: #aa51fdcc;
     }
-    .sign_up{
-        color:  #aa51fdcc
+
+    .sign_up {
+        color: #aa51fdcc
     }
-    .body{
-        background : none;
+
+    .body {
+        background: none;
         background-color: black;
     }
+
     .sign_in_form {
         margin: 0 3vw;
         margin-top: 18%;
     }
+
     .sign_up_form {
         margin: 0 3vw;
         margin-top: 18%;
         margin-left: 60%;
     }
+
     .title_name {
         font-size: 38px;
     }
@@ -189,9 +196,11 @@
     .title_name {
         font-size: 25px;
     }
+
     .forgot .para {
         text-align: left;
     }
+
     .forgot {
         display: block;
     }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+
 .sign_up_form {
     background: rgba(0, 0, 0, 0.4117647058823529);
     max-width: 500px;
@@ -21,7 +22,8 @@ p.sign_in_p {
     color: white;
     text-decoration: none;
 }
-.sign_in:hover{
+
+.sign_in:hover {
     text-decoration: underline;
 }
 
@@ -35,8 +37,8 @@ p.sign_in_p {
         margin-top: 5%;
         margin-left: 1%;
     }
-    .sign_in{
+
+    .sign_in {
         color: #641ba8cc;
     }
 }
-

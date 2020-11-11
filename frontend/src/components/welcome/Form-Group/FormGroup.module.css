@@ -1,7 +1,8 @@
 .form_group {
     margin: 20px 0;
 }
-.form_group:active{
+
+.form_group:active {
     top: 1px;
     position: relative;
 }

@@ -1,36 +1,36 @@
-.body{
+.body {
     display: flex;
     height: auto;
 }
 
 .info,
 .poster,
-.group_change{
+.group_change {
     margin-right: auto;
     box-sizing: border-box;
 }
 
-.poster{
+.poster {
     background-color: rgb(43, 42, 42);
     width: 280px;
     height: 377px;
-    transform: translate(25%,-25%);
+    transform: translate(25%, -25%);
     border-radius: 16px;
     border: 3px solid white;
 }
 
-.poster_img{
+.poster_img {
     width: 247px;
     height: 370px;
     border-radius: 16px;
 }
 
-.info{
+.info {
     margin-left: 8%;
     width: 55%;
 }
 
-.show_title{
+.show_title {
     font-weight: bolder;
     padding-top: 5%;
     font-size: 50px;
@@ -38,7 +38,7 @@
     word-break: normal;
 }
 
-.show_title::after{
+.show_title::after {
     content: ""attr(name)"+";
     display: inline-block;
     font-size: 15px;
@@ -47,16 +47,16 @@
     box-shadow: -2px -2px 10px #333235, 4px 3px 10px #0d0c0f;
     color: rgb(187, 185, 185);
     border-radius: 50%;
-    transform: translate(10px , -10px);
+    transform: translate(10px, -10px);
 }
 
-.genre{
+.genre {
     margin-top: 20px;
     line-break: normal;
-    width:100%;
+    width: 100%;
 }
 
-.genre_card{
+.genre_card {
     display: inline-block;
     margin-left: 13px;
     margin-top: 15px;
@@ -75,31 +75,31 @@
 }
 
 
-.synopsis{
+.synopsis {
     word-wrap: break-word;
     font-weight: normal;
     max-width: 100%;
-    padding-top:20px;
+    padding-top: 20px;
     padding-bottom: 20px;
     font-size: 14px;
     word-spacing: 0.1em;
     color: rgba(255, 255, 255, 0.74);
 }
 
-.see_more{
+.see_more {
     font-weight: bold;
     color: #f0b922;
     cursor: pointer;
 }
 
-.group_change{
+.group_change {
     padding-left: 5%;
     padding-top: 2%;
     width: 33%;
     margin-right: auto;
 }
 
-.select{
+.select {
     width: 17%;
     padding: 15px 10px;
     outline: none;
@@ -110,10 +110,10 @@
     font-size: 12px;
     letter-spacing: 2px;
     box-sizing: border-box;
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
 
-.option{
+.option {
     color: #ffff;
     padding: 3px 0px;
     box-sizing: border-box;
@@ -121,7 +121,7 @@
 
 
 .play_btn,
-.watch_list_btn{
+.watch_list_btn {
     background-color: rgb(80, 14, 141);
     text-align: center;
     color: white;
@@ -140,32 +140,32 @@
 }
 
 .play_btn:active,
-.watch_list_btn:active{
+.watch_list_btn:active {
     position: relative;
     top: 1px;
 }
 
-.play_btn{
+.play_btn {
     margin-top: 150px;
 }
 
-.watch_list_btn{
+.watch_list_btn {
     margin-top: 20px;
 }
 
-.plus{
+.plus {
     margin-right: 7px;
     font-size: 19px;
 }
 
 
-@media(max-width : 1160px){
+@media(max-width : 1160px) {
 
-    .body{
+    .body {
         flex-direction: column;
     }
 
-    .poster{
+    .poster {
         margin-right: auto;
         margin-left: auto;
         width: 200px;
@@ -173,42 +173,42 @@
         transform: translate(-20px, -25%);
     }
 
-    .poster_img{
+    .poster_img {
         width: 192px;
         height: 274px;
     }
-    
-    .info{
+
+    .info {
         margin-top: -40px;
         text-align: center;
         margin-right: auto;
         width: 80%;
     }
 
-    .show_title{
+    .show_title {
         font-size: 35px;
         padding-top: 0;
     }
 
-    
-    .group_change{
+
+    .group_change {
         width: 80%;
         margin-left: 3%;
         margin-bottom: 30px;
     }
 
-    .btn_wrapper{
+    .btn_wrapper {
         display: flex;
     }
 
     .play_btn,
-    .watch_list_btn{
+    .watch_list_btn {
         margin-top: 0px;
-        margin-left: 20px ;
+        margin-left: 20px;
         font-size: 12px;
     }
-    
-    .select{
+
+    .select {
         width: 30%;
         position: relative;
         float: left;
@@ -216,24 +216,26 @@
 
 }
 
-@media(max-width : 570px){
-    
-    .group_change{
+@media(max-width : 570px) {
+
+    .group_change {
         display: flex;
         flex-direction: column;
         width: 93%;
         margin-left: 0px;
     }
-    .btn_wrapper{
+
+    .btn_wrapper {
         margin-top: 40px;
         margin-left: -4%;
     }
-    .select{
+
+    .select {
         width: 50%;
     }
-    .btn_wrapper{
+
+    .btn_wrapper {
         width: 100%;
         justify-content: space-evenly;
     }
 }
-

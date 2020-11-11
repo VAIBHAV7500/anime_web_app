@@ -9294,6 +9294,14 @@ react-overlays@^4.1.0:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-pace-progress@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-pace-progress/-/react-pace-progress-2.0.0.tgz#4df95e2ca86b9daf9ffc3e16188f3d6e731836c6"
+  integrity sha512-RKXD96dAVFT6gKQLpLhIH8vbQkP+pzdIZdAFoMfPJ6bArz/BWIw/77xNBxcJ1Or8QKWXyTBl2AIBTHo8W9vLFg==
+  dependencies:
+    prop-types "^15.6.2"
+    react "^16.6.3"
+
 react-player@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.6.1.tgz#3c296039898bfd726b52ba31984cc406af03de2f"
