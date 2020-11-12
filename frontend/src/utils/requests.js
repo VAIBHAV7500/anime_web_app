@@ -17,8 +17,12 @@ const requests = {
     reviews: `/api/review`,
     relatedShows: `/api/shows/similar`,
     fetchWatchlist : `/api/list/watchlist`,
+    postWatchlist: `/api/list/add-watchlist`,
+    removeWatchlist: `/api/list/remove-watchlist`,
     fetchCurrentlyWatching : `/api/list/currently-watching`,
-    fetchCompletedShows : `/api/list/completed`
+    postCurrentlyWatching: `/api/list/add-currently-watching`,
+    fetchCompletedShows : `/api/list/completed`,
+    postCompletedShows: `/api/list/add-completed`
 }
 
 export default requests;

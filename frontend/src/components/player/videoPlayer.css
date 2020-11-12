@@ -7,6 +7,11 @@
     font-family: Helvetica, Arial, sans-serif;
     text-shadow: none !important;
     outline: none !important;
+    border: none !important;
+  }
+
+  .video-js .vjs-tech{
+    outline: none !;
   }
 
   .video-js .vjs-control-bar {
@@ -68,7 +73,7 @@
   .video-js .vjs-fullscreen-control {
     width: 30px;
     height: 30px;
-    margin: 5px;
+    margin-right: 5px;
     padding: 0px !important;
   }
   
@@ -410,26 +415,29 @@ Control Buttons Images
 */
 
 .vjs-subs-caps-button .vjs-icon-placeholder::before{
-  background-image: url("https://img.icons8.com/metro/26/000000/closed-captioning.png");
-  background-color: white;
+  background-image: url("/closed_caption.svg");
+  fill: white;
   background-size: 30px 30px;
   background-repeat: no-repeat;
-  border: 2px solid black;
+  opacity: 0.75;
+}
+
+.vjs-subs-caps-button:hover{
+  opacity: 1 !important;
 }
 
 .vjs-audio-button button .vjs-icon-placeholder::before{
-  background-image: url("https://img.icons8.com/metro/26/000000/closed-captioning.png");
-  background-color: white;
+  background-image: url("/audiotrack.svg");
   background-size: 30px 30px;
   background-repeat: no-repeat;
-  border: 2px solid black;
+  opacity: 0.75;
 }
 
 .vjs-picture-in-picture-control .vjs-icon-placeholder::before{
-  background-image: url("https://img.icons8.com/metro/26/000000/closed-captioning.png");
-  background-color: white;
+  background-image: url("/pip.svg");
   background-size: 30px 30px;
   background-repeat: no-repeat;
-  border: 2px solid black;
+  opacity: 0.75;
 }
+
 

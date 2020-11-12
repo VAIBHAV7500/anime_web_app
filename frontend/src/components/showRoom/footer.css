@@ -1,5 +1,12 @@
 .footer{
-    background: rgb(56, 1, 119);
+    background: #641ba8cc;  
+    background-image: -webkit-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: -moz-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: -ms-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: -o-linear-gradient(top, #641ba8cc, #3a0968cc);
+    background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
+    color: white;
+    font-weight: normal;
     opacity: 1;
     height: auto;
     position: absolute;
@@ -23,7 +30,7 @@ table{
     display: block;
     width: 100%;
     padding: 1%;
-    font-size: 15px;
+    font-size: 10px;
     margin-top: 8px;
 }
 
@@ -32,6 +39,7 @@ table{
     width: 60%;
     margin-left: 37%;
     padding: 26px 0%;
+    cursor: pointer;
 }
 .footer_logo_div{
     width: 60%; 
@@ -41,10 +49,7 @@ table{
     cursor: pointer;
     color: white;
     float: right;
-    font-size: 54px;
-    background: -webkit-linear-gradient(white, #38495a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    width: 180px;
 }
 
 @media(max-width:480px){

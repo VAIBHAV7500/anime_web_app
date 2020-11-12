@@ -1,5 +1,6 @@
 import React from 'react'
-import './footer.css'
+import './footer.css';
+import mainLogo from '../services/logo_transparent.png'
 
 function footer() {
     return (
@@ -16,9 +17,7 @@ function footer() {
                     <p>Legal Notices</p>
                 </div>
                 <div className="footer_logo_div">
-                    <h1 className="footer_logo">
-                        ANIMEI
-                    </h1>
+                    <img draggable="false" className="footer_logo"  src={mainLogo} />
                 </div>
             </div>
         </div>

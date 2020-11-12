@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Pace from 'react-pace-progress';
 import Banner from './banner';
 import Info from './info';
@@ -29,36 +29,36 @@ export class show extends Component {
         title: 'Similar Shows & Movies',
         component: <Similar show_id={this.props.match.params.id}/>
       }
-    ] 
+    ] ;
 
     fetchData = async () => {
-        const showId = this.props.match.params.id
-        const promiseArray = [];
-        this.setState({
-            show_id: showId,
-            nav_id: 0,
-            loading:true
-        });
-        promiseArray.push(new Promise((res, rej) => {
-            axios.get(`${requests.fetchShowDetails}?id=${showId}`).then((result) => {
-                res(result);
-            }).catch((err) => {
-                rej(err)
-            });
-        }));
-        const results = await Promise.all(promiseArray);
-        const states = {
-            show: results[0].data,
-            nav_id: 0,
-            show_id: showId,
-            loading:false,
-        };
-        this.setState(states);
+      const showId = this.props.match.params.id
+      const promiseArray = [];
+      this.setState({
+          show_id: showId,
+          nav_id: 0,
+          loading:true
+      });
+      promiseArray.push(new Promise((res, rej) => {
+          axios.get(`${requests.fetchShowDetails}?id=${showId}`).then((result) => {
+              res(result);
+          }).catch((err) => {
+              rej(err)
+          });
+      }));
+      const results = await Promise.all(promiseArray);
+      const states = {
+          show: results[0].data,
+          nav_id: 0,
+          show_id: showId,
+          loading:false,
+      };
+      this.setState(states);
     }
     
-    async componentDidMount(){  
-        window.scrollTo(0, 0);
-        this.fetchData();
+    async componentDidMount(){ 
+      window.scrollTo(0, 0);
+      this.fetchData();
     }
 
     async componentDidUpdate(prevProps) {

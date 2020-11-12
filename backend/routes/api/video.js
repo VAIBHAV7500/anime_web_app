@@ -74,8 +74,8 @@ router.get('/episodes', async(req,res,next)=>{
     if(req.query.show_id || req.query.offset){ 
         const latest = req.query.latest === 'true' ? true : false;
         let from = parseInt(req.query.from || 1);
+        const rows = await db.shows.totalShows(req.query.show_id);
         if(latest && req.query.from === undefined){
-            const rows = await db.shows.totalShows(req.query.show_id);
             if(rows && rows.length != 0){
                 from = rows[0].total_episodes;
             }
@@ -90,9 +90,8 @@ router.get('/episodes', async(req,res,next)=>{
             });   
             return;
         });
-        let totalEpisodes = 0;
+        let totalEpisodes = rows[0] && rows[0].total_episodes;
         if(result && result.length){
-            totalEpisodes = result[0].total_episodes;
             result = result.map((x)=>{
                 return {
                     id: x.id,

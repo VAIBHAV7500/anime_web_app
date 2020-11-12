@@ -133,7 +133,8 @@
     padding: 15px 10px;
     border: none;
     letter-spacing: 2px;
-    width: 50%;
+    width: auto;
+    max-width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -147,10 +148,12 @@
 
 .play_btn {
     margin-top: 150px;
+    height: 3vh;
 }
 
 .watch_list_btn {
     margin-top: 20px;
+    height: 3vh;
 }
 
 .plus {

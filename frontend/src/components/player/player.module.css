@@ -1,5 +1,4 @@
 .player-wrapper{
-    height: 100vh;
     background-color: rgb(43, 42, 42);
     animation: fadeInAnimation ease 4s;
     animation-iteration-count: 1;

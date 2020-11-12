@@ -62,6 +62,7 @@ export class player extends Component {
         return (
                 <div className={styles.player_wrapper}>
                     <VideoPlayerComp src={this.state?.videoUrl} />
+                    
                  </div>
         )
     }

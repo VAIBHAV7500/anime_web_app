@@ -51,7 +51,8 @@ function Episodes() {
             endPoint += `&latest=true`;
         }
         const response = await axios.get(endPoint);
-        return response.data.result;
+        console.log(response.data);
+        return response.data;
     }
 
     const fetchMoreData = async () => {
@@ -59,13 +60,16 @@ function Episodes() {
         if(!latest){
             from = episodeArray?.length ? episodeArray[episodeArray.length-1].episode + 1 : 0;
             const response = await fetchEps(from);
-            setEpisodes(episodeArray?.concat(response));
-            episodeArray = episodeArray.concat(response);
+            setEpisodes(episodeArray?.concat(response.result));
+            episodeArray = episodeArray.concat(response.result);
+            if(response.total_episodes === episodeArray.length){
+                setMore(false);
+            }
         }else if(latest && episodeArray[episodeArray.length-1]?.episode > 1){
             from = episodeArray?.length ? episodeArray[episodeArray.length-1].episode - 1 : 0;
             const response = await fetchEps(from);  
-            setEpisodes(episodeArray?.concat(response));
-            episodeArray = episodeArray.concat(response);
+            setEpisodes(episodeArray?.concat(response.result));
+            episodeArray = episodeArray.concat(response.result);
             if(from - chunkSize <= 1){
                 setMore(false);
             }
@@ -74,17 +78,29 @@ function Episodes() {
 
     const setNewRange = async () =>{
         const epNum = document.getElementsByClassName(styles.number_input)[0].value;
+        let from = 1;
+        let response = {};
         setEpisodes([]);
         if(epNum){
-            const from = epNum;
-            const response = await fetchEps(from);
-            setEpisodes(response);
-            episodeArray = response;
+            from = epNum;
+            response = await fetchEps(from);
+            setEpisodes(response.result);
+            episodeArray = response.result;
         }else{
-            const from = 1;
-            const response = await fetchEps(from);
-            setEpisodes(response);
-            episodeArray = response;
+            from = 1;
+            response = await fetchEps(from);
+            setEpisodes(response.result);
+            episodeArray = response.result;
+        }
+
+        if(!latest){
+            if(response.total_episodes === episodeArray.length){
+                setMore(false);
+            }
+        }else{
+            if(from - chunkSize <= 1){
+                setMore(false);
+            }
         }
     }
 
