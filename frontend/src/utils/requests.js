@@ -22,7 +22,9 @@ const requests = {
     fetchCurrentlyWatching : `/api/list/currently-watching`,
     postCurrentlyWatching: `/api/list/add-currently-watching`,
     fetchCompletedShows : `/api/list/completed`,
-    postCompletedShows: `/api/list/add-completed`
+    postCompletedShows: `/api/list/add-completed`,
+    fetchVideoDetails: `/api/video/details`,
+    postVideoSessions: `/api/video/sessions`,
 }
 
 export default requests;

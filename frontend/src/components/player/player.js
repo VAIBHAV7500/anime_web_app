@@ -1,38 +1,30 @@
 import React, {Component} from 'react'
-import ReactPlayer from 'react-player';
 import Description from './description';
-import {getVideoLink} from '../../utils/api';
 import styles from './player.module.css';
 import VideoPlayerComp from './VideoPlayerComp';
-
-const watchProgress = (event) => {
-    console.log(event);
-}
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
+import PageLoader from '../services/page_loader';
 
 export class player extends Component {
 
     fetchData = async () => {
         window.scrollTo(0, 0);
-        const showId = this.props.match.params.id
+        const playerId = this.props.match.params.id;
+        this.setState({
+            loading: true
+        });
+        
         try {
-            document.body.style = 'background: rgb(43, 42, 42);';
-            this.disableRightClick();
-            let response = {};
-            // //response = await getVideoLink();
-            // console.log('IN player')
-            // console.log(response);
-            // if (response.status === 200) {
-            //     const data = response.data;
-            //     this.setState(data);
-            // } else {
-            //     console.log(response);
-            //     throw new Error(response.data);
-            // }
-
-            this.setState(prevState => ({
-                ...prevState,
-                videoUrl: `https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8`
-            }));
+            const endPoint = `${requests.fetchVideoDetails}?player_id=${playerId}`;
+            const result = await axios.get(endPoint);
+            console.log(result);
+            if(result.data){
+                this.setState({
+                    player: result.data,
+                    loading: false
+                });
+            }
         } catch (error) {
             console.log(error.message);
         }
@@ -61,8 +53,8 @@ export class player extends Component {
     render() {
         return (
                 <div className={styles.player_wrapper}>
-                    <VideoPlayerComp src={this.state?.videoUrl} />
-                    
+                    {this.state?.loading && <PageLoader />}
+                    {this.state?.player && <VideoPlayerComp src={this.state?.player} />}
                  </div>
         )
     }

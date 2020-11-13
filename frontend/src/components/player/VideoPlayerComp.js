@@ -6,12 +6,16 @@ import 'videojs-hotkeys';
 import './videoPlayer.css';
 import 'videojs-event-tracking';
 import { useHistory } from 'react-router';
-import player from './player';
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
+import { useSelector } from 'react-redux';
 
 function VideoPlayerComp({src}) {
-  const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8";
+  const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
   const playerRef = useRef();
   const history = useHistory();
+  let prevTime = 0;
+  const userId = useSelector(state => state.user_id);
 
   const playerOptions = {
     autoplay: true, 
@@ -33,7 +37,8 @@ function VideoPlayerComp({src}) {
       remainingTimeDisplay: false,
       subtitlesButton: false,
       captionsButton: true,
-      audioTrackButton: true
+      audioTrackButton: true,
+      qualitySelector: true
     },
     playbackRates: [0.5, 1, 1.5, 2],
     responsive:true,
@@ -95,12 +100,32 @@ function VideoPlayerComp({src}) {
     });
 
     player.on('tracking:firstplay', (e, data) => {
-      console.log('Button');
+      console.log('SRc: ' + src.progress);
+      console.log('Duration: ' + player?.duration());
       createPlayerButtons(player);
+
+      const currentTime = ((src?.progress || 0) * (player?.duration() || 0)) /100;
+      console.log('Current Time: ' + currentTime);
+      player.currentTime(currentTime);
     });
 
     const checkTime = setInterval(function(){
        console.log(player?.currentTime()); 
+       const currTime = player?.currentTime() || 0;
+       if((currTime - prevTime)>= 10){
+          const covered = (player?.currentTime() / player?.duration())*100;
+          console.log(userId);
+          const body = {
+            user_id: userId,
+            show_id: src.show_id,
+            video_id: src.id,
+            covered
+          }
+          const endPoint = requests.postVideoSessions;
+          axios.post(endPoint,body);
+          prevTime = currTime;
+       }
+
     }, 3000);
     return () => {
       clearInterval(checkTime);

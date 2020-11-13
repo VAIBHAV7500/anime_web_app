@@ -19,6 +19,7 @@ const user_ip = require('./tables/user_ip');
 const completed_shows = require('./tables/completed_shows');
 const currently_watching = require('./tables/currently_watching');
 const watchlist = require('./tables/watchlist');
+const user_player_session = require('./tables/user_player_session');
 
 const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
@@ -55,4 +56,5 @@ module.exports =  {
     completed_shows,
     currently_watching,
     watchlist,
+    user_player_session,
 }

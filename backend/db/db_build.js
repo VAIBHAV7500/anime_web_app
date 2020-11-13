@@ -19,6 +19,7 @@ const user_ip = require('./tables/user_ip');
 const completed_shows = require('./tables/completed_shows');
 const currently_watching = require('./tables/currently_watching');
 const watchlist = require('./tables/watchlist');
+const user_player_session = require('./tables/user_player_session');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -89,10 +90,11 @@ con.connect(async (err)=>{
         console.log(`Created currently_watching`);
         response = await watchlist.createTable(con);
         console.log(`Created watchlist`);
+        response = await user_player_session.createTable(con);
+        console.log((`Created user_player_session`));
 
-        
         console.log('Running Migrations');
-        
+
     }
     catch(err){
         console.log(err);

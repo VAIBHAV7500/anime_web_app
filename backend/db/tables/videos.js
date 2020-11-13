@@ -16,9 +16,12 @@ const createTable = (con) => {
             closing_end_time TIME,
             quality INT,
             type VARCHAR(255),
+            next_show BIGINT UNSIGNED,
             show_id BIGINT,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            FOREIGN KEY(show_id) REFERENCES shows(ID),
+            FOREIGN KEY(next_show) REFERENCES shows(ID)
         )
     `;
     return new Promise((res, rej) => {
@@ -32,8 +35,8 @@ const createTable = (con) => {
 }
 
 const find = async (id) => {
-    const sql = `SELECT * FROM videos WHERE id = ${id} LIMIT 1`;
-    const result = await runQuery(sql);
+    const sql = `SELECT * FROM videos WHERE id = ? LIMIT 1`;
+    const result = await runQuery(sql,[id]);
     return result.length ? result[0] : undefined;
 }
 

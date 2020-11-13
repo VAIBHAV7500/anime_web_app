@@ -154,7 +154,7 @@ function Episodes() {
                             </div>
                             
                             <div className={styles.episode_description}>{"Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King."}</div>
-                            <div className={styles.progress} style={{width: `${Math.floor(Math.random() * 100)}%`}}/>
+                            <div className={styles.progress} style={{width: `${episode.progress}%`}}/>
                         </div>
                     ))}
                 </InfiniteScroll>
