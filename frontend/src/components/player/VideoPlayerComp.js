@@ -90,6 +90,14 @@ function VideoPlayerComp({src}) {
         //removeButton("skip_intro");
       history.goBack();
     },true);
+    createButton(el,"Discussion","discusson", [styles.discussion, 'vjs-control-bar'],()=>{
+      if(player.isFullscreen()){
+        player.exitFullscreen();
+      }
+      var el = document.getElementsByClassName(styles.player)[0];
+      console.log(el.scrollHeight);
+      window.scrollBy(0,el.scrollHeight);
+    });
   }
 
 
@@ -97,6 +105,12 @@ function VideoPlayerComp({src}) {
     //videojs.registerPlugin('hotkeys',this.hotkeys);
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
+      if(document.documentElement.offsetHeight > 0)
+      document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
+      window.addEventListener("resize",()=>{
+        if(document.documentElement.offsetHeight > 0)
+        document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
+      });
     });
 
     player.on('tracking:firstplay', (e, data) => {
@@ -109,33 +123,37 @@ function VideoPlayerComp({src}) {
       player.currentTime(currentTime);
     });
 
-    const checkTime = setInterval(function(){
-       console.log(player?.currentTime()); 
-       const currTime = player?.currentTime() || 0;
-       if((currTime - prevTime)>= 10){
-          const covered = (player?.currentTime() / player?.duration())*100;
-          console.log(userId);
-          const body = {
-            user_id: userId,
-            show_id: src.show_id,
-            video_id: src.id,
-            covered
-          }
-          const endPoint = requests.postVideoSessions;
-          axios.post(endPoint,body);
-          prevTime = currTime;
-       }
+    const checkSessionDetails = () => {
+      console.log(player?.currentTime()); 
+      const currTime = player?.currentTime() || 0;
+      if((currTime - prevTime)>= 10){
+         const covered = (player?.currentTime() / player?.duration())*100;
+         console.log(userId);
+         const body = {
+           user_id: userId,
+           show_id: src.show_id,
+           video_id: src.id,
+           covered
+         }
+         const endPoint = requests.postVideoSessions;
+         axios.post(endPoint,body);
+         prevTime = currTime;
+      }
+    }
 
+    const checkTime = setInterval(function(){
+      checkSessionDetails();
     }, 3000);
     return () => {
       clearInterval(checkTime);
+      checkSessionDetails();
       player.dispose();
     };
   },[]);
 
   return (
       <div data-vjs-player className={styles.player}>
-        <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline/>
+        <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline />
       </div>  
   )
 }

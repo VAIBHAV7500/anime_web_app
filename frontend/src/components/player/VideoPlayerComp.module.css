@@ -4,6 +4,7 @@
     left: 0%;
     height: 100%;
     width: 100%;
+    scroll-behavior: smooth;
 }
 
 .player{
@@ -34,12 +35,10 @@
 }
 
 .skip_intro{
-    top: 90%;
     height: 50px;
-    left: 90%;
-    margin-left: -30px;
-    margin-top: -50px;
-    background-color:  transparent !important;
+    bottom: 81px;
+    right: 30px;
+    background-color: transparent !important;
     padding: 10px;
 }
 
@@ -51,9 +50,10 @@
 }
 
 .discussion{
-    top: 83%;
-    height: 50px;
-    left: 2%;
-    margin-left: -10px;
-    padding: 5px 20px;
+    top: 83% !important;
+    height: 50px !important;
+    left: 2% !important;
+    margin-left: -10px !important;
+    width: fit-content !important;
+    padding: 5px 20px !important;
 }

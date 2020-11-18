@@ -49,7 +49,7 @@ const deleteRecord = async (show_id, user_id) => {
 
 const exists = async (show_id, user_id) => {
     const sql = `SELECT id from watchlist where show_id = ? and user_id = ? limit 1`;
-    const result = runQuery(sql, [show_id, user_id]);
+    const result = await runQuery(sql, [show_id, user_id]);
     return result.length !== 0 ? true : false; 
 }
 

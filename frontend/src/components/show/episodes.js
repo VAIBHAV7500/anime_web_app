@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import styles from './episodes.module.css';
@@ -6,11 +6,14 @@ import {useHistory} from "react-router-dom";
 import { useLocation, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useSelector } from 'react-redux';
 
 let episodeArray = [];
 
 function Episodes() {
     const {id} = useParams();
+    const userId = useSelector(state => state.user_id);
+    let prevUserId = null;
     const [episodes, setEpisodes] = useState([]);
     const [cookies,setCookie] = useCookies(['order-track']);
     let [latest, setLatest] = useState(cookies['order-track'] === 'true' ? true : false);
@@ -20,19 +23,22 @@ function Episodes() {
     let chunkSize = 10;
 
     const updateEpisodes = async () => {
-        setEpisodes([]);
-        setMore(true);
-        episodeArray = [];
-        let endPoint = `${requests.fetchEpisodes}?show_id=${id}`;
-        if(latest){
-            endPoint += `&offset=${chunkSize}&latest=true`;
-        }else{
-            endPoint += `&from=${0}&offset=${chunkSize}`;
-        }   
-        const response = await axios.get(endPoint);
-        setEpisodes(response.data.result);
-        episodeArray = response.data.result;
-        return response.data.result;
+        if(userId){
+            setEpisodes([]);
+            setMore(true);
+            episodeArray = [];
+            console.log('User Id: ' + userId);
+            let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}`;
+            if(latest){
+                endPoint += `&offset=${chunkSize}&latest=true`;
+            }else{
+                endPoint += `&from=${0}&offset=${chunkSize}`;
+            }   
+            const response = await axios.get(endPoint);
+            setEpisodes(response.data.result);
+            episodeArray = response.data.result;
+            return response.data.result;
+        }
     }
 
     useEffect(() => {
@@ -45,14 +51,24 @@ function Episodes() {
         updateEpisodes();
     },[id]);
 
-    const fetchEps = async (from) => {
-        let endPoint = `${requests.fetchEpisodes}?show_id=${id}&from=${from}&offset=${chunkSize}`;
-        if(latest){
-            endPoint += `&latest=true`;
+    useEffect(() => {
+        console.log('User id: ' + userId);
+        if(prevUserId !== userId){
+            prevUserId = userId;
+            updateEpisodes();
         }
-        const response = await axios.get(endPoint);
-        console.log(response.data);
-        return response.data;
+    }, [userId])
+
+    const fetchEps = async (from) => {
+        if(userId){
+            let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}&from=${from}&offset=${chunkSize}`;
+            if(latest){
+                endPoint += `&latest=true`;
+            }
+            const response = await axios.get(endPoint);
+            console.log(response.data);
+            return response.data;
+        }
     }
 
     const fetchMoreData = async () => {
@@ -60,18 +76,22 @@ function Episodes() {
         if(!latest){
             from = episodeArray?.length ? episodeArray[episodeArray.length-1].episode + 1 : 0;
             const response = await fetchEps(from);
-            setEpisodes(episodeArray?.concat(response.result));
-            episodeArray = episodeArray.concat(response.result);
-            if(response.total_episodes === episodeArray.length){
-                setMore(false);
+            if(response){
+                setEpisodes(episodeArray?.concat(response.result));
+                episodeArray = episodeArray.concat(response.result);
+                if(response.total_episodes === episodeArray.length){
+                    setMore(false);
+                }
             }
         }else if(latest && episodeArray[episodeArray.length-1]?.episode > 1){
             from = episodeArray?.length ? episodeArray[episodeArray.length-1].episode - 1 : 0;
             const response = await fetchEps(from);  
-            setEpisodes(episodeArray?.concat(response.result));
-            episodeArray = episodeArray.concat(response.result);
-            if(from - chunkSize <= 1){
-                setMore(false);
+            if(response){
+                setEpisodes(episodeArray?.concat(response.result));
+                episodeArray = episodeArray.concat(response.result);
+                if(from - chunkSize <= 1){
+                    setMore(false);
+                }
             }
         }
     }

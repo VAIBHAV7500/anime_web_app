@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './info.module.css';
 import {useHistory} from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 
 function Info({movie}) {
     const [moreSyn, setSynopsis] = useState(false);
-    const [watchStatus, setWatchStatus] = useState('Add to List')
+    const [watchStatus, setWatchStatus] = useState('Add to List');
+    const [latest, setLatest] = useState({});
     const history = useHistory();
     const userId = useSelector(state => state.user_id);
 
@@ -30,8 +31,23 @@ function Info({movie}) {
         }
     }
 
+    useEffect(() => {
+        setWatchStatus(movie?.watchlist ? 'remove from list' : 'Add to List');
+        if(movie?.recent){
+            setLatest(movie.recent);
+        }
+    }, [movie])
+
     const goToShow = (id) => {
-        history.push(`/show/${id}`);
+        if(id){
+            history.push(`/show/${id}`);
+        }
+    }
+
+    const goToPlayer = (id) =>{
+        if(id){
+            history.push(`/player/${id}`);
+        }
     }
 
     const handleWatchList = async () => {
@@ -50,7 +66,8 @@ function Info({movie}) {
             finalStatus = 'Remove from List';
           }else if(watchStatus.toLowerCase() === 'remove from list'){
             setWatchStatus('Removing');
-              const response = await axios.delete(requests.removeWatchlist,body).catch((err)=>{
+            console.log(JSON.stringify(body));
+              const response = await axios.delete(`${requests.removeWatchlist}?show_id=${movie.id}&user_id=${userId}`).catch((err)=>{
                 console.log(err);
                 //show error...
             });
@@ -87,8 +104,8 @@ function Info({movie}) {
                     }
                 </select> 
                 <div className={`${styles.btn_wrapper}`}>
-                    <div className={`${styles.play_btn} `}>
-                        Start Watching
+                    <div className={`${styles.play_btn} `} onClick={()=>{goToPlayer(latest?.id)}}>
+                        {latest?.episode_number && (latest.episode_number === 1 ? 'Start Watching' : 'Continue Watching Ep ' + latest.episode_number)}
                     </div>
                     <div className={`${styles.watch_list_btn}`} onClick={handleWatchList}>
                         {watchStatus}

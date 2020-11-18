@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './description.css'
 
-function description() {
+
+function Description() {
+    
+    useEffect(() => {
+        if(document.documentElement.offsetHeight > 0)
+        document.querySelector('.page').style.marginTop = document.documentElement.offsetHeight + "px";
+        window.addEventListener("resize",()=>{
+            if(document.documentElement.offsetHeight > 0)
+            document.querySelector('.page').style.marginTop = document.documentElement.offsetHeight + "px";        
+        });
+
+        return () => {
+            if (window.removeEventListener) {                   // For all major browsers, except IE 8 and earlier
+                window.removeEventListener("resize", ()=>{});
+            } else if (window.detachEvent) {                    // For IE 8 and earlier versions
+                window.detachEvent("resize", ()=>{});   
+            }
+        }
+    }, []);
     return (
         <div className="page">
             <div className="title"> Vinland Saga </div>
@@ -29,4 +47,4 @@ function description() {
     )
 }
 
-export default description
+export default Description

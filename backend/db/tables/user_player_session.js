@@ -33,14 +33,22 @@ const upsertRecord = async (body) => {
     return runQuery(sql, [Object.values(body)]);
 }
 
-const findByShowId = async(show_id) => {
-    const sql = `SELECT covered_percentage, video_id FROM user_player_sessions where show_id = ?`;
-    return runQuery(sql,[show_id]);
+const findByShowId = async(show_id, user_id) => {
+    const sql = `SELECT covered_percentage, video_id FROM user_player_sessions where show_id = ? and user_id = ?`;
+    return runQuery(sql,[show_id, user_id]);
 }
 
-const findByVideoId = async (video_id) => {
-    const sql = `SELECT covered_percentage FROM user_player_sessions where video_id = ?`;
-    return runQuery(sql,[video_id]);
+const findByVideoId = async (video_id, userId) => {
+    const sql = `SELECT covered_percentage FROM user_player_sessions where video_id = ? and user_id = ?`;
+    return runQuery(sql,[video_id, userId]);
+}
+
+const findByUserId = async (userId) => {
+    const sql = `SELECT DISTINCT shows.id as id,
+    shows.name as name,
+    shows.description as description,
+    shows.poster_landscape_url as poster FROM user_player_sessions as ups inner join shows on shows.id = ups.show_id where user_id = ?`;
+    return runQuery(sql,[userId]);
 }
 
 module.exports = {
@@ -49,4 +57,5 @@ module.exports = {
     findByShowId,
     findByVideoId,
     upsertRecord,
+    findByUserId,
 }

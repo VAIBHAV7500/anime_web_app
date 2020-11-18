@@ -200,7 +200,7 @@ input[type=number] {
   background-color: #ffff;
   -webkit-transition: .4s;
   transition: .4s;
-  height: 10px;
+  height: 2px;
 }
 
 .slider:before {
@@ -208,10 +208,10 @@ input[type=number] {
   content: "";
   height: 26px;
   width: 26px;
-  left: 0px;
+  left: -1px;
   bottom: -8px;
+  top: -11px;
   background-color: rgb(88, 88, 88);
-  -webkit-transition: .4s;
   transition: .4s;
 }
 
@@ -246,8 +246,8 @@ input:checked+.slider:before {
   margin: -5px 0px 0px 10px;
   text-transform: capitalize;
   font-size: 20px;
-  font-weight: bold;
-  font-weight: bold;
+  font-weight: bolder;
+  top: -8px;
 }
 
 .toggle_switch:before{
@@ -257,8 +257,8 @@ input:checked+.slider:before {
   margin: -5px 0px 0px -20px;
   text-transform: capitalize;
   font-size: 20px;
-  font-weight: bold;
-  font-weight: bold;
+  font-weight: bolder;
+  top: -8px;
 }
 
 

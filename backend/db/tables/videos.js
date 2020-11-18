@@ -65,10 +65,19 @@ const findByEpisodeName = async (name,show_id)=>{
     return result.length ? result[0] : undefined;
 }
 
+const fetchRecent = async (show_id, user_id) => {
+    const sql = `SELECT id, episode_number
+      FROM videos LEFT JOIN user_player_sessions as ups on ups.video_id = videos.id
+      WHERE videos.show_id = ? AND (ups.user_id = ? OR videos.episode_number = 1) order by episode_number desc limit 1
+    `;
+    return runQuery(sql,[show_id, user_id]);
+}
+
 module.exports = {
     createTable,
     find,
     create,
     getShows,
     findByEpisodeName,
+    fetchRecent
 }

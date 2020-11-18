@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Pace from 'react-pace-progress';
 import Banner from './banner';
 import Info from './info';
@@ -10,9 +10,10 @@ import Episodes from './episodes';
 import Characters from './characters';
 import Review from './review';
 import Similar from './similar';
+import { connect } from 'react-redux';
 
-export class show extends Component {
 
+class show extends Component {
     navItems = [{
         title: 'Episodes',
         component: <Episodes show_id={this.props.match.params.id}/>
@@ -32,37 +33,43 @@ export class show extends Component {
     ] ;
 
     fetchData = async () => {
-      const showId = this.props.match.params.id
-      const promiseArray = [];
-      this.setState({
-          show_id: showId,
-          nav_id: 0,
-          loading:true
-      });
-      promiseArray.push(new Promise((res, rej) => {
-          axios.get(`${requests.fetchShowDetails}?id=${showId}`).then((result) => {
-              res(result);
-          }).catch((err) => {
-              rej(err)
-          });
-      }));
-      const results = await Promise.all(promiseArray);
-      const states = {
-          show: results[0].data,
-          nav_id: 0,
-          show_id: showId,
-          loading:false,
-      };
-      this.setState(states);
+      console.log("inside fetchdata : " + this.props.user_id);
+      if(this.props.user_id){
+        const showId = this.props.match.params.id
+        const promiseArray = [];
+        this.setState({
+            show_id: showId,
+            nav_id: 0,
+            loading:true
+        });
+        promiseArray.push(new Promise((res, rej) => {
+            axios.get(`${requests.fetchShowDetails}?id=${showId}&user_id=${this.props.user_id}`).then((result) => {
+                res(result);
+            }).catch((err) => {
+                rej(err)
+            });
+        }));
+        const results = await Promise.all(promiseArray);
+        const states = {
+            show: results[0].data,
+            nav_id: 0,
+            show_id: showId,
+            loading:false,
+        };
+        this.setState(states);
+      }
     }
-    
     async componentDidMount(){ 
       window.scrollTo(0, 0);
       this.fetchData();
     }
 
     async componentDidUpdate(prevProps) {
-        if (this.props.match.params.id !== prevProps.match.params.id) {
+      console.log(JSON.stringify(prevProps));
+      if(this.props.user_id != prevProps.user_id){
+        this.fetchData();
+      }
+      if (this.props.match.params.id !== prevProps.match.params.id ) {
             window.scrollTo(0, 0);
             this.fetchData();
         }
@@ -96,9 +103,16 @@ export class show extends Component {
                     }
                 </div>
                 {this.navItems[this.state?.nav_id || 0]?.component}
+                
             </div>
         )
     }
 }
 
-export default show
+const mapStatetoProps = (state) => {
+  return {
+    user_id : state.user_id,
+  }
+}
+
+export default connect(mapStatetoProps)(show);

@@ -71,11 +71,12 @@ router.post('/upload', async (req,res,next)=>{
 });
 
 router.get('/episodes', async(req,res,next)=>{
-    if(req.query.show_id || req.query.offset){ 
+    if(req.query.show_id && req.query.offset && req.query.user_id){ 
         const latest = req.query.latest === 'true' ? true : false;
         let from = parseInt(req.query.from || 1);
         const rows = await db.shows.totalShows(req.query.show_id);
         const showId = req.query.show_id;
+        const userId = req.query.user_id;
         if(latest && req.query.from === undefined){
             if(rows && rows.length != 0){
                 from = rows[0].total_episodes;
@@ -92,7 +93,7 @@ router.get('/episodes', async(req,res,next)=>{
             })
         }));
         promiseArray.push(new Promise((res,rej)=>{
-            db.user_player_session.findByShowId(showId).then((result)=>{
+            db.user_player_session.findByShowId(showId, userId).then((result)=>{
                 res(result);
             }).catch((err)=>{
                 rej(err);
@@ -106,6 +107,9 @@ router.get('/episodes', async(req,res,next)=>{
             });   
             return;
         });
+
+        console.log('progress');
+        console.log(progress);
         
         let totalEpisodes = rows[0] && rows[0].total_episodes;
         if(episodes && episodes.length){
@@ -224,7 +228,8 @@ router.get('/genre',async (req,res,next)=>{
 
 router.get('/details',async (req,res,next)=>{
     const videoId = req.query.player_id;
-    console.log(videoId);
+    const userId = req.query.user_id;
+    console.log('User Id: ' + userId);
     if(!videoId){
         res.status(401).json({
             message: "Info not sufficient..."
@@ -239,7 +244,7 @@ router.get('/details',async (req,res,next)=>{
             })
         }));
         promiseArray.push(new Promise((res,rej)=>{
-            db.user_player_session.findByVideoId(videoId).then((result)=>{
+            db.user_player_session.findByVideoId(videoId, userId).then((result)=>{
                 res(result);
             }).catch((err)=>{
                 rej(err);
@@ -261,10 +266,6 @@ router.get('/details',async (req,res,next)=>{
 router.post('/sessions', async (req,res,next)=>{
     const body = req.body;
     if([body.user_id, body.video_id, body.covered, body.show_id].includes(null)){
-        console.log(body.user_id);
-        console.log(body.show_id);
-        console.log(body.video_id);
-        console.log(body.covered);
         res.status(401).json({
             message: "Not enough info!"
         });

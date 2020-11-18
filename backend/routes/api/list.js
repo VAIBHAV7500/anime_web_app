@@ -23,7 +23,6 @@ router.post('/add-watchlist', async (req,res) => {
 
 router.get('/watchlist', async (req,res) => {
   const user_id = req.query.id;
-  console.log('id' + user_id);
   if(user_id){
     const result = await db.watchlist.getAllShowIdByUserId(user_id).catch(err => {
       res.status(501).json({
@@ -31,7 +30,6 @@ router.get('/watchlist', async (req,res) => {
           stack : err.stack,
       });
     });
-    console.log(result);
     res.status(200).json({
       result : result,
     });
@@ -43,8 +41,8 @@ router.get('/watchlist', async (req,res) => {
 });
 
 router.delete('/remove-watchlist', async (req,res)=>{
-  const userId = req.body.user_id;
-  const showId = req.body.show_id;
+  const userId = req.query.user_id;
+  const showId = req.query.show_id;
   if(!userId || !showId){
     res.status(401).json({
       message: "User id or Show id is missing"
@@ -84,14 +82,15 @@ router.post('/add-currently-watching', async (req,res) => {
 router.get('/currently-watching', async (req,res) => {
     const user_id = req.query.id;
     if(user_id){
-      const result = await db.currently_watching.getAllShowIdByUserId(req.body.user_id).catch(err => {
+      const result = await db.user_player_session.findByUserId(user_id).catch(err => {
         res.status(500).json({
             message : err.message,
             stack : err.stack,
         });
       });
+      console.log(result);
       res.status(200).json({
-          result : result,
+          result : result
       });
     }else{
       res.status(401).json({

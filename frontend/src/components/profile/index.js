@@ -47,7 +47,7 @@ function Profile() {
         <div className={styles.body}>
             <div className={styles.banner}>
                 <img className={styles.user_img} src={userImg}></img>
-                <h1 className={styles.user_name}>Anubhav Solanki</h1>
+                <h1 className={styles.user_name}>Full Name (Username)</h1>
             </div>
             <div className={`${styles.nav} ${styles.neumorphism}`}>
                 {nav_items.map( (item,index) => generateNavField(item.title,index) )}
