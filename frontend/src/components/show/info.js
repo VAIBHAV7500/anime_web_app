@@ -13,7 +13,7 @@ function Info({movie}) {
     const toggleSyn = () => {
         setSynopsis(!moreSyn);
     }
-
+    
     const changeGroupSize = (size, blur = false) => {
         let element = document.getElementById('season-group');
         element.size = size;
@@ -26,6 +26,7 @@ function Info({movie}) {
     const goToShow = (id) => {
         history.push(`/show/${id}`);
     }
+ 
 
     return (
         <div className={styles.body}>
