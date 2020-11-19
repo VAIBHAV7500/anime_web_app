@@ -32,6 +32,7 @@
 .card:hover{
     border-color: white !important;
     transform: scale(1.05);
+    box-shadow: none;
 }
 
 .wrapper{

@@ -33,7 +33,8 @@ router.post('/create',async (req,res,next)=>{
 
 router.get('/details',async (req,res,next)=>{
     const id = req.query.id;
-    if(!id){
+    const userId = req.query.user_id;
+    if(!id || !userId){
         res.status(401).json({
             error: "No Id found",
         });
@@ -46,7 +47,6 @@ router.get('/details',async (req,res,next)=>{
         });
         return;
     }
-    const genre_ids = data.genre_id;
     const promiseArray = [];
     promiseArray.push(new Promise((res,rej)=>{
         db.genre.bulkFindCategory(id).then((result)=>{
@@ -55,6 +55,7 @@ router.get('/details',async (req,res,next)=>{
             rej(err);
         });
     }));
+
     promiseArray.push(new Promise((res, rej) => {
         db.shows.getShowsByGroupId(data.group_id).then((result) => {
             res(result);
@@ -62,8 +63,35 @@ router.get('/details',async (req,res,next)=>{
             rej(err);
         });
     }));
-    const result = await Promise.all(promiseArray);
-    [data.genres,data.groups] = result;
+
+    promiseArray.push(new Promise((res,rej)=>{
+        db.watchlist.exists(id,userId).then((result)=>{
+            res(result);
+        }).catch((err)=>{
+            rej(err);
+        }); 
+    }));
+
+    promiseArray.push(new Promise((res,rej)=>{
+        db.videos.fetchRecent(id, userId).then((result)=>{
+            console.log('Result from USP' + JSON.stringify(result));
+            if(result.length){
+                res(result[0]);
+            }else{
+                res(null);
+            }
+        }).catch((err)=>{
+            rej(err);
+        })
+    }));
+    const result = await Promise.all(promiseArray).catch((err)=>{
+        console.log(err);
+        res.status(501).json({
+            error: err.message,
+            stack: err.stack
+        });
+    });
+    [data.genres,data.groups, data.watchlist, data.recent] = result;
     res.json(data);
 });
 

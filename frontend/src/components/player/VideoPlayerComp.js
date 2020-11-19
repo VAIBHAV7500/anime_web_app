@@ -5,9 +5,18 @@ import videojs from 'video.js';
 import 'videojs-hotkeys';
 import './videoPlayer.css';
 import 'videojs-event-tracking';
+import { useHistory } from 'react-router';
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
+import { useSelector } from 'react-redux';
+
 function VideoPlayerComp({src}) {
-  const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8";
+  const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
   const playerRef = useRef();
+  const history = useHistory();
+  let prevTime = 0;
+  const userId = useSelector(state => state.user_id);
+
   const playerOptions = {
     autoplay: true, 
     muted: false,
@@ -28,7 +37,8 @@ function VideoPlayerComp({src}) {
       remainingTimeDisplay: false,
       subtitlesButton: false,
       captionsButton: true,
-      audioTrackButton: true
+      audioTrackButton: true,
+      qualitySelector: true
     },
     playbackRates: [0.5, 1, 1.5, 2],
     responsive:true,
@@ -45,42 +55,106 @@ function VideoPlayerComp({src}) {
     }
   }
 
+  const createButton = (el,text,id,styleClasses=[],onClick,reverse=false) => {
+    var btn = document.createElement("BUTTON");   
+    btn.innerHTML = text; 
+    btn.id = id;
+    btn.classList.add(styles.player_btn);
+    styleClasses.forEach(element => {
+        btn.classList.add(element);
+    });
+    if(reverse){
+        btn.classList.add(styles.slide_in_left);
+    }else{
+        btn.classList.add(styles.slide_in_right);
+    }
+    btn.onclick = onClick;
+    el.insertAdjacentElement('afterend',btn);
+  }
+
+  const removeButton = (id) => {
+      let el = document.querySelector('#' + id);
+      el.remove();
+  }
+
+  const createPlayerButtons = (player) => {
+    const el = document.getElementsByClassName('vjs-big-play-button')[0];
+    console.log(el);
+    createButton(el,"Skip Intro","skip_intro",[styles.skip_intro],() => {
+        console.log("clicked");
+        const stopTime = 22;
+        player.currentTime(stopTime);
+        removeButton('skip_intro');
+    });
+    createButton(el,"Back","back",[styles.back_btn, 'vjs-control-bar'],()=>{
+        //removeButton("skip_intro");
+      history.goBack();
+    },true);
+    createButton(el,"Discussion","discusson", [styles.discussion, 'vjs-control-bar'],()=>{
+      if(player.isFullscreen()){
+        player.exitFullscreen();
+      }
+      var el = document.getElementsByClassName(styles.player)[0];
+      console.log(el.scrollHeight);
+      window.scrollBy(0,el.scrollHeight);
+    });
+  }
+
+
   useEffect(()=>{
     //videojs.registerPlugin('hotkeys',this.hotkeys);
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
+      if(document.documentElement.offsetHeight > 0)
+      document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
+      window.addEventListener("resize",()=>{
+        if(document.documentElement.offsetHeight > 0)
+        document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
+      });
     });
-    var Button = videojs.getComponent('Button');
-    var MyButton = videojs.extend(Button, {
-      constructor: function() {
-        Button.apply(this, arguments);
-        this.addClass(styles.sample);
-        this.controlText("Next");
 
-      },
-      handleClick: function() {
-        /* do something on click */
-        console.log("hey");
-      }
+    player.on('tracking:firstplay', (e, data) => {
+      console.log('SRc: ' + src.progress);
+      console.log('Duration: ' + player?.duration());
+      createPlayerButtons(player);
+
+      const currentTime = ((src?.progress || 0) * (player?.duration() || 0)) /100;
+      console.log('Current Time: ' + currentTime);
+      player.currentTime(currentTime);
     });
-    videojs.registerComponent('MyButton', MyButton);
-    player.addChild('MyButton', {});
+
+    const checkSessionDetails = () => {
+      console.log(player?.currentTime()); 
+      const currTime = player?.currentTime() || 0;
+      if((currTime - prevTime)>= 10){
+         const covered = (player?.currentTime() / player?.duration())*100;
+         console.log(userId);
+         const body = {
+           user_id: userId,
+           show_id: src.show_id,
+           video_id: src.id,
+           covered
+         }
+         const endPoint = requests.postVideoSessions;
+         axios.post(endPoint,body);
+         prevTime = currTime;
+      }
+    }
 
     const checkTime = setInterval(function(){
-       console.log(player?.currentTime()); 
+      checkSessionDetails();
     }, 3000);
     return () => {
       clearInterval(checkTime);
+      checkSessionDetails();
       player.dispose();
     };
   },[]);
 
   return (
-    <div>	
-      <div data-vjs-player>
-        <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline/>
-      </div>
-    </div>  
+      <div data-vjs-player className={styles.player}>
+        <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline />
+      </div>  
   )
 }
 

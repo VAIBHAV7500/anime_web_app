@@ -1,6 +1,11 @@
 .shadow{
     opacity:1;
-    background-color:rgb(15, 15, 15);
+    background: #641ba8;  
+    background-image: -webkit-linear-gradient(top, #641ba8, #3a0968);
+    background-image: -moz-linear-gradient(top, #641ba8, #3a0968);
+    background-image: -ms-linear-gradient(top, #641ba8, #3a0968);
+    background-image: -o-linear-gradient(top, #641ba8, #3a0968);
+    background-image: linear-gradient(to bottom, #641ba8, #3a0968);
     position:fixed;
     width:100%;
     height:100%;

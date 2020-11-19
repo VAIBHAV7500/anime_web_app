@@ -9,6 +9,7 @@ const createTable = (con) => {
             image_url TEXT,
             FOREIGN KEY (user_id) REFERENCES users(id),
             FOREIGN KEY (show_id) REFERENCES shows(id),
+            UNIQUE KEY(user_id,show_id),
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )

@@ -1,10 +1,10 @@
 .banner {
     color: white;
     object-fit: contain;
-    height: 550px;
-    -webkit-box-shadow: inset 0px -160px 50px -33px rgba(27,27,27,1);
-    -moz-box-shadow: inset 0px -160px 50px -33px rgba(27,27,27,1);
-    box-shadow: inset 0px -160px 50px -33px rgba(27,27,27,1);
+    height: 600px;
+    -webkit-box-shadow: inset 0px -140px 60px -33px rgb(14, 13, 13);
+    -moz-box-shadow: inset 0px -140px 60px -33px rgb(14, 13, 13);
+    box-shadow: inset 0px -140px 60px -33px rgb(14, 13, 13);
     cursor: pointer;
 }
 
@@ -69,4 +69,14 @@
         transparent,
         rgba(37, 37, 37, 0.21),
         #111);
+}
+
+.active{
+    top: 5%;
+
+}
+
+.inactive{
+    top: 5%;
+
 }

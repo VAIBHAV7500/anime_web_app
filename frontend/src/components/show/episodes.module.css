@@ -197,9 +197,10 @@ input[type=number] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(58, 57, 57);
+  background-color: #ffff;
   -webkit-transition: .4s;
   transition: .4s;
+  height: 2px;
 }
 
 .slider:before {
@@ -207,10 +208,10 @@ input[type=number] {
   content: "";
   height: 26px;
   width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
+  left: -1px;
+  bottom: -8px;
+  top: -11px;
+  background-color: rgb(88, 88, 88);
   transition: .4s;
 }
 
@@ -219,9 +220,9 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(35px);
+  -ms-transform: translateX(35px);
+  transform: translateX(35px);
 }
 
 /* Rounded sliders */
@@ -235,16 +236,29 @@ input:checked+.slider:before {
 
 .toggle_switch {
   position: absolute;
-  margin: 12px 0px 0px 46px;
+  margin: 20px 0px 0px 46px;
 }
 
 .toggle_switch:after {
-  content: "Latest";
+  content: "Z";
   display: inline-block;
   position: absolute;
-  margin: 5px 0px 0px 10px;
+  margin: -5px 0px 0px 10px;
   text-transform: capitalize;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: bolder;
+  top: -8px;
+}
+
+.toggle_switch:before{
+  content: "A";
+  display: inline-block;
+  position: absolute;
+  margin: -5px 0px 0px -20px;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bolder;
+  top: -8px;
 }
 
 

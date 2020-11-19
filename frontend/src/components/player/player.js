@@ -1,48 +1,51 @@
 import React, {Component} from 'react'
-import ReactPlayer from 'react-player';
 import Description from './description';
-import {getVideoLink} from '../../utils/api';
 import styles from './player.module.css';
 import VideoPlayerComp from './VideoPlayerComp';
-
-const watchProgress = (event) => {
-    console.log(event);
-}
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
+import PageLoader from '../services/page_loader';
+import { connect } from 'react-redux';
 
 export class player extends Component {
 
     fetchData = async () => {
-        window.scrollTo(0, 0);
-        const showId = this.props.match.params.id
-        try {
-            document.body.style = 'background: rgb(43, 42, 42);';
-            this.disableRightClick();
-            let response = {};
-            // //response = await getVideoLink();
-            // console.log('IN player')
-            // console.log(response);
-            // if (response.status === 200) {
-            //     const data = response.data;
-            //     this.setState(data);
-            // } else {
-            //     console.log(response);
-            //     throw new Error(response.data);
-            // }
-
-            this.setState(prevState => ({
-                ...prevState,
-                videoUrl: `https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8`
-            }));
-        } catch (error) {
-            console.log(error.message);
+        this.setState({
+            loading: true
+        });
+        if(this.props.user_id){
+            console.log('Inside fetch Data');
+            window.scrollTo(0, 0);
+            const playerId = this.props.match.params.id;
+            
+            try {
+                const endPoint = `${requests.fetchVideoDetails}?player_id=${playerId}&user_id=${this.props.user_id}`;
+                const result = await axios.get(endPoint);
+                console.log(result);
+                if(result.data){
+                    this.setState({
+                        player: result.data,
+                        loading: false
+                    });
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
         }
     }
     async componentDidMount() {
         this.fetchData();
+
     }
 
     async componentDidUpdate(prevProps) {
+        console.log(this.props.user_id);
+        console.log(prevProps.user_id);
         if (this.props.match.params.id !== prevProps.match.params.id) {
+            this.fetchData();
+        }
+        if(this.props.user_id !== prevProps.user_id){
+            console.log('Inside condition')
             this.fetchData();
         }
     }
@@ -61,10 +64,18 @@ export class player extends Component {
     render() {
         return (
                 <div className={styles.player_wrapper}>
-                    <VideoPlayerComp src={this.state?.videoUrl} />
+                    {this.state?.loading && <PageLoader />}
+                    {this.state?.player !== undefined && <VideoPlayerComp src={this.state?.player} />}
+                    <Description></Description>
                  </div>
         )
     }
 }
 
-export default player
+const mapStatetoProps = (state) => {
+    return {
+      user_id : state.user_id,
+    }
+  }
+
+export default connect(mapStatetoProps)(player)

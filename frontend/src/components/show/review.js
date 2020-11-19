@@ -10,6 +10,7 @@ function Review({show_id}) {
 
     const [reviews, setReviews] = useState([]);
     const userId = useSelector(state => state.user_id);
+    
     const init = async () => {
         const endPoint = `${requests.reviews}/shows?id=${show_id}&user_id=${userId}`;
         const response = await axios.get(endPoint);

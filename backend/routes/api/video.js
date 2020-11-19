@@ -71,18 +71,35 @@ router.post('/upload', async (req,res,next)=>{
 });
 
 router.get('/episodes', async(req,res,next)=>{
-    if(req.query.show_id || req.query.offset){ 
+    if(req.query.show_id && req.query.offset && req.query.user_id){ 
         const latest = req.query.latest === 'true' ? true : false;
         let from = parseInt(req.query.from || 1);
+        const rows = await db.shows.totalShows(req.query.show_id);
+        const showId = req.query.show_id;
+        const userId = req.query.user_id;
         if(latest && req.query.from === undefined){
-            const rows = await db.shows.totalShows(req.query.show_id);
             if(rows && rows.length != 0){
                 from = rows[0].total_episodes;
             }
         }
         const offset = parseInt(req.query.offset);
         const to = from + (latest ? -1 : 1) * offset;
-        let result = await db.videos.getShows(req.query.show_id, from, to, latest).catch((err)=>{
+        const promiseArray = [];
+        promiseArray.push(new Promise((res,rej)=>{
+            db.videos.getShows(req.query.show_id, from, to, latest).then((result)=>{
+                res(result);
+            }).catch((err)=>{
+                rej(err);
+            })
+        }));
+        promiseArray.push(new Promise((res,rej)=>{
+            db.user_player_session.findByShowId(showId, userId).then((result)=>{
+                res(result);
+            }).catch((err)=>{
+                rej(err);
+            });
+        }));
+        let [episodes,progress] = await Promise.all(promiseArray).catch((err)=>{
             res.status(501).json({
                 success: false,
                 err: err.message,
@@ -90,21 +107,26 @@ router.get('/episodes', async(req,res,next)=>{
             });   
             return;
         });
-        let totalEpisodes = 0;
-        if(result && result.length){
-            totalEpisodes = result[0].total_episodes;
-            result = result.map((x)=>{
+
+        console.log('progress');
+        console.log(progress);
+        
+        let totalEpisodes = rows[0] && rows[0].total_episodes;
+        if(episodes && episodes.length){
+            episodes = episodes.map((x)=>{
+                const episodeProgress = progress.filter(pr => pr.video_id === x.id);
                 return {
                     id: x.id,
                     name: x.name,
                     type: x.type,
                     episode: x.episode_number,
                     thumbnail_url: x.thumbnail_url,
+                    progress: episodeProgress.length ? episodeProgress[0].covered_percentage : 0,
                 }
             });
         }
         res.json({
-            result,
+            result: episodes,
             total_episodes: totalEpisodes
         });
     }else{
@@ -201,6 +223,71 @@ router.get('/genre',async (req,res,next)=>{
         return show;
     });
     res.json(result);
+});
+
+
+router.get('/details',async (req,res,next)=>{
+    const videoId = req.query.player_id;
+    const userId = req.query.user_id;
+    console.log('User Id: ' + userId);
+    if(!videoId){
+        res.status(401).json({
+            message: "Info not sufficient..."
+        });
+    }else{
+        const promiseArray = [];
+        promiseArray.push(new Promise((res,rej)=>{
+            db.videos.find(videoId).then((result)=>{
+                res(result);
+            }).catch((err)=>{
+                rej(err);
+            })
+        }));
+        promiseArray.push(new Promise((res,rej)=>{
+            db.user_player_session.findByVideoId(videoId, userId).then((result)=>{
+                res(result);
+            }).catch((err)=>{
+                rej(err);
+            });
+        }));
+        const [result,progress] = await Promise.all(promiseArray).catch((err)=>{
+            res.status(501).json({
+                success: false,
+                err: err.message,
+                stack: process.env.NODE_ENV="development" ?  err.stack : null
+            });   
+            return;
+        });
+        result.progress = progress.length ? progress[0].covered_percentage : 0;
+        res.json(result);
+    }
+});
+
+router.post('/sessions', async (req,res,next)=>{
+    const body = req.body;
+    if([body.user_id, body.video_id, body.covered, body.show_id].includes(null)){
+        res.status(401).json({
+            message: "Not enough info!"
+        });
+    }
+    else{
+        const recordBody = {
+            covered_percentage: body.covered,
+            user_id: body.user_id,
+            video_id: body.video_id,
+            show_id: body.show_id
+        }
+        await db.user_player_session.upsertRecord(recordBody).catch((err)=>{
+            console.log(err);
+            res.status(501).json({
+                message: err.message,
+                stack: err.stack
+            })
+        })
+        res.json({
+            message: "OK"
+        })
+    }
 });
 
 

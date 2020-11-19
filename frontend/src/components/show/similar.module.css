@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     justify-content: center;
     min-height: 70vh;
+    margin-top: 30px;
 }
 
 .show{

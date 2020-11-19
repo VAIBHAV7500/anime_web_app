@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './info.module.css';
 import {useHistory} from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
+import { useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Info({movie}) {
     const [moreSyn, setSynopsis] = useState(false);
+    const [watchStatus, setWatchStatus] = useState('Add to List');
+    const [latest, setLatest] = useState({});
     const history = useHistory();
+    const userId = useSelector(state => state.user_id);
+
     function truncate(str , n){
         return str?.length > n ? str.substr(0 , n-1) + " ... ": str;
     }
@@ -23,8 +31,50 @@ function Info({movie}) {
         }
     }
 
+    useEffect(() => {
+        setWatchStatus(movie?.watchlist ? 'remove from list' : 'Add to List');
+        if(movie?.recent){
+            setLatest(movie.recent);
+        }
+    }, [movie])
+
     const goToShow = (id) => {
-        history.push(`/show/${id}`);
+        if(id){
+            history.push(`/show/${id}`);
+        }
+    }
+
+    const goToPlayer = (id) =>{
+        if(id){
+            history.push(`/player/${id}`);
+        }
+    }
+
+    const handleWatchList = async () => {
+        if(!['Adding','Removing'].includes(watchStatus)){
+          const body = {
+            user_id: userId,
+            show_id: movie.id
+          };
+          let finalStatus = '';
+          if(watchStatus.toLowerCase() === 'add to list'){
+            setWatchStatus('Adding');
+            const response = await axios.post(requests.postWatchlist,body).catch((err)=>{
+              console.log(err);
+              //show error...
+            });
+            finalStatus = 'Remove from List';
+          }else if(watchStatus.toLowerCase() === 'remove from list'){
+            setWatchStatus('Removing');
+            console.log(JSON.stringify(body));
+              const response = await axios.delete(`${requests.removeWatchlist}?show_id=${movie.id}&user_id=${userId}`).catch((err)=>{
+                console.log(err);
+                //show error...
+            });
+            finalStatus = 'Add to List';
+          }
+          setWatchStatus(finalStatus);
+        }
     }
  
 
@@ -34,7 +84,7 @@ function Info({movie}) {
                 {movie?.poster_portrait_url && <img loading="lazy" draggable="false" alt="poster" src={movie?.poster_portrait_url.replace('medium','large')} className={styles.poster_img} onError={(event)=>{console.log(event);}} />}
             </div>
             <div className={`${styles.info}`}>
-                <div name={movie?.age_category} className={`${styles.show_title}`}>{movie?.name}</div>
+                <div name={movie?.age_category ? movie.age_category : 13} className={`${styles.show_title}`}>{movie?.name}</div>
                 <div className={styles.genre}>
                     {movie?.genres?.map((genre,index)=>{
                         return <div className={styles.genre_card}  key={index}>{genre}</div>
@@ -55,11 +105,11 @@ function Info({movie}) {
                     }
                 </select> 
                 <div className={`${styles.btn_wrapper}`}>
-                    <div className={`${styles.play_btn} `}>
-                        Start Watching
+                    <div className={`${styles.play_btn} `} onClick={()=>{goToPlayer(latest?.id)}}>
+                        {latest?.episode_number && (latest.episode_number === 1 ? 'Start Watching' : 'Continue Watching Ep ' + latest.episode_number)}
                     </div>
-                    <div className={`${styles.watch_list_btn}`}>
-                        <AiOutlinePlus className={styles.plus} /> Watch List
+                    <div className={`${styles.watch_list_btn}`} onClick={handleWatchList}>
+                        {watchStatus}
                     </div>
                 </div>
             </div>

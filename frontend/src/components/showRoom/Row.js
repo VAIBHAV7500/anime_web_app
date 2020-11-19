@@ -50,7 +50,7 @@ function Row({ title, movies, isLargeRow }) {
             onClick={() => handleClick(movie)}
              className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
             src = {
-              `${isLargeRow ? movie.poster_portrait_url : movie.poster_landscape_url}`
+              `${isLargeRow ? movie.poster_portrait_url.replace('medium','large') : movie.poster_landscape_url}`
             }
             alt={movie.name}
           />

@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import styles from './watchlist.module.css';
 import {useHistory} from "react-router-dom";
 import axios from '../../utils/axios';
+import requests from '../../utils/requests';
 
 const Watchlist = ({userId, endPoint}) => {
     const [watchlist, setWatchlist] = useState([]);
@@ -14,10 +15,7 @@ const Watchlist = ({userId, endPoint}) => {
     }, [endPoint,userId]);
 
     const getWatchlist = async () => {
-        const body = {
-            user_id: userId,
-        }
-        return axios.post(endPoint, body);
+        return axios.get(`${endPoint}?id=${userId}`);
     }
     
     const generateWatchlist = async () => {

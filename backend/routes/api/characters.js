@@ -30,9 +30,7 @@ router.post('/create', async (req,res,next)=>{
         });
         return;
     })
-    console.log(JSON.stringify(record));
     const id = record.insertId;
-    console.log(id);
     const mappingBody = {
         show_id: body.show_id,
         character_id: id
