@@ -5,14 +5,16 @@ import requests from '../../utils/requests';
 import { Editor } from '@tinymce/tinymce-react';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useSelector } from 'react-redux';
-import {review_word_limit} from '../../constants';
+import { review_word_limit } from '../../constants';
+import { useParams } from 'react-router-dom'
 function Review({show_id}) {
 
     const [reviews, setReviews] = useState([]);
     const userId = useSelector(state => state.user_id);
+    const {id} = useParams();
     
     const init = async () => {
-        const endPoint = `${requests.reviews}/shows?id=${show_id}&user_id=${userId}`;
+        const endPoint = `${requests.reviews}/shows?id=${id}&user_id=${userId}`;
         const response = await axios.get(endPoint);
         response.data = response.data.reverse();
         //response.data = {...response.data,showMore : false};
@@ -28,7 +30,7 @@ function Review({show_id}) {
 
     useEffect(() => {
         init();
-    },[show_id]);
+    },[id]);
 
     let finalContent = '';
     let textEditor;

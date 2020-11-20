@@ -24,7 +24,7 @@ require('dotenv').config();
 var indexRouter = require('./routes');
 var authRouter = require('./routes/authRoutes')(app);
 var restrictedAreaRouter = require('./routes/restrictedArea')(app);
-
+var apiRouter = require('./routes/api');
 
 /* -------------------------------------------------------------------------- */
 /*                           Routers Declaration End                          */
@@ -41,14 +41,25 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static(path.join(__dirname, 'build')));
+}else{
+  app.use(express.static(path.join(__dirname, 'public')));
+}
 app.use(cors());
 app.use(helmet());
 
-app.use('/', indexRouter);
 app.use('/auth',authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
+app.use('/api', apiRouter);
 app.use(app.oauth.errorHandler());
+if(process.env.NODE_ENV === "production"){
+  app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+ });
+}else{
+  app.use('/', indexRouter);
+}
 app.use(anyError);
 app.use(errorHandler);
 

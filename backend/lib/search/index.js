@@ -50,7 +50,7 @@ let filterList = new Fuse(list, FilterOptions);
 
 const updateList = async () => {
     const shows = await db.shows.getShowsData();
-    if(shows){
+    if(shows && shows.length > 0){
         list = await db.genre.attachGenres(shows);
     }
     fuse = new Fuse(list, options);

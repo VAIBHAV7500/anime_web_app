@@ -2,14 +2,15 @@ import React, {useState, useEffect} from 'react';
 import styles from './similar.module.css';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 function Similar({show_id}) {
     const [similar, setSimilar] = useState([]);
     const history = useHistory();
+    const {id} = useParams();
 
     const getSimilarShows = async () => {   
-        const endPoint = `${requests.relatedShows}?id=${show_id}`;
+        const endPoint = `${requests.relatedShows}?id=${id}`;
         const response = await axios.get(endPoint);
         setSimilar(response.data);
     }
@@ -22,7 +23,7 @@ function Similar({show_id}) {
         return () => {
         
         }
-    }, [show_id]);
+    }, [id]);
 
     const goToShow = (id) => {
         history.push(`/show/${id}`);

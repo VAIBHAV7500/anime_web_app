@@ -1,0 +1,28 @@
+version: "3"
+
+services: 
+  backend:
+    build: ./backend
+    ports: 
+      - "8080:8080"
+    depends_on: 
+      - db
+    container_name: backend
+  
+  client: 
+    build: ./frontend
+    ports: 
+      - "80:80"
+    container_name: client
+  
+  db: 
+    container_name: mysql
+    image: mysql:8.0
+    volumes:
+      - "/app/database:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3336:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'trailblazer'
+      MYSQL_DATABASE: 'animeApp'

@@ -111,6 +111,7 @@ router.get('/create-group', async (req,res,next)=>{
 
 router.get('/similar', async (req,res,next) => {
     const id = req.query.id;
+    console.log(id);
     if(!id){
         res.status(401).json({
             message: "No Show Id"
@@ -128,6 +129,7 @@ router.get('/similar', async (req,res,next) => {
                 poster_portrait_url: x.item.poster_portrait_url
             }
         }).splice(0,10);
+        console.log(result.map(x => x.id));
         res.json(result);
     }
 });

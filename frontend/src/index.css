@@ -30,3 +30,7 @@ code {
 button{
   cursor: pointer;
 }
+
+img{
+  pointer-events: all;
+}

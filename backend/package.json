@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "sh db.sh && npx nodemon app.js"
+    "dev": "npx nodemon app.js",
+    "start": "node app.js",
+    "db": "sh db.sh"
   },
   "dependencies": {
     "@api.video/nodejs-sdk": "^1.8.4",

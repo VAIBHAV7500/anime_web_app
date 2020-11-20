@@ -23,6 +23,11 @@ export class player extends Component {
                 const result = await axios.get(endPoint);
                 console.log(result);
                 if(result.data){
+                    result.data.intro_start_time = 0;
+                    result.data.intro_end_time = 22;
+                    result.data.closing_start_time = 828;
+                    result.data.closing_end_time = 880;
+                    result.data.next_show = 20;
                     this.setState({
                         player: result.data,
                         loading: false

@@ -56,36 +56,41 @@ function VideoPlayerComp({src}) {
   }
 
   const createButton = (el,text,id,styleClasses=[],onClick,reverse=false) => {
-    var btn = document.createElement("BUTTON");   
-    btn.innerHTML = text; 
-    btn.id = id;
-    btn.classList.add(styles.player_btn);
-    styleClasses.forEach(element => {
-        btn.classList.add(element);
-    });
-    if(reverse){
-        btn.classList.add(styles.slide_in_left);
-    }else{
-        btn.classList.add(styles.slide_in_right);
+    let element = document.querySelector('#' + id);
+    if(!element){
+      var btn = document.createElement("BUTTON");   
+      btn.innerHTML = text; 
+      btn.id = id;
+      btn.classList.add(styles.player_btn);
+      styleClasses.forEach(element => {
+          btn.classList.add(element);
+      });
+      if(reverse){
+          btn.classList.add(styles.slide_in_left);
+      }else{
+          btn.classList.add(styles.slide_in_right);
+      }
+      btn.onclick = onClick;
+      el.insertAdjacentElement('afterend',btn);
     }
-    btn.onclick = onClick;
-    el.insertAdjacentElement('afterend',btn);
   }
 
   const removeButton = (id) => {
       let el = document.querySelector('#' + id);
-      el.remove();
+      if(el){
+        el.remove();
+      }
+  }
+
+  const goToPlayer = (id) => {
+    if(id){
+      history.push(`/player/${id}`);
+    }
   }
 
   const createPlayerButtons = (player) => {
     const el = document.getElementsByClassName('vjs-big-play-button')[0];
     console.log(el);
-    createButton(el,"Skip Intro","skip_intro",[styles.skip_intro],() => {
-        console.log("clicked");
-        const stopTime = 22;
-        player.currentTime(stopTime);
-        removeButton('skip_intro');
-    });
     createButton(el,"Back","back",[styles.back_btn, 'vjs-control-bar'],()=>{
         //removeButton("skip_intro");
       history.goBack();
@@ -114,10 +119,10 @@ function VideoPlayerComp({src}) {
     });
 
     player.on('tracking:firstplay', (e, data) => {
-      console.log('SRc: ' + src.progress);
+      console.log('SRc: ' + JSON.stringify(src));
       console.log('Duration: ' + player?.duration());
       createPlayerButtons(player);
-
+      checkButtons();
       const currentTime = ((src?.progress || 0) * (player?.duration() || 0)) /100;
       console.log('Current Time: ' + currentTime);
       player.currentTime(currentTime);
@@ -141,8 +146,46 @@ function VideoPlayerComp({src}) {
       }
     }
 
+    const checkButtons = () => {
+      const el = document.getElementsByClassName('vjs-big-play-button')[0];
+      const currTime = player?.currentTime() || 0;
+      const buffer = 5;
+      console.log('Time: ' + currTime);
+      console.log('Buff time: ' + currTime + buffer);
+
+      if(src.intro_end_time != null && src.intro_start_time != null){
+        if(currTime + buffer >= src.intro_start_time && currTime <= src.intro_end_time){
+          console.log('Creating Skip Button');
+          createButton(el,"Skip Intro","skip_intro",[styles.skip_intro],() => {
+            console.log("clicked");
+            const stopTime = src.intro_end_time;
+            if(stopTime){
+              player.currentTime(stopTime);
+            }
+            removeButton('skip_intro');
+          });
+        }
+        else if(currTime + buffer >= src.intro_end_time){
+          console.log('Removing Button');
+           removeButton('skip_intro');
+        }
+      }
+
+      if(src.closing_start_time && src.closing_end_time && src.next_show){
+        if(currTime + buffer >= src.closing_start_time && currTime <= src.closing_end_time){
+          createButton(el,"Next Episode","skip_intro",[styles.skip_intro],() => {
+            goToPlayer(src.next_show);
+          });
+        }
+        else if(currTime + buffer >= src.closing_end_time){
+           removeButton('skip_intro');
+        }
+      }
+    }
+
     const checkTime = setInterval(function(){
       checkSessionDetails();
+      checkButtons();
     }, 3000);
     return () => {
       clearInterval(checkTime);

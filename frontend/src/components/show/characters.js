@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react'
 import styles from './characters.module.css';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
+import { useParams } from 'react-router-dom'
 
 function Characters({show_id}) {
     const [characters, setCharacters] = useState([]);
+    const {id} = useParams();
 
     const updateCharacters = async () => {
-        const response = await axios.get(`${requests.characters}?show_id=${show_id}`);
+        setCharacters([]);
+        const response = await axios.get(`${requests.characters}?show_id=${id}`);
         if (response.data) {
             console.log(response.data);
             setCharacters(response.data);
@@ -18,11 +21,12 @@ function Characters({show_id}) {
     }
 
     useEffect(() => {
+        console.log(id);
         updateCharacters();
         return () => {
             setCharacters([]);
         }
-    }, [show_id])
+    },[id]);
     return (
         <div className={styles.characters}>
             {
