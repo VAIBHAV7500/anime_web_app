@@ -12,6 +12,7 @@
     width: 270px;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
     cursor: pointer;
+    margin: 23px;
 }
 
 .neumorphism {

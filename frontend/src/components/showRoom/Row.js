@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Row.css";
 import ReactPlayer from 'react-player/lazy';
-import { MdClose } from "react-icons/md";
+import { MdClose, MdPlayCircleOutline } from "react-icons/md";
 import {useHistory} from "react-router-dom";
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import { FaAngleDoubleDown, FaAngleLeft, FaAngleRight} from 'react-icons/fa';
 
-function Row({ title, movies, isLargeRow }) {
-  const [trailer, setTrailer] = useState("");
+function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray }) {
+  const [trailer, setTrailer] = trailerArray;
   const history = useHistory();
   let keyId = 1;
   let curTimeOut;
-  const handleClick = (movie) => {
+  const [showIndex,setShowIndex] = showIndexArray;
+  const handleClick = (movie,index) => {  
       movie.rating = Math.round(((Math.random() * (10 - 8 + 1)) + 8) * 9) / 10;
       let description = movie.description;
       let truncLength = window.screen.availWidth < 520 ? 200 : 400;
@@ -18,7 +19,8 @@ function Row({ title, movies, isLargeRow }) {
           description = description.substring(0,truncLength) + '...';
       }
       movie.description = description;
-      setTrailer(movie);
+      setTrailer({...movie,index : rowIndex});
+      tiltDiv(index);   
   }
 
   const goToVideo = (trailer) => {
@@ -35,6 +37,32 @@ function Row({ title, movies, isLargeRow }) {
     slide.scrollBy(-1000,0);
   }
 
+  useEffect(() => {
+    let el = document.querySelector(`[index="${showIndex.prev}"]`);
+    if(el)
+    el.classList.remove("card_div_tilt");
+    if(showIndex.current === showIndex.prev && showIndex.current!="" && showIndex.prev!=""){
+      setShowIndex({current : "" , prev : ""});
+      setTrailer(undefined);
+    }
+  }, [showIndex])
+
+  const currentTiltRemove = () => {
+    let el = document.querySelector(`[index="${showIndex.current}"]`);
+    if(el)
+    el.classList.remove("card_div_tilt");
+  }
+  
+  const tiltDiv = (index) => {
+    let prevIndex = showIndex.current;
+    setShowIndex({
+      current : `${rowIndex}-${index}`,
+      prev : prevIndex
+    });
+    let el = document.querySelector(`[index="${rowIndex}-${index}"]`);
+    el.classList.add("card_div_tilt");
+  }
+
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -42,26 +70,31 @@ function Row({ title, movies, isLargeRow }) {
         <div className="slider slider_back" onClick={handleSliderBack}>
           <FaAngleLeft/>
         </div>
-        {movies && movies.map((movie) => (
-          <img
-            loading="lazy"
-            draggable="false"
-            key={keyId++}
-            onClick={() => handleClick(movie)}
-             className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
-            src = {
-              `${isLargeRow ? movie.poster_portrait_url.replace('medium','large') : movie.poster_landscape_url}`
-            }
-            alt={movie.name}
-          />
+        {movies && movies.map((movie,index) => (
+          <div key={index} index={`${rowIndex}-${index}`} name={movie.name} className={`card_div`}>
+            <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
+            <div className="box-shadow"></div>
+            <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown>
+            <img
+              loading="lazy"
+              draggable="false"
+              key={keyId++}
+              onClick={()=>{goToVideo(movie)}}
+              className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
+              src = {
+                `${isLargeRow ? movie.poster_portrait_url.replace('medium','large') : movie.poster_landscape_url}`
+              }
+              alt={movie.name}
+            />
+          </div>
         ))}
         <div className="slider slider_front" onClick={handleSlider}>
           <FaAngleRight/>
         </div>
       </div>
       {
-          window.screen.availWidth > 514 ?( trailer && <div className="trailer_window" id="trailer_window">
-          < MdClose className = "close-btn" onClick={()=>{setTrailer(undefined)}}/>
+          window.screen.availWidth > 514 ?( trailer && rowIndex==trailer.index && <div className="trailer_window" id="trailer_window">
+          < MdClose className = "close-btn" onClick={()=>{setTrailer(undefined);currentTiltRemove();setShowIndex({prev : "",current : ""})}}/>
           < ReactPlayer  
             url={`${trailer.trailer_url}`} 
             height = "390px"

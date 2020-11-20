@@ -12,7 +12,10 @@
 }
 
 .card{
-    display: inline;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
     background-size: auto 100%;
     background-position: center;
     color: white;
@@ -32,7 +35,16 @@
 .card:hover{
     border-color: white !important;
     transform: scale(1.05);
-    box-shadow: none;
+}
+
+.play_icon{
+    position: absolute;
+    font-size: 100px;
+    transform: scale(0);
+}
+.card:hover .play_icon{
+    transition: 0.1s 0.2s;
+    transform: scale(1) ;
 }
 
 .wrapper{
@@ -45,9 +57,12 @@
 
 .show_title{
     margin: 13px 0px 43px 0px;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
 }
 
 .show_description{

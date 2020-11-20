@@ -3,6 +3,7 @@ import styles from './watchlist.module.css';
 import {useHistory} from "react-router-dom";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
+import { MdPlayCircleOutline } from 'react-icons/md';
 
 const Watchlist = ({userId, endPoint}) => {
     const [watchlist, setWatchlist] = useState([]);
@@ -36,7 +37,8 @@ const Watchlist = ({userId, endPoint}) => {
                     <div className={styles.wrapper}>
                         <h1 className={styles.show_title}>{show.name}</h1>
                         <p className={styles.show_description}>{show.description}</p>
-                    </div>   
+                    </div>    
+                    <MdPlayCircleOutline className={styles.play_icon}></MdPlayCircleOutline> 
                 </div>
             ))}
             </div>

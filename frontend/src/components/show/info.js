@@ -84,7 +84,7 @@ function Info({movie}) {
                 {movie?.poster_portrait_url && <img loading="lazy" draggable="false" alt="poster" src={movie?.poster_portrait_url.replace('medium','large')} className={styles.poster_img} onError={(event)=>{console.log(event);}} />}
             </div>
             <div className={`${styles.info}`}>
-                <div name={movie?.age_category ? movie.age_category : 13} className={`${styles.show_title}`}>{movie?.name}</div>
+                <div name={movie?.age_category ? movie.age_category : 13} className={`${styles.show_title}`}><span style={{marginRight:"11px"}}>{movie?.name}</span></div>
                 <div className={styles.genre}>
                     {movie?.genres?.map((genre,index)=>{
                         return <div className={styles.genre_card}  key={index}>{genre}</div>
