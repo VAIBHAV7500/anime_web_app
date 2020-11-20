@@ -66,11 +66,20 @@ export class showRoom extends Component {
         })
         this.state.pageLoader = false;
         this.state.rows = this.rows;
+        this.state.trailer = "";
+        this.state.showIndex = {current : "" , prev : ""};
         this.setState(this.state);      
     }
 
+    changeTrailer = (newTrailerData) => {
+      this.setState(prev=>({...prev,trailer : newTrailerData}))
+    }
+    changeShowIndex = (newIndexData) =>{
+      this.setState(prev=>({...prev,showIndex : newIndexData}))
+    }
+
     componentDidMount = () => {
-        this.loadData();
+      this.loadData();
     }
 
     render() {
@@ -82,7 +91,7 @@ export class showRoom extends Component {
               <div  className={styles.spaces}/>
               {
                 this.state.rows?.map((row,index)=>{
-                  return <Row title = {row.name} movies = {row.movies} isLargeRow  key={index} className={styles.row}/>
+                  return <Row rowIndex={index} showIndexArray={[this.state.showIndex,this.changeShowIndex]} trailerArray={[this.state.trailer,this.changeTrailer]} title = {row.name} movies = {row.movies} isLargeRow  key={index} className={styles.row}/>
                 })
               }
               <footer>

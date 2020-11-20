@@ -24,6 +24,30 @@
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 
+.card_div{
+    min-width: 226px;
+    height: auto;
+    position: relative;
+    transition: 1s;
+    perspective: 1000px;
+}
+
+.card_div:hover .see_more{
+    transform: translateX(-68%) scale(1.6,1);
+}
+
+
+.see_more{
+    position: absolute;
+    bottom: 4px;
+    left: 48%;
+    transform: translateX(-68%) scale(0);
+    font-size: 31px;
+    transition: 0.3s;
+    z-index: 99;
+    cursor: pointer;
+}
+
 .row_posters::-webkit-scrollbar {
     display: none;
 }
@@ -45,8 +69,18 @@
     transition: transform 0.5s,border-radius 0.5s;
     box-shadow: -2px -2px 7px rgba(255, 255, 255, 0.308),
                  7px  7px 15px rgba(0, 0, 0, 0.733);
+    transform-style: preserve-3d;
+    transform-origin: bottom;
 }
-
+.box-shadow{
+    position: absolute;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.404);
+    z-index: 98;
+    height: 100%;
+    transform: scale(0);
+    border-radius: 10px;
+}
 
 .row_poster:hover{
     transform: scale(1.08);
@@ -58,7 +92,35 @@
     );
     z-index: 1;
     border-radius: 20px;
+}
+.card_div_tilt{
+    transition: 1s;
+    margin-left: 20px ;
+    transform: scale(1.09);
+    margin-right: 20px ;
+}
 
+.play_icon{
+    position: absolute;
+    z-index: 99;
+    left: 50%;
+    top: 50%;
+    font-size: 70px;
+    transform: translate(-68%, -50%) scale(0);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.card_div:hover .play_icon{
+    transform: translate(-68%, -50%) scale(1.08);
+}
+
+.card_div:hover .row_poster{
+    filter: blur(1.02px);
+}
+
+.card_div:hover .box-shadow{
+    transform: scale(1);
 }
 
 .slider{
@@ -257,6 +319,26 @@ td{
         padding-top: 425px;
     }
 }
+
+@media(max-width : 800px){
+    .slider{
+        display: none;
+    }
+    .see_more{
+        display: none;
+    }
+    .play_icon{
+        display: none;
+    }
+    .box-shadow{
+        display: none;
+    }
+    .card_div:hover .row_poster{
+        filter: blur(0px);
+    }
+
+}
+
 @media (max-width:731px){
     .player{
         height: 350px !important;

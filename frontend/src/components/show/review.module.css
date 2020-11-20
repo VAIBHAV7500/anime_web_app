@@ -2,15 +2,16 @@
 .reviews {
     min-height: 500px;
     width: 100%;
-    margin-left: 50px;
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
 }
 
 .editor{
     width: 90%;
-    margin-left: 30px;
     height: 100%;
     margin-bottom: 50px;
+    align-self: center;
 }
 
 .tiny_editor{
@@ -47,28 +48,27 @@
 }
 
 .review_container{
-    clear:both;
+    clear: both;
     width: 80%;
-    align-content: center;
-    padding-left: 100px;
-    margin-top:100px;
-    border-radius: 1px; 
+    align-self: center;
+    border-radius: 1px;
+    margin-left: -50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .review{
-  margin-top: -13px;
-  margin-right:auto;
-  margin-bottom: 10px;
-  color: white;
-  font-size:14px;
-  margin-bottom: 40px;
-  background-color: transparent;
-  border-radius: 10px;
-  cursor: default;
-  padding-right: 313px;
-  padding-left: 1px;
-  border-bottom: 1px solid grey;
-  padding-bottom: 35px;
+    color: white;
+    font-size: 14px;
+    background-color: transparent;
+    border-radius: 10px;
+    border-bottom: 1px solid grey;
+    padding: 0px 50px 35px 1px;
+    margin: -13px auto 40px 0px;
+    cursor: default;
+    width: 100%;
 }
 
 .reviewer{
