@@ -75,6 +75,10 @@ class show extends Component {
         }
     }
 
+    async componentWillUnmount(){
+      this.setState({});
+    }
+
     selectNav = (id) =>{
         this.setState(prevState=>({
             ...prevState,

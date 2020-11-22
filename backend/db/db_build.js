@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const dbConfig = require('../config/dbConfig.json');
+const fs = require('fs');
 const user = require('./tables/user');
 const sessions = require('./tables/sessions');
 const plans = require('./tables/plan');
@@ -27,6 +28,8 @@ var con = mysql.createConnection({
     password: dbConfig.password
 });
 
+const migrationFolder = `./db/migrations`;
+
 const db_name = dbConfig.db_name;
 
 const createDB = async () => {
@@ -41,7 +44,6 @@ const createDB = async () => {
     })
 }
 
-console.log('Creating Tables');
 con.connect(async (err)=>{
     if(err){
         throw err;
@@ -50,6 +52,7 @@ con.connect(async (err)=>{
     {
         console.log("DB CONNECTION BUILT!!");
         let response = "";
+        console.log('############## Creating Tables ##############');
         response = await createDB();
         console.log(`Created DB`);
         response = await user.createTable(con);
@@ -93,8 +96,15 @@ con.connect(async (err)=>{
         response = await user_player_session.createTable(con);
         console.log((`Created user_player_session`));
 
-        console.log('Running Migrations');
-
+        console.log('\n############## Running Migrations ##############');
+        console.log('If ERR => ER_DUP_FIELDNAME then it is already in the DB.')
+        fs.readdirSync(migrationFolder).forEach((file) => {
+            const names = file.split(".");
+            if(names){
+                const name = names[0];
+                require(`./migrations/${name}`)(con).then(() => {console.log(`Migrated File: ${file}`);}).catch(err => console.log(err.message));
+            }
+        });
     }
     catch(err){
         console.log(err);

@@ -11,6 +11,8 @@
     color: white;
     background-color: rgb(182, 182, 241);
     background-image: radial-gradient(ellipse at center,#8627dfa9, black 100%);
+    box-shadow: -1px -1px 10px #333235, 4px 3px 10px #0d0c0f;
+        
 }
 
 .user_img{
@@ -20,6 +22,8 @@
     top: 14vh;
     left: 12vw;
     z-index: 1;
+    box-shadow: -1px -1px 10px #333235, 8px 3px 15px #0d0c0f;
+        
 }
 
 .user_name{
@@ -67,8 +71,7 @@
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
-    7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: -1px -1px 10px #333235, 4px 3px 10px #0d0c0f;
     color: rgb(187, 185, 185);
 }
 

@@ -1,11 +1,12 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var morgan = require('morgan');
 var cors = require('cors');
 var helmet = require('helmet');
 var db = require('./db');
 var { updateList } = require('./lib/search');
+var { logger } = require('./lib/logger');
 const oAuth2Server = require('node-oauth2-server')
 var oAuthModel = require('./services/accessTokenModel');
 var app = express();
@@ -37,7 +38,7 @@ updateList(); // to load the search list
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(logger('dev'));
+//app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -48,6 +49,26 @@ if(process.env.NODE_ENV === "production"){
 }
 app.use(cors());
 app.use(helmet());
+
+const getMorganFormat = () =>
+  JSON.stringify({
+    method: ':method',
+    url: ':url',
+    http_version: ':http-version',
+    remote_address: ':remote-addr',
+    remote_user: ':remote-user',
+    response_time: ':response-time',
+    referrer: ':referrer',
+    status: ':status',
+    content_length: ':res[content-length]',
+    timestamp: ':date[iso]',
+  });
+
+app.use(
+  morgan(getMorganFormat(), {
+    stream: logger.eds_stream,
+  })
+);
 
 app.use('/auth',authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)

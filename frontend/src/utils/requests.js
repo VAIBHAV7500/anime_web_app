@@ -25,6 +25,7 @@ const requests = {
     postCompletedShows: `/api/list/add-completed`,
     fetchVideoDetails: `/api/video/details`,
     postVideoSessions: `/api/video/sessions`,
+    myReviews: '/api/review/my-reviews',
 }
 
 export default requests;

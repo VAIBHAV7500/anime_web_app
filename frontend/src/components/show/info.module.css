@@ -37,7 +37,6 @@
     color: white;
     word-break: normal;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -222,6 +221,11 @@
         position: relative;
         float: left;
     }
+    .show_title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
 }
 
@@ -250,4 +254,6 @@
         width: 100%;
         justify-content: space-evenly;
     }
+
+    
 }

@@ -30,9 +30,6 @@
 
 }
 
-.player_btn:hover{
-    background-color: #641ba8e0 !important;
-}
 
 .skip_intro{
     height: 50px;
@@ -42,11 +39,19 @@
     padding: 10px;
 }
 
+.skip_intro:hover{
+    background-color: #641ba8e0 !important;
+}
+
 .back_btn{
     top: 2% !important;
     left: 1% !important;
     width: 80px !important;
     height: 40px !important;
+}
+
+.back_btn:hover{
+    background-color: #641ba8e0 !important;
 }
 
 .discussion{
@@ -57,3 +62,49 @@
     width: fit-content !important;
     padding: 5px 20px !important;
 }
+
+.discussion:hover{
+    background-color: #641ba8e0 !important;
+}
+
+.type {
+    top: 2% !important;
+    position: absolute;
+    left: 85% !important;
+    width: 100px !important;
+    height: 50px !important;
+    cursor: default !important;
+    padding: 5px 20px !important;
+  }
+  
+  .green {
+    background: #27c019b4 !important;
+    width: 120px !important;
+    background-image: -webkit-linear-gradient(top, #27c019, #0f7906) !important;
+    background-image: -moz-linear-gradient(top, #27c019, #0f7906) !important;
+    background-image: -ms-linear-gradient(top, #27c019, #0f7906) !important;
+    background-image: -o-linear-gradient(top, #27c019, #0f7906) !important;
+    background-image: linear-gradient(to bottom, #27c019b4, #0f7906) !important;
+  }
+  
+  .red {
+    background: #f04949 !important;
+    font-weight: bolder !important;
+    height: 40px !important;
+    background-image: -webkit-linear-gradient(top, #f04949, #c70b0b) !important;
+    background-image: -moz-linear-gradient(top, #f04949, #a73012) !important;
+    background-image: -ms-linear-gradient(top, #f04949, #a73012) !important;
+    background-image: -o-linear-gradient(top, #f04949, #a73012) !important;
+    background-image: linear-gradient(to bottom, #f04949, #c70b0b) !important;
+  }
+  
+  .orange {
+    background: #f0a32f !important;
+    width: 120px !important;
+    background-image: -webkit-linear-gradient(top, #f0a32f, #e08803) !important;
+    background-image: -moz-linear-gradient(top, #f0a32f, #e08803) !important;
+    background-image: -ms-linear-gradient(top, #f0a32f, #e08803) !important;
+    background-image: -o-linear-gradient(top, #f0a32f, #e08803) !important;
+    background-image: linear-gradient(to bottom, #f0a32f, #e08803) !important;
+  }
+  

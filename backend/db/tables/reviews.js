@@ -53,6 +53,11 @@ const likeAction = async (id, like) => {
     sql = `UPDATE reviews SET likes = ${response[0].likes} WHERE id = ${id}`;
     return runQuery(sql); 
 } 
+
+const findByUserId = (id) => {
+    const sql = `SELECT reviews.review, reviews.likes from reviews INNER JOIN user_review on user_review.review_id = reviews.id where user_review.user_id = ?`;
+    return runQuery(sql,[id]);
+}
  
 module.exports = {
     createTable,
@@ -60,4 +65,5 @@ module.exports = {
     create,
     findByShows,
     likeAction,
+    findByUserId,
 }

@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     justify-content: center;
     min-height: 70vh;
+    padding-top: 20px;
 }
 
 .character {
@@ -49,8 +50,7 @@
 .neumorphism {
     padding: 15px 10px;
     border: none;
-    box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),
-        7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: -1px -1px 10px #333235, 4px 3px 10px #0d0c0f;
     color: rgb(187, 185, 185);
 }
 

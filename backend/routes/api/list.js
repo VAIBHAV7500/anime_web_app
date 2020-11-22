@@ -83,15 +83,18 @@ router.get('/currently-watching', async (req,res) => {
     const user_id = req.query.id;
     if(user_id){
       const result = await db.user_player_session.findByUserId(user_id).catch(err => {
+        console.log(err);
         res.status(500).json({
             message : err.message,
             stack : err.stack,
         });
       });
-      console.log(result);
-      res.status(200).json({
+      if(result){
+        console.log(result);
+        res.status(200).json({
           result : result
-      });
+        });
+      }
     }else{
       res.status(401).json({
         message: "No proper user id"
