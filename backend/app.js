@@ -66,7 +66,7 @@ const getMorganFormat = () =>
 
 app.use(
   morgan(getMorganFormat(), {
-    stream: logger.eds_stream,
+    stream: logger.stream,
   })
 );
 
