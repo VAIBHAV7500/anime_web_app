@@ -34,6 +34,8 @@
 
 .card_div:hover .see_more{
     transform: translateX(-68%) scale(1.6,1);
+    -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
+    filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
 }
 
 
@@ -98,6 +100,8 @@
     transform: translate(-68%, -50%) scale(0);
     transition: 0.3s;
     cursor: pointer;
+    -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
+    filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
 }
 
 .card_div:hover .play_icon{

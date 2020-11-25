@@ -1,23 +1,10 @@
 
 .reviews {
     min-height: 500px;
-    width: 100%;
+    width: 80%;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
-}
-
-.editor{
-    width: 90%;
-    height: 100%;
-    margin-bottom: 50px;
-    align-self: center;
-}
-
-.tiny_editor{
-    width: 100%;
-    height: 300px;
-    margin-bottom: 50px;
 }
 
 .neumorphism {
@@ -27,25 +14,6 @@
     color: rgb(255, 255, 255);
 }
 
-.post_button{
-    float: right;
-    padding-top: 8px;
-    margin: 20px;
-    width: 120px;
-    height: 30px;
-    background-color: #500e8dcc;
-    align-content: center;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: bolder;
-    cursor: pointer;
-    color: white;
-}
-.post_button:active{
-    position: relative;
-    top: 1px;
-}
 
 .review_container{
     clear: both;
@@ -67,7 +35,7 @@
     border-bottom: 1px solid grey;
     padding: 0px 50px 35px 1px;
     margin: -13px auto 40px 0px;
-    cursor: default;
+    cursor: pointer;
     width: 100%;
 }
 
@@ -106,10 +74,7 @@
     font-size: 22px;
     /* color: rgb(209, 23, 23); */
 }
-.heart:active{
-    position: relative;
-    top: 1px;
-}
+
 .showMore{
     color: #f0b922;
     font-weight: bold;

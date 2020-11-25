@@ -35,12 +35,16 @@
 .card:hover{
     border-color: white !important;
     transform: scale(1.05);
+    box-shadow: inset -8px -3px 30px 11px rgba(0,0,0,0.65);
 }
 
 .play_icon{
     position: absolute;
     font-size: 100px;
     transform: scale(0);
+    /* text-shadow: inset -8px -3px 30px 11px rgba(0,0,0,0.65); */
+    -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
+    filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
 }
 .card:hover .play_icon{
     transition: 0.1s 0.2s;

@@ -6,16 +6,19 @@ import 'videojs-hotkeys';
 import './videoPlayer.css';
 import 'videojs-event-tracking';
 import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom'
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
 
 function VideoPlayerComp({src}) {
   const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+  //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.mp4";
   const playerRef = useRef();
   const history = useHistory();
   let prevTime = 0;
   const userId = useSelector(state => state.user_id);
+  const {id} = useParams();
 
   const playerOptions = {
     autoplay: true, 
@@ -47,7 +50,9 @@ function VideoPlayerComp({src}) {
         enableLowInitialPlaylist: true,
         smoothQualityChange: true,
         overrideNative: true,
-      }
+      },
+      nativeAudioTracks: false,
+      nativeTextTracks: false,
     },
     plugins: {
       hotkeys: {},
@@ -71,7 +76,9 @@ function VideoPlayerComp({src}) {
           btn.classList.add(styles.slide_in_right);
       }
       btn.onclick = onClick;
-      el.insertAdjacentElement('afterend',btn);
+      if(el){
+        el.insertAdjacentElement('afterend',btn);
+      }
     }
   }
 
@@ -82,9 +89,18 @@ function VideoPlayerComp({src}) {
       }
   }
 
-  const goToPlayer = (id) => {
+  const removeAllButton = () => {
+    const buttons = ["back","discussion","filler","manga","anime","skip_intro"];
+    buttons.forEach((button)=>{
+      removeButton(button);
+    });
+  }
+
+  const goToPlayer = (id, player) => {
     if(id){
+      player.dispose();
       history.push(`/player/${id}`);
+      window.location.reload();
     }
   }
 
@@ -93,7 +109,11 @@ function VideoPlayerComp({src}) {
     console.log(el);
     createButton(el,"Back","back",[styles.back_btn, 'vjs-control-bar'],()=>{
         //removeButton("skip_intro");
-      history.goBack();
+      //history.goBack();
+      console.log(src.show_id);
+      if(src.show_id){
+        history.push(`/show/${src.show_id}`);
+      }
     },true);
     createButton(el,"Discussion","discusson", [styles.discussion, 'vjs-control-bar'],()=>{
       if(player.isFullscreen()){
@@ -158,7 +178,7 @@ function VideoPlayerComp({src}) {
       }
     }
 
-    const checkButtons = () => {
+    const checkButtons = (player) => {
       const el = document.getElementsByClassName('vjs-big-play-button')[0];
       const currTime = player?.currentTime() || 0;
       const buffer = 5;
@@ -186,7 +206,7 @@ function VideoPlayerComp({src}) {
       if(src.closing_start_time && src.closing_end_time && src.next_show){
         if(currTime + buffer >= src.closing_start_time && currTime <= src.closing_end_time){
           createButton(el,"Next Episode","skip_intro",[styles.skip_intro],() => {
-            goToPlayer(src.next_show);
+            goToPlayer(src.next_show, player);
           });
         }
         else if(currTime + buffer >= src.closing_end_time){
@@ -197,20 +217,23 @@ function VideoPlayerComp({src}) {
 
     const checkTime = setInterval(function(){
       checkSessionDetails();
-      checkButtons();
+      checkButtons(player);
     }, 3000);
     return () => {
       clearInterval(checkTime);
       checkSessionDetails();
       window.removeEventListener("resize", () => {});
+      removeAllButton();
       player.dispose();
     };
-  },[]);
+  },[id]);
 
   return (
-      <div data-vjs-player className={styles.player}>
-        <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline />
-      </div>  
+      <div className="videoPlayer">
+        <div data-vjs-player className={styles.player}>
+          <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline />
+        </div> 
+      </div> 
   )
 }
 

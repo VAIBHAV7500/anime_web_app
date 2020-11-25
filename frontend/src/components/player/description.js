@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import './description.css'
+import React, { useEffect } from 'react';
+import './description.css';
+import { useParams } from 'react-router-dom';
 
 
 function Description() {
-    
+    const {id} = useParams();
     useEffect(() => {
         if(document.documentElement.offsetHeight > 0)
         document.querySelector('.page').style.marginTop = document.documentElement.offsetHeight + "px";
@@ -19,7 +20,7 @@ function Description() {
                 window.detachEvent("resize", ()=>{});   
             }
         }
-    }, []);
+    }, [id]);
     return (
         <div className="page">
             <div className="title"> Vinland Saga </div>

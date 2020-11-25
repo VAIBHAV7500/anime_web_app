@@ -23,7 +23,7 @@ class show extends Component {
         component: <Characters show_id={this.props.match.params.id}/>
       },
       {
-        title: 'Review',
+        title: 'Reviews',
         component: <Review show_id={this.props.match.params.id}/> 
       },
       {

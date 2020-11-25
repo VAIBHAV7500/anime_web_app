@@ -55,7 +55,7 @@ const likeAction = async (id, like) => {
 } 
 
 const findByUserId = (id) => {
-    const sql = `SELECT reviews.review, reviews.likes from reviews INNER JOIN user_review on user_review.review_id = reviews.id where user_review.user_id = ?`;
+    const sql = `SELECT reviews.id, reviews.review, reviews.likes, reviews.show_id from reviews INNER JOIN user_review on user_review.review_id = reviews.id where user_review.user_id = ?`;
     return runQuery(sql,[id]);
 }
  

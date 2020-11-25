@@ -120,16 +120,15 @@ router.post('/create', async (req, res, next) => {
 
 router.get('/my-reviews', async (req,res,next)=>{
     const id = req.query.id;
-    console.log(id);
-    const result = await db.reviews.findByUserId(id).catch((err)=> {
+    const reviews = await db.reviews.findByUserId(id).catch((err)=> {
         console.log(err);
         res.status(500).json({
             error: err.message,
             stack: err.stack,
         });
     });
-    if(result){
-        res.json(result);
+    if(reviews){
+        res.json(reviews);
     };
 });
 
