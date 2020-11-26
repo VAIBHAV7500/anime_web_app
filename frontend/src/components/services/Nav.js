@@ -1,5 +1,5 @@
 import React ,{ useState, useEffect } from 'react';
-import { FaUser, FaSearch, FaSlidersH } from "react-icons/fa";
+import { FaUser, FaSearch, FaSlidersH, FaBell } from "react-icons/fa";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import "./Nav.css";
@@ -148,9 +148,16 @@ function Nav() {
             onclick : logout,
             class : "signOut_Button",
         },
-        
     ]
     
+    const notifications = [
+        "hey you are late",
+        "come fast I need you",
+        "You are the best"
+    ]
+
+
+
     return (
         <div className="nav_wrapper">
         <div className={`nav ${!search && show && "nav_black"}`}>
@@ -158,11 +165,19 @@ function Nav() {
                 <img draggable="false" className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
             </span>
             < FaSearch className="search_icon" onClick={handleSearch} />
+            <span className="notification_icon">
+                <FaBell/>
+                <span className="notification_number">1</span>
+            </span>
+            {/* <div className="notification_dropdown">
+                    <div>Cool</div>
+                    <div>Bro</div>
+            </div> */}
             <span className="avatar_span"  onMouseOver={showSignOutButton} onMouseLeave={hideShowButton} >
                     <FaUser className = "nav_avatar"></FaUser>
             </span>
         </div>
-        {<div className={`dropdown_content ${!search && show ? "dropdown_content_separator" : ""}  ${dropDown? "show_block slide-in-right" : ""}`} >
+        <div className={`dropdown_content ${!search && show ? "dropdown_content_separator" : ""}  ${dropDown? "show_block slide-in-right" : ""}`} >
             <div onMouseOver={showSignOutButton} onMouseLeave={()=>{hideShowButton(true)}} className={`dropdown_container`}>
                 {
                     dropdownContent.map((field,index) =>(
@@ -170,7 +185,8 @@ function Nav() {
                     ))
                 }
             </div>
-        </div>}
+        </div>
+        
         {search && generateSearchModal()}
         {search && <div className="shadow" onClick={handleSearch}></div>}
         </div>

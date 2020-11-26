@@ -109,48 +109,56 @@ export default function SignUp() {
         }); 
     }
     
+    const signUpFields = [
+        {
+            id : "regEmail",
+            name : "Email",
+            component : <FaEnvelope/>,
+            type : "email",
+            value : state.regEmail,
+            onChange : handleChange,
+        },
+        {
+            id : "regPassword",
+            name : "Password",
+            component : <FaUnlock/>,
+            type : "password",
+            value : state.regPassword,
+            onChange : handleChange,
+            pattern : "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$",
+            title : "must be 8 letters [A-Z,a-z,0-9,special characters]"
+        },
+        {
+            id : "regConfirmPassword",
+            name : "Confirm Password",
+            component : <FaUnlock/>,
+            type : "password",
+            value : state.regConfirmPassword,
+            onChange : handleChange,
+            pattern : "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$",
+            title : "must be 8 letters [A-Z,a-z,0-9,special characters]"
+        },
+        {
+            id : "regMobileNo",
+            name : "Mobile No.",
+            component : <FaMobile/>,
+            type : "tel",
+            value : state.regMobileNo,
+            onChange : handleChange,
+            pattern : "^(\+\d{1,3}[- ]?)?\d{10}$",
+        }
+    ]
+
     return (
         <div className={styles.sign_up_form}>
             <h1 className={styles2.title_name}><strong>Sign Up</strong></h1>
             {state.showerror? errorAdd() : ""}
             <form onSubmit={handleSignUp}>
-                <FormGroup
-                    id="regEmail"
-                    name="Email"
-                    component={<FaEnvelope/>}
-                    type="email"
-                    value={state.regEmail}
-                    onChange={handleChange}   
-                />
-                <FormGroup
-                    id="regPassword"
-                    name="Password"
-                    component={<FaUnlock/>}
-                    type="password"
-                    value={state.regPassword}
-                    onChange={handleChange}
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$"
-                    title="must be 8 letters [A-Z,a-z,0-9,special characters]"
-                />
-                <FormGroup
-                    id="regConfirmPassword"
-                    name="Confirm Password"
-                    component={<FaUnlock/>}
-                    type="password"
-                    value={state.regConfirmPassword}
-                    onChange={handleChange}
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$"
-                    title="must be 8 letters [A-Z,a-z,0-9,special characters]"
-                />
-                <FormGroup
-                    id="regMobileNo"
-                    name="Mobile No."
-                    component={<FaMobile/>}
-                    type="tel"
-                    value={state.regMobileNo}
-                    onChange={handleChange}
-                    pattern="^(\+\d{1,3}[- ]?)?\d{10}$"
-                />
+                {signUpFields.map((field) => (
+                    <FormGroup
+                        fieldData={field} 
+                    />
+                ))}
                 <button className={styles2.btn} type="submit">{ state.loader? <Spinner/> : <strong>Sign Up</strong>}</button>
                 <p className={`${styles.sign_in_p} ${styles2.para}`}>Already have an account? <Link  className={`${styles.sign_in} ${styles2.link}`} to="/signin"><strong>Sign In</strong></Link></p>
             </form>

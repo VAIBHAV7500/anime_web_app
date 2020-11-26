@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import styles from './SignIn.module.css';
 import Spinner from '../Spinner/index'
-import { FaUnlock, FaEnvelope } from 'react-icons/fa';
+import { FaUnlock, FaEnvelope, FaUser } from 'react-icons/fa';
 import FormGroup from '../Form-Group/FormGroup'
 import axios from '../../../utils/axios';
 import qs from 'qs';
@@ -124,27 +124,36 @@ const Login = (props)=>{
         )
     }
 
+    const signInFields = [
+        {
+            id : "email",
+            name : "Email",
+            component : <FaEnvelope/>,
+            type : "email",
+            value : state.email,
+            onChange : handleChange,
+        },
+        {
+            id : "password",
+            name : "Password",
+            component : <FaUnlock/>,
+            type : "password",
+            value : state.password,
+            onChange : handleChange,
+        }
+    ]
+
+
     return (
         <div className={styles.sign_in_form}>
         <h1 className={styles.title_name}><strong>Sign In</strong></h1>
         {state.errorShow? errorAdd() : ""}
         <form onSubmit={handleSignIn}>
-          <FormGroup
-              id="email"
-              name="Email"
-              component={<FaEnvelope/>}
-              type="email"
-              value={state.email}
-              onChange={handleChange}
-          />
-          <FormGroup
-              id="password"
-              name="Password"
-              component={<FaUnlock/>}
-              type="password"
-              value={state.password}
-              onChange={handleChange}
-          />
+          {signInFields.map((field) => (
+              <FormGroup
+                fieldData={field} 
+              />
+          ))}
           <div className={styles.forgot}>
             <a href="/#" className={styles.link} >Forgot Password?</a>
             <p className={styles.para}><input type="checkbox" />Remember Me</p>
