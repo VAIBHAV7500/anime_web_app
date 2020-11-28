@@ -20,6 +20,8 @@ const Search = (props) => {
         }else{
             document.body.style.overflow="auto";
             setFilter(false);
+            document.querySelector("." + styles.search_input).value="";
+            setSearchSet([]);
         }
     },[search])
 
@@ -51,13 +53,13 @@ const Search = (props) => {
 
     return (
         <div className={`${styles.search_container}`}>
-            <div className={`${styles.search_group}`}>
-                <FaTimes 
-                    className={`${styles.close_search_icon}`} 
-                    onClick={(e)=>{
-                        closeModal(e,"searchModal",setSearch,true);
-                    }}
-                />
+             <FaTimes 
+                className={`${styles.close_search_icon}`} 
+                onClick={(e)=>{
+                    closeModal(e,"searchModal",setSearch,true);
+                }}
+            />
+            <div className={`${styles.search_group} ${styles.slide_in_top}`}>
                 <input placeholder="Search" className={`${styles.search_input}`} onChange={getSuggestions}></input>
                 <FaSlidersH 
                     className={`${styles.filter_icon}`}
