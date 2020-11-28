@@ -1,20 +1,16 @@
 .filterBar{
-    margin-top: 117px;
-    margin-left: 5%;
-    width: 77%;
+    box-sizing: border-box;
     backdrop-filter: blur(30px);
     text-transform: uppercase;
     overflow-y: initial !important;
     background-color: rgba(74, 9, 112, 0.035);
-    border-radius: 20px;
 }
 
 .container{
-    height: 250px;
-    padding: 1%;
-    padding-top: 0%;
-    margin-top: -7px;
+    display: flex;
     overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 262px;
 }
 
 .neumorphism {
@@ -24,9 +20,7 @@
     letter-spacing: 2px;
     box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),7px 7px 20px 0 rgba(0, 0, 0, 0.8);
     color: rgb(187, 185, 185);
-}
-.make_flex{
-    display: flex;
+    padding-bottom: 67px;
 }
 
 .filter_row{
@@ -55,7 +49,7 @@
     background-color:#370b61 ;
 }
 .left_filter_column{
-    width: 500px;
+    width: 50%;
     text-align: center;
 }
 
@@ -69,74 +63,36 @@
 }
 
 .filter_submit_button{
-    margin-left: 83%;
-    width: 13%;
-    height: 4vh;
-    border-radius: 3%;
+    position: absolute;
+    right: 30px;
+    width: 127px;
+    height: 36px;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
-
-/* -------------------------------------------------------------------------- */
-/*                              RESPONSIVE MEDIA                              */
-/* -------------------------------------------------------------------------- */
-
-@media(max-width:990px){
-    .filterBar{
-        width: 100%;
-        margin-left: -9%;
-    }
-}
-@media(max-width:757px){
-    .filterBar{
-        width: 115%;
-        margin-left: -20%;
-    }
-}
-@media(max-width:757px){
-    .filterBar{
-        width: 115%;
-        margin-left: -20%;
-    }
-}
-@media(max-width:656px){
-    .filterBar{
-        width: 120%;
-        margin-left: -22%;
-    }
-    .right_filter_column{
-        width: 100%;
-    }
-}
-@media(max-width:500px){
+@media(max-width:1240px){
     .container{
-        display: block;
+        flex-direction: column;
     }
     .left_filter_column{
-        width: 90%;
+        width: 100%;
     }
     .right_filter_column{
-        margin-top: 3%;
+        padding: 0;
+        width: 100%;
+    }
+    .container{
+        align-items: center;
         text-align: center;
-        padding-left: 0;
+    }
+    .filterBar{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
     }
     .filter_submit_button{
-        margin-left: 0;
-        width: 100%;
-        height: 5vh;
-        max-height: 5vh;
-        font-weight: bold;
-    }
-    .filterBar{
-        padding-bottom: 0;
-    }
-}
-@media(max-width:454px){
-    .filterBar{
-        margin-left: -25%;
-    }
-}
-@media(max-width:317px){
-    .filterBar{
-        margin-left: -28%;
+        width: 90%;
+        transform: translateY(50px);
     }
 }

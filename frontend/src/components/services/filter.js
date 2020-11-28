@@ -41,6 +41,7 @@ export default class browse extends Component {
             </div>
         )
     }
+
     setFilter = ()=>{
         this.props.showFilter(false);
         this.props.submit(this.state);
@@ -50,7 +51,7 @@ export default class browse extends Component {
         
         return (
              <div className={`${styles.filterBar} ${styles.neumorphism}`}>
-                <div className={`${styles.container} ${styles.make_flex}`}>
+                <div className={`${styles.container}`}>
                     <div className={styles.left_filter_column}>
                         {this.filterRow("Genres",'genre_arr',constants.genres,`${styles.genre}`)}
                     </div>
@@ -61,7 +62,7 @@ export default class browse extends Component {
                         {this.filterRow("Age Category",'age_category_arr',constants.age_categories)}
                     </div>
                 </div>
-                <button className={`${styles.filter_submit_button} ${styles.filter_button_active} ${styles.filter_button}`} onClick={this.setFilter}>Submit</button>
+                <button className={`${styles.filter_submit_button} ${styles.filter_button_active} ${styles.filter_button}`} onClick={this.setFilter}>Filter</button>
              </div>
         )
     }
