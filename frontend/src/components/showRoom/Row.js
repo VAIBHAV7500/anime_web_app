@@ -64,32 +64,34 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
   }
 
   return (
-    <div className="row">
-      <h2>{title}</h2>
-      < div className = "cards row_posters" >
-        <div className="slider slider_back" onClick={handleSliderBack}>
-          <FaAngleLeft/>
-        </div>
-        {movies && movies.map((movie,index) => (
-          <div key={index} index={`${rowIndex}-${index}`} name={movie.name} className={`card_div`}>
-            <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
-            <div className="box-shadow"></div>
-            <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown>
-            <img
-              loading="lazy"
-              draggable="false"
-              key={keyId++}
-              onClick={()=>{goToVideo(movie)}}
-              className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
-              src = {
-                `${isLargeRow ? movie.poster_portrait_url.replace('medium','large') : movie.poster_landscape_url}`
-              }
-              alt={movie.name}
-            />
+    <div>
+      <div className="row">
+        <h2>{title}</h2>
+        < div className = "cards row_posters" >
+          <div className="slider slider_back" onClick={handleSliderBack}>
+            <FaAngleLeft/>
           </div>
-        ))}
-        <div className="slider slider_front" onClick={handleSlider}>
-          <FaAngleRight/>
+          {movies && movies.map((movie,index) => (
+            <div key={index} index={`${rowIndex}-${index}`} name={movie.name} className={`card_div`}>
+              <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
+              <div className="box-shadow"></div>
+              <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown>
+              <img
+                loading="lazy"
+                draggable="false"
+                key={keyId++}
+                onClick={()=>{goToVideo(movie)}}
+                className={`row_poster  card ${isLargeRow && "row_posterLarge"}`}
+                src = {
+                  `${isLargeRow ? movie.poster_portrait_url.replace('medium','large') : movie.poster_landscape_url}`
+                }
+                alt={movie.name}
+              />
+            </div>
+          ))}
+          <div className="slider slider_front" onClick={handleSlider}>
+            <FaAngleRight/>
+          </div>
         </div>
       </div>
       {
