@@ -1,8 +1,8 @@
 
 .video-js {
-    width: 100%;
-    height: 100%;
-      
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
     font-size: 12px;
     font-family: Helvetica, Arial, sans-serif;
     text-shadow: none !important;
@@ -437,6 +437,18 @@ Control Buttons Images
   background-size: 30px 30px;
   background-repeat: no-repeat;
   opacity: 0.75;
+}
+
+.vjs-text-track-settings{
+  background:rgba(17, 16, 16, 0.8) !important;
+  backdrop-filter: blur(2px);
+}
+
+.vjs-text-track-settings button{
+  color: red;
+  background-color: transparent !important;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
 }
 
 

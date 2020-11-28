@@ -20,6 +20,22 @@
     margin-bottom: 50px;
 }
 
+.preview{
+    clear: both;
+    display: flex;
+    width: 90%;
+    align-self: center;
+    border-radius: 1px;
+    margin-left: -50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.preview_text{
+
+}
+
 .neumorphism {
     border: none;
     box-shadow: -7px -7px 20px 0 rgba(51, 49, 49, 0.4),

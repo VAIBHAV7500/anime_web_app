@@ -48,6 +48,7 @@ function Banner() {
     useEffect(() => {
         async function fetchData(){
             const request = await axios.get(requests.fetchBanner);
+            console.log(request.data);
             setMovies(
                 request.data
             );
@@ -71,12 +72,12 @@ function Banner() {
             return <div 
             className = "banner"
             key = {i}
-            onClick={()=>{goToShow(movie?.id)}}
+            onClick={()=>{goToShow(movie?.show_id)}}
             style = {
               {
-                backgroundSize: "cover",
+                backgroundRepeat: 'no-repeat',
                 backgroundImage: `url(
-                      "${movie?.poster_landscape_url}"
+                      "${movie?.src}"
                   )`,
                 backgroundPosition: "center center",
               }

@@ -6,10 +6,11 @@ import { Editor } from '@tinymce/tinymce-react';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { review_word_limit } from '../../constants';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 function Review({show_id}) {
 
     const [reviews, setReviews] = useState([]);
+    const [preview, setPreview] = useState();
     const userId = useSelector(state => state.user_id);
     const {id} = useParams();
     
@@ -38,6 +39,12 @@ function Review({show_id}) {
     const handleEditorChange = (content, editor) => {
         finalContent = content;
         textEditor = editor;
+        const review = {
+            review: content,
+            showMore: true,
+            email: 'abc@gmail.com'
+        };
+        setPreview(review);
     }
 
     const postReview = async () => {
@@ -123,6 +130,13 @@ function Review({show_id}) {
                     }}
                     onEditorChange={handleEditorChange}
                 />
+                { preview?.review && <div className={`${styles.review} ${styles.make_flex} ${styles.preview}`}>
+                            <div className={styles.preview_text}>Preview: </div>
+                            <div className={styles.review_detail}>
+                                <div className={styles.review_text} dangerouslySetInnerHTML={createMarkup(preview)}/>
+                            </div>               
+                        </div>
+                }
                 <div className={`${styles.post_button}`} onClick={postReview}>POST</div>
             </div>
             <div className={styles.seperator} />

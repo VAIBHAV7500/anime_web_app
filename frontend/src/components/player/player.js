@@ -47,6 +47,7 @@ export class player extends Component {
         console.log(this.props.user_id);
         console.log(prevProps.user_id);
         if (this.props.match.params.id !== prevProps.match.params.id) {
+            console.log('Episode Updatead');
             this.fetchData();
         }
         if(this.props.user_id !== prevProps.user_id){
@@ -70,7 +71,7 @@ export class player extends Component {
         return (
                 <div className={styles.player_wrapper}>
                     {this.state?.loading && <PageLoader />}
-                    {this.state?.player !== undefined && <VideoPlayerComp src={this.state?.player} />}
+                    {this.state?.player !== undefined && <VideoPlayerComp src={this.state?.player} className={styles.player} />}
                     <Description></Description>
                  </div>
         )

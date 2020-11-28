@@ -6,10 +6,10 @@ import { useParams } from 'react-router-dom';
 function Description() {
     const {id} = useParams();
     useEffect(() => {
-        if(document.documentElement.offsetHeight > 0)
+        if(document && document.documentElement && document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
         document.querySelector('.page').style.marginTop = document.documentElement.offsetHeight + "px";
         window.addEventListener("resize",()=>{
-            if(document.documentElement.offsetHeight > 0)
+            if(document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
             document.querySelector('.page').style.marginTop = document.documentElement.offsetHeight + "px";        
         });
 

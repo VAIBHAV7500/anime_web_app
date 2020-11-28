@@ -17,6 +17,7 @@
     "dotenv": "^8.2.0",
     "email-validator": "^2.0.4",
     "express": "~4.16.1",
+    "express-csp-header": "^4.0.0",
     "file-encryptor": "^0.1.1",
     "formidable": "^1.2.2",
     "fuse.js": "^6.4.1",

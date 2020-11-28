@@ -39,6 +39,11 @@
     width: 100%;
 }
 
+.review:hover{
+    background-color: rgb(69, 69, 70);
+    
+}
+
 .reviewer{
     padding-top: 10px;
     font-weight: bolder;

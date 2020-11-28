@@ -5,6 +5,7 @@ const keys = require('../../config/keys.json');
 const formidable = require("formidable");
 const db = require('../../db');
 const { json } = require('express');
+const banner = require('../../config/banner.json');
 
 const client = new apiVideo.ClientSandbox({
     apiKey: keys.api_video.apiKey
@@ -188,13 +189,9 @@ router.get('/trending',async (req,res,next)=>{
 });
 
 router.get('/banner', async (req, res, next) => {
-    const result = await db.shows.forBanner().catch((err)=>{
-        return res.status(501).json({
-            error: err.message,
-            stack: err.stack,
-        });
-    }) 
-    res.json(result);
+    console.log('banner');
+    console.log(JSON.stringify(banner));
+    res.json(banner);
 });
 
 router.get('/genre',async (req,res,next)=>{

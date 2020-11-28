@@ -1,14 +1,16 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var morgan = require('morgan');
-var cors = require('cors');
-var helmet = require('helmet');
-var db = require('./db');
-var { updateList } = require('./lib/search');
-var { logger } = require('./lib/logger');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
+const db = require('./db');
+const { updateList } = require('./lib/search');
+const { logger } = require('./lib/logger');
 const oAuth2Server = require('node-oauth2-server')
-var oAuthModel = require('./services/accessTokenModel');
+const oAuthModel = require('./services/accessTokenModel');
+const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
+
 var app = express();
 app.oauth = oAuth2Server({
   model: oAuthModel,
@@ -17,6 +19,17 @@ app.oauth = oAuth2Server({
 })
 var { anyError, errorHandler, }  = require('./services/middleware');
 require('dotenv').config();
+
+// app.use(expressCspHeader({
+//   directives: {
+//       'default-src': [SELF, INLINE],
+//       'script-src': [SELF, INLINE, '*'],
+//       'style-src': [SELF, INLINE],
+//       'img-src': [SELF , '*', 'data:image/png'],
+//       'worker-src': [NONE],
+//       'block-all-mixed-content': true
+//   }
+// }));
 
 /* -------------------------------------------------------------------------- */
 /*                          Routers Declaration Start                         */
@@ -36,7 +49,7 @@ global.connection = db.getConnection();
 updateList(); // to load the search list
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+/*app.set('views', path.join(__dirname, 'views'));*/
 app.set('view engine', 'jade');
 //app.use(morgan('dev'));
 app.use(express.json());
@@ -75,9 +88,14 @@ app.use('/restrictedArea',restrictedAreaRouter)
 app.use('/api', apiRouter);
 app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
+  console.log('here');
+  app.use(express.static(path.join(__dirname, 'build')));
   app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
- });
+    console.log('check');
+    console.log(path.resolve(__dirname, 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+  
 }else{
   app.use('/', indexRouter);
 }

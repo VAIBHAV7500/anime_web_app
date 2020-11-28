@@ -6,6 +6,8 @@
 
 * Node - Setup Node from [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
+* Self Signed SSL - [here](https://zeropointdevelopment.com/how-to-get-https-working-in-windows-10-localhost-dev-environment/)
+
 ## Backend:
 * Install packages required.
 

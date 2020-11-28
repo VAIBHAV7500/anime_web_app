@@ -61,9 +61,11 @@ function Episodes() {
 
     const fetchEps = async (from) => {
         if(userId){
-            let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}&from=${from}&offset=${chunkSize}`;
+            let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}&offset=${chunkSize}`;
             if(latest){
                 endPoint += `&latest=true`;
+            }else{
+                endPoint += `&from=${from}`;
             }
             const response = await axios.get(endPoint);
             console.log(response.data);

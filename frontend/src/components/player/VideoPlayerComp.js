@@ -1,19 +1,23 @@
 import React, { useEffect, useState,useRef, createElement } from 'react';
-import VideoComponent from 'react-video-js-player';
+//import VideoComponent from 'react-video-js-player';
 import styles from './VideoPlayerComp.module.css';
 import videojs from 'video.js';
 import 'videojs-hotkeys';
-import './videoPlayer.css';
 import 'videojs-event-tracking';
 import { useHistory } from 'react-router';
 import { useParams } from 'react-router-dom'
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
+//import 'video.js/dist/video-js.css';
+//require('./videoPlayer.css');
+/* eslint import/no-webpack-loader-syntax: off */
+require('!style-loader!css-loader!video.js/dist/video-js.min.css');
+require('./videoPlayer.css');
 
 function VideoPlayerComp({src}) {
   const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
-  //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.mp4";
+  //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
   const playerRef = useRef();
   const history = useHistory();
   let prevTime = 0;
@@ -229,7 +233,7 @@ function VideoPlayerComp({src}) {
   },[id]);
 
   return (
-      <div className="videoPlayer">
+      <div className={styles.videoPlayer}>
         <div data-vjs-player className={styles.player}>
           <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline />
         </div> 
