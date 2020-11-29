@@ -9,6 +9,7 @@
     box-sizing: border-box;
     margin-top: 91px;
     margin-left: 136px;
+    overflow-y: scroll;
 }
 
 p.sign_in_p {

@@ -1,6 +1,6 @@
 import React ,{ useState, useEffect } from 'react';
 import { FaUser, FaSearch, FaBell} from "react-icons/fa";
-import "./Nav.css";
+import styles from './Nav.module.css';
 import {useHistory} from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import {LoginFailure} from '../../redux/Auth/authAction';
@@ -8,13 +8,36 @@ import { useCookies } from 'react-cookie';
 import mainLogo from './logo_transparent.png';
 import ModalGenerator, { showModal } from './modalGenerator';
 import Search from './search';
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
+import { useSelector } from 'react-redux';
 
 function Nav() {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
+    const [notifications, setNotifications] = useState([{body: "No New Notification",dummy:true}]);
+    const [unread, setUnread] = useState(0);
     const history = useHistory();
     const [, , removeCookie] = useCookies(['loginCookie']);
+    const userId = useSelector(state => state.user_id);
     const dispatch = useDispatch();
+
+    const handleNotification = async () => {
+        if(userId){
+            const endpoint = `${requests.notification}?user_id=${userId}`;
+            const result = await axios.get(endpoint).catch((err)=>{
+                //do something
+            });
+            if(result){
+                if(result?.data?.length){
+                    setNotifications(result.data);
+                    console.log(JSON.stringify(result.data));
+                    const unread = result.data.filter(x => x.read_reciept === 0).length;
+                    setUnread(unread);
+                }
+            }
+        }
+    }
 
     useEffect(() => {
         let isMounted = true; // note this flag denote mount status
@@ -26,11 +49,18 @@ function Nav() {
                     handleShow(false);
             }
         });
+        handleNotification();
         return() => {
             //window.removeEventListener("scroll", handleMouseDown, true);
             isMounted = false; // note this flag denote mount status
         }    
     }, []);
+
+    useEffect(()=>{
+        if(userId){
+            handleNotification();
+        }
+    },[userId]);
 
     const goToHome = () => {
         history.push('/');
@@ -56,45 +86,54 @@ function Nav() {
             onclick : logout,
             class : "signOut_Button",
         },
-    ]
-    
-    const notifications = [
-        "Welcome to Animei TV",
-        "WooHoo! You have watched 1000 episodes"
-    ]
+    ];
+
+    const markNotificationAsRead = async () =>{
+        console.log('Markingggg');
+        if(userId){
+            const endPoint = `${requests.notificationRead}`;
+            const body={
+                user_id: userId
+            };
+            const result = await axios.patch(endPoint,body);
+            if(result.status === 200){
+                setUnread(0);
+            }
+        }
+    }
 
     return (
-        <div className="nav_wrapper">
-        <div className={`nav ${!search && show && "nav_black"}`}>
+        <div className={styles.nav_wrapper}>
+        <div className={`${styles.nav} ${!search && show && styles.nav_black}`}>
             <span>
-                <img draggable="false" className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
+                <img draggable="false" className={`${styles.nav_logo} ${!search && show  && styles.logo_white}`} onClick={goToHome} src={mainLogo} />
             </span>
             < FaSearch 
-                className="search_icon" 
+                className={styles.search_icon} 
                 onClick={()=>{
                     showModal("searchModal",setSearch); 
                 }} 
             />
-            <span className="notification_icon">
-                <FaBell className="bell_icon ring"/>
-                <span className="notification_number">1</span>
+            <span className={styles.notification_icon} onMouseEnter = {markNotificationAsRead}>
+                <FaBell className={`${styles.bell_icon} ${unread ? styles.ring : ""}`}/>
+            {unread ? <span className={styles.notification_number}>{!notifications.dummy && (unread > 9 ? '9+' : unread)}</span> : ""}
             </span>
-            <div className="notification_dropdown">
+            <div className={styles.notification_dropdown}>
                 {notifications?.map(notification_message => (
-                    <div className="notification_node">
-                        {notification_message}
+                    <div className={styles.notification_node}>
+                        {notification_message?.body}
                     </div>
                 ))}
             </div>
-            <span className="avatar_span" >
-                <FaUser className = "nav_avatar"></FaUser>
+            <span className={styles.avatar_span} >
+                <FaUser className = {styles.nav_avatar}></FaUser>
             </span>
-            <div className="dropdown_wrapper" >
-                <div className={`dropdown_content `} >
-                    <div className={`dropdown_container`}>
+            <div className={styles.dropdown_wrapper} >
+                <div className={`${styles.dropdown_content} `} >
+                    <div className={`${styles.dropdown_container}`}>
                         {
                             dropdownContent.map((field,index) =>(
-                                <button key={index} className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
+                                <button key={index} className={`${styles.dropdown_button} ${field.class}`} onClick={field.onclick}>{field.name}</button>
                             ))
                         }
                     </div>

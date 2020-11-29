@@ -213,7 +213,7 @@
     top: 80px;
     width: 250px;
     height: fit-content;
-    background-color: rgb(161, 153, 153);
+    background-color: rgba(255, 255, 255,0.8);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -227,6 +227,7 @@
     box-sizing: border-box;
     padding: 11px 20px;
     border-bottom: 2px solid black;
+    font-weight: bold;
     width: 100%;
 }
 

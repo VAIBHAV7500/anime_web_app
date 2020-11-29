@@ -6,10 +6,13 @@ import { useSelector } from 'react-redux';
 import request from '../../utils/requests';
 import Support from './support';
 import MyReviews from './myReviews';
-import userImg from '../../images/default_user_profile.png'
+import userImg from '../../images/default_user_profile.png';
+import axios from '../../utils/axios';
+import requests from '../../utils/requests';
 
 function Profile() {
     const [active, setActive] = useState(0);
+    const [user,setUser] = useState({email:"",user_name:""});
     let id = useSelector(state=>state.user_id);
     const nav_items = [
       { 
@@ -46,13 +49,32 @@ function Profile() {
         );
     }
 
+    const fetchUserDetails = async () => {
+        const endPoint = `${requests.userDetails}?id=${id}`;
+        const result = await axios.get(endPoint).catch((err)=>{
+          console.log(err);
+        });
+        console.log(result);
+        if(result && result.data){
+           if(result.data.email){
+              setUser(result.data);
+           }
+        }
+    }
+
+    useEffect(() => {
+      if(id){
+        fetchUserDetails();
+      }
+    }, [id])
+
     return (
         <>
-        <Nav></Nav>
+        <Nav />
         <div className={styles.body}>
             <div className={styles.banner}>
                 <img className={styles.user_img} src={userImg}></img>
-                <h1 className={styles.user_name}>Full Name (Username)</h1>
+                <h1 className={styles.user_name}>{user.user_name} {user.email}</h1>
             </div>
             <div className={`${styles.nav} ${styles.neumorphism}`}>
                 {nav_items.map( (item,index) => generateNavField(item.title,index) )}

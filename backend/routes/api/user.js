@@ -16,4 +16,22 @@ router.post('/create', async (req, res, next) => {
     res.json({"message":response});
 });
 
+router.get('/details', async(req,res,next)=>{
+    const id = req.query.id;
+    if(id){
+        const result = await db.user.find(id).catch((err)=>{
+            res.status(501).json({
+                error: err.message
+            });
+        });
+        if(result){
+            res.json(result);
+        }
+    }else{
+        res.status(401).json({
+            message: "No User Id"
+        })
+    }
+});
+
 module.exports = router;

@@ -7,7 +7,7 @@ const createTable = (con) => {
             user_id BIGINT UNSIGNED,
             show_id BIGINT UNSIGNED,
             notification_id BIGINT UNSIGNED,
-            read_reciept BOOLEAN,
+            read_reciept BOOLEAN DEFAULT FALSE,
             read_time TIMESTAMP,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -35,18 +35,23 @@ const create = async (body) => {
     return runQuery(sql, [Object.values(body)]);
 }
 
-const findUnread = async (userId) => {
-  const sql = `SELECT notifications.body,notifications.link,notifications.image_url, ne.created_at FROM notification_engagements
+const getAll = async (userId) => {
+  const sql = `SELECT notifications.body,notifications.link,notifications.image_url, ne.created_at, ne.read_reciept FROM notification_engagements
        AS ne INNER JOIN notifications ON notifications.id = ne.notification_id
-       where ne.read_reciept = false and ne.user_id = ?
+       where ne.user_id = ?
        `
   return runQuery(sql,[userId]);
 }
 
+const markRead = async (userId) => {
+  const sql = `UPDATE notification_engagements SET read_reciept = true, read_time = NOW() where user_id = ? and read_reciept = false`;
+  return runQuery(sql,[userId]);
+}
 
 module.exports = {
     createTable,
     find,
     create,
-    findUnread,
+    getAll,
+    markRead
 }

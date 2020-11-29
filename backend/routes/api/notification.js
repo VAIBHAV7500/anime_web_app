@@ -4,10 +4,8 @@ const db = require('../../db/index');
 
 router.get('/unread',async (req,res,next)=>{
   const userId = req.query.user_id;
-  console.log(userId);
-  console.log('In notification');
   if(userId){
-    const result = await db.notification_engagements.findUnread(userId).catch((err)=>{
+    const result = await db.notification_engagements.getAll(userId).catch((err)=>{
       res.status(501).json({
         error: err.message,
         stack: err.stack
@@ -20,6 +18,28 @@ router.get('/unread',async (req,res,next)=>{
     res.status(401).json({
       message: "no user id"
     });
+  }
+});
+
+router.patch('/mark-read', async (req,res,next)=>{
+  const body = req.body;
+  if(body && body.user_id){
+    const id = body.user_id;
+    const result = db.notification_engagements.markRead(id).catch((err)=>{
+      console.log(JSON.stringify(err));
+      res.status(501).json({
+        error: err.message
+      });
+    });
+    if(result){
+      res.status(200).json({
+        success: true
+      });
+    }
+  }else{
+    res.status(401).json({
+      success: false
+    })
   }
 });
 
