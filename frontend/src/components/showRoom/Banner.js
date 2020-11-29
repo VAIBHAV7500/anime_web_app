@@ -48,7 +48,6 @@ function Banner() {
     useEffect(() => {
         async function fetchData(){
             const request = await axios.get(requests.fetchBanner);
-            console.log(request.data);
             setMovies(
                 request.data
             );

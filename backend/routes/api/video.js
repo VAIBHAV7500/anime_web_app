@@ -108,9 +108,6 @@ router.get('/episodes', async(req,res,next)=>{
             });   
             return;
         });
-
-        console.log('progress');
-        console.log(progress);
         
         let totalEpisodes = rows[0] && rows[0].total_episodes;
         if(episodes && episodes.length){

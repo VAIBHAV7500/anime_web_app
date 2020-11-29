@@ -89,8 +89,7 @@ function Nav() {
     ];
 
     const markNotificationAsRead = async () =>{
-        console.log('Markingggg');
-        if(userId){
+        if(userId && unread){
             const endPoint = `${requests.notificationRead}`;
             const body={
                 user_id: userId

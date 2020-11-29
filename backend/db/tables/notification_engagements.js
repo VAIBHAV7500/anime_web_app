@@ -48,10 +48,16 @@ const markRead = async (userId) => {
   return runQuery(sql,[userId]);
 }
 
+const welcomeNotification = async (userId) => {
+  const sql = `INSERT INTO notification_engagements(notification_id,user_id) values(?)`;
+  return runQuery(sql,[1, userId]);
+}
+
 module.exports = {
     createTable,
     find,
     create,
     getAll,
-    markRead
+    markRead,
+    welcomeNotification
 }

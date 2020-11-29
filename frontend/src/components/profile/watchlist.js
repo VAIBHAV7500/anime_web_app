@@ -25,7 +25,6 @@ const Watchlist = ({userId, endPoint}) => {
     }
 
     const gotoShow = (id) => {
-        console.log(id);
         history.push(`/show/${id}`)
     }
 

@@ -231,6 +231,11 @@
     width: 100%;
 }
 
+.notification_node:hover{
+    background: #641ba8a8;
+    cursor:default;
+    background-image: linear-gradient(to bottom, #641ba8b6, #3a0968a4);
+}
 
 
 /* -------------------------------------------------------------------------- */

@@ -41,7 +41,6 @@ const prettyPrintConsole = format((info) => {
 
   if (info.metadata && info.metadata.type === 'morgan') {
     const m = JSON.parse(info.message);
-    //console.log(JSON.stringify(m));
     info.message = `${m.timestamp} ${m.method} :: ${m.url} - ${m.status} (${m.response_time} ms) `;
   }
 

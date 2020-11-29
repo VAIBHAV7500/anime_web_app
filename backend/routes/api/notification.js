@@ -26,7 +26,6 @@ router.patch('/mark-read', async (req,res,next)=>{
   if(body && body.user_id){
     const id = body.user_id;
     const result = db.notification_engagements.markRead(id).catch((err)=>{
-      console.log(JSON.stringify(err));
       res.status(501).json({
         error: err.message
       });

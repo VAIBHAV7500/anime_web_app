@@ -112,9 +112,6 @@ function VideoPlayerComp({src}) {
     const el = document.getElementsByClassName('vjs-big-play-button')[0];
     console.log(el);
     createButton(el,"Back","back",[styles.back_btn, 'vjs-control-bar'],()=>{
-        //removeButton("skip_intro");
-      //history.goBack();
-      console.log(src.show_id);
       if(src.show_id){
         history.push(`/show/${src.show_id}`);
       }
@@ -124,7 +121,6 @@ function VideoPlayerComp({src}) {
         player.exitFullscreen();
       }
       var el = document.getElementsByClassName(styles.player)[0];
-      console.log(el.scrollHeight);
       window.scrollBy(0,el.scrollHeight);
     });
     const type = src?.type;
@@ -146,10 +142,10 @@ function VideoPlayerComp({src}) {
     //videojs.registerPlugin('hotkeys',this.hotkeys);
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
-      if(document.documentElement.offsetHeight > 0)
+      if(document && document.documentElement && document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
       document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
       window.addEventListener("resize",()=>{
-        if(document.documentElement.offsetHeight > 0)
+        if(document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
         document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
       });
     });
