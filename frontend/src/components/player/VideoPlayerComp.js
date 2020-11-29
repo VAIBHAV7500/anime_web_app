@@ -165,24 +165,32 @@ function VideoPlayerComp({src}) {
     });
 
     const checkSessionDetails = () => {
-      console.log(player?.currentTime()); 
-      const currTime = player?.currentTime() || 0;
-      if((currTime - prevTime)>= 10){
-         const covered = (player?.currentTime() / player?.duration())*100;
-         console.log(userId);
-         const body = {
-           user_id: userId,
-           show_id: src.show_id,
-           video_id: src.id,
-           covered
-         }
-         const endPoint = requests.postVideoSessions;
-         axios.post(endPoint,body);
-         prevTime = currTime;
+      //console.log(player?.currentTime()); 
+      if(player){
+        let currTime = 0;
+        try{
+          currTime = player?.currentTime();
+        }catch(e){
+          console.log(e);
+        }
+        if((currTime - prevTime)>= 10){
+          const covered = (player?.currentTime() / player?.duration())*100;
+          console.log(userId);
+          const body = {
+            user_id: userId,
+            show_id: src.show_id,
+            video_id: src.id,
+            covered
+          }
+          const endPoint = requests.postVideoSessions;
+          axios.post(endPoint,body);
+          prevTime = currTime;
+        }
       }
     }
 
     const checkButtons = (player) => {
+      console.log(player);
       const el = document.getElementsByClassName('vjs-big-play-button')[0];
       const currTime = player?.currentTime() || 0;
       const buffer = 5;
@@ -195,7 +203,7 @@ function VideoPlayerComp({src}) {
           createButton(el,"Skip Intro","skip_intro",[styles.skip_intro],() => {
             console.log("clicked");
             const stopTime = src.intro_end_time;
-            if(stopTime){
+            if(stopTime && player){
               player.currentTime(stopTime);
             }
             removeButton('skip_intro');
@@ -221,6 +229,8 @@ function VideoPlayerComp({src}) {
 
     const checkTime = setInterval(function(){
       checkSessionDetails();
+      console.log('Player');
+      console.log(player);
       checkButtons(player);
     }, 3000);
     return () => {

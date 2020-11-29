@@ -59,7 +59,7 @@ function Nav() {
     ]
     
     const notifications = [
-        "Your comment has been approved",
+        "Welcome to Animei TV",
         "WooHoo! You have watched 1000 episodes"
     ]
 

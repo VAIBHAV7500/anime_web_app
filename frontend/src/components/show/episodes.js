@@ -64,7 +64,8 @@ function Episodes() {
             let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}&offset=${chunkSize}`;
             if(latest){
                 endPoint += `&latest=true`;
-            }else{
+            }
+            if(from){
                 endPoint += `&from=${from}`;
             }
             const response = await axios.get(endPoint);
@@ -85,13 +86,15 @@ function Episodes() {
                     setMore(false);
                 }
             }
-        }else if(latest && episodeArray[episodeArray.length-1]?.episode > 1){
+        }else if(latest && episodeArray[episodeArray.length-1]?.episode >= 1){
             from = episodeArray?.length ? episodeArray[episodeArray.length-1].episode - 1 : 0;
             const response = await fetchEps(from);  
+            console.log('Fetched More data');
             if(response){
                 setEpisodes(episodeArray?.concat(response.result));
                 episodeArray = episodeArray.concat(response.result);
-                if(from - chunkSize <= 1){
+                if(episodeArray.length >= response.total_episodes){
+                    console.log(`From: ${from} | ChunkSize: ${chunkSize}`);
                     setMore(false);
                 }
             }
@@ -114,15 +117,10 @@ function Episodes() {
             setEpisodes(response.result);
             episodeArray = response.result;
         }
-
-        if(!latest){
-            if(response.total_episodes === episodeArray.length){
-                setMore(false);
-            }
-        }else{
-            if(from - chunkSize <= 1){
-                setMore(false);
-            }
+        console.log(`Range Response: `);
+        console.log(response);
+        if(response.total_episodes === from + episodeArray.length -1){
+            setMore(false);
         }
     }
 

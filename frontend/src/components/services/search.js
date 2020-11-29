@@ -46,8 +46,8 @@ const Search = (props) => {
         getSuggestions(true,data);
     }
 
-    const goToShow = (id) => {
-        setSearch(false);
+    const goToShow = (e,id) => {
+        closeModal(e,"searchModal",setSearch,true);
         history.push(`/show/${id}`);
     }
 
@@ -77,7 +77,7 @@ const Search = (props) => {
                         <img 
                             alt={suggestion_card.name} 
                             src={suggestion_card.poster_portrait_url}
-                            onClick={()=>{goToShow(suggestion_card.id)}}
+                            onClick={(e)=>{goToShow(e,suggestion_card.id)}}
                             className={`${styles.suggestion_card_image}`} 
                         />
                         <span className={`${styles.suggestion_card_name}`}>{suggestion_card.name}</span>

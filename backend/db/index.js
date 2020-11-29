@@ -1,25 +1,8 @@
 const mysql = require('mysql');
 const dbConfig = require('../config/dbConfig.json');
-const user = require('./tables/user');
-const sessions = require('./tables/sessions');
-const plans = require('./tables/plan');
-const genre = require('./tables/genre');
-const shows = require('./tables/shows');
-const videos = require('./tables/videos');
-const audios = require('./tables/audios');
-const subtitles = require('./tables/subtitles');
-const access_tokens = require('./tables/access_tokens');
-const group = require('./tables/group');
-const genre_show_mapping = require('./tables/genre_show_mapping');
-const characters = require('./tables/characters');
-const character_show_mapping = require('./tables/character_show_mapping');
-const reviews = require('./tables/reviews');
-const user_review = require('./tables/user_review');
-const user_ip = require('./tables/user_ip');
-const completed_shows = require('./tables/completed_shows');
-const currently_watching = require('./tables/currently_watching');
-const watchlist = require('./tables/watchlist');
-const user_player_session = require('./tables/user_player_session');
+const fs = require('fs');
+
+const tablesFolder = `./db/tables`;
 
 const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
@@ -35,26 +18,16 @@ const getConnection = () =>{
     return con;
 }
 
-module.exports =  {
-    user,
-    sessions,
-    plans,
-    genre,
-    shows,
-    videos,
-    audios,
-    subtitles,
+let exportJson = {
     getConnection,
-    access_tokens,
-    group,
-    genre_show_mapping,
-    characters,
-    character_show_mapping,
-    reviews,
-    user_review,
-    user_ip,
-    completed_shows,
-    currently_watching,
-    watchlist,
-    user_player_session,
 }
+
+fs.readdirSync(tablesFolder).forEach((file) => {
+    const names = file.split(".");
+    if(names){
+        const name = names[0];
+        exportJson[name] = require(`./tables/${name}`);
+    }
+});
+
+module.exports = exportJson
