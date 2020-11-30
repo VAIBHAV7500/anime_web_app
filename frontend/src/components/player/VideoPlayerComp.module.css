@@ -81,9 +81,9 @@ video{
     position: absolute !important;
     top: 2% !important;
     position: absolute;
-    left: 98% !important;
-    width: 100px !important;
-    height: 50px !important;
+    left: 95% !important;
+    width: 20px !important;
+    height: 20px !important;
     cursor: default !important;
     padding: 5px 20px !important;
     transform: translateX(-98%);
@@ -91,7 +91,6 @@ video{
   
   .green {
     background: #27c019b4 !important;
-    width: 120px !important;
     background-image: -webkit-linear-gradient(top, #27c019, #0f7906) !important;
     background-image: -moz-linear-gradient(top, #27c019, #0f7906) !important;
     background-image: -ms-linear-gradient(top, #27c019, #0f7906) !important;
@@ -102,7 +101,6 @@ video{
   .red {
     background: #f04949 !important;
     font-weight: bolder !important;
-    height: 40px !important;
     background-image: -webkit-linear-gradient(top, #f04949, #c70b0b) !important;
     background-image: -moz-linear-gradient(top, #f04949, #a73012) !important;
     background-image: -ms-linear-gradient(top, #f04949, #a73012) !important;
@@ -112,7 +110,6 @@ video{
   
   .orange {
     background: #f0a32f !important;
-    width: 120px !important;
     background-image: -webkit-linear-gradient(top, #f0a32f, #e08803) !important;
     background-image: -moz-linear-gradient(top, #f0a32f, #e08803) !important;
     background-image: -ms-linear-gradient(top, #f0a32f, #e08803) !important;
