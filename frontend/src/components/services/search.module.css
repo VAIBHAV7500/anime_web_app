@@ -71,6 +71,7 @@
 .suggestion_card{
     position: relative;
     text-align: center;
+    cursor: pointer;
     width: 160px;
     height: 240px;
     margin: 10px;
@@ -79,6 +80,10 @@
     background-color: rgba(27, 27, 27, 0.801);
     box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.158),
                 5px 5px 10px rgba(0, 0, 0, 0.829);
+}
+
+.suggestion_card:hover{
+    background-color: rgba(54, 54, 54, 0.801);
 }
 
 .suggestion_card_image{

@@ -20,6 +20,7 @@ function Episodes() {
     const [hasMore, setMore] = useState(true);
     const history = useHistory();
     let location = useLocation();
+    let loading = false;
     let chunkSize = 10;
 
     const updateEpisodes = async () => {
@@ -27,14 +28,25 @@ function Episodes() {
             setEpisodes([]);
             setMore(true);
             episodeArray = [];
-            console.log('User Id: ' + userId);
+            loading = true;
+            const epNum = document.getElementsByClassName(styles.number_input)[0].value;
+            
             let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}`;
             if(latest){
                 endPoint += `&offset=${chunkSize}&latest=true`;
+                if(epNum){
+                    endPoint += `&from=${epNum}`;
+                }
             }else{
-                endPoint += `&from=${0}&offset=${chunkSize}`;
+                endPoint += `&offset=${chunkSize}`;
+                if(epNum){
+                    endPoint += `&from=${epNum}`;
+                }else{
+                    endPoint += `&from=${0}`
+                }
             }   
             const response = await axios.get(endPoint);
+            loading = false;
             setEpisodes(response.data.result);
             episodeArray = response.data.result;
             return response.data.result;
@@ -47,12 +59,10 @@ function Episodes() {
     },[]);
 
     useEffect(()=>{
-        console.log('Updated');
         updateEpisodes();
     },[id]);
 
     useEffect(() => {
-        console.log('User id: ' + userId);
         if(prevUserId !== userId){
             prevUserId = userId;
             updateEpisodes();
@@ -61,14 +71,16 @@ function Episodes() {
 
     const fetchEps = async (from) => {
         if(userId){
+            loading = true;
             let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}&offset=${chunkSize}`;
             if(latest){
                 endPoint += `&latest=true`;
-            }else{
+            }
+            if(from){
                 endPoint += `&from=${from}`;
             }
             const response = await axios.get(endPoint);
-            console.log(response.data);
+            loading = false;
             return response.data;
         }
     }
@@ -85,13 +97,13 @@ function Episodes() {
                     setMore(false);
                 }
             }
-        }else if(latest && episodeArray[episodeArray.length-1]?.episode > 1){
+        }else if(latest && episodeArray[episodeArray.length-1]?.episode >= 1){
             from = episodeArray?.length ? episodeArray[episodeArray.length-1].episode - 1 : 0;
-            const response = await fetchEps(from);  
+            const response = await fetchEps(from);
             if(response){
                 setEpisodes(episodeArray?.concat(response.result));
                 episodeArray = episodeArray.concat(response.result);
-                if(from - chunkSize <= 1){
+                if(episodeArray.length >= response.total_episodes){
                     setMore(false);
                 }
             }
@@ -110,24 +122,20 @@ function Episodes() {
             episodeArray = response.result;
         }else{
             from = 1;
-            response = await fetchEps(from);
+            if(!latest){
+                response = await fetchEps(from);
+            }else{
+                response = await fetchEps();
+            }
             setEpisodes(response.result);
             episodeArray = response.result;
         }
-
-        if(!latest){
-            if(response.total_episodes === episodeArray.length){
-                setMore(false);
-            }
-        }else{
-            if(from - chunkSize <= 1){
-                setMore(false);
-            }
+        if(response.total_episodes === parseInt(from) + episodeArray.length -1){
+            setMore(false);
         }
     }
 
     const goToPlayer = (id) =>{
-        console.log(id);
         history.push(`/player/${id}`);
     }
 

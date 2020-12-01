@@ -26,7 +26,7 @@ const createTable = (con) => {
 }
 
 const find = async (id) =>{
-    const sql = `SELECT * FROM users WHERE id = ${id} LIMIT 1`;
+    const sql = `SELECT user_name,email FROM users WHERE id = ${id} LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }

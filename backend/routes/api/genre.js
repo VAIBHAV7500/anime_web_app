@@ -4,7 +4,6 @@ var db = require('../../db/index');
 
 router.post('/insert-genre/:genre', async (req, res, next)=>{
     const result = await db.genre.findByGenre(req.params.genre).catch(e=>{
-        console.log(e);
         res.json({
             message : e
         });
@@ -16,7 +15,6 @@ router.post('/insert-genre/:genre', async (req, res, next)=>{
         });
     }else{
         const new_id = await db.genre.create({category : req.params.genre}).catch(e=>{
-            console.log(e);
             res.json({
                 message : e
             });

@@ -97,7 +97,6 @@ router.delete('/unlike', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
     const body = req.body;
-    console.log(body);
     body.likes = 0;
     body.approved = true;
     if(body){
@@ -121,7 +120,6 @@ router.post('/create', async (req, res, next) => {
 router.get('/my-reviews', async (req,res,next)=>{
     const id = req.query.id;
     const reviews = await db.reviews.findByUserId(id).catch((err)=> {
-        console.log(err);
         res.status(500).json({
             error: err.message,
             stack: err.stack,

@@ -30,7 +30,6 @@ const create = async (body) => {
 
 const upsertRecord = async (body) => {
     const sql = `REPLACE INTO user_player_sessions(${Object.keys(body).join()}) VALUES (?)`;
-    console.log(sql);
     return runQuery(sql, [Object.values(body)]);
 }
 

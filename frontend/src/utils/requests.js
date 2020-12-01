@@ -26,6 +26,9 @@ const requests = {
     fetchVideoDetails: `/api/video/details`,
     postVideoSessions: `/api/video/sessions`,
     myReviews: '/api/review/my-reviews',
+    notification: '/api/notification/unread',
+    notificationRead: '/api/notification/mark-read',
+    userDetails: '/api/user/details',
 }
 
 export default requests;

@@ -112,9 +112,6 @@ function VideoPlayerComp({src}) {
     const el = document.getElementsByClassName('vjs-big-play-button')[0];
     console.log(el);
     createButton(el,"Back","back",[styles.back_btn, 'vjs-control-bar'],()=>{
-        //removeButton("skip_intro");
-      //history.goBack();
-      console.log(src.show_id);
       if(src.show_id){
         history.push(`/show/${src.show_id}`);
       }
@@ -124,7 +121,6 @@ function VideoPlayerComp({src}) {
         player.exitFullscreen();
       }
       var el = document.getElementsByClassName(styles.player)[0];
-      console.log(el.scrollHeight);
       window.scrollBy(0,el.scrollHeight);
     });
     const type = src?.type;
@@ -146,10 +142,10 @@ function VideoPlayerComp({src}) {
     //videojs.registerPlugin('hotkeys',this.hotkeys);
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
-      if(document.documentElement.offsetHeight > 0)
+      if(document && document.documentElement && document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
       document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
       window.addEventListener("resize",()=>{
-        if(document.documentElement.offsetHeight > 0)
+        if(document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
         document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
       });
     });
@@ -165,24 +161,32 @@ function VideoPlayerComp({src}) {
     });
 
     const checkSessionDetails = () => {
-      console.log(player?.currentTime()); 
-      const currTime = player?.currentTime() || 0;
-      if((currTime - prevTime)>= 10){
-         const covered = (player?.currentTime() / player?.duration())*100;
-         console.log(userId);
-         const body = {
-           user_id: userId,
-           show_id: src.show_id,
-           video_id: src.id,
-           covered
-         }
-         const endPoint = requests.postVideoSessions;
-         axios.post(endPoint,body);
-         prevTime = currTime;
+      //console.log(player?.currentTime()); 
+      if(player){
+        let currTime = 0;
+        try{
+          currTime = player?.currentTime();
+        }catch(e){
+          console.log(e);
+        }
+        if((currTime - prevTime)>= 10){
+          const covered = (player?.currentTime() / player?.duration())*100;
+          console.log(userId);
+          const body = {
+            user_id: userId,
+            show_id: src.show_id,
+            video_id: src.id,
+            covered
+          }
+          const endPoint = requests.postVideoSessions;
+          axios.post(endPoint,body);
+          prevTime = currTime;
+        }
       }
     }
 
     const checkButtons = (player) => {
+      console.log(player);
       const el = document.getElementsByClassName('vjs-big-play-button')[0];
       const currTime = player?.currentTime() || 0;
       const buffer = 5;
@@ -195,7 +199,7 @@ function VideoPlayerComp({src}) {
           createButton(el,"Skip Intro","skip_intro",[styles.skip_intro],() => {
             console.log("clicked");
             const stopTime = src.intro_end_time;
-            if(stopTime){
+            if(stopTime && player){
               player.currentTime(stopTime);
             }
             removeButton('skip_intro');
@@ -221,6 +225,8 @@ function VideoPlayerComp({src}) {
 
     const checkTime = setInterval(function(){
       checkSessionDetails();
+      console.log('Player');
+      console.log(player);
       checkButtons(player);
     }, 3000);
     return () => {

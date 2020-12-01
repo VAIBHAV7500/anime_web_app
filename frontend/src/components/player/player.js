@@ -14,14 +14,12 @@ export class player extends Component {
             loading: true
         });
         if(this.props.user_id){
-            console.log('Inside fetch Data');
             window.scrollTo(0, 0);
             const playerId = this.props.match.params.id;
             
             try {
                 const endPoint = `${requests.fetchVideoDetails}?player_id=${playerId}&user_id=${this.props.user_id}`;
                 const result = await axios.get(endPoint);
-                console.log(result);
                 if(result.data){
                     result.data.intro_start_time = 0;
                     result.data.intro_end_time = 22;
@@ -44,20 +42,12 @@ export class player extends Component {
     }
 
     async componentDidUpdate(prevProps) {
-        console.log(this.props.user_id);
-        console.log(prevProps.user_id);
         if (this.props.match.params.id !== prevProps.match.params.id) {
-            console.log('Episode Updatead');
             this.fetchData();
         }
         if(this.props.user_id !== prevProps.user_id){
-            console.log('Inside condition')
             this.fetchData();
         }
-    }
-
-    handleKeyPress = (event) => {
-        console.log(event);
     }
 
     disableRightClick = () => {
