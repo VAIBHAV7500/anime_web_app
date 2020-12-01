@@ -65,43 +65,43 @@ function Nav() {
 
     return (
         <div className="nav_wrapper">
-        <div className={`nav ${!search && show && "nav_black"}`}>
-            <span>
-                <img draggable="false" className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
-            </span>
-            < FaSearch 
-                className="search_icon" 
-                onClick={()=>{
-                    showModal("searchModal",setSearch); 
-                }} 
-            />
-            <span className="notification_icon">
-                <FaBell className="bell_icon ring"/>
-                <span className="notification_number">1</span>
-            </span>
-            <div className="notification_dropdown">
-                {notifications?.map(notification_message => (
-                    <div className="notification_node">
-                        {notification_message}
-                    </div>
-                ))}
-            </div>
-            <span className="avatar_span" >
-                <FaUser className = "nav_avatar"></FaUser>
-            </span>
-            <div className="dropdown_wrapper" >
-                <div className={`dropdown_content `} >
-                    <div className={`dropdown_container`}>
-                        {
-                            dropdownContent.map((field,index) =>(
-                                <button key={index} className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
-                            ))
-                        }
+            <div className={`nav ${!search && show && "nav_black"}`}>
+                <span>
+                    <img draggable="false" className={`nav_logo ${!search && show  && "logo_white"}`} onClick={goToHome} src={mainLogo} />
+                </span>
+                < FaSearch 
+                    className="search_icon" 
+                    onClick={()=>{
+                        showModal("searchModal",setSearch); 
+                    }} 
+                />
+                <span className="notification_icon">
+                    <FaBell className="bell_icon ring"/>
+                    <span className="notification_number">1</span>
+                </span>
+                <div className="notification_dropdown">
+                    {notifications?.map((notification_message,index) => (
+                        <div key={index} className="notification_node">
+                            {notification_message}
+                        </div>
+                    ))}
+                </div>
+                <span className="avatar_span" >
+                    <FaUser className = "nav_avatar"></FaUser>
+                </span>
+                <div className="dropdown_wrapper" >
+                    <div className={`dropdown_content `} >
+                        <div className={`dropdown_container`}>
+                            {
+                                dropdownContent.map((field,index) =>(
+                                    <button key={index} className={`dropdown_button ${field.class}`} onClick={field.onclick}>{field.name}</button>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
+                {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
             </div>
-            {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
-        </div>
         </div>
     )
 }
