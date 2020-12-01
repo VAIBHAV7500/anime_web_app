@@ -61,6 +61,7 @@
     margin-top:10px;
     min-height: 400px;
     width: 85%;
+    height: 75vh;
     overflow: auto;
     overflow-x: hidden;
     display: flex;
