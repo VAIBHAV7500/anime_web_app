@@ -14,9 +14,6 @@ function Discussion() {
         let commentElement = document.querySelector("." + styles.body);
         videoElement.classList.remove("shrink_video");
         commentElement.classList.remove(styles.discussion_show);
-        /* COMMENT HOOK NEEDED TO MAKE COMMENT HOOK FALSE */
-        /* next line is just a workaround */
-        document.querySelector(".VideoPlayerComp_discussion__1Xosn").click();
     }
 
     useEffect(()=>{
