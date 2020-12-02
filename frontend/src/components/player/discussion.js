@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './discussion.module.css';
 import { FaArrowLeft, FaGrinAlt, FaPaperPlane, FaUnlock } from "react-icons/fa";
@@ -16,6 +16,13 @@ function Discussion() {
         commentElement.classList.remove(styles.discussion_show);
         /* COMMENT HOOK NEEDED TO MAKE COMMENT HOOK FALSE */
     }
+
+    useEffect(()=>{
+      document.querySelector("."+styles.body).scrollTop = 0; 
+      let discussContainer = document.querySelector("." + styles.discussion_container);
+      discussContainer.scrollTo(0,discussContainer.scrollHeight); 
+    })
+
     const addSenderMessage = (message) => {
         document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.sender_bubble}">${message} </div>`; 
     }
@@ -28,7 +35,10 @@ function Discussion() {
         addSenderMessage(message.value);
         message.value="";
         message.focus();
+        let discussContainer = document.querySelector("." + styles.discussion_container);
+        discussContainer.scrollTo(0,discussContainer.scrollHeight); 
     }
+
     const handleSend = (e) => {
         if(e.which === 13){
             send();

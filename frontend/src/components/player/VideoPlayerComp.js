@@ -170,10 +170,6 @@ function VideoPlayerComp({src}) {
     //videojs.registerPlugin('hotkeys',this.hotkeys);
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
-      let videoElement = document.querySelector(".video-js");
-      let commentElement = document.querySelector(".discussion_body__3VKYS");
-      videoElement.classList.add("shrink_video");
-          commentElement.classList.add("discussion_discussion_show__Dklfh");
       if(document && document.documentElement && document.documentElement.offsetHeight > 0 && document.querySelector('.video-js'))
       document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
       window.addEventListener("resize",()=>{
