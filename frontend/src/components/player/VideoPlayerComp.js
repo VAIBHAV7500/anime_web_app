@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom'
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
+import { player } from './player';
 //import 'video.js/dist/video-js.css';
 //require('./videoPlayer.css');
 /* eslint import/no-webpack-loader-syntax: off */
@@ -23,6 +24,20 @@ function VideoPlayerComp({src}) {
   let prevTime = 0;
   const userId = useSelector(state => state.user_id);
   const {id} = useParams();
+  const [fullscreen, setFullScreen] = useState(false);
+  let comment = false;
+  let fullScreen = false;
+
+  useEffect(() => {
+    if(fullscreen){
+      let videoElement = document.querySelector(".video-js");
+      let commentElement = document.querySelector(".discussion_body__3VKYS");
+      if(videoElement.classList.contains("shrink_video"))
+        videoElement.classList.remove("shrink_video");
+      if(commentElement.classList.contains("discussion_discussion_show__Dklfh"))
+        commentElement.classList.remove("discussion_discussion_show__Dklfh");
+    }
+  },[fullscreen]);
 
   const playerOptions = {
     autoplay: true, 
@@ -63,6 +78,7 @@ function VideoPlayerComp({src}) {
       eventTracking: true
     }
   }
+  
 
   const createButton = (el,text,id,styleClasses=[],onClick,reverse=false) => {
     let element = document.querySelector('#' + id);
@@ -108,20 +124,32 @@ function VideoPlayerComp({src}) {
     }
   }
 
+
   const createPlayerButtons = (player) => {
     const el = document.getElementsByClassName('vjs-big-play-button')[0];
-    console.log(el);
     createButton(el,"Back","back",[styles.back_btn, 'vjs-control-bar'],()=>{
       if(src.show_id){
         history.push(`/show/${src.show_id}`);
       }
     },true);
     createButton(el,"Discussion","discusson", [styles.discussion, 'vjs-control-bar'],()=>{
+      let videoElement = document.querySelector(".video-js");
+      let commentElement = document.querySelector(".discussion_body__3VKYS");
       if(player.isFullscreen()){
         player.exitFullscreen();
+        if(comment)
+        comment = !comment;
       }
-      var el = document.getElementsByClassName(styles.player)[0];
-      window.scrollBy(0,el.scrollHeight);
+      if(videoElement && commentElement){
+        if(!comment){
+          videoElement.classList.add("shrink_video");
+          commentElement.classList.add("discussion_discussion_show__Dklfh");
+        }else{
+          videoElement.classList.remove("shrink_video");
+          commentElement.classList.remove("discussion_discussion_show__Dklfh");
+        }
+        comment = !comment;
+      }
     });
     const type = src?.type;
     if(type){
@@ -142,26 +170,35 @@ function VideoPlayerComp({src}) {
     //videojs.registerPlugin('hotkeys',this.hotkeys);
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
-      if(document && document.documentElement && document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
+      let videoElement = document.querySelector(".video-js");
+      let commentElement = document.querySelector(".discussion_body__3VKYS");
+      videoElement.classList.add("shrink_video");
+          commentElement.classList.add("discussion_discussion_show__Dklfh");
+      if(document && document.documentElement && document.documentElement.offsetHeight > 0 && document.querySelector('.video-js'))
       document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
       window.addEventListener("resize",()=>{
-        if(document.documentElement.offsetHeight > 0 && document.querySelector('.page'))
+        if(document.documentElement.offsetHeight > 0 && document.querySelector('.video-js'))
         document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
       });
+      player.on("fullscreenchange",()=>{
+        fullScreen = !fullScreen;
+        if(fullScreen){
+          setFullScreen(true);
+        }else{
+          setFullScreen(false)
+        }
+      })
+
     });
 
     player.on('tracking:firstplay', (e, data) => {
-      console.log('SRc: ' + JSON.stringify(src));
-      console.log('Duration: ' + player?.duration());
       createPlayerButtons(player);
       checkButtons();
       const currentTime = ((src?.progress || 0) * (player?.duration() || 0)) /100;
-      console.log('Current Time: ' + currentTime);
       player.currentTime(currentTime);
     });
 
     const checkSessionDetails = () => {
-      //console.log(player?.currentTime()); 
       if(player){
         let currTime = 0;
         try{
@@ -171,7 +208,6 @@ function VideoPlayerComp({src}) {
         }
         if((currTime - prevTime)>= 10){
           const covered = (player?.currentTime() / player?.duration())*100;
-          console.log(userId);
           const body = {
             user_id: userId,
             show_id: src.show_id,
@@ -186,18 +222,12 @@ function VideoPlayerComp({src}) {
     }
 
     const checkButtons = (player) => {
-      console.log(player);
       const el = document.getElementsByClassName('vjs-big-play-button')[0];
       const currTime = player?.currentTime() || 0;
       const buffer = 5;
-      console.log('Time: ' + currTime);
-      console.log('Buff time: ' + currTime + buffer);
-
       if(src.intro_end_time != null && src.intro_start_time != null){
         if(currTime + buffer >= src.intro_start_time && currTime <= src.intro_end_time){
-          console.log('Creating Skip Button');
           createButton(el,"Skip Intro","skip_intro",[styles.skip_intro],() => {
-            console.log("clicked");
             const stopTime = src.intro_end_time;
             if(stopTime && player){
               player.currentTime(stopTime);
@@ -206,7 +236,6 @@ function VideoPlayerComp({src}) {
           });
         }
         else if(currTime + buffer >= src.intro_end_time){
-          console.log('Removing Button');
            removeButton('skip_intro');
         }
       }
@@ -225,8 +254,6 @@ function VideoPlayerComp({src}) {
 
     const checkTime = setInterval(function(){
       checkSessionDetails();
-      console.log('Player');
-      console.log(player);
       checkButtons(player);
     }, 3000);
     return () => {

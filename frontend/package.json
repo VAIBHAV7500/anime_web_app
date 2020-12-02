@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.2",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
+    "emoji-picker-react": "^3.2.4",
     "hls.js": "^0.14.16",
     "movie-trailer": "^2.0.6",
     "pthumbnails": "^1.2.0",

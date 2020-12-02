@@ -53,7 +53,7 @@ const Search = (props) => {
 
     return (
         <div className={`${styles.search_container}`}>
-             <FaTimes 
+            <FaTimes 
                 className={`${styles.close_search_icon}`} 
                 onClick={(e)=>{
                     closeModal(e,"searchModal",setSearch,true);

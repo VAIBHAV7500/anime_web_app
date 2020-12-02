@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import Description from './description';
 import styles from './player.module.css';
 import VideoPlayerComp from './VideoPlayerComp';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import PageLoader from '../services/page_loader';
 import { connect } from 'react-redux';
+import Discussion from './discussion';
 
 export class player extends Component {
 
@@ -38,7 +38,10 @@ export class player extends Component {
     }
     async componentDidMount() {
         this.fetchData();
-
+        document.body.style.overflow = "hidden";
+    }
+    async componentWillUnmount () {
+        document.body.style.overflow = "auto";
     }
 
     async componentDidUpdate(prevProps) {
@@ -62,7 +65,7 @@ export class player extends Component {
                 <div className={styles.player_wrapper}>
                     {this.state?.loading && <PageLoader />}
                     {this.state?.player !== undefined && <VideoPlayerComp src={this.state?.player} className={styles.player} />}
-                    <Description></Description>
+                    <Discussion/>
                  </div>
         )
     }

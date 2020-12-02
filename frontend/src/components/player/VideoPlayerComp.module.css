@@ -11,10 +11,13 @@
     /* width: 100%;
     height: 100%;
     position: absolute; */
+    float: left !important;
+}
+video{
+    width: 10%;
 }
 
 .videoPlayer{
-    position: absolute;
     height: 100%;
     width: 100%;
     background-color: red;
@@ -62,9 +65,9 @@
 }
 
 .discussion{
-    top: 83% !important;
+    bottom: 81px !important;
     height: 50px !important;
-    left: 2% !important;
+    left: 30px !important;
     margin-left: -10px !important;
     width: fit-content !important;
     padding: 5px 20px !important;
@@ -75,13 +78,15 @@
 }
 
 .type {
+    position: absolute !important;
     top: 2% !important;
     position: absolute;
-    left: 90% !important;
+    left: 98% !important;
     width: 100px !important;
     height: 50px !important;
     cursor: default !important;
     padding: 5px 20px !important;
+    transform: translateX(-98%);
   }
   
   .green {

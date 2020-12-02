@@ -1,11 +1,19 @@
 .page{
-    display: block;
     position: absolute;
-    margin-top: 100vh;
-    padding-top: 2%;
-    color:white;
+    color: white;
     background: radial-gradient(ellipse at bottom, #3e3d3f 0%, #090a0f 100%);
+    right: 0;
+    height: 100%;
+    width: 25%;
+    overflow: hidden;
+    transition: transform 0.5s;
+    transform: translateX(100%);
 }
+
+.page_show{
+    transform: translateX(0);
+}
+
 
 .title{
     text-align: center;
