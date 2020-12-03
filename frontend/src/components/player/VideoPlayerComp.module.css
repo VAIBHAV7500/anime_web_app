@@ -37,6 +37,7 @@ video{
     width: auto;
     text-transform: uppercase !important;
     font-weight: bold;
+    cursor: pointer !important;
 
 }
 
@@ -74,6 +75,7 @@ video{
     margin-left: -10px !important;
     width: fit-content !important;
     padding: 5px 20px !important;
+    cursor: pointer !important;
 }
 .discussion::before{
     height: 0 !important;
@@ -86,7 +88,7 @@ video{
     position: absolute !important;
     top: 2% !important;
     position: absolute;
-    left: 95% !important;
+    left: 97% !important;
     width: 20px !important;
     height: 20px !important;
     cursor: default !important;

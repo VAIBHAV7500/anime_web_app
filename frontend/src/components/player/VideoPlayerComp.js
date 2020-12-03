@@ -10,7 +10,8 @@ import { useParams } from 'react-router-dom'
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
-import { player } from './player';
+import 'videojs-contrib-ads';
+import 'videojs-ima';
 //import 'video.js/dist/video-js.css';
 //require('./videoPlayer.css');
 /* eslint import/no-webpack-loader-syntax: off */
@@ -65,7 +66,11 @@ function VideoPlayerComp({src}) {
       eventTracking: true
     }
   }
-  
+
+  var imaOptions = {
+    adLabel: `Don't Like Ads? Switch to Premium`,
+    adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator='
+  };
 
   const createButton = (el,text,id,styleClasses=[],onClick,reverse=false) => {
     let element = document.querySelector('#' + id);
@@ -155,6 +160,7 @@ function VideoPlayerComp({src}) {
     document.querySelector("input").blur();
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
+      //player.ima(imaOptions);
       player.on("fullscreenchange",()=>{
         if(player.isFullscreen()){
           const videoElement = document.querySelector(".video-js");

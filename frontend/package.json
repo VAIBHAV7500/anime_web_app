@@ -37,8 +37,10 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "video.js": "^7.9.7",
+    "videojs-contrib-ads": "^6.7.0",
     "videojs-event-tracking": "^1.0.1",
-    "videojs-hotkeys": "^0.2.27"
+    "videojs-hotkeys": "^0.2.27",
+    "videojs-ima": "^1.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
