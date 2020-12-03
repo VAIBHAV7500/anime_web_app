@@ -20,7 +20,7 @@ function Discussion() {
     }
 
     useEffect(()=>{
-        
+
         document.querySelector("."+styles.body).scrollTop = 0; 
         let discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight); 
