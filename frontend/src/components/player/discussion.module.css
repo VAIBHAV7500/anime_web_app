@@ -106,7 +106,7 @@
 }
 
 .footer_translate{
-    transform: translateY(0px);
+    transform: translateY(0px) !important;
 }
 
 .footer_wrapper input{
@@ -119,12 +119,18 @@
     border: none;
     outline:none;
     font-size: 16px;
+    margin-left: 10px;
 }
 .send_icon,
 .emo_selector_icon{
     font-size:20px;
     cursor: pointer;
-    margin: 0px 5px;
+}
+.send_icon{
+    margin: 0px 10px 0px 10px;
+}
+.emo_selector_icon{
+    margin: 0px 0px 0px 10px;
 }
 
 

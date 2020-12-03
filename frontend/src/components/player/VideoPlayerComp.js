@@ -165,12 +165,11 @@ function VideoPlayerComp({src}) {
     }
   }
 
-
+  
   useEffect(()=>{
-    //videojs.registerPlugin('hotkeys',this.hotkeys);
+    document.querySelector("input").blur();
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
-     
       player.on("fullscreenchange",()=>{
         fullScreen = !fullScreen;
         if(fullScreen){
@@ -250,7 +249,6 @@ function VideoPlayerComp({src}) {
     return () => {
       clearInterval(checkTime);
       checkSessionDetails();
-     
       removeAllButton();
       player.dispose();
     };

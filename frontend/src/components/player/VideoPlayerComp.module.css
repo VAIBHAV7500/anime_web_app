@@ -59,6 +59,9 @@ video{
     width: 80px !important;
     height: 40px !important;
 }
+.back_btn::before{
+    height: 0 !important;
+}
 
 .back_btn:hover{
     background-color: #641ba8e0 !important;
@@ -72,7 +75,9 @@ video{
     width: fit-content !important;
     padding: 5px 20px !important;
 }
-
+.discussion::before{
+    height: 0 !important;
+}
 .discussion:hover{
     background-color: #641ba8e0 !important;
 }

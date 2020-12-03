@@ -39,7 +39,7 @@ export class player extends Component {
     async componentDidMount() {
         this.fetchData();
     }
-   
+  
 
     async componentDidUpdate(prevProps) {
         if (this.props.match.params.id !== prevProps.match.params.id) {
