@@ -233,6 +233,7 @@
 
 .notification_node:hover{
     background: #641ba8a8;
+    color: white;
     cursor:default;
     background-image: linear-gradient(to bottom, #641ba8b6, #3a0968a4);
 }

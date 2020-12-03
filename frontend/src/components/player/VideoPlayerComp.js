@@ -154,13 +154,13 @@ function VideoPlayerComp({src}) {
     const type = src?.type;
     if(type){
       if(type == "filler"){
-        createButton(el,"FILLER", "filler", [styles.type, styles.red, 'vjs-control-bar'],()=>{});
+        createButton(el,"", "filler", [styles.type, styles.red, 'vjs-control-bar'],()=>{});
       }else if(type === "manga" || type === "manga canon"){
-        createButton(el,"MANGA CANON", "manga", [styles.type, styles.green, 'vjs-control-bar'],()=>{});
+        createButton(el,"", "manga", [styles.type, styles.green, 'vjs-control-bar'],()=>{});
       }else if(type === "anime"){
-        createButton(el,"ANIME CANON", "anime",[styles.type, styles.green, 'vjs-control-bar'],()=>{});
+        createButton(el,"", "anime",[styles.type, styles.green, 'vjs-control-bar'],()=>{});
       }else if(type === "mixed" || type === "mixed canon"){
-        createButton(el, "MIXED CANON", "mixed", [styles.type, styles.orange, 'vjs-control-bar'],()=>{});
+        createButton(el, "", "mixed", [styles.type, styles.orange, 'vjs-control-bar'],()=>{});
       }
     }
   }

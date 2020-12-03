@@ -28,28 +28,29 @@ function Episodes() {
             setEpisodes([]);
             setMore(true);
             episodeArray = [];
-            loading = true;
-            const epNum = document.getElementsByClassName(styles.number_input)[0].value;
-            
-            let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}`;
-            if(latest){
-                endPoint += `&offset=${chunkSize}&latest=true`;
-                if(epNum){
-                    endPoint += `&from=${epNum}`;
-                }
-            }else{
-                endPoint += `&offset=${chunkSize}`;
-                if(epNum){
-                    endPoint += `&from=${epNum}`;
+            if(!loading){
+                loading = true;
+                const epNum = document.getElementsByClassName(styles.number_input)[0].value;
+                
+                let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}`;
+                if(latest){
+                    endPoint += `&offset=${chunkSize}&latest=true`;
+                    if(epNum){
+                        endPoint += `&from=${epNum}`;
+                    }
                 }else{
-                    endPoint += `&from=${0}`
-                }
-            }   
-            const response = await axios.get(endPoint);
-            loading = false;
-            setEpisodes(response.data.result);
-            episodeArray = response.data.result;
-            return response.data.result;
+                    endPoint += `&offset=${chunkSize}`;
+                    if(epNum){
+                        endPoint += `&from=${epNum}`;
+                    }else{
+                        endPoint += `&from=${0}`
+                    }
+                }   
+                const response = await axios.get(endPoint);
+                loading = false;
+                setEpisodes(response.data.result);
+                episodeArray = response.data.result;
+            }
         }
     }
 
@@ -70,7 +71,7 @@ function Episodes() {
     }, [userId])
 
     const fetchEps = async (from) => {
-        if(userId){
+        if(userId && !loading){
             loading = true;
             let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}&offset=${chunkSize}`;
             if(latest){
