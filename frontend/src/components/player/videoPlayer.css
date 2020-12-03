@@ -457,7 +457,7 @@ Control Buttons Images
 }
 
 
-@media(max-width:1600px){
+@media(max-width:1100px){
   .shrink_video{
     width: 60% !important;
   }

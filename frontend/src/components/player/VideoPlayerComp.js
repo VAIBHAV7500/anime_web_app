@@ -1,6 +1,7 @@
 import React, { useEffect, useState,useRef, createElement } from 'react';
 //import VideoComponent from 'react-video-js-player';
 import styles from './VideoPlayerComp.module.css';
+import discussionStyles from './discussion.module.css';
 import videojs from 'video.js';
 import 'videojs-hotkeys';
 import 'videojs-event-tracking';
@@ -24,20 +25,6 @@ function VideoPlayerComp({src}) {
   let prevTime = 0;
   const userId = useSelector(state => state.user_id);
   const {id} = useParams();
-  const [fullscreen, setFullScreen] = useState(false);
-  let comment = false;
-  let fullScreen = false;
-
-  useEffect(() => {
-    if(fullscreen){
-      let videoElement = document.querySelector(".video-js");
-      let commentElement = document.querySelector(".discussion_body__3VKYS");
-      if(videoElement.classList.contains("shrink_video"))
-        videoElement.classList.remove("shrink_video");
-      if(commentElement.classList.contains("discussion_discussion_show__Dklfh"))
-        commentElement.classList.remove("discussion_discussion_show__Dklfh");
-    }
-  },[fullscreen]);
 
   const playerOptions = {
     autoplay: true, 
@@ -134,21 +121,19 @@ function VideoPlayerComp({src}) {
     },true);
     createButton(el,"Discussion","discusson", [styles.discussion, 'vjs-control-bar'],()=>{
       let videoElement = document.querySelector(".video-js");
-      let commentElement = document.querySelector(".discussion_body__3VKYS");
+      let commentElement = document.querySelector(`.${discussionStyles.body}`);
       if(player.isFullscreen()){
         player.exitFullscreen();
-        if(comment)
-        comment = !comment;
       }
+
       if(videoElement && commentElement){
-        if(!comment){
-          videoElement.classList.add("shrink_video");
-          commentElement.classList.add("discussion_discussion_show__Dklfh");
-        }else{
+        if(videoElement.classList.contains("shrink_video")){
           videoElement.classList.remove("shrink_video");
-          commentElement.classList.remove("discussion_discussion_show__Dklfh");
+          commentElement.classList.remove(discussionStyles.discussion_show);
+        }else{
+          videoElement.classList.add("shrink_video");
+          commentElement.classList.add(discussionStyles.discussion_show);
         }
-        comment = !comment;
       }
     });
     const type = src?.type;
@@ -171,11 +156,13 @@ function VideoPlayerComp({src}) {
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
       player.on("fullscreenchange",()=>{
-        fullScreen = !fullScreen;
-        if(fullScreen){
-          setFullScreen(true);
-        }else{
-          setFullScreen(false)
+        if(player.isFullscreen()){
+          const videoElement = document.querySelector(".video-js");
+          const commentElement = document.querySelector(`.${discussionStyles.body}`);
+          if(videoElement.classList.contains("shrink_video")){
+            videoElement.classList.remove("shrink_video");
+            commentElement.classList.remove(discussionStyles.discussion_show);
+          }
         }
       })
 

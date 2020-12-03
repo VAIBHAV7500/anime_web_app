@@ -135,11 +135,12 @@
 
 
 
-@media(max-width:1600px){
+@media(max-width:1100px){
     .body{
       width: 40% ;
     }
 }
+
 @media(max-width:800px){
     .body{
         width: 50% ;
