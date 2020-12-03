@@ -1,11 +1,12 @@
 .banner {
     color: white;
-    object-fit: contain;
+    object-fit: cover;
     height: 600px;
     -webkit-box-shadow: inset 0px -140px 60px -33px rgb(14, 13, 13);
     -moz-box-shadow: inset 0px -140px 60px -33px rgb(14, 13, 13);
     box-shadow: inset 0px -140px 60px -33px rgb(14, 13, 13);
     cursor: pointer;
+    background-size: auto 100%;
 }
 
 .banner_contents {
@@ -16,13 +17,17 @@
 }
 
 .banner_title {
-    float: right;
-    padding-right: 30px;
     font-size: 3rem;
     font-weight: 800;
-    padding-top: 200px;
-    color: rgb(247, 244, 244); 
+    color: rgb(247, 244, 244);
     font: bold 52px Helvetica, Arial, Sans-Serif;
+    bottom: 60px;
+    position: absolute;
+    right: 26px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 }
 
 .react-multiple-carousel__arrow{
@@ -80,3 +85,44 @@
     top: 5%;
 
 }
+ 
+
+@media(max-width:830px){
+    .banner_title{
+        width: 50%;
+    }
+}
+
+@media(max-width:650px){
+    .banner_title{
+        font-size: 40px;
+    }
+}
+
+@media(max-width:500px){
+    .banner_title{
+        bottom: 86px;
+    }
+}
+
+
+
+/*
+@media(max-width:600px){
+    .banner_title{
+        font-size: 35px;
+        bottom: 125px;
+    }
+}
+
+
+@media(max-width:500px){
+    .banner_title{
+        font-size: 31px;
+        bottom: 160px;
+        text-align: center;
+        left: 0;
+        right: 0;
+    }
+} */
+

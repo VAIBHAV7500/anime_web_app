@@ -61,7 +61,7 @@ function Banner() {
       <Carousel 
       className="carousal"
       responsive={responsive}
-      autoPlay= {true}
+      autoPlay= {false}
       arrows = {true}
       showDots = {false}
       infinite = {true}

@@ -457,3 +457,20 @@ Control Buttons Images
 }
 
 
+@media(max-width:1600px){
+  .shrink_video{
+    width: 60% !important;
+  }
+}
+
+@media(max-width:800px){
+  .shrink_video{
+    width: 50% !important;
+  }
+}
+
+@media(max-width:650px){
+  .shrink_video{
+    width: 0% !important;
+  }
+}

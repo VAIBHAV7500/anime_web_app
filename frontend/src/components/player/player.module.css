@@ -12,9 +12,14 @@
 .player_wrapper{
     width: 100%;
     height: 100%;
+    position: fixed;
 }
 
 .player{
     width: 100%;
     height: 100%;
+}
+
+.overflow{
+    overflow:  hidden !important;
 }

@@ -31,8 +31,8 @@ function Discussion() {
     }
     const send = () => {
         let message = document.getElementById("send_message");
-        if(message.value)
-        addSenderMessage(message.value);
+        if(message.value.trim())
+        addSenderMessage(message.value.trim());
         message.value="";
         message.focus();
         let discussContainer = document.querySelector("." + styles.discussion_container);
@@ -62,12 +62,20 @@ function Discussion() {
                 <h3>Discussion</h3>
             </div>
             <div className={`${styles.discussion_container} ${picker ? styles.discussion_container_translate : ""}`}>
-                <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
-                    hey
-                </div>
-                <div className={`${styles.bubble} ${styles.sender_bubble}`}>
-                    hey
-                </div>
+                {
+
+                    /* -------------------------------------------------------------------------- */
+                    /*                         This is the Chat container                         */
+                    /* -------------------------------------------------------------------------- */
+
+                    /* <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
+                        hey
+                    </div>
+                    <div className={`${styles.bubble} ${styles.sender_bubble}`}>
+                        hey
+                    </div> */
+
+                }
             </div>
             <div className={`${styles.footer} ${picker ? styles.footer_translate : "" }`}>
                 <div className={styles.footer_wrapper}>

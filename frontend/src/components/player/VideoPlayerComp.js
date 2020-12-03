@@ -170,12 +170,7 @@ function VideoPlayerComp({src}) {
     //videojs.registerPlugin('hotkeys',this.hotkeys);
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
-      if(document && document.documentElement && document.documentElement.offsetHeight > 0 && document.querySelector('.video-js'))
-      document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
-      window.addEventListener("resize",()=>{
-        if(document.documentElement.offsetHeight > 0 && document.querySelector('.video-js'))
-        document.querySelector('.video-js').style.height = document.documentElement.offsetHeight + "px";
-      });
+     
       player.on("fullscreenchange",()=>{
         fullScreen = !fullScreen;
         if(fullScreen){
@@ -255,7 +250,7 @@ function VideoPlayerComp({src}) {
     return () => {
       clearInterval(checkTime);
       checkSessionDetails();
-      window.removeEventListener("resize", () => {});
+     
       removeAllButton();
       player.dispose();
     };

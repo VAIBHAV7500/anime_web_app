@@ -38,11 +38,8 @@ export class player extends Component {
     }
     async componentDidMount() {
         this.fetchData();
-        document.body.style.overflow = "hidden";
     }
-    async componentWillUnmount () {
-        document.body.style.overflow = "auto";
-    }
+   
 
     async componentDidUpdate(prevProps) {
         if (this.props.match.params.id !== prevProps.match.params.id) {

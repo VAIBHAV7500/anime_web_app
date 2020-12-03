@@ -20,7 +20,7 @@ video{
 .videoPlayer{
     height: 100%;
     width: 100%;
-    background-color: red;
+    background-color: rgb(24, 23, 23);
 }
 
 .player_btn{

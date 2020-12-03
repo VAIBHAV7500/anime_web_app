@@ -3,7 +3,8 @@
     color: white;
     background-color: rgb(24, 23, 23);
     right: 0;
-    height: 100vh;
+    top: 0;
+    height: 100%;
     width: 25%;
     overflow: hidden;
     transition: transform 0.5s;
@@ -126,3 +127,20 @@
     margin: 0px 5px;
 }
 
+
+
+@media(max-width:1600px){
+    .body{
+      width: 40% ;
+    }
+}
+@media(max-width:800px){
+    .body{
+        width: 50% ;
+    }
+}
+@media(max-width:650px){
+    .body{
+        width: 100% ;
+    }
+}
