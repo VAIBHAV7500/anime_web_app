@@ -12,6 +12,8 @@ import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
 import 'videojs-contrib-ads';
 import 'videojs-ima';
+import 'videojs-contrib-quality-levels';
+import 'videojs-hls-quality-selector';
 //import 'video.js/dist/video-js.css';
 //require('./videoPlayer.css');
 /* eslint import/no-webpack-loader-syntax: off */
@@ -41,14 +43,15 @@ function VideoPlayerComp({src}) {
         seekBar: true
       },
       textTrackSettings: false,
+      playbackRateMenuButton: false,
       currentTimeDisplay: true,
       timeDivider: true,
       durationDisplay: true,
       remainingTimeDisplay: false,
       subtitlesButton: false,
       captionsButton: true,
-      audioTrackButton: true,
-      qualitySelector: true
+      qualitySelector: true,
+      audioTrackButton: true
     },
     playbackRates: [0.5, 1, 1.5, 2],
     responsive:true,
@@ -71,6 +74,12 @@ function VideoPlayerComp({src}) {
     adLabel: `Don't Like Ads? Switch to Premium`,
     adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator='
   };
+
+  var qualityOptions = {
+    displayCurrentQuality: true,
+    placementIndex: 6,
+    vjsIconClass:  "vjs-icon-hd"
+  }
 
   const createButton = (el,text,id,styleClasses=[],onClick,reverse=false) => {
     let element = document.querySelector('#' + id);
@@ -161,6 +170,9 @@ function VideoPlayerComp({src}) {
     const player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
       //player.ima(imaOptions);
+
+      player.hlsQualitySelector(qualityOptions);
+
       player.on("fullscreenchange",()=>{
         if(player.isFullscreen()){
           const videoElement = document.querySelector(".video-js");

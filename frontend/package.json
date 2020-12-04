@@ -38,7 +38,9 @@
     "redux-logger": "^3.0.6",
     "video.js": "^7.9.7",
     "videojs-contrib-ads": "^6.7.0",
+    "videojs-contrib-quality-levels": "^2.0.9",
     "videojs-event-tracking": "^1.0.1",
+    "videojs-hls-quality-selector": "^1.1.4",
     "videojs-hotkeys": "^0.2.27",
     "videojs-ima": "^1.9.0"
   },
