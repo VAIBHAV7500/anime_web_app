@@ -26,11 +26,12 @@
 }
 
 .card_div{
-    min-width: 226px;
-    height: auto;
+    min-width: 210px;
+    height: 300px;
     position: relative;
     transition: 1s;
     perspective: 1000px;
+    margin-right: 15px;
 }
 
 .card_div:hover .see_more{
@@ -57,16 +58,13 @@
 
 .row_poster{
     display: block;
-    width: 100%;
-    min-width: 210px;
-    margin-right: 25px;
+    min-width: 100%;
+    height: 100%;
     max-width: 0;
     transition: transform 200ms;
     cursor: pointer;
     background-color: rgb(29, 29, 29);
     padding: 0px;
-    max-height: 300px;
-    min-height: 300px;
     z-index: inherit;
     border-radius: 10px;
     transition: transform 0.5s,border-radius 0.5s;

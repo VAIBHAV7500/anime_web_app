@@ -76,6 +76,7 @@ input[type=number] {
   width: 61%;
 }
 
+
 .wrapper {
   display: flex;
 }
@@ -149,7 +150,7 @@ input[type=number] {
   font-family: Sans-serif;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   overflow: hidden;
 }
 

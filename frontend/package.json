@@ -28,6 +28,7 @@
     "react-multi-carousel": "^2.5.5",
     "react-pace-progress": "^2.0.0",
     "react-player": "^2.6.1",
+    "react-progressive-image-loading": "^3.0.3",
     "react-redux": "^7.2.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -39,10 +40,12 @@
     "video.js": "^7.9.7",
     "videojs-contrib-ads": "^6.7.0",
     "videojs-contrib-quality-levels": "^2.0.9",
+    "videojs-errors": "^4.3.2",
     "videojs-event-tracking": "^1.0.1",
     "videojs-hls-quality-selector": "^1.1.4",
     "videojs-hotkeys": "^0.2.27",
-    "videojs-ima": "^1.9.0"
+    "videojs-ima": "^1.9.0",
+    "ws": "^7.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

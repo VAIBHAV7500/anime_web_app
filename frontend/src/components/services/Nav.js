@@ -31,7 +31,6 @@ function Nav() {
             if(result){
                 if(result?.data?.length){
                     setNotifications(result.data);
-                    console.log(JSON.stringify(result.data));
                     const unread = result.data.filter(x => x.read_reciept === 0).length;
                     setUnread(unread);
                 }
@@ -103,44 +102,43 @@ function Nav() {
 
     return (
         <div className={styles.nav_wrapper}>
-            <div className={`${styles.nav} ${!search && show && styles.nav_black}`}>
-                <span>
-                    <img draggable="false" className={`${styles.nav_logo} ${!search && show  && styles.logo_white}`} onClick={goToHome} src={mainLogo} />
-                </span>
-                < FaSearch 
-                    className={styles.search_icon} 
-                    onClick={()=>{
-                        showModal("searchModal",setSearch); 
-                    }} 
-                />
-                <span className={styles.notification_icon} onMouseEnter = {markNotificationAsRead}>
-                    <FaBell className={`${styles.bell_icon} ${unread ? styles.ring : ""}`}/>
-                {unread ? <span className={styles.notification_number}>{!notifications.dummy && (unread > 9 ? '9+' : unread)}</span> : ""}
-                </span>
-                <div className={styles.notification_dropdown}>
-                    {notifications?.map(notification_message => (
-                        <div className={styles.notification_node}>
-                            {notification_message?.body}
-                        </div>
-                    ))}
-                </div>
-                <span className={styles.avatar_span} >
-                    <FaUser className = {styles.nav_avatar}></FaUser>
-                </span>
-                <div className={styles.dropdown_wrapper} >
-                    <div className={`${styles.dropdown_content} `} >
-                        <div className={`${styles.dropdown_container}`}>
-                            {
-                                dropdownContent.map((field,index) =>(
-                                    <button key={index} className={`${styles.dropdown_button} ${field.class}`} onClick={field.onclick}>{field.name}</button>
-                                ))
-                            }
-                        </div>
+        <div className={`${styles.nav} ${!search && show && styles.nav_black}`}>
+            <span>
+                <img draggable="false" className={`${styles.nav_logo} ${!search && show  && styles.logo_white}`} onClick={goToHome} src={mainLogo} />
+            </span>
+            < FaSearch 
+                className={styles.search_icon} 
+                onClick={()=>{
+                    showModal("searchModal",setSearch); 
+                }} 
+            />
+            <span className={styles.notification_icon} onMouseEnter = {markNotificationAsRead}>
+                <FaBell className={`${styles.bell_icon} ${unread ? styles.ring : ""}`}/>
+            {unread ? <span className={styles.notification_number}>{!notifications.dummy && (unread > 9 ? '9+' : unread)}</span> : ""}
+            </span>
+            <div className={styles.notification_dropdown}>
+                {notifications?.map(notification_message => (
+                    <div className={styles.notification_node}>
+                        {notification_message?.body}
                     </div>
-                    
-                </div>
-                {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
+                ))}
             </div>
+            <span className={styles.avatar_span} >
+                <FaUser className = {styles.nav_avatar}></FaUser>
+            </span>
+            <div className={styles.dropdown_wrapper} >
+                <div className={`${styles.dropdown_content} `} >
+                    <div className={`${styles.dropdown_container}`}>
+                        {
+                            dropdownContent.map((field,index) =>(
+                                <button key={index} className={`${styles.dropdown_button} ${field.class}`} onClick={field.onclick}>{field.name}</button>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+            {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
+        </div>
         </div>
     )
 }

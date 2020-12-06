@@ -57,12 +57,6 @@
     max-height: calc(100vh - 55px - 55px + 2px - 330px);
 }
 
-
-.discussion_container::-webkit-scrollbar {
-    display: none;
-}
-
-
 .bubble{
     width: fit-content;
     padding: 8px 20px;

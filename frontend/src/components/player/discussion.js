@@ -5,9 +5,10 @@ import { FaArrowLeft, FaGrinAlt, FaPaperPlane, FaUnlock } from "react-icons/fa";
 import Picker from 'emoji-picker-react';
 import './emoPickerStyle.css'
 
-function Discussion() {
+function Discussion({discussion}) {
     const {id} = useParams();
     const [picker,setPicker] = useState(false);
+    const prevTime = 0;
     
     const closeDiscussion = () => {
         let videoElement = document.querySelector(".video-js");
@@ -21,13 +22,27 @@ function Discussion() {
         document.querySelector("."+styles.body).scrollTop = 0; 
         let discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight); 
-    })
+    });
+
+    useEffect(()=>{
+        console.log(discussion);
+        const messages = discussion?.messages;
+        if(messages){
+            messages.forEach((x)=>{
+                addRecieverMessage(x);
+            });
+        }
+    },[discussion]);
 
     const addSenderMessage = (message) => {
         document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.sender_bubble}">${message} </div>`; 
+        const discussContainer = document.querySelector("." + styles.discussion_container);
+        discussContainer.scrollTo(0,discussContainer.scrollHeight); 
     }
     const addRecieverMessage = (message) => {
-        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}">${message} </div>`; 
+        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}">${message} </div>`;
+        const discussContainer = document.querySelector("." + styles.discussion_container);
+        discussContainer.scrollTo(0,discussContainer.scrollHeight);  
     }
     const send = () => {
         let message = document.getElementById("send_message");
@@ -35,8 +50,6 @@ function Discussion() {
         addSenderMessage(message.value.trim());
         message.value="";
         message.focus();
-        let discussContainer = document.querySelector("." + styles.discussion_container);
-        discussContainer.scrollTo(0,discussContainer.scrollHeight); 
     }
 
     const handleSend = (e) => {

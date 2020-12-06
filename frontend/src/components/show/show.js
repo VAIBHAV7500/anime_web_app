@@ -33,7 +33,6 @@ class show extends Component {
     ] ;
 
     fetchData = async () => {
-      console.log("inside fetchdata : " + this.props.user_id);
       if(this.props.user_id){
         const showId = this.props.match.params.id
         const promiseArray = [];
@@ -65,7 +64,6 @@ class show extends Component {
     }
 
     async componentDidUpdate(prevProps) {
-      console.log(JSON.stringify(prevProps));
       if(this.props.user_id != prevProps.user_id){
         this.fetchData();
       }

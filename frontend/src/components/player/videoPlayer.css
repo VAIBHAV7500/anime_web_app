@@ -17,7 +17,7 @@
 }
 
   .video-js .vjs-tech{
-    outline: none !;
+    outline: none !important;
   }
 
   .video-js .vjs-control-bar {
@@ -454,6 +454,16 @@ Control Buttons Images
   background-color: transparent !important;
   border-radius: 6px;
   border: 1px solid #dcdcdc;
+}
+
+/* Prevent CC settings menu item from displaying */
+.vjs-texttrack-settings {
+  display: none;
+}
+
+.vjs-errors-ok-button{
+  border: 1px solid white;
+  border-radius: 2px;
 }
 
 

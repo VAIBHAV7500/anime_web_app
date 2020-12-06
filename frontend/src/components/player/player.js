@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import socketIOClient from "socket.io-client";
 import styles from './player.module.css';
 import VideoPlayerComp from './VideoPlayerComp';
 import axios from '../../utils/axios';
@@ -7,7 +8,12 @@ import PageLoader from '../services/page_loader';
 import { connect } from 'react-redux';
 import Discussion from './discussion';
 
+const URL = 'ws://192.168.2.7:4200';
+
 export class player extends Component {
+
+    socket;
+    ws = new WebSocket(URL);
 
     fetchData = async () => {
         this.setState({
@@ -30,14 +36,78 @@ export class player extends Component {
                         player: result.data,
                         loading: false
                     });
+                    if(result?.data?.name){
+                        document.title = result.data.name;
+                    }
                 }
             } catch (error) {
-                console.log(error.message);
+                console.log(error);
             }
         }
     }
+
+    getSockets = () => {
+        if(this.ws){
+            this.ws.onopen = () => {
+                // on connecting, do nothing but log it to the console
+                console.log('connected')
+                this.ws.send(JSON.stringify({message:"Hello Server"}));
+            }
+          
+            this.ws.onmessage = evt => {
+                // on receiving a message, add it to the list of messages
+                console.log(evt);
+                const data = JSON.parse(evt.data)
+                if(data.type === "discussion"){
+                    this.state.discussion = data;
+                    this.setState(this.state);
+                }
+            }
+        
+            this.ws.onclose = () => {
+                console.log('disconnected');
+                // automatically try to reconnect on connection loss
+                this.setState({
+                    ws: new WebSocket(URL),
+                })
+            }
+        }   
+    }
+
     async componentDidMount() {
         this.fetchData();
+        this.getSockets();
+    }
+
+    componentWillUnmount(){
+        if(this.ws){
+            this.ws.close();
+        }
+        document.title =  'Animei TV - An Streaming Platform';
+    }
+
+    updateVideoStatus = (data) => {
+        data.type = "sessions";
+        console.log('Im here');
+        if(this.socket){
+            console.log(data);
+            this.socket.emit('session',data);
+        }
+        if(this.ws){
+            this.ws.send(JSON.stringify(data));
+        }
+    }
+
+    updateDiscussion = (currTime) => {
+        //console.log(currTime);
+        this.state.curr_time = currTime;
+        const body = {
+            type: "discussion",
+            time: currTime
+        };
+        if(this.ws){
+            this.ws.send(JSON.stringify(body));
+        }
     }
   
 
@@ -61,8 +131,13 @@ export class player extends Component {
         return (
                 <div className={styles.player_wrapper}>
                     {this.state?.loading && <PageLoader />}
-                    {this.state?.player !== undefined && <VideoPlayerComp src={this.state?.player} className={styles.player} />}
-                    <Discussion/>
+                    {this.state?.player !== undefined && <VideoPlayerComp 
+                        src={this.state?.player}
+                        className={styles.player} 
+                        updateVideoStatus={this.updateVideoStatus} 
+                        updateDiscussion = {this.updateDiscussion}
+                    />}
+                    <Discussion discussion = {this?.state?.discussion}/>
                  </div>
         )
     }

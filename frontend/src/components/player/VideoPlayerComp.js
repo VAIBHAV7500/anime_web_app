@@ -7,20 +7,18 @@ import 'videojs-hotkeys';
 import 'videojs-event-tracking';
 import { useHistory } from 'react-router';
 import { useParams } from 'react-router-dom'
-import axios from '../../utils/axios';
-import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
 import 'videojs-contrib-ads';
 import 'videojs-ima';
 import 'videojs-contrib-quality-levels';
 import 'videojs-hls-quality-selector';
-//import 'video.js/dist/video-js.css';
-//require('./videoPlayer.css');
+import 'videojs-errors';
 /* eslint import/no-webpack-loader-syntax: off */
-require('!style-loader!css-loader!video.js/dist/video-js.min.css');
-require('./videoPlayer.css');
+import('!style-loader!css-loader!video.js/dist/video-js.min.css').then(()=>{
+  require('./videoPlayer.css');
+});
 
-function VideoPlayerComp({src}) {
+function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
   const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
   //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
   const playerRef = useRef();
@@ -182,15 +180,23 @@ function VideoPlayerComp({src}) {
             commentElement.classList.remove(discussionStyles.discussion_show);
           }
         }
-      })
+      });
+
+      player.errors();
 
     });
 
+    let checkTime;
+
     player.on('tracking:firstplay', (e, data) => {
       createPlayerButtons(player);
-      checkButtons();
+      //checkButtons();
       const currentTime = ((src?.progress || 0) * (player?.duration() || 0)) /100;
       player.currentTime(currentTime);
+      checkTime = setInterval(function(){
+        checkSessionDetails();
+        checkButtons(player);
+      }, 3000);
     });
 
     const checkSessionDetails = () => {
@@ -201,7 +207,7 @@ function VideoPlayerComp({src}) {
         }catch(e){
           console.log(e);
         }
-        if((currTime - prevTime)>= 10){
+        if(Math.abs(currTime - prevTime)>= 10){
           const covered = (player?.currentTime() / player?.duration())*100;
           const body = {
             user_id: userId,
@@ -209,8 +215,8 @@ function VideoPlayerComp({src}) {
             video_id: src.id,
             covered
           }
-          const endPoint = requests.postVideoSessions;
-          axios.post(endPoint,body);
+          updateVideoStatus(body);
+          updateDiscussion(currTime);
           prevTime = currTime;
         }
       }
@@ -237,22 +243,20 @@ function VideoPlayerComp({src}) {
 
       if(src.closing_start_time && src.closing_end_time && src.next_show){
         if(currTime + buffer >= src.closing_start_time && currTime <= src.closing_end_time){
-          createButton(el,"Next Episode","skip_intro",[styles.skip_intro],() => {
+          createButton(el,"Next Episode","next",[styles.skip_intro],() => {
             goToPlayer(src.next_show, player);
           });
         }
-        else if(currTime + buffer >= src.closing_end_time){
-           removeButton('skip_intro');
+        else {
+           removeButton('next');
         }
       }
     }
 
-    const checkTime = setInterval(function(){
-      checkSessionDetails();
-      checkButtons(player);
-    }, 3000);
     return () => {
-      clearInterval(checkTime);
+      if(checkTime){
+        clearInterval(checkTime);
+      }
       checkSessionDetails();
       removeAllButton();
       player.dispose();
@@ -262,7 +266,7 @@ function VideoPlayerComp({src}) {
   return (
       <div className={styles.videoPlayer}>
         <div data-vjs-player className={styles.player}>
-          <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline />
+          <video ref={playerRef} className={` video-js ${styles.player} vjs-big-play-centered`} playsInline active />
         </div> 
       </div> 
   )

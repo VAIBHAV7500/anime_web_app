@@ -11,6 +11,7 @@ function Review({show_id}) {
 
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
+    const [editor, setEditor] = useState(false);
     const userId = useSelector(state => state.user_id);
     const {id} = useParams();
     
@@ -48,7 +49,6 @@ function Review({show_id}) {
     }
 
     const postReview = async () => {
-        console.log(finalContent);
         if(finalContent){
             const endPoint = `${requests.reviews}/create`;
             const body = {
@@ -60,7 +60,6 @@ function Review({show_id}) {
                 console.log(err);
                 //Something went wrong
             });
-            console.log(response);
             textEditor.setContent('');
         }
     }
@@ -72,11 +71,8 @@ function Review({show_id}) {
     }
     const handleLike = (review_id) => {
         const className = styles.red_heart;
-        console.log(className);
         const element = document.getElementById(review_id);
         const likeNumber = document.getElementById(`like_${review_id}`);
-        console.log(element);
-        console.log(likeNumber.innerText);
         if(element.classList.contains(className)){
             element.classList.remove(className);
             likeNumber.innerText = (parseInt(likeNumber.innerText) - 1).toString();
@@ -99,6 +95,10 @@ function Review({show_id}) {
         let newArr = [...reviews];
         newArr[index].showMore = !newArr[index].showMore;
         setReviews(newArr);
+    }
+
+    const handleTinyInit = () => {
+        setEditor(true);
     }
 
     return (
@@ -129,6 +129,7 @@ function Review({show_id}) {
                         bullist numlist outdent indent | removeformat'
                     }}
                     onEditorChange={handleEditorChange}
+                    onInit={handleTinyInit}
                 />
                 { preview?.review && <div className={`${styles.review} ${styles.make_flex} ${styles.preview}`}>
                             <div className={styles.preview_text}>Preview: </div>
@@ -137,7 +138,7 @@ function Review({show_id}) {
                             </div>               
                         </div>
                 }
-                <div className={`${styles.post_button}`} onClick={postReview}>POST</div>
+                {editor && <div className={`${styles.post_button}`} onClick={postReview}>POST</div>}
             </div>
             <div className={styles.seperator} />
             <div className={styles.review_container}>

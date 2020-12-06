@@ -32,9 +32,15 @@ function Info({movie}) {
     }
 
     useEffect(() => {
+        if(movie?.name){
+            document.title = movie.name;
+        }
         setWatchStatus(movie?.watchlist ? 'remove from list' : 'Add to List');
         if(movie?.recent){
             setLatest(movie.recent);
+        }
+        return () => {
+            document.title = 'Animei TV - An Streaming Platform';
         }
     }, [movie])
 
@@ -66,7 +72,6 @@ function Info({movie}) {
             finalStatus = 'Remove from List';
           }else if(watchStatus.toLowerCase() === 'remove from list'){
             setWatchStatus('Removing');
-            console.log(JSON.stringify(body));
               const response = await axios.delete(`${requests.removeWatchlist}?show_id=${movie.id}&user_id=${userId}`).catch((err)=>{
                 console.log(err);
                 //show error...
@@ -108,7 +113,7 @@ function Info({movie}) {
                     <div className={`${styles.play_btn} `} onClick={()=>{goToPlayer(latest?.id)}}>
                         {latest?.episode_number && (latest.episode_number === 1 ? 'Start Watching' : 'Continue Watching Ep ' + latest.episode_number)}
                     </div>
-                    <div className={`${styles.watch_list_btn}`} onClick={handleWatchList}>
+                    <div className={`${styles.watch_list_btn} ${watchStatus.toLowerCase() === 'remove from list' ? styles.remove: ""}`} onClick={handleWatchList}>
                         {watchStatus}
                     </div>
                 </div>
