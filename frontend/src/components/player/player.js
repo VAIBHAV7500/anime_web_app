@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import socketIOClient from "socket.io-client";
 import styles from './player.module.css';
 import VideoPlayerComp from './VideoPlayerComp';
 import axios from '../../utils/axios';
@@ -12,7 +11,6 @@ const URL = 'ws://192.168.2.7:4200';
 
 export class player extends Component {
 
-    socket;
     ws = new WebSocket(URL);
 
     fetchData = async () => {
@@ -89,10 +87,6 @@ export class player extends Component {
     updateVideoStatus = (data) => {
         data.type = "sessions";
         console.log('Im here');
-        if(this.socket){
-            console.log(data);
-            this.socket.emit('session',data);
-        }
         if(this.ws){
             this.ws.send(JSON.stringify(data));
         }

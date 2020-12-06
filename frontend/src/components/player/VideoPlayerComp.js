@@ -13,6 +13,7 @@ import 'videojs-ima';
 import 'videojs-contrib-quality-levels';
 import 'videojs-hls-quality-selector';
 import 'videojs-errors';
+import { MdAirportShuttle } from 'react-icons/md';
 /* eslint import/no-webpack-loader-syntax: off */
 import('!style-loader!css-loader!video.js/dist/video-js.min.css').then(()=>{
   require('./videoPlayer.css');
@@ -216,8 +217,10 @@ function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
             covered
           }
           updateVideoStatus(body);
-          updateDiscussion(currTime);
           prevTime = currTime;
+        }
+        if(currTime - prevTime >= 3){
+          updateDiscussion(currTime);
         }
       }
     }
