@@ -15,9 +15,15 @@ const onLoad = (wss) => {
         //   data.type = "discussion";
         //   ws.send(JSON.stringify(data));
         // },3*1000);
-          const data = player.getDiscussion(body);
-          data.type = "discussion";
-          ws.send(JSON.stringify(data));
+          player.getDiscussion(body).then((data)=>{
+            const body = {
+              type: "discussion",
+              messages: data
+            }
+            ws.send(JSON.stringify(body));
+          });
+      }else if(body.type === "sender"){
+        player.newMessage(body);
       }
     });
 

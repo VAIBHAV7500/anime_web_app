@@ -14,6 +14,7 @@
     "dotenv": "^8.2.0",
     "emoji-picker-react": "^3.2.4",
     "hls.js": "^0.14.16",
+    "moment": "^2.29.1",
     "movie-trailer": "^2.0.6",
     "pthumbnails": "^1.2.0",
     "query-string": "^6.13.2",
@@ -67,5 +68,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://dev.animei.tv"
 }

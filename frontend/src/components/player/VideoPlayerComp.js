@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef, createElement } from 'react';
+import React, { useEffect, forwardRef, useRef, useImperativeHandle } from 'react';
 //import VideoComponent from 'react-video-js-player';
 import styles from './VideoPlayerComp.module.css';
 import discussionStyles from './discussion.module.css';
@@ -19,7 +19,7 @@ import('!style-loader!css-loader!video.js/dist/video-js.min.css').then(()=>{
   require('./videoPlayer.css');
 });
 
-function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
+const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) => {
   const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
   //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
   const playerRef = useRef();
@@ -27,6 +27,8 @@ function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
   let prevTime = 0;
   const userId = useSelector(state => state.user_id);
   const {id} = useParams();
+  let player;
+  let tempTime = 0;
 
   const playerOptions = {
     autoplay: true, 
@@ -166,7 +168,7 @@ function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
   
   useEffect(()=>{
     document.querySelector("input").blur();
-    const player = videojs(playerRef.current,playerOptions, () => {
+    player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
       //player.ima(imaOptions);
 
@@ -189,6 +191,8 @@ function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
 
     let checkTime;
 
+    setPlayer(player);
+
     player.on('tracking:firstplay', (e, data) => {
       createPlayerButtons(player);
       //checkButtons();
@@ -208,6 +212,9 @@ function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
         }catch(e){
           console.log(e);
         }
+        if(currTime - prevTime >= 10){
+          updateDiscussion(currTime);
+        }
         if(Math.abs(currTime - prevTime)>= 10){
           const covered = (player?.currentTime() / player?.duration())*100;
           const body = {
@@ -219,15 +226,13 @@ function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
           updateVideoStatus(body);
           prevTime = currTime;
         }
-        if(currTime - prevTime >= 3){
-          updateDiscussion(currTime);
-        }
       }
     }
 
     const checkButtons = (player) => {
       const el = document.getElementsByClassName('vjs-big-play-button')[0];
       const currTime = player?.currentTime() || 0;
+      tempTime = currTime;
       const buffer = 5;
       if(src.intro_end_time != null && src.intro_start_time != null){
         if(currTime + buffer >= src.intro_start_time && currTime <= src.intro_end_time){
@@ -262,6 +267,7 @@ function VideoPlayerComp({src,updateVideoStatus,updateDiscussion}) {
       }
       checkSessionDetails();
       removeAllButton();
+      console.log('Disposing Player...');
       player.dispose();
     };
   },[id]);

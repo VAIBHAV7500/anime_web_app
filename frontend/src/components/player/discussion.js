@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 import styles from './discussion.module.css';
 import { FaArrowLeft, FaGrinAlt, FaPaperPlane, FaUnlock } from "react-icons/fa";
 import Picker from 'emoji-picker-react';
-import './emoPickerStyle.css'
+import './emoPickerStyle.css';
+import { useSelector } from 'react-redux';
 
-function Discussion({discussion}) {
+
+function Discussion({discussion,sendMessage}) {
     const {id} = useParams();
     const [picker,setPicker] = useState(false);
     const prevTime = 0;
+    const userId = useSelector(state => state.user_id);
     
     const closeDiscussion = () => {
         let videoElement = document.querySelector(".video-js");
@@ -26,10 +29,15 @@ function Discussion({discussion}) {
 
     useEffect(()=>{
         console.log(discussion);
-        const messages = discussion?.messages;
+        const messages = discussion;
+        console.log(messages);
         if(messages){
             messages.forEach((x)=>{
-                addRecieverMessage(x);
+                if(x.id === userId){
+                    addSenderMessage(x.message);
+                }else{
+                    addRecieverMessage(x.message);
+                }
             });
         }
     },[discussion]);
@@ -46,8 +54,13 @@ function Discussion({discussion}) {
     }
     const send = () => {
         let message = document.getElementById("send_message");
-        if(message.value.trim())
-        addSenderMessage(message.value.trim());
+        if(message?.value?.trim()){
+            const messageData = message.value.trim();
+            addSenderMessage(messageData);
+            if(userId){
+                sendMessage(messageData,userId);
+            }
+        }
         message.value="";
         message.focus();
     }

@@ -22,13 +22,34 @@ const updateSession = async (body) => {
   }
 }
 
-const getDiscussion = (body) => {
-    return {
-      messages: ["Hello"]
+const getDiscussion = async (body) => {
+  console.log(body);
+  const from = body.time + 1;
+  let to = from + 60;
+  if(body.time == 0){
+    const result = await db.user_player_session.findByVideoId(body.id, body.user_id);
+    if(result && result[0]){
+      to += (result[0].covered_percentage || 0);
     }
+  }
+  const result = await db.discussions.findByVideo(body.id,from,to);
+  return result;
+}
+
+const newMessage = async (body) => {
+  const params = {
+    time: body.time,
+    user_id: body.user_id,
+    message: body.message,
+    video_id: body.id,
+  }
+  db.discussions.create(params).then((err)=>{
+    console.log(err);
+  })
 }
 
 module.exports = {
   updateSession,
   getDiscussion,
+  newMessage
 }

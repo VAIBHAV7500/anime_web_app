@@ -1,5 +1,4 @@
 const express = require('express');
-const http = require("http");
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
@@ -12,6 +11,7 @@ const oAuth2Server = require('node-oauth2-server')
 const oAuthModel = require('./services/accessTokenModel');
 const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 const WebSocket = require('ws');
+const fs = require('fs');
 
 var app = express();
 app.oauth = oAuth2Server({
@@ -23,13 +23,13 @@ var { anyError, errorHandler, }  = require('./services/middleware');
 require('dotenv').config();
 
 // app.use(expressCspHeader({
-//   directives: {
-//       'default-src': [SELF, INLINE],
-//       'script-src': [SELF, INLINE, '*'],
-//       'style-src': [SELF, INLINE],
-//       'img-src': [SELF , '*', 'data:image/png'],
-//       'worker-src': [NONE],
-//       'block-all-mixed-content': true
+//    directives: {
+//   //     'default-src': [SELF, INLINE],
+//   //     'script-src': [SELF, INLINE, '*'],
+//       //  'style-src': [INLINE],
+//       // 'img-src': [SELF , '*', 'data:image/png'],
+//       // 'worker-src': [NONE],
+//       // 'block-all-mixed-content': true
 //   }
 // }));
 
@@ -101,8 +101,17 @@ if(process.env.NODE_ENV === "production"){
 }
 app.use(anyError);
 app.use(errorHandler);
+let server;
+if(process.env.NODE_ENV === "production"){
+  const https = require("https");
+  const key = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.key');
+  const cert = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.crt');
+  server = https.createServer({key,cert},app);
+}else{
+  const http = require("http");
+  server = http.createServer(app);
+}
 
-const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 onLoad(wss);
 
