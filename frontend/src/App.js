@@ -61,12 +61,13 @@ const check = (token,dispatch,removeCookie)=>{
 }
 
 const App = ()=>{
-  const [cookies,,removeCookie] = useCookies(['token']);
+  const tokenName = 'token';
+  const [cookies,,removeCookie] = useCookies([tokenName]);
   const dispatch = useDispatch();
-  const loginStatus = useSelector(state=>state.login) || check(cookies['token'],dispatch,removeCookie);
+  const loginStatus = useSelector(state=>state.login) || check(cookies[tokenName],dispatch,removeCookie);
   useEffect(() => {
-    check(cookies['token'],dispatch,removeCookie);
-  },[cookies['token']]);
+    check(cookies[tokenName],dispatch,removeCookie);
+  },[cookies[tokenName]]);
   return (
     <div className="App">
       {loginStatus ? 

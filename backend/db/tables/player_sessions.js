@@ -1,6 +1,6 @@
 const createTable = (con) => {
     const sql = `
-        CREATE TABLE IF NOT EXISTS sessions (
+        CREATE TABLE IF NOT EXISTS player_sessions (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             episode_id BIGINT UNSIGNED,
             duration FLOAT,
@@ -20,13 +20,13 @@ const createTable = (con) => {
 }
 
 const find = async (id) => {
-    const sql = `SELECT * FROM sessions where id = ${id} LIMIT 1`;
+    const sql = `SELECT * FROM player_sessions where id = ${id} LIMIT 1`;
     const result = await runQuery(sql);
     return result.length ? result[0] : undefined;
 }
 
 const create = async (body) => {
-    const sql = `INSERT INTO sessions(${Object.keys(body).join()}) VALUES (?)`;
+    const sql = `INSERT INTO player_sessions(${Object.keys(body).join()}) VALUES (?)`;
     return await runQuery(sql, [Object.values(body)]);
 }
 

@@ -87,6 +87,7 @@ const Login = (props)=>{
         };
         
         const response = await axios(config).catch(err=>{
+            console.log(err);
             setState(prevState=>({
                 ...prevState,
                 errorShow : true

@@ -5,6 +5,7 @@ import { FaArrowLeft, FaGrinAlt, FaPaperPlane, FaUnlock } from "react-icons/fa";
 import Picker from 'emoji-picker-react';
 import './emoPickerStyle.css';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 
 function Discussion({discussion,sendMessage}) {
@@ -33,6 +34,9 @@ function Discussion({discussion,sendMessage}) {
         console.log(messages);
         if(messages){
             messages.forEach((x)=>{
+                const time = moment.utc(parseFloat(x.time)*1000).format('HH:mm:ss');
+                console.log(x.time);
+                console.log(time);
                 if(x.id === userId){
                     addSenderMessage(x.message);
                 }else{

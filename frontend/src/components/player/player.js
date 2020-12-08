@@ -117,7 +117,7 @@ export class player extends Component {
         if(this.ws){
             this.ws.close();
         }
-        document.title =  'Animei TV - An Streaming Platform';
+        document.title =  'Animei TV - An Anime Streaming Platform';
         window.removeEventListener('beforeunload', ()=>{
             if(this.ws){
                 this.ws.close();

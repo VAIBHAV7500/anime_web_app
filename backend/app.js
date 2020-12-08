@@ -12,6 +12,11 @@ const oAuthModel = require('./services/accessTokenModel');
 const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 const WebSocket = require('ws');
 const fs = require('fs');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+const passport = require('passport');
+const keys = require('./config/keys.json');
+const dbConfig = require('./config/dbConfig.json');
 
 var app = express();
 app.oauth = oAuth2Server({
@@ -33,19 +38,11 @@ require('dotenv').config();
 //   }
 // }));
 
-/* -------------------------------------------------------------------------- */
-/*                          Routers Declaration Start                         */
-/* -------------------------------------------------------------------------- */
 
-var indexRouter = require('./routes');
-var authRouter = require('./routes/authRoutes')(app);
-var restrictedAreaRouter = require('./routes/restrictedArea')(app);
-var apiRouter = require('./routes/api');
-const { onLoad } = require('./routes/socket');
+//app.set('trust proxy', 1) // trust first proxy
+console.log(JSON.stringify(keys.session));
+console.log(JSON.stringify(dbConfig));
 
-/* -------------------------------------------------------------------------- */
-/*                           Routers Declaration End                          */
-/* -------------------------------------------------------------------------- */
 
 global.connection = db.getConnection();
 
@@ -63,6 +60,35 @@ if(process.env.NODE_ENV === "production"){
 }else{
   app.use(express.static(path.join(__dirname, 'public')));
 }
+
+var sessionStore = new MySQLStore({
+  host: dbConfig.host,
+  port: dbConfig.port,
+  user: dbConfig.user,
+  password: dbConfig.password,
+  database: dbConfig.db_name,
+});
+
+console.log(sessionStore);
+
+var sess = {
+  key: keys.session.key,
+  secret: keys.session.secret,
+  saveUninitialized: false,
+  store: sessionStore,
+  resave: false,
+  cookie: {}
+}
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(cors());
 app.use(helmet());
 
@@ -86,9 +112,24 @@ app.use(
   })
 );
 
+
+/* -------------------------------------------------------------------------- */
+/*                          Routers Declaration Start                         */
+/* -------------------------------------------------------------------------- */
+
+var indexRouter = require('./routes');
+var authRouter = require('./routes/authRoutes')(app);
+var restrictedAreaRouter = require('./routes/restrictedArea')(app);
+var apiRouter = require('./routes/api');
+const { onLoad } = require('./routes/socket');
+
+/* -------------------------------------------------------------------------- */
+/*                           Routers Declaration End                          */
+/* -------------------------------------------------------------------------- */
+
 app.use('/auth',authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
-app.use('/api', apiRouter);
+app.use('/api',app.oauth.authorise(), apiRouter);
 app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));
