@@ -25,6 +25,7 @@
     "fuse.js": "^6.4.1",
     "handlebars": "^4.7.6",
     "helmet": "^4.1.0",
+    "hsts": "^2.2.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "moment": "^2.29.1",

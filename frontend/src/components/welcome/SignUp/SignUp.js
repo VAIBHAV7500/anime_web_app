@@ -10,6 +10,10 @@ import Spinner from '../Spinner/index'
 import { Link } from 'react-router-dom';
 
 
+const passRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$";
+//const passRegex = "*";
+
+
 export default function SignUp() {
     useEffect(() => {
         document.body.classList.add(styles2.body);
@@ -134,7 +138,7 @@ export default function SignUp() {
             type : "password",
             value : state.regPassword,
             onChange : handleChange,
-            pattern : "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$",
+            pattern : passRegex,
             title : "must be 8 letters [A-Z,a-z,0-9,special characters]"
         },
         {
@@ -144,7 +148,7 @@ export default function SignUp() {
             type : "password",
             value : state.regConfirmPassword,
             onChange : handleChange,
-            pattern : "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$",
+            pattern : passRegex,
             title : "must be 8 letters [A-Z,a-z,0-9,special characters]"
         },
         {

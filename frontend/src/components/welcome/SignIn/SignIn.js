@@ -28,7 +28,8 @@ const Login = (props)=>{
 
         }
     }, []);
-    const [_, setCookie] = useCookies(['token']);
+    const [cookie, setCookie] = useCookies(['token']);
+
     const handleAccessToken = async (token)=>{
         var config = {
             method: 'post',
@@ -40,7 +41,6 @@ const Login = (props)=>{
         };
         var response = await axios(config);
         if(response.data.message === "Successfully Entered"){
-            history.push('/');
             return {
                 check : true,
                 user_id : response.data.user_id,

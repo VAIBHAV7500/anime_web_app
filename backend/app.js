@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const hsts = require('hsts');
 const db = require('./db');
 const { updateList } = require('./lib/search');
 const { logger } = require('./lib/logger');
@@ -27,17 +28,24 @@ app.oauth = oAuth2Server({
 var { anyError, errorHandler, }  = require('./services/middleware');
 require('dotenv').config();
 
-// app.use(expressCspHeader({
+// if(process.env.NODE_ENV === "production"){
+//   app.use(expressCspHeader({
 //    directives: {
-//   //     'default-src': [SELF, INLINE],
-//   //     'script-src': [SELF, INLINE, '*'],
-//       //  'style-src': [INLINE],
-//       // 'img-src': [SELF , '*', 'data:image/png'],
-//       // 'worker-src': [NONE],
-//       // 'block-all-mixed-content': true
+//       'default-src': ['*'],
+//       'script-src': ['*'],
+//        'style-src': ['*'],
+//       'img-src': [SELF , '*'],
+//       'worker-src': ['*'],
+//       'block-all-mixed-content': false
 //   }
 // }));
+// }
 
+if(process.env.NODE_ENV === "production"){
+  app.use(hsts({
+    maxAge: 15552000  // 180 days in seconds
+  }))
+}
 
 //app.set('trust proxy', 1) // trust first proxy
 console.log(JSON.stringify(keys.session));
@@ -89,7 +97,10 @@ app.use(session(sess));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://dev.animei.tv'],
+  credentials: true
+}));
 app.use(helmet());
 
 const getMorganFormat = () =>
@@ -129,11 +140,13 @@ const { onLoad } = require('./routes/socket');
 
 app.use('/auth',authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
-app.use('/api',app.oauth.authorise(), apiRouter);
+app.use('/api', apiRouter);
 app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));
-  app.get('/*', function (req, res) {
+  app.get('*', function (req, res) {
+    console.log('Going to that path');
+    console.log(__dirname);
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
   

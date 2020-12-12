@@ -10,7 +10,7 @@ console.log(token);
 const instance = axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL,
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/JSON',
         'Authorization': 'Bearer ' + token,
         }
 });

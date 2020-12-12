@@ -20,7 +20,20 @@ const groups = [
  'Hunter x Hunter',
  'Tsugumomo',
  'Bungo Stray Dogs',
- 'Code Geass'
+ 'Code Geass',
+ 'Re:ZERO',
+  'Konosuba',
+  'Sword Art',
+  'Hunter',
+  'Fruits Basket',
+  'Bungo Stray Dogs',
+  'High School',
+  'Overlord',
+  'Kakegurui',,
+  'Fairy Tail',
+  'Nisekoi',
+  
+
 ];
 
 groups.forEach(async (group) => {

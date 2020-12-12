@@ -5,10 +5,9 @@ const createTable = (con) => {
         CREATE TABLE IF NOT EXISTS notification_engagements(
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             user_id BIGINT UNSIGNED,
-            show_id BIGINT UNSIGNED,
             notification_id BIGINT UNSIGNED,
             read_reciept BOOLEAN DEFAULT FALSE,
-            read_time TIMESTAMP,
+            read_time TIMESTAMP DEFAULT NULL,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY(notification_id) REFERENCES notifications(ID)
@@ -48,9 +47,9 @@ const markRead = async (userId) => {
   return runQuery(sql,[userId]);
 }
 
-const welcomeNotification = async (userId) => {
-  const sql = `INSERT INTO notification_engagements(notification_id,user_id) values(?)`;
-  return runQuery(sql,[1, userId]);
+const welcomeNotification = async (notification_id,userId) => {
+  const sql = `INSERT INTO notification_engagements(notification_id,user_id) values( ${notification_id}, ${userId})`;
+  return runQuery(sql);
 }
 
 module.exports = {

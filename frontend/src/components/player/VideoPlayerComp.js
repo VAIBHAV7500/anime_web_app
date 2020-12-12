@@ -14,10 +14,9 @@ import 'videojs-contrib-quality-levels';
 import 'videojs-hls-quality-selector';
 import 'videojs-errors';
 import { MdAirportShuttle } from 'react-icons/md';
+require('./videoPlayer.css');
 /* eslint import/no-webpack-loader-syntax: off */
-import('!style-loader!css-loader!video.js/dist/video-js.min.css').then(()=>{
-  require('./videoPlayer.css');
-});
+require('!style-loader!css-loader!video.js/dist/video-js.min.css');
 
 const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) => {
   const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"

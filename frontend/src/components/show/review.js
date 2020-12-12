@@ -7,11 +7,12 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { review_word_limit } from '../../constants';
 import { useParams } from 'react-router-dom';
-function Review({show_id}) {
+function Review({show_id,setState,prev}) {
 
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
     const [editor, setEditor] = useState(false);
+    const [textEditor, setTextEditor] = useState();
     const userId = useSelector(state => state.user_id);
     const {id} = useParams();
     
@@ -28,18 +29,20 @@ function Review({show_id}) {
             response.data[i] = e;
         })
         setReviews(response.data);
+        setState(2,response.data);
     }
 
     useEffect(() => {
-        init();
+        console.log(prev);
+        if(!prev){
+            init();
+        }else{
+            setReviews(prev);
+        }
     },[id]);
 
-    let finalContent = '';
-    let textEditor;
-
     const handleEditorChange = (content, editor) => {
-        finalContent = content;
-        textEditor = editor;
+        setTextEditor(editor);
         const review = {
             review: content,
             showMore: true,
@@ -49,13 +52,15 @@ function Review({show_id}) {
     }
 
     const postReview = async () => {
-        if(finalContent){
+        const proposedReview = preview.review;
+        if(proposedReview){
             const endPoint = `${requests.reviews}/create`;
             const body = {
                 show_id,
                 user_id: userId,
-                review: finalContent
+                review: proposedReview
             }
+            console.log(body);
             const response = await axios.post(endPoint, body).catch((err) => {
                 console.log(err);
                 //Something went wrong

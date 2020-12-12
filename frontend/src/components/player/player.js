@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Discussion from './discussion';
 import moment from 'moment';
 
-const URL = `ws://192.168.2.7:4200`;
+const URL = process.env.REACT_APP_WEBSOCKET_URL;
 
 export class player extends Component {
 

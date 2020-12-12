@@ -32,12 +32,12 @@ export class showRoom extends Component {
         url: requests.fetchComedyMovies
       },
       {
-        name: 'Horror',
-        url: requests.fetchHorrorMovies
+        name: 'Fantasy',
+        url: requests.fetchFantasy
       },
       {
-        name: 'Romance',
-        url: requests.fetchRomanceMovies
+        name: 'Adventure',
+        url: requests.fetchAdventure
       },
       {
         name: 'Drama',

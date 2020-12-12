@@ -14,23 +14,44 @@ import { connect } from 'react-redux';
 
 
 class show extends Component {
-    navItems = [{
-        title: 'Episodes',
-        component: <Episodes show_id={this.props.match.params.id}/>
-      },
-      {
-        title: 'Characters',
-        component: <Characters show_id={this.props.match.params.id}/>
-      },
-      {
-        title: 'Reviews',
-        component: <Review show_id={this.props.match.params.id}/> 
-      },
-      {
-        title: 'Similar Shows & Movies',
-        component: <Similar show_id={this.props.match.params.id}/>
+
+  setDataCache = (index,data) => {
+    if(this.state){
+      switch(index){
+        case 0:
+          this.state.episodes = data;
+          break;
+        case 1:
+          this.state.characters = data;
+          break;
+        case 2:
+          this.state.reviews = data;
+          break;
+        case 3:
+          this.state.similar = data;
+          break; 
       }
-    ] ;
+      this.setState(this.state);
+    }
+  }
+
+  navItems = [{
+      title: 'Episodes',
+      component: <Episodes show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.episodes}/>
+    },
+    {
+      title: 'Characters',
+      component: <Characters show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.characters}/>
+    },
+    {
+      title: 'Reviews',
+      component: <Review show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.reviews}/> 
+    },
+    {
+      title: 'Similar Shows & Movies',
+      component: <Similar show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.similar}/>
+    }
+  ] ;
 
     fetchData = async () => {
       if(this.props.user_id){
