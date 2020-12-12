@@ -111,7 +111,6 @@ function VideoPlayerComp({src}) {
     }
   }
 
-
   const createPlayerButtons = (player) => {
     const el = document.getElementsByClassName('vjs-big-play-button')[0];
     createButton(el,"Back","back",[styles.back_btn, 'vjs-control-bar'],()=>{

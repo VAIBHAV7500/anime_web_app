@@ -76,6 +76,7 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
               <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
               <div className="box-shadow"></div>
               <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown>
+              <p className="show_name">{movie.name}</p>
               <img
                 loading="lazy"
                 draggable="false"

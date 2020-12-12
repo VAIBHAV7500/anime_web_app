@@ -8,19 +8,47 @@
 .number {
   width: 30%;
   cursor: pointer;
-  margin-left: 78%;
   position: absolute;
   right: 10%;
+  top: 30px;
+  padding: 0 !important;
+  height: 49px;
+  display: flex;
+  align-items: center;
 }
 
 .number_input {
   width: 100%;
-  max-width: 210px;
+  height: 100%;
   outline: none;
   color: #ffff;
   font-size: 15px;
   background-color: rgba(255, 255, 255, 0);
   border: 0;
+  padding-left: 15px;
+}
+
+.go_btn{
+  opacity: 0;
+  width: 0%;
+  overflow:hidden;
+  white-space:nowrap;
+  display:inline-block;
+}
+
+.number_input:valid + .go_btn{
+  width: 21%;
+  height: 100%;
+  min-width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  background-color:rgb(80, 14, 141);
+  color:white;
+  cursor: pointer;
+  opacity: 1;
+  transition: width 0.3s;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -265,6 +293,46 @@ input:checked+.slider:before {
 .wrap {
   height: 10vh;
 }
+
+
+
+.switch{
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+.switch span{
+  padding: 10px;
+  background-color: transparent;
+  border-radius: 6px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.not_pressed{
+  /* box-shadow: -2px -2px 6px 0 rgba(0, 0, 0, 0.5),
+    2px 2px 5px 0px rgba(255, 255, 255, 0.096); */
+    /* box-shadow: 0px 0px 10px black,
+    -1px -1px 2px rgba(255, 255, 255, 0.11); */
+    box-shadow: inset 0px 0px 10px rgba(151, 142, 142, 0.11),
+              inset -3px -3px 10px  black,
+              0px 0px 10px black,
+              -1px -1px 2px rgba(255, 255, 255, 0.11);
+}
+
+.pressed{
+  /* box-shadow: inset 2px 2px 13px 0px rgba(0, 0, 0, 0.5),
+  inset -2px -2px 13px -10px rgba(255, 255, 255, 0.5); */
+  /* box-shadow: inset 0px 0px 10px rgba(151, 142, 142, 0.11),
+  inset -10px -10px 15px  black,
+  0px 0px 10px black,
+  -1px -1px 2px rgba(255, 255, 255, 0.11); */
+
+  box-shadow: inset 7px 7px 14px #090a0a, 
+              inset 0px  0px 5px #292b2c;
+}
+
+
 
 
 @media (max-width: 800px) {

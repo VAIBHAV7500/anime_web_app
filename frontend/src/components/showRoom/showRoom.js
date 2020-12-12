@@ -89,11 +89,13 @@ export class showRoom extends Component {
               <Nav />
               <Banner />
               <div  className={styles.spaces}/>
+              <div className={styles.rows_wrapper}>
               {
                 this.state.rows?.map((row,index)=>{
                   return <Row rowIndex={index} showIndexArray={[this.state.showIndex,this.changeShowIndex]} trailerArray={[this.state.trailer,this.changeTrailer]} title = {row.name} movies = {row.movies} isLargeRow  key={index} className={styles.row}/>
                 })
               }
+              </div>
               <footer>
                 <Footer/>
               </footer>

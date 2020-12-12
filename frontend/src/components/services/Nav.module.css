@@ -191,11 +191,6 @@
     animation: none;
 }
 
-.notification_icon:hover+.notification_dropdown,
-.notification_dropdown:hover {
-    transition: max-height 0.25s ease-in;
-    max-height: calc(95% - 80px);
-}
 
 .notification_number {
     margin-top: -9px;
@@ -220,8 +215,13 @@
     overflow-x: hidden;
     max-height: 0;
     border-radius: 7px;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.25s ease-in-out;
 }
+
+.show_notification{
+    max-height: calc(95% - 80px);
+}
+
 
 .notification_node {
     box-sizing: border-box;

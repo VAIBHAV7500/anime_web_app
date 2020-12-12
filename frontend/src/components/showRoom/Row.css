@@ -3,7 +3,6 @@
     margin-bottom: 6px;
     margin-left: 10px;
     color:white;
-    min-height: 300px;
     width: 100%;
     z-index: 3;
     transform: translateY(-105px);
@@ -21,20 +20,22 @@
     left:0;
     scroll-behavior: smooth;
     z-index: inherit;
+    height: 300px;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    gap: -100px;
 }
 
 .card_div{
-    min-width: 226px;
-    height: auto;
+    min-width: 210px;
+    height: 100%;
     position: relative;
+    margin-right: 18px;
     transition: 1s;
-    perspective: 1000px;
 }
 
 .card_div:hover .see_more{
-    transform: translateX(-68%) scale(1.6,1);
+    transform: translateX(-50%) scale(1.6,1);
     -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
     filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
 }
@@ -58,27 +59,22 @@
 .row_poster{
     display: block;
     width: 100%;
-    min-width: 210px;
-    margin-right: 25px;
-    max-width: 0;
+    height: 100%;
     transition: transform 200ms;
     cursor: pointer;
     background-color: rgb(29, 29, 29);
     padding: 0px;
-    max-height: 300px;
-    min-height: 300px;
     z-index: inherit;
     border-radius: 10px;
     transition: transform 0.5s,border-radius 0.5s;
     box-shadow: -2px -2px 7px rgba(255, 255, 255, 0.308),
                  7px  7px 15px rgba(0, 0, 0, 0.733);
-    transform-style: preserve-3d;
-    transform-origin: bottom;
+    
 }
 .box-shadow{
     position: absolute;
     width: 100%;
-    background: rgba(0, 0, 0, 0.404);
+    background: rgba(0, 0, 0, 0.795);
     z-index: 98;
     height: 100%;
     transform: scale(0);
@@ -98,7 +94,7 @@
     left: 50%;
     top: 50%;
     font-size: 70px;
-    transform: translate(-68%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
     transition: 0.3s;
     cursor: pointer;
     -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
@@ -106,7 +102,7 @@
 }
 
 .card_div:hover .play_icon{
-    transform: translate(-68%, -50%) scale(1.08);
+    transform: translate(-50%, -50%) scale(1.08);
 }
 
 .card_div:hover .row_poster{
@@ -116,6 +112,29 @@
 .card_div:hover .box-shadow{
     transform: scale(1);
 }
+
+.card_div:hover .show_name{
+    opacity: 1;
+}
+
+.show_name{
+    box-sizing: border-box;
+    position: absolute;
+    top: 5%;
+    text-align: center;
+    z-index: 99;
+    width: 100%;
+    padding: 0 10%;
+    opacity: 0;
+    transition: 0.3s;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: capitalize;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 
 .slider{
     position: absolute;
@@ -130,6 +149,7 @@
     display: flex;
     align-items: center;
     opacity: 0;
+    z-index: 99;
 }
 
 .cards:hover > .slider{
@@ -339,6 +359,12 @@ td{
     .card_div:hover .row_poster{
         filter: blur(0px);
     }
+    .row_posters{
+        height: 180px;
+    }
+    .card_div{
+        min-width: 126px;
+    }
 }
 
 @media (max-width:731px){
@@ -384,6 +410,15 @@ td{
     }
     .trailer_btn{
         width: auto;
+    }
+}
+
+@media(max-width:320px){
+    .row_posters{
+        height: 160px;
+    }
+    .card_div{
+        min-width: 112px;
     }
 }
 

@@ -8,23 +8,17 @@
     padding-top: 20px;
 }
 
-.character {
-    width: 289px;
-    background-color: radial-gradient(ellipse, #1e1e1f 10%, #090a0f 100%);
-    overflow-x: hidden;
-    margin: 10px;
-}
-
 .wrap_description {
     overflow: auto;
-    height: 385px;
+    height: calc(100% - 32px);
     border-radius: 16px;
     border: 2px solid #ffff;
     overflow: hidden;
+    position: relative;
 }
 
 .wrap_description:hover .description {
-    transform: translateY(-390px);
+    transform: translateY(-100%);
 }
 
 .description {
@@ -59,10 +53,8 @@
 }
 
 .character_image {
-    max-width: 285px;
-    min-width: 285px;
-    min-height: 386px;
-    max-height: 386px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     background-color: rgb(22, 22, 22);
 }
@@ -72,4 +64,72 @@
     color: #f0b922;
     font-weight: bold;
     margin-top: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.character_card{
+    position: relative;
+    width: 285px;
+    height: 386px;
+    margin: 23px;
+    perspective: 1000px;
+    background-color: radial-gradient(ellipse, #1e1e1f 10%, #090a0f 100%);
+}
+
+.character_card:hover .character_back{
+    transform: rotateY(360deg);
+}
+
+.character_card:hover .character_front{
+    transform: rotateY(180deg);
+}
+
+.character_back,
+.character_front{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: 0.5s;
+    transform-style: preserve-3d;
+}
+.character_back{
+    transform: rotateY(180deg);
+}
+.character_front{
+    background-color: transparent;
+}
+
+@media(max-width:1000px){
+    .character_card{
+        width: 207px;
+        height: 280px;
+    }
+}
+
+@media(max-width:750px){
+    .character_card{
+        width: 170px;
+        height: 230px;
+    }
+}
+
+@media(max-width:630px){
+    .character_card{
+        width: 110px;
+        height: 150px;
+    }
+}
+
+@media(max-width:300px){
+    .character_card{
+        padding: 10px;
+        width: 88px;
+        height: 120px;
+    }
 }

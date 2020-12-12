@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { FaArrowRight } from "react-icons/fa";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import styles from './episodes.module.css';
@@ -147,17 +148,24 @@ function Episodes() {
         setCookie('order-track', latest , { path: '/' });
     }
 
+    const [switchToggle,setSwitchToggle] = useState(true);
+
     return (
         <div className={styles.episodes}>
            <div className={styles.wrap}>
-                <div className={styles.toggle_switch}>
+                {/* <div className={styles.toggle_switch}>
                     <label className={styles.switch}>
                         <input type="checkbox" checked={latest} onClick={setOrderCookie}/>
                         <span className={`${styles.slider} ${styles.round} `}></span>
                     </label>
+                </div> */}
+                <div className={styles.switch}>
+                    <span  onClick={eval(`${ !switchToggle? ()=>{setSwitchToggle(true)} : null }`)} className={`${switchToggle ? styles.pressed : styles.not_pressed}`}>Latest</span>
+                    <span  onClick={eval(`${ switchToggle? ()=>{setSwitchToggle(false)} : null }`)} className={`${!switchToggle ? styles.pressed : styles.not_pressed}`}>Oldest</span>
                 </div>
                 <div className={`${styles.number} ${styles.neumorphism}`}>
-                    <input type="number" placeholder="Episode to Start From" min="1" max="99999" className={`${styles.number_input}`} onChange={setNewRange}/>
+                    <input type="number" placeholder="Episode to Start From" min="1" max="99999" className={`${styles.number_input}`} onChange={setNewRange} required/>
+                    <div className={styles.go_btn}><FaArrowRight/></div>
                 </div>
            </div>
             <div

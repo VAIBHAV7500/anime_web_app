@@ -9,10 +9,12 @@
 }
 
 .show{
-    width: 270px;
+    width: 265px;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
     cursor: pointer;
     margin: 23px;
+    height: 386px;
+    overflow: hidden;
 }
 
 .neumorphism {
@@ -27,15 +29,13 @@
 
 .wrap_description{
     overflow: auto;
-    height: 385px;
+    height: calc(100% - 22px);
     overflow: hidden;
 }
 
 .show_image{
-    max-width: 265px;
-    min-width: 265px;
-    min-height: 386px;
-    max-height: 386px;
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
     background-color: rgb(22, 22, 22);
 }
@@ -45,4 +45,36 @@
     color: #f0b922;
     font-weight: bold;
     margin-top: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media(max-width:1000px){
+    .show{
+        width: 207px;
+        height: 280px;
+        margin: 8px;
+    }
+}
+
+@media(max-width:750px){
+    .show{
+        width: 170px;
+        height: 230px;
+    }
+}
+
+@media(max-width:630px){
+    .show{
+        width: 110px;
+        height: 150px;
+    }
+}
+
+@media(max-width:300px){
+    .show{
+        width: 88px;
+        height: 120px;
+    }
 }

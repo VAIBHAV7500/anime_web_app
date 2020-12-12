@@ -31,18 +31,22 @@ function Characters({show_id}) {
         <div className={styles.characters}>
             {
                 characters?.map((character)=>{
-                    return <div className={`${styles.character} ${styles.neumorphism}`}>
-                        <div className={styles.wrap_description}>
-                            <img src={character.image_url} className={styles.character_image}></img>
-                            <div className={styles.description}>
-                                <h1>{character.role === "MC" ? "Main Character" : "Side Character"}</h1>
-                                <p className={styles.character_description}>{character.description}</p>
-                            </div>
+                    return (
+                    <div className={`${styles.character_card} `}>
+                        <div className={`${styles.character_front} ${styles.neumorphism}`}>
                         </div>
-                        <div className={styles.name}>{character.name}</div>
-                        
+                        <div className={`${styles.character_back} ${styles.neumorphism} `}>
+                            <div className={styles.wrap_description}>
+                                <img src={character.image_url} className={styles.character_image}></img>
+                                <div className={styles.description}>
+                                    <h1>{character.role === "MC" ? "Main Character" : "Side Character"}</h1>
+                                    <p className={styles.character_description}>{character.description}</p>
+                                </div>
+                            </div>
+                            <div className={styles.name}>{character.name}</div>    
+                        </div>
                     </div>
-                })
+                )})
             }
         </div>
     )

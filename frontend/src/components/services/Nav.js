@@ -16,6 +16,7 @@ function Nav() {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
     const [notifications, setNotifications] = useState([{body: "No New Notification",dummy:true}]);
+    const [showNotification,setShowNotification] = useState(false);
     const [unread, setUnread] = useState(0);
     const history = useHistory();
     const [, , removeCookie] = useCookies(['loginCookie']);
@@ -113,11 +114,11 @@ function Nav() {
                         showModal("searchModal",setSearch); 
                     }} 
                 />
-                <span className={styles.notification_icon} onMouseEnter = {markNotificationAsRead}>
+                <span className={styles.notification_icon} onClick={()=>{setShowNotification(!showNotification)}} onMouseEnter = {markNotificationAsRead}>
                     <FaBell className={`${styles.bell_icon} ${unread ? styles.ring : ""}`}/>
                 {unread ? <span className={styles.notification_number}>{!notifications.dummy && (unread > 9 ? '9+' : unread)}</span> : ""}
                 </span>
-                <div className={styles.notification_dropdown}>
+                <div className={`${styles.notification_dropdown} ${showNotification ? styles.show_notification : ""}`}>
                     {notifications?.map(notification_message => (
                         <div className={styles.notification_node}>
                             {notification_message?.body}

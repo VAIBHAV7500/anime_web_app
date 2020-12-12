@@ -17,7 +17,8 @@ export default function SignUp() {
             document.body.classList.remove(styles2.body);
         }
     }, []);
-
+    const passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$"
+    console.log(new RegExp(passwordRegex).test("Hello@123") ? "match" : "not match");
     const appbaseurl = process.env.REACT_APP_BASE_URL;
     const [state,setState] = useState({
         loader : false,
@@ -125,7 +126,7 @@ export default function SignUp() {
             type : "password",
             value : state.regPassword,
             onChange : handleChange,
-            pattern : "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$",
+            pattern : passwordRegex,
             title : "must be 8 letters [A-Z,a-z,0-9,special characters]"
         },
         {
@@ -135,7 +136,7 @@ export default function SignUp() {
             type : "password",
             value : state.regConfirmPassword,
             onChange : handleChange,
-            pattern : "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$",
+            pattern : passwordRegex,
             title : "must be 8 letters [A-Z,a-z,0-9,special characters]"
         },
         {
@@ -154,8 +155,9 @@ export default function SignUp() {
             <h1 className={styles2.title_name}><strong>Sign Up</strong></h1>
             {state.showerror? errorAdd() : ""}
             <form onSubmit={handleSignUp}>
-                {signUpFields.map((field) => (
+                {signUpFields.map((field,index) => (
                     <FormGroup
+                        key={index}
                         fieldData={field} 
                     />
                 ))}
