@@ -10,11 +10,15 @@
   cursor: pointer;
   position: absolute;
   right: 10%;
-  top: 30px;
+  top: 20px;
   padding: 0 !important;
   height: 49px;
   display: flex;
   align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 .number_input {
@@ -29,16 +33,18 @@
 }
 
 .go_btn{
-  opacity: 0;
   width: 0%;
   overflow:hidden;
   white-space:nowrap;
   display:inline-block;
+  transition: width 0.3s;
+
 }
 
 .number_input:valid + .go_btn{
-  width: 21%;
+  width: calc(21% - 30px);
   height: 100%;
+  padding: 0px 15px;
   min-width: fit-content;
   display: flex;
   justify-content: center;
@@ -48,7 +54,7 @@
   color:white;
   cursor: pointer;
   opacity: 1;
-  transition: width 0.3s;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -295,12 +301,10 @@ input:checked+.slider:before {
   height: 10vh;
 }
 
-
-
 .switch{
   position: absolute;
   left: 50px;
-  top: 50px;
+  top: 38px;
 }
 .switch span{
   padding: 10px;
@@ -311,10 +315,6 @@ input:checked+.slider:before {
 }
 
 .not_pressed{
-  /* box-shadow: -2px -2px 6px 0 rgba(0, 0, 0, 0.5),
-    2px 2px 5px 0px rgba(255, 255, 255, 0.096); */
-    /* box-shadow: 0px 0px 10px black,
-    -1px -1px 2px rgba(255, 255, 255, 0.11); */
     box-shadow: inset 0px 0px 10px rgba(151, 142, 142, 0.11),
               inset -3px -3px 10px  black,
               0px 0px 10px black,
@@ -322,14 +322,7 @@ input:checked+.slider:before {
 }
 
 .pressed{
-  /* box-shadow: inset 2px 2px 13px 0px rgba(0, 0, 0, 0.5),
-  inset -2px -2px 13px -10px rgba(255, 255, 255, 0.5); */
-  /* box-shadow: inset 0px 0px 10px rgba(151, 142, 142, 0.11),
-  inset -10px -10px 15px  black,
-  0px 0px 10px black,
-  -1px -1px 2px rgba(255, 255, 255, 0.11); */
-
-  box-shadow: inset 7px 7px 14px #090a0a, 
+  box-shadow: inset 2px 2px 12px #090a0a, 
               inset 0px  0px 5px #292b2c;
 }
 

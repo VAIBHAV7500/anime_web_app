@@ -12,7 +12,8 @@ const Search = (props) => {
     const [search,setSearch] = props.searchHook;
     const [searchSet, setSearchSet] = useState([]);
     const history = useHistory();
-
+    const searchTime=0.5;
+    let searchTimeout;
     useEffect(() => {
         if(search === true){
             document.querySelector("." + styles.search_input).focus();
@@ -60,7 +61,13 @@ const Search = (props) => {
                 }}
             />
             <div className={`${styles.search_group} ${styles.slide_in_top}`}>
-                <input placeholder="Search" className={`${styles.search_input}`} onChange={getSuggestions}></input>
+                <input placeholder="Search" className={`${styles.search_input}`} onChange={()=>{
+                    if(searchTimeout)
+                        clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(()=>{
+                        getSuggestions();
+                    },searchTime * 1000)
+                }}></input>
                 <FaSlidersH 
                     className={`${styles.filter_icon}`}
                     onClick={() => {

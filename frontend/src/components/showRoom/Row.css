@@ -127,11 +127,12 @@
     padding: 0 10%;
     opacity: 0;
     transition: 0.3s;
-    font-size: 22px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: capitalize;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
 }
 
@@ -354,6 +355,9 @@ td{
         display: none;
     }
     .box-shadow{
+        display: none;
+    }
+    .show_name{
         display: none;
     }
     .card_div:hover .row_poster{

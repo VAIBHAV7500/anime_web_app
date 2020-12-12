@@ -113,8 +113,8 @@ function Nav() {
                         showModal("searchModal",setSearch); 
                     }} 
                 />
-                <span className={styles.notification_icon} onClick={()=>{setShowNotification(!showNotification)}} onMouseEnter = {markNotificationAsRead}>
-                    <FaBell className={`${styles.bell_icon} ${unread ? styles.ring : ""}`}/>
+                <span className={styles.notification_icon} onMouseEnter = {markNotificationAsRead}>
+                    <FaBell onClick={()=>{setShowNotification(!showNotification)}} className={`${styles.bell_icon} ${unread ? styles.ring : ""}`}/>
                 {unread ? <span className={styles.notification_number}>{!notifications.dummy && (unread > 9 ? '9+' : unread)}</span> : ""}
                 </span>
                 <div className={`${styles.notification_dropdown} ${showNotification ? styles.show_notification : ""}`}>

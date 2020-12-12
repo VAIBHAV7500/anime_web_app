@@ -12,18 +12,18 @@
     background-color: rgb(182, 182, 241);
     background-image: radial-gradient(ellipse at center,#8627dfa9, black 100%);
     box-shadow: -1px -1px 10px #333235, 4px 3px 10px #0d0c0f;
+    position: relative;
         
 }
 
 .user_img{
     border-radius: 50%;
-    width: 12%;
+    width: 200px;
     position: absolute;
-    top: 14vh;
-    left: 12vw;
+    bottom: -30%;
+    left: 40px;
     z-index: 1;
-    box-shadow: -1px -1px 10px #333235, 8px 3px 15px #0d0c0f;
-        
+    box-shadow: -1px -1px 10px #333235, 8px 3px 15px #0d0c0f;  
 }
 
 .user_name{
@@ -36,11 +36,10 @@
     display: flex;
     flex-direction: row;
     color: white;
-    margin-top: 13vh;
+    margin-top: 95px;
     background-color: rgba(255, 255, 255, 0.02);
     box-shadow :0 0 15px 2px rgba(0, 0, 0, 0.5);
     width: 79%;
-    height: 7vh;
     align-items: center;
     overflow-x: auto;
     overflow-y: hidden;
@@ -78,4 +77,16 @@
 .active{
     box-shadow: -12px -7px 20px 0 rgba(38, 36, 39, 0.4),
             7px 3px 9px 0 rgba(136, 81, 238, 0.6);
+}
+
+@media(max-width:750px){
+    .nav{
+        margin-top: 75px;
+    }
+    .user_img{
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        bottom: -25%;
+    }
 }

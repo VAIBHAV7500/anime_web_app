@@ -18,19 +18,9 @@
 }
 
 .nav_logo {
-    position: fixed;
-    top: 1%;
-    width: 200px;
     height: 50px;
-    margin-top: 8px;
-    font-size: 30px;
-    -webkit-text-stroke: 0.5px black;
-    -o-object-fit: contain;
-    object-fit: contain;
     cursor: pointer;
-    background: -webkit-linear-gradient(white, #38495a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin-left: 15px;
 }
 
 
@@ -442,4 +432,44 @@
     100% {
         transform: rotate(0);
     }
+}
+
+
+@media(max-width:380px){
+    .search_icon,
+    .bell_icon,
+    .nav_avatar{
+        height: 20px;
+    }
+    .nav_logo{
+        height: 35px;
+    }
+
+    .avatar_span,
+    .notification_icon,
+    .search_icon{
+        padding: 0 5px;
+    }
+    .avatar_span{
+        margin-right: 10px;
+    } 
+}
+
+
+@media(max-width:245px){
+    .search_icon,
+    .bell_icon,
+    .nav_avatar{
+        height: 15px;
+    }
+    .nav_logo{
+        height: 30px;
+    }
+
+    .avatar_span,
+    .notification_icon,
+    .search_icon{
+        padding: 0 2px;
+    }
+    
 }

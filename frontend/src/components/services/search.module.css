@@ -41,6 +41,7 @@
     font-size: 41px;
     color: grey;
     cursor: pointer;
+    z-index: 999;
 }
 
 .filter_container{
