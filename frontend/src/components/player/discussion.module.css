@@ -57,17 +57,12 @@
     max-height: calc(100vh - 55px - 55px + 2px - 330px);
 }
 
-
-.discussion_container::-webkit-scrollbar {
-    display: none;
-}
-
-
 .bubble{
     width: fit-content;
     padding: 8px 20px;
     margin: 3px 10px;
     border-radius: 10px;
+    cursor: default;
 }
 
 .receiver_bubble{
@@ -77,10 +72,22 @@
     color: white;
 }
 
+.receiver_bubble:hover{
+    -webkit-box-shadow: 5px 1px 11px 0px  rgba(110, 27, 189, 0.8);
+    -moz-box-shadow:    5px 1px 11px 0px rgba(110, 27, 189, 0.8);
+    box-shadow:         5px 1px 11px 0px rgba(110, 27, 189, 0.8);
+}
+
 .sender_bubble{
     display: flex;
     align-self: flex-end;
     background-color: white;
+}
+
+.sender_bubble:hover{
+    -webkit-box-shadow: -3px 1px 11px 0px  rgba(229, 228, 230, 0.8);
+    -moz-box-shadow:    -3px 1px 11px 0px rgba(229, 228, 230, 0.8);
+    box-shadow:         -3px 1px 11px 0px rgba(229, 228, 230, 0.8);
 }
 
 .footer{

@@ -7,10 +7,12 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { review_word_limit } from '../../constants';
 import { useParams } from 'react-router-dom';
-function Review({show_id}) {
+function Review({show_id,setState,prev}) {
 
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
+    const [editor, setEditor] = useState(false);
+    const [textEditor, setTextEditor] = useState();
     const userId = useSelector(state => state.user_id);
     const {id} = useParams();
     
@@ -27,18 +29,20 @@ function Review({show_id}) {
             response.data[i] = e;
         })
         setReviews(response.data);
+        setState(2,response.data);
     }
 
     useEffect(() => {
-        init();
+        console.log(prev);
+        if(!prev){
+            init();
+        }else{
+            setReviews(prev);
+        }
     },[id]);
 
-    let finalContent = '';
-    let textEditor;
-
     const handleEditorChange = (content, editor) => {
-        finalContent = content;
-        textEditor = editor;
+        setTextEditor(editor);
         const review = {
             review: content,
             showMore: true,
@@ -48,19 +52,19 @@ function Review({show_id}) {
     }
 
     const postReview = async () => {
-        console.log(finalContent);
-        if(finalContent){
+        const proposedReview = preview.review;
+        if(proposedReview){
             const endPoint = `${requests.reviews}/create`;
             const body = {
                 show_id,
                 user_id: userId,
-                review: finalContent
+                review: proposedReview
             }
+            console.log(body);
             const response = await axios.post(endPoint, body).catch((err) => {
                 console.log(err);
                 //Something went wrong
             });
-            console.log(response);
             textEditor.setContent('');
         }
     }
@@ -72,11 +76,8 @@ function Review({show_id}) {
     }
     const handleLike = (review_id) => {
         const className = styles.red_heart;
-        console.log(className);
         const element = document.getElementById(review_id);
         const likeNumber = document.getElementById(`like_${review_id}`);
-        console.log(element);
-        console.log(likeNumber.innerText);
         if(element.classList.contains(className)){
             element.classList.remove(className);
             likeNumber.innerText = (parseInt(likeNumber.innerText) - 1).toString();
@@ -99,6 +100,10 @@ function Review({show_id}) {
         let newArr = [...reviews];
         newArr[index].showMore = !newArr[index].showMore;
         setReviews(newArr);
+    }
+
+    const handleTinyInit = () => {
+        setEditor(true);
     }
 
     return (
@@ -129,6 +134,7 @@ function Review({show_id}) {
                         bullist numlist outdent indent | removeformat'
                     }}
                     onEditorChange={handleEditorChange}
+                    onInit={handleTinyInit}
                 />
                 { preview?.review && <div className={`${styles.review} ${styles.make_flex} ${styles.preview}`}>
                             <div className={styles.preview_text}>Preview: </div>
@@ -137,7 +143,7 @@ function Review({show_id}) {
                             </div>               
                         </div>
                 }
-                <div className={`${styles.post_button}`} onClick={postReview}>POST</div>
+                {editor && <div className={`${styles.post_button}`} onClick={postReview}>POST</div>}
             </div>
             <div className={styles.seperator} />
             <div className={styles.review_container}>

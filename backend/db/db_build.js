@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const dbConfig = require('../config/dbConfig.json');
 const fs = require('fs');
 const user = require('./tables/user');
-const sessions = require('./tables/sessions');
+const player_sessions = require('./tables/player_sessions');
 const plans = require('./tables/plan');
 const genre = require('./tables/genre');
 const shows = require('./tables/shows');
@@ -21,7 +21,9 @@ const completed_shows = require('./tables/completed_shows');
 const currently_watching = require('./tables/currently_watching');
 const watchlist = require('./tables/watchlist');
 const user_player_session = require('./tables/user_player_session');
-
+const notification = require('./tables/notifications');
+const notification_engagements = require('./tables/notification_engagements');
+const discussions = require('./tables/discussions');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -30,7 +32,6 @@ var con = mysql.createConnection({
 });
 
 const migrationFolder = `./db/migrations`;
-const tablesFolder = `./db/tables`;
 
 const db_name = dbConfig.db_name;
 
@@ -57,16 +58,53 @@ con.connect(async (err)=>{
         console.log('############## Creating Tables ##############');
         response = await createDB();
         console.log(`Created DB`);
+        response = await user.createTable(con);
+        console.log(`Craated User`);
+        response = await player_sessions.createTable(con);
+        console.log(`Created player_sessions`);
+        response = await plans.createTable(con);
+        console.log(`Created Plans`);
+        response = await genre.createTable(con);
+        console.log(`Created Genre`);
+        response = await shows.createTable(con);
+        console.log(`Created Shows`);
+        response = await videos.createTable(con);
+        console.log(`Created Videos`);
+        response = await audios.createTable(con);
+        console.log(`Created Audios`);
+        response = await subtitles.createTable(con);
+        console.log(`Created Subtitles`);
+        response = await access_tokens.createTable(con);
+        console.log(`Created Access Token`);
+        response = await group.createTable(con);
+        console.log(`Created Group`);
+        response = await genre_show_mapping.createTable(con);
+        console.log(`Created genre_show_mapping`);
+        response = await characters.createTable(con);
+        console.log(`Created characters`);
+        response = await character_show_mapping.createTable(con);
+        console.log(`Created character_show_mapping`);
+        response = await reviews.createTable(con);
+        console.log(`Created reviews`);
+        response = await user_review.createTable(con);
+        console.log(`Created user_review`);
+        response = await user_ip.createTable(con);
+        console.log(`Created user_ip`);
+        response = await completed_shows.createTable(con);
+        console.log(`Created completed_shows`);
+        response = await currently_watching.createTable(con);
+        console.log(`Created currently_watching`);
+        response = await watchlist.createTable(con);
+        console.log(`Created watchlist`);
+        response = await user_player_session.createTable(con);
+        console.log((`Created user_player_session`));
+        response = await notification.createTable(con);
+        console.log((`Created notification`));
+        response = await notification_engagements.createTable(con);
+        console.log((`Created notification_engagements`));
+        response = await discussions.createTable(con);
+        console.log((`Created Discussions`));
 
-        fs.readdirSync(tablesFolder).forEach((file) => {
-            const names = file.split(".");
-            if(names){
-                const name = names[0];
-                require(`./tables/${name}`).createTable(con).then(() => {
-                    console.log(`Created Table: ${file}`);
-                }).catch(err => console.log(err.message));
-            }
-        });
         console.log('\n############## Running Migrations ##############');
         console.log('If ERR => ER_DUP_FIELDNAME then it is already in the DB.')
         fs.readdirSync(migrationFolder).forEach((file) => {

@@ -19,9 +19,7 @@ const createTable = (con) => {
             next_show BIGINT UNSIGNED,
             show_id BIGINT,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            FOREIGN KEY(show_id) REFERENCES shows(ID),
-            FOREIGN KEY(next_show) REFERENCES shows(ID)
+            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     `;
     return new Promise((res, rej) => {

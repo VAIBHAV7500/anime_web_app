@@ -2,12 +2,16 @@ import React,{useEffect,useState} from 'react'
 import styles from './signup.module.css'
 import styles2  from '../SignIn/SignIn.module.css'
 import FormGroup from '../Form-Group/FormGroup'
-import { FaUnlock, FaMobile, FaEnvelope} from 'react-icons/fa';
+import { FaUnlock, FaMobile, FaEnvelope, FaUser} from 'react-icons/fa';
 import axios from '../../../utils/axios';
 import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
 import Spinner from '../Spinner/index'
 import { Link } from 'react-router-dom';
+
+
+const passRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$";
+//const passRegex = "*";
 
 
 export default function SignUp() {
@@ -27,6 +31,7 @@ export default function SignUp() {
         regConfirmPassword:"",
         regMobileNo:"",
         error:"",
+        name:"",
         showerror: false
     });
 
@@ -111,6 +116,14 @@ export default function SignUp() {
     }
     
     const signUpFields = [
+        {
+            id : "name",
+            name : "Name",
+            component : <FaUser/>,
+            type : "text",
+            value : state.name,
+            onChange : handleChange,
+        },
         {
             id : "regEmail",
             name : "Email",

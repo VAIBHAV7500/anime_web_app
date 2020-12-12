@@ -140,6 +140,10 @@
     justify-content: center;
 }
 
+.remove{
+    background-color: rgb(65, 64, 64); 
+}
+
 .play_btn:active,
 .watch_list_btn:active {
     position: relative;

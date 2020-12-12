@@ -12,16 +12,13 @@ function Characters({show_id}) {
         setCharacters([]);
         const response = await axios.get(`${requests.characters}?show_id=${id}`);
         if (response.data) {
-            console.log(response.data);
             setCharacters(response.data);
-            console.log(characters);
         } else {
             // Something went Wrong
         }
     }
 
     useEffect(() => {
-        console.log(id);
         updateCharacters();
         return () => {
             setCharacters([]);

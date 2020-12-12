@@ -6,7 +6,7 @@ const createTable = (con) => {
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             password VARCHAR(255),
             email VARCHAR(255) UNIQUE NOT NULL,
-            user_name TEXT UNIQUE,
+            user_name VARCHAR(255) UNIQUE,
             status INT,
             mobile VARCHAR(15) UNIQUE,
             plan_id INT,

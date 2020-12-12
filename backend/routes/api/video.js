@@ -165,7 +165,7 @@ router.get('/trending',async (req,res,next)=>{
             message: "API KEY is missing or incorrect"
         })
     }
-    const videos = [12,13,10,9,8,6,2,15];
+    const videos = [25,30,5,124,114,122,62,10,58,127];
     const promiseArray = [];
     videos.forEach((id)=>{
         promiseArray.push(new Promise((res,rej)=>{
@@ -186,8 +186,6 @@ router.get('/trending',async (req,res,next)=>{
 });
 
 router.get('/banner', async (req, res, next) => {
-    console.log('banner');
-    console.log(JSON.stringify(banner));
     res.json(banner);
 });
 
@@ -201,7 +199,6 @@ router.get('/genre',async (req,res,next)=>{
         return;
     }
     const genre_id = await db.genre.findByGenre(id); // Later remove it
-    console.log(genre_id);
     let result = await db.shows.getShowsByGenre(genre_id.id).catch((err)=>{
         res.status(401).json({
             err: err.message,
@@ -209,7 +206,6 @@ router.get('/genre',async (req,res,next)=>{
         });
     });
     const show_ids = result.map(x => x.id);
-    console.log(show_ids);
     const genres = await db.genre_show_mapping.findGenreByShows(show_ids);
     result.map((show)=>{
         const genre = genres.filter(x => x.show_id === show.id).map(x => x.category);
@@ -223,7 +219,6 @@ router.get('/genre',async (req,res,next)=>{
 router.get('/details',async (req,res,next)=>{
     const videoId = req.query.player_id;
     const userId = req.query.user_id;
-    console.log('User Id: ' + userId);
     if(!videoId){
         res.status(401).json({
             message: "Info not sufficient..."

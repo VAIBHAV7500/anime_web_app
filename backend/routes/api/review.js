@@ -97,19 +97,24 @@ router.delete('/unlike', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
     const body = req.body;
-    body.likes = 0;
-    body.approved = true;
+    console.log(JSON.stringify(body));
     if(body){
+        body.likes = 0;
+        body.approved = true;
+        console.log(JSON.stringify(body));
         const response = await db.reviews.create(body).catch((err)=>{
             res.status(501).json({
                 error: err.message,
                 stack: err.stack
             });
         });
-        const id = response.insertId;
-        res.json({
-            id
-        });
+        if(response){
+            const id = response.insertId;
+            console.log(response);
+            res.json({
+                id
+            });
+        }
     }else{
         res.status(402).json({
             message: "Body is not defined"

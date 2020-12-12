@@ -11,7 +11,6 @@ function MyReviews({userId,endPoint}) {
     const history = useHistory();
     const fetchData = async () => {
         const result = await axios.get(`${endPoint}?id=${userId}`);
-        console.log(result);
         if(result.data){
             setReviews(result.data);
         }else{

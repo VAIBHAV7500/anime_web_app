@@ -10,6 +10,8 @@ const requests = {
     fetchRomanceMovies: `api/video/genre?genre_id=romance`,
     fetchDrama: `api/video/genre?genre_id=drama`,
     fetchDocumentaries: `api/video/trending?api_key=${API_KEY}`,
+    fetchFantasy: `api/video/genre?genre_id=fantasy`,
+    fetchAdventure: `api/video/genre?genre_id=adventure`,
     fetchEpisodes: `api/video/episodes`,
     fetchSuggestions: `api/search/suggestions`,
     fetchShowDetails: `api/shows/details`,

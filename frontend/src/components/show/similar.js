@@ -32,8 +32,8 @@ function Similar({show_id}) {
     return (
         <div className={styles.similar}>
             {
-                similar.map((show)=>{
-                    return <div className={`${styles.show} ${styles.neumorphism}`} onClick={()=>{goToShow(show.id)}}>
+                similar.map((show, index)=>{
+                    return <div className={`${styles.show} ${styles.neumorphism}`} key={index} onClick={()=>{goToShow(show.id)}}>
                         <div className={styles.wrap_description}>
                             <img src={show.poster_portrait_url} className={styles.show_image}></img>
                         </div>

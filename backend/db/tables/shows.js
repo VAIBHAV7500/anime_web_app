@@ -44,7 +44,7 @@ const create = async (body) => {
 }
 
 const getShowsByGenre = async (id) => {
-    const sql = `SELECT shows.* FROM shows inner join genre_show_mapping as gsm on shows.id = gsm.show_id WHERE gsm.genre_id = ${id} ORDER BY total_view desc LIMIT 20`;
+    const sql = `SELECT shows.* FROM shows inner join genre_show_mapping as gsm on shows.id = gsm.show_id WHERE gsm.genre_id = ${id} ORDER BY RAND() LIMIT 20`;
     return await runQuery(sql);
 }
 

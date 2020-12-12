@@ -32,7 +32,6 @@ function Nav() {
             if(result){
                 if(result?.data?.length){
                     setNotifications(result.data);
-                    console.log(JSON.stringify(result.data));
                     const unread = result.data.filter(x => x.read_reciept === 0).length;
                     setUnread(unread);
                 }
@@ -138,10 +137,10 @@ function Nav() {
                             }
                         </div>
                     </div>
-                    
                 </div>
-                {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
             </div>
+            {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
+        </div>
         </div>
     )
 }

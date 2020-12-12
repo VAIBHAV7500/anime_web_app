@@ -34,7 +34,9 @@ module.exports = (app)=>{
         }
     });
     
-    router.post('/login',app.oauth.grant());
+    router.post('/login',app.oauth.grant(),(req,res,next)=>{
+        console.log('Loginnnnn POST AUTH');
+    });
     
     return router;
 };
