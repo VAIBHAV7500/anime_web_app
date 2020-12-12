@@ -312,6 +312,10 @@ input:checked+.slider:before {
   border-radius: 6px;
   margin-left: 5px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 .not_pressed{
