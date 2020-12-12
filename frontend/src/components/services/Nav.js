@@ -141,7 +141,6 @@ function Nav() {
             </div>
             {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
         </div>
-        </div>
     )
 }
 
