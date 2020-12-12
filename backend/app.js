@@ -97,10 +97,7 @@ app.use(session(sess));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors({
-  origin: ['https://dev.animei.tv'],
-  credentials: true
-}));
+app.use(cors());
 app.use(helmet());
 
 const getMorganFormat = () =>
