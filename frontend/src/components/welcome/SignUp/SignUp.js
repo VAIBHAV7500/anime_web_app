@@ -9,11 +9,6 @@ import sha256 from 'crypto-js/sha256';
 import Spinner from '../Spinner/index'
 import { Link } from 'react-router-dom';
 
-
-const passRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$";
-//const passRegex = "*";
-
-
 export default function SignUp() {
     useEffect(() => {
         document.body.classList.add(styles2.body);
