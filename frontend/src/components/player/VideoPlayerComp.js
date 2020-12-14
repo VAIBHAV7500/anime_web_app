@@ -19,8 +19,8 @@ require('./videoPlayer.css');
 require('!style-loader!css-loader!video.js/dist/video-js.min.css');
 
 const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) => {
-  const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
-  //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
+  //const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+  const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
   const playerRef = useRef();
   const history = useHistory();
   let prevTime = 0;

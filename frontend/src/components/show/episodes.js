@@ -16,11 +16,10 @@ function Episodes() {
     const userId = useSelector(state => state.user_id);
     let prevUserId = null;
     const [episodes, setEpisodes] = useState([]);
-    const [cookies,setCookie] = useCookies(['order-track']);
-    let [latest, setLatest] = useState(cookies['order-track'] === 'true' ? true : false);
+    const [cookies,setCookie] = useCookies([id]);
+    let [latest, setLatest] = useState(cookies[id] === 'true' ? true : false);
     const [hasMore, setMore] = useState(true);
     const history = useHistory();
-    let location = useLocation();
     let loading = false;
     let chunkSize = 10;
 
@@ -29,26 +28,24 @@ function Episodes() {
             setEpisodes([]);
             setMore(true);
             episodeArray = [];
-            if(!loading){
-                loading = true;
-                const epNum = document.getElementsByClassName(styles.number_input)[0].value;
-                
-                let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}`;
-                if(latest){
-                    endPoint += `&offset=${chunkSize}&latest=true`;
-                    if(epNum){
-                        endPoint += `&from=${epNum}`;
-                    }
+            const epNum = document.getElementsByClassName(styles.number_input)[0].value;
+            
+            let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}`;
+            if(latest){
+                endPoint += `&offset=${chunkSize}&latest=true`;
+                if(epNum){
+                    endPoint += `&from=${epNum}`;
+                }
+            }else{
+                endPoint += `&offset=${chunkSize}`;
+                if(epNum){
+                    endPoint += `&from=${epNum}`;
                 }else{
-                    endPoint += `&offset=${chunkSize}`;
-                    if(epNum){
-                        endPoint += `&from=${epNum}`;
-                    }else{
-                        endPoint += `&from=${0}`
-                    }
-                }   
-                const response = await axios.get(endPoint);
-                loading = false;
+                    endPoint += `&from=${0}`
+                }
+            }
+            const response = await finalfetchSource(endPoint);
+            if(response?.data){
                 setEpisodes(response.data.result);
                 episodeArray = response.data.result;
             }
@@ -72,8 +69,7 @@ function Episodes() {
     }, [userId])
 
     const fetchEps = async (from) => {
-        if(userId && !loading){
-            loading = true;
+        if(userId){
             let endPoint = `${requests.fetchEpisodes}?show_id=${id}&user_id=${userId}&offset=${chunkSize}`;
             if(latest){
                 endPoint += `&latest=true`;
@@ -81,9 +77,18 @@ function Episodes() {
             if(from){
                 endPoint += `&from=${from}`;
             }
-            const response = await axios.get(endPoint);
+            const response = await finalfetchSource(endPoint);
+            return response?.data;
+        }
+    }
+
+    const finalfetchSource = async (endPoint) => {
+        if(userId && !loading){
+            loading = true;
+            const result = await axios.get(endPoint);
+            console.log(result);
             loading = false;
-            return response.data;
+            return result;
         }
     }
 
@@ -120,8 +125,10 @@ function Episodes() {
         if(epNum){
             from = epNum;
             response = await fetchEps(from);
-            setEpisodes(response.result);
-            episodeArray = response.result;
+            if(response?.result){
+                setEpisodes(response.result);
+                episodeArray = response.result;
+            }
         }else{
             from = 1;
             if(!latest){
@@ -129,8 +136,10 @@ function Episodes() {
             }else{
                 response = await fetchEps();
             }
-            setEpisodes(response.result);
-            episodeArray = response.result;
+            if(response?.result){
+                setEpisodes(response.result);
+                episodeArray = response.result;
+            }
         }
         if(response.total_episodes === parseInt(from) + episodeArray.length -1){
             setMore(false);
@@ -145,7 +154,7 @@ function Episodes() {
         latest = !latest;
         setLatest(latest);
         updateEpisodes();
-        setCookie('order-track', latest , { path: '/' });
+        setCookie(id, latest , { path: '/' });
     }
 
     const [switchToggle,setSwitchToggle] = useState(true);
@@ -160,12 +169,12 @@ function Episodes() {
                     </label>
                 </div> */}
                 <div className={styles.switch}>
-                    <span  onClick={eval(`${ !switchToggle? ()=>{setSwitchToggle(true)} : null }`)} className={`${switchToggle ? styles.pressed : styles.not_pressed}`}>Latest</span>
-                    <span  onClick={eval(`${ switchToggle? ()=>{setSwitchToggle(false)} : null }`)} className={`${!switchToggle ? styles.pressed : styles.not_pressed}`}>Oldest</span>
+                    <span  onClick={setOrderCookie} className={`${latest ? styles.pressed : styles.not_pressed}`}>Latest</span>
+                    <span  onClick={setOrderCookie} className={`${!latest ? styles.pressed : styles.not_pressed}`}>Oldest</span>
                 </div>
                 <div className={`${styles.number} ${styles.neumorphism}`}>
-                    <input type="number" placeholder="Episode to Start From" min="1" max="99999" className={`${styles.number_input}`} onChange={setNewRange} required/>
-                    <div className={styles.go_btn}><FaArrowRight/></div>
+                    <input type="number" placeholder="Episode to Start From" min="1" max="99999" className={`${styles.number_input}`} required/>
+                    <div className={styles.go_btn} onClick={setNewRange}><FaArrowRight/></div>
                 </div>
            </div>
             <div
@@ -189,7 +198,7 @@ function Episodes() {
                             <img draggable="false" alt={episode.name} className={styles.episode_thumbnail} src={episode.thumbnail_url}/>
                             <div className={styles.wrapper}>
                                 <div className={styles.episode_name}>{episode.episode} - {episode.name}</div>
-                                <div className={`${styles.type} ${episode.type.toLowerCase() === "filler" ? styles.red : ( episode.type.toLowerCase() === 'manga canon' ? styles.green : styles.orange)  }`}>{episode.type}</div>
+                                {episode?.type ? <div className={`${styles.type} ${episode.type.toLowerCase() === "filler" ? styles.red : ( episode.type.toLowerCase() === 'manga canon' ? styles.green : styles.orange)  }`}>{episode?.type}</div> : ""}
                             </div>
                             
                             <div className={styles.episode_description}>{"Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King.Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King.Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King.Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King.Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King.Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King.Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King.Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the 'Wizard King'—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the next Wizard King."}</div>

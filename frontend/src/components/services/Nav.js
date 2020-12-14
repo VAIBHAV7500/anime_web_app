@@ -118,8 +118,8 @@ function Nav() {
                 {unread ? <span className={styles.notification_number}>{!notifications.dummy && (unread > 9 ? '9+' : unread)}</span> : ""}
                 </span>
                 <div className={`${styles.notification_dropdown} ${showNotification ? styles.show_notification : ""}`}>
-                    {notifications?.map(notification_message => (
-                        <div className={styles.notification_node}>
+                    {notifications?.map((notification_message, index) => (
+                        <div className={styles.notification_node} key={index}>
                             {notification_message?.body}
                         </div>
                     ))}

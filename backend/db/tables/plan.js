@@ -2,6 +2,7 @@ const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS plans (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255),
             screen INT,
             price DOUBLE,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

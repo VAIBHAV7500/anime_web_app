@@ -7,14 +7,29 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { review_word_limit } from '../../constants';
 import { useParams } from 'react-router-dom';
-function Review({show_id,setState,prev}) {
+import { ToastContainer, toast } from 'react-toastify';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import 'react-toastify/dist/ReactToastify.css';
 
+function Review({show_id,setState,prev}) {
+    console.log(process.env.REACT_APP_HCAPTCHA_SITE_KEY);
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
     const [editor, setEditor] = useState(false);
+    let verified = false;
     const [textEditor, setTextEditor] = useState();
     const userId = useSelector(state => state.user_id);
     const {id} = useParams();
+
+    const toastConfig = {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    }
     
     const init = async () => {
         const endPoint = `${requests.reviews}/shows?id=${id}&user_id=${userId}`;
@@ -52,20 +67,29 @@ function Review({show_id,setState,prev}) {
     }
 
     const postReview = async () => {
-        const proposedReview = preview.review;
+        console.log(verified);
+        const proposedReview = preview?.review;
         if(proposedReview){
-            const endPoint = `${requests.reviews}/create`;
-            const body = {
-                show_id,
-                user_id: userId,
-                review: proposedReview
+            if(verified){
+                const endPoint = `${requests.reviews}/create`;
+                const body = {
+                    show_id,
+                    user_id: userId,
+                    review: proposedReview
+                }
+                console.log(body);
+                const response = await axios.post(endPoint, body).catch((err) => {
+                    console.log(err);
+                    toast.error(`O'Oh, looks like there's some issue. Please try again later`);
+                    //Something went wrong
+                });
+                textEditor.setContent('');
+                toast.success('Your review has been submitted successfully..', toastConfig);
+            }else{
+                toast.dark('Hmmm.... Captcha is Required', toastConfig);
             }
-            console.log(body);
-            const response = await axios.post(endPoint, body).catch((err) => {
-                console.log(err);
-                //Something went wrong
-            });
-            textEditor.setContent('');
+        }else{
+            toast.warning(`Please write the review first...`);
         }
     }
     const wordLimit = review_word_limit;
@@ -106,8 +130,28 @@ function Review({show_id,setState,prev}) {
         setEditor(true);
     }
 
+    const handleVerificationSuccess = (token) => {
+        console.log(token);
+        if(token){
+            verified = true;
+        }
+    }
+
     return (
         <div className={styles.reviews}>
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
+            {/* Same as */}
+            <ToastContainer />
             <div className={styles.editor}>
                 <Editor
                     className={styles.tiny_editor}
@@ -143,7 +187,20 @@ function Review({show_id,setState,prev}) {
                             </div>               
                         </div>
                 }
-                {editor && <div className={`${styles.post_button}`} onClick={postReview}>POST</div>}
+                {editor && <div>
+                    <div className={styles.hcaptcha}>
+                        <HCaptcha
+                        sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}
+                        onVerify={token => handleVerificationSuccess(token)}
+                        theme = "dark"
+                        language = "en"
+                        className = {styles.hcaptcha}
+                        />
+                    </div>
+                    <div className={`${styles.post_button}`} onClick={postReview}>
+                    POST
+                    </div>
+                </div>}
             </div>
             <div className={styles.seperator} />
             <div className={styles.review_container}>

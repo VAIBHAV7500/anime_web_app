@@ -30,6 +30,8 @@ class show extends Component {
         case 3:
           this.state.similar = data;
           break; 
+        default:
+          break;
       }
       this.setState(this.state);
     }

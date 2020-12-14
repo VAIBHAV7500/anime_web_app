@@ -17,7 +17,7 @@ const checkIp = async (ip,userId) => {
     if(res){
         let ipArray = JSON.parse(JSON.stringify(res));
         let result = ipArray.find(obj => obj.ip === ip);
-        if(result) return; 
+        if(result) return true; 
         if(res.length >= 4/*user screeen limit get from Table based on current userID */){
             await db.user_ip.deleteIp(ipArray[0].ip,userId).catch(err=>{
                 throw new Error({
@@ -41,17 +41,20 @@ const checkIp = async (ip,userId) => {
 module.exports = (app)=>{
     router.post('/enter',app.oauth.authorise(),async (req,res)=>{
         var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        await checkIp(ip,req.oauth.bearerToken.user.id).catch((err)=>{
+        const response = await checkIp(ip,req.oauth.bearerToken.user.id).catch((err)=>{
         console.log(err.status);
           res.status(err.status).json({
             message : err.message,
             stack : err.stack,
           });
         });
-        res.status(200).json({
-          message : "Successfully Entered",
-          user_id : req.oauth.bearerToken.user.id,
-        });
+        if(response){
+            console.log('Successfully Entered');
+            res.status(200).json({
+                message : "Successfully Entered",
+                user_id : req.oauth.bearerToken.user.id,
+            });
+        }
     });
     return router;
 }

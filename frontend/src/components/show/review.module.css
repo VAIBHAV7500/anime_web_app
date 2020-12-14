@@ -44,6 +44,10 @@
     color: rgb(255, 255, 255);
 }
 
+.hcaptcha{
+    padding: 10px;
+}
+
 .post_button{
     float: right;
     padding-top: 8px;

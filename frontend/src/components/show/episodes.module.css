@@ -213,6 +213,7 @@ input[type=number] {
 .switch {
   position: relative;
   display: inline-block;
+  font-weight: bolder;
   width: 60px;
   height: 34px;
 }
@@ -326,6 +327,7 @@ input:checked+.slider:before {
 }
 
 .pressed{
+  background-color: rgb(138, 136, 136);
   box-shadow: inset 2px 2px 12px #090a0a, 
               inset 0px  0px 5px #292b2c;
 }

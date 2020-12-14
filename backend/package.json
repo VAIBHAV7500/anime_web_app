@@ -11,6 +11,7 @@
     "@api.video/nodejs-sdk": "^1.8.4",
     "aws-sdk": "^2.797.0",
     "axios": "^0.20.0",
+    "connect-ensure-login": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

@@ -1,4 +1,5 @@
 var db = require('../db/index');
+const passport = require('passport');
 
 const getClient = async (clientID, clientSecret, callback) => {
   const client = {

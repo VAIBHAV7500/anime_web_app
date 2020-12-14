@@ -16,6 +16,7 @@ const fs = require('fs');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const passport = require('passport');
+const connectEnsureLogin = require('connect-ensure-login');
 const keys = require('./config/keys.json');
 const dbConfig = require('./config/dbConfig.json');
 
@@ -47,10 +48,6 @@ if(process.env.NODE_ENV === "production"){
   }))
 }
 
-//app.set('trust proxy', 1) // trust first proxy
-console.log(JSON.stringify(keys.session));
-console.log(JSON.stringify(dbConfig));
-
 
 global.connection = db.getConnection();
 
@@ -77,15 +74,15 @@ var sessionStore = new MySQLStore({
   database: dbConfig.db_name,
 });
 
-console.log(sessionStore);
-
 var sess = {
   key: keys.session.key,
   secret: keys.session.secret,
   saveUninitialized: false,
   store: sessionStore,
   resave: false,
-  cookie: {}
+  cookie: {
+    maxAge: 60000
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -142,9 +139,10 @@ app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));
   app.get('*', function (req, res) {
-    console.log('Going to that path');
-    console.log(__dirname);
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    res.redirect('/');
+    // console.log('Going to that path');
+    // console.log(__dirname);
+    // res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
   
 }else{
