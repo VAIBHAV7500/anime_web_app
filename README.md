@@ -20,11 +20,21 @@
     which mysqld
     ```
     If it shows the path then continue otherwise install MySQL.
+* Create a config folder and copy config files in that folder
+
+* Create a certificate folder and copy the self signed certificate over there.
+
 * Setup config/dbConfig.json file with the user and password of your MySQL.
 
 * Create Database
     ```
-    sh ./db.sh
+    npm run db
+    ```
+
+* Crate a .env file and copy the required content.
+* Start Server
+    ```
+    npm run dev
     ```
 
 ## Frontend
@@ -39,7 +49,7 @@
 * In terminal 1
 ```
 cd backend
-npx nodemon app.js
+npm run dev
 ```
 * In terminal 2
 ```
@@ -47,6 +57,13 @@ cd frontend
 npm start
 ```
 <strong>Note</strong> : We consider you are at the root folder of the app in both the terminals.
+
+
+## How to Build
+* In root folder run
+    ```
+    sh .\build.sh
+    ```
 
 
 ## Code Standardization

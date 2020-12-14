@@ -8,6 +8,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux';
+import PulseLoader from "react-spinners/PulseLoader";
 
 let episodeArray = [];
 
@@ -186,7 +187,7 @@ function Episodes() {
                     dataLength={episodes.length} //This is important field to render the next data
                     next={fetchMoreData}
                     hasMore={hasMore}
-                    loader={<h4>Loading...</h4>}
+                    loader={<PulseLoader color="#ffff"/>}
                     endMessage={
                       <p style={{ textAlign: 'center' }}>
                         <b>Yay! You have seen it all</b>

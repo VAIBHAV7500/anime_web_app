@@ -12,7 +12,6 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Review({show_id,setState,prev}) {
-    console.log(process.env.REACT_APP_HCAPTCHA_SITE_KEY);
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
     const [editor, setEditor] = useState(false);
@@ -48,7 +47,6 @@ function Review({show_id,setState,prev}) {
     }
 
     useEffect(() => {
-        console.log(prev);
         if(!prev){
             init();
         }else{
@@ -67,7 +65,6 @@ function Review({show_id,setState,prev}) {
     }
 
     const postReview = async () => {
-        console.log(verified);
         const proposedReview = preview?.review;
         if(proposedReview){
             if(verified){
@@ -77,9 +74,7 @@ function Review({show_id,setState,prev}) {
                     user_id: userId,
                     review: proposedReview
                 }
-                console.log(body);
                 const response = await axios.post(endPoint, body).catch((err) => {
-                    console.log(err);
                     toast.error(`O'Oh, looks like there's some issue. Please try again later`);
                     //Something went wrong
                 });
@@ -131,7 +126,6 @@ function Review({show_id,setState,prev}) {
     }
 
     const handleVerificationSuccess = (token) => {
-        console.log(token);
         if(token){
             verified = true;
         }

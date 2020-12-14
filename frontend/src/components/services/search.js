@@ -6,11 +6,13 @@ import Filter from './filter'
 import { closeModal } from './modalGenerator';
 import requests from '../../utils/requests';
 import axios from '../../utils/axios';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Search = (props) => {
     const [filter,setFilter] = useState(false);
     const [search,setSearch] = props.searchHook;
     const [searchSet, setSearchSet] = useState([]);
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
     const searchTime=0.5;
     let searchTimeout;
@@ -39,8 +41,11 @@ const Search = (props) => {
             baseUrl += '?filter=true';
             body = Object.assign(body,data);
         }
+        setLoading(true);
+        setSearchSet([]);
         let request = await axios.post(baseUrl, body);
         setSearchSet(request.data);
+        setLoading(false);
     }
 
     const getData = (data)=>{
@@ -79,6 +84,11 @@ const Search = (props) => {
                 <Filter showFilter={setFilter} submit={getData} />
             </div>
             <div className={`${styles.suggestion_box}`}>
+                <ClipLoader
+                size={150}
+                color={"#641ba8"}
+                loading={loading}
+                />
                 {searchSet?.map((suggestion_card,index) => (
                     <div key={index} className={`${styles.suggestion_card}`}>
                         <img 
