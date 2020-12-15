@@ -38,9 +38,6 @@
     margin-top: 58px !important;
 }
 
-.preview_text{
-
-}
 
 .neumorphism {
     border: none;
@@ -194,5 +191,12 @@
     }
     100% {
       transform: scale(1);
+    }
+}
+
+@media(max-width:550px){
+    .captcha_wrapper{
+        flex-direction: column;
+        align-items: flex-end;
     }
 }
