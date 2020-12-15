@@ -152,15 +152,15 @@ if(process.env.NODE_ENV === "production"){
 app.use(anyError);
 app.use(errorHandler);
 let server;
-if(process.env.NODE_ENV === "production"){
-  const https = require("https");
-  const key = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.key');
-  const cert = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.crt');
-  server = https.createServer({key,cert},app);
-}else{
+// if(process.env.NODE_ENV === "production"){
+//   const https = require("https");
+//   const key = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.key');
+//   const cert = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.crt');
+//   server = https.createServer({key,cert},app);
+// }else{
   const http = require("http");
   server = http.createServer(app);
-}
+//}
 
 const wss = new WebSocket.Server({ server });
 onLoad(wss);
