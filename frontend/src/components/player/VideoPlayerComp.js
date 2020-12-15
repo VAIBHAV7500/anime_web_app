@@ -168,7 +168,7 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) =>
     document.querySelector("input").blur();
     player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
-      player.ima(imaOptions);
+      //player.ima(imaOptions);
       const videoElement = document.querySelector(".video-js");
       const commentElement = document.querySelector(`.${discussionStyles.body}`);
       videoElement.classList.add("shrink_video");

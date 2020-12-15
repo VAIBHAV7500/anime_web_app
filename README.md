@@ -84,3 +84,6 @@ Tables & Columns: Snake Case
 CSS: Snake Case
 
 API Paths: Snake Case
+
+## Spinners
+https://www.davidhu.io/react-spinners/

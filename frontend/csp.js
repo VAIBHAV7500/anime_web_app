@@ -11,11 +11,14 @@ module.exports = {
   "style-src": [
     "'self'",
     "'unsafe-inline'",
-    "https://fonts.googleapis.com"
+    "https://fonts.googleapis.com",
+    "https://hcaptcha.com",
+    "https://*.hcaptcha.com"
   ],
   "img-src": [
     "*", 
-    "data:"
+    "data:",
+    "'self'",
   ],
   "font-src": ["*", "'self'", "https://fonts.gstatic.com", "data:"],
   "worker-src": ["*", "'self'", "blob:"],
@@ -27,8 +30,16 @@ module.exports = {
     "'self'",
     "'unsafe-inline'",
     "'unsafe-eval'",
-    "blob:"
+    "blob:",
+    "https://hcaptcha.com", 
+    "https://*.hcaptcha.com"
   ],
-  "script-src-elem": ["'self'", "https://imasdk.googleapis.com/"]
-  }
+  "frame-src": [
+    "'self'",
+    "https://hcaptcha.com", 
+    "https://*.hcaptcha.com",
+  ],
+  "script-src-elem": ["'self'", "https://imasdk.googleapis.com/"],
+  "connect-src": ["'self'", "https://hcaptcha.com", "https://*.hcaptcha.com"]
+  },
 }
