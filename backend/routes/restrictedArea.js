@@ -36,6 +36,7 @@ const checkIp = async (ip,userId) => {
             status : 500,
         });
     });
+    return true;
 }
 
 module.exports = (app)=>{
