@@ -86,13 +86,7 @@
     letter-spacing: 1px;
 }
 
-@media(max-width:1500px){
-    .watchlist{
-        width: 100%;
-    }
-}
-
-@media(max-width:850px){
+@media(max-width:1060px){
     .card{
         width: 250px;
         height: 150px;
@@ -103,7 +97,7 @@
     }
 }
 
-@media(max-width:610px){
+@media(max-width:770px){
     .card{
         width: 166px;
         height: 100px;
@@ -122,10 +116,7 @@
     
 }
 
-@media(max-width:440px){
-    .watchlist{
-        width: 80%;
-    }
+@media(max-width:560px){
     .card{
        width: 100%;
        margin: 5px 0px;

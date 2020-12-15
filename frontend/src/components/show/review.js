@@ -181,7 +181,7 @@ function Review({show_id,setState,prev}) {
                             </div>               
                         </div>
                 }
-                {editor && <div>
+                {editor && <div className={styles.captcha_wrapper}>
                     <div className={styles.hcaptcha}>
                         <HCaptcha
                         sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}

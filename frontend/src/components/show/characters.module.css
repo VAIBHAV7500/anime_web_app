@@ -7,6 +7,23 @@
     min-height: 70vh;
     padding-top: 20px;
 }
+.character_guideline{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.character_guideline p{
+    color: white;
+    background-color: rebeccapurple;
+    width: fit-content;
+    height: fit-content;
+    padding: 15px 60px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+}
 
 .wrap_description {
     overflow: auto;
@@ -78,12 +95,12 @@
     background-color: radial-gradient(ellipse, #1e1e1f 10%, #090a0f 100%);
 }
 
-.character_card:hover .character_back{
-    transform: rotateY(360deg);
+.back_rotated{
+    transform: rotateY(360deg) !important;
 }
 
-.character_card:hover .character_front{
-    transform: rotateY(180deg);
+.front_rotated{
+    transform: rotateY(180deg) !important;
 }
 
 .character_back,

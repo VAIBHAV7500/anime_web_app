@@ -14,6 +14,11 @@
     align-self: center;
 }
 
+.captcha_wrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+
 .tiny_editor{
     width: 100%;
     height: 300px;

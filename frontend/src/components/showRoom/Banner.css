@@ -12,8 +12,7 @@
 .banner_contents {
     margin-left: 30px;
     padding-top: 35vh;
-    height: 190px;
-    
+    height: 190px; 
 }
 
 .banner_title {
@@ -27,7 +26,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
 }
 
 .react-multiple-carousel__arrow{
@@ -89,7 +87,8 @@
 
 @media(max-width:830px){
     .banner_title{
-        width: 50%;
+        width: fit-content;
+        max-width: 50%;
     }
 }
 

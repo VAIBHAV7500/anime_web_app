@@ -28,8 +28,8 @@
 
 .user_name{
     position: absolute;
-    top: 31vh;
-    left: 26vw;
+    bottom: -25%;
+    left : 240px;
 }
 
 .nav{
@@ -81,12 +81,17 @@
 
 @media(max-width:750px){
     .nav{
-        margin-top: 75px;
+        margin-top: 130px;
     }
     .user_img{
         left: 50%;
         transform: translateX(-50%);
         width: 150px;
         bottom: -25%;
+    }
+    .user_name{
+        bottom: -45%;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }

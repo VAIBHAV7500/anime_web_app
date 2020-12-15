@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 function Characters({show_id}) {
     const [characters, setCharacters] = useState([]);
+    const [rotateCard, setRotateCard] = useState([]);
     const {id} = useParams();
 
     const updateCharacters = async () => {
@@ -13,6 +14,9 @@ function Characters({show_id}) {
         const response = await axios.get(`${requests.characters}?show_id=${id}`);
         if (response.data) {
             setCharacters(response.data);
+            let dummyArr = new Array(response.data.length).fill(false);
+            setRotateCard(dummyArr);
+            console.log(dummyArr);
         } else {
             // Something went Wrong
         }
@@ -24,15 +28,26 @@ function Characters({show_id}) {
             setCharacters([]);
         }
     },[id]);
+
+
+    const rotateOnClick = (index)=>{
+        let dummyArr = new Array(rotateCard.length).fill(false);
+        dummyArr[index] = !rotateCard[index]
+        setRotateCard(dummyArr);
+    }
+    
     return (
         <div className={styles.characters}>
+            <div className={styles.character_guideline}>
+                <p>Characters will be shown as the story continues, or you can also reveal a card by clicking on it.</p>
+            </div>
             {
-                characters?.map((character)=>{
-                    return (
-                    <div className={`${styles.character_card} `}>
-                        <div className={`${styles.character_front} ${styles.neumorphism}`}>
+                characters?.map((character,i)=>{
+                    return (    
+                    <div onClick={()=>{rotateOnClick(i)}} className={`${styles.character_card} `}>
+                        <div className={`${styles.character_front} ${styles.neumorphism} ${rotateCard[i] ? styles.front_rotated : ""}`}>
                         </div>
-                        <div className={`${styles.character_back} ${styles.neumorphism} `}>
+                        <div className={`${styles.character_back} ${styles.neumorphism} ${rotateCard[i] ? styles.back_rotated : ""} `}>
                             <div className={styles.wrap_description}>
                                 <img src={character.image_url} className={styles.character_image}></img>
                                 <div className={styles.description}>

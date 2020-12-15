@@ -61,7 +61,7 @@ function Banner() {
       <Carousel 
       className="carousal"
       responsive={responsive}
-      autoPlay= {true}
+      autoPlay= {false}
       arrows = {true}
       showDots = {false}
       infinite = {true}
@@ -83,7 +83,6 @@ function Banner() {
             } >
               <div className="banner_contents">
                 <h1 className="banner_title">{movie?.title || movie?.name || movie?.original_name}</h1>
-                
               </div>
               <div className="banner_fadeBottom" />
             </div>
