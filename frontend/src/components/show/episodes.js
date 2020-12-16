@@ -126,6 +126,8 @@ function Episodes() {
         if(epNum){
             from = epNum;
             response = await fetchEps(from);
+            console.log('Range');
+            console.log(response);
             if(response?.result){
                 setEpisodes(response.result);
                 episodeArray = response.result;
@@ -143,6 +145,17 @@ function Episodes() {
             }
         }
         if(response.total_episodes === parseInt(from) + episodeArray.length -1){
+            setMore(false);
+        }
+        if(response?.result && response.result.length){
+            let last = 1;
+            if(!latest){
+                last = response.total_episodes;
+            }
+            if(response.result[response.result.length - 1].episode === last){
+                setMore(false);
+            }
+        }else{
             setMore(false);
         }
     }
