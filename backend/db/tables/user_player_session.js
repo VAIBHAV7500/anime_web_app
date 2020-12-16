@@ -47,8 +47,7 @@ const findByUserId = async (userId) => {
     const sql = `SELECT DISTINCT shows.id as id,
     shows.name as name,
     shows.description as description,
-    ups.updated_at as updated_at,
-    shows.poster_landscape_url as poster FROM user_player_sessions as ups inner join shows ON shows.id = ups.show_id WHERE user_id = ? ORDER BY ups.updated_at desc`;
+    shows.poster_landscape_url as poster FROM user_player_sessions as ups inner join shows ON shows.id = ups.show_id WHERE user_id = ?`;
     return runQuery(sql,[userId]);
 }
 
