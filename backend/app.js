@@ -140,7 +140,7 @@ if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));
   app.get('*', function (req, res) {
     //Facing issues on reloading...
-    res.redirect('/');
+    res.redirect(`/?redirect=${req.originalUrl}`);
     // console.log('Going to that path');
     // console.log(__dirname);
     // res.sendFile(path.resolve(__dirname, 'build', 'index.html'));

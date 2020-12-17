@@ -7,6 +7,7 @@ import Footer from './footer';
 import PageLoader from '../services/page_loader';
 import styles from './showRoom.module.css';
 import axios from '../../utils/axios';
+import {useHistory} from "react-router-dom";
 
 export class showRoom extends Component {
     constructor(props) {
@@ -78,7 +79,16 @@ export class showRoom extends Component {
       this.setState(prev=>({...prev,showIndex : newIndexData}))
     }
 
+    checkRedirect = () => {
+      const query = new URLSearchParams(this.props.location.search);
+      const redirectURL = query.get('redirect');
+      if(redirectURL){
+        this.props.history.push(redirectURL);
+      }
+    }
+
     componentDidMount = () => {
+      this.checkRedirect();
       this.loadData();
     }
 

@@ -96,6 +96,7 @@ const Search = (props) => {
                             src={suggestion_card.poster_portrait_url}
                             onClick={(e)=>{goToShow(e,suggestion_card.id)}}
                             className={`${styles.suggestion_card_image}`} 
+                            draggable = {false}
                         />
                         <span className={`${styles.suggestion_card_name}`}>{suggestion_card.name}</span>
                     </div>

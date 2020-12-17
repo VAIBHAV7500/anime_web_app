@@ -120,7 +120,7 @@ class show extends Component {
                 <Banner movie = {this.state?.show}/>
                 <Info movie = {this.state?.show} className={styles.info}/>
                 <br className={styles.break}/>
-                <div className={styles.sub_nav}>
+                <div className={`${styles.sub_nav} ${styles.noselect}`}>
                     {
                         this.navItems.map((x, index) =>{
                             return <div  key ={index} className= {`${styles.sub_item} ${styles.neumorphism} ${this.state?.nav_id === index ? styles.sub_item_active:""}`} onClick={()=>{this.selectNav(index)}}> {x.title} </div>
