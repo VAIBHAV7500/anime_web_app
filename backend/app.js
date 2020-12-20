@@ -21,7 +21,6 @@ const keys = require('./config/keys.json');
 const dbConfig = require('./config/dbConfig.json');
 const responseTime = require('response-time');
 const redis = require('redis');
-const {logger} = require('./lib/logger');
 
 var app = express();
 app.oauth = oAuth2Server({
