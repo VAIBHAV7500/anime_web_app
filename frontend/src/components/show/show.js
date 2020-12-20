@@ -15,6 +15,16 @@ import { connect } from 'react-redux';
 
 class show extends Component {
 
+  toastConfig = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  }
+
   setDataCache = (index,data) => {
     if(this.state){
       switch(index){
@@ -39,19 +49,19 @@ class show extends Component {
 
   navItems = [{
       title: 'Episodes',
-      component: <Episodes show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.episodes}/>
+      component: <Episodes show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.episodes} toastConfig = {this.toastConfig}/>
     },
     {
       title: 'Characters',
-      component: <Characters show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.characters}/>
+      component: <Characters show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.characters} toastConfig = {this.toastConfig}/>
     },
     {
       title: 'Reviews',
-      component: <Review show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.reviews}/> 
+      component: <Review show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.reviews} toastConfig = {this.toastConfig}/> 
     },
     {
       title: 'Similar Shows & Movies',
-      component: <Similar show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.similar}/>
+      component: <Similar show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.similar} toastConfig = {this.toastConfig}/>
     }
   ] ;
 

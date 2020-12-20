@@ -58,3 +58,7 @@ const sendMail = async (body) => {
     // Handle promise's fulfilled/rejected states
     return sendPromise;
 }
+
+module.exports = {
+    sendMail
+}

@@ -37,7 +37,7 @@ export class player extends Component {
                         loading: false
                     });
                     if(result?.data?.name){
-                        document.title = result.data.name;
+                        document.title = result.data.name + '- Animei TV';
                     }
                 }
             } catch (error) {

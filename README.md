@@ -8,6 +8,8 @@
 
 * Self Signed SSL - [here](https://zeropointdevelopment.com/how-to-get-https-working-in-windows-10-localhost-dev-environment/)
 
+* Redis - [here](https://linuxize.com/post/how-to-install-and-configure-redis-on-ubuntu-18-04/)
+
 ## Backend:
 * Install packages required.
 

@@ -36,6 +36,9 @@
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "pretty-error": "^2.1.2",
+    "razorpay": "^2.0.6",
+    "redis": "^3.0.2",
+    "response-time": "^2.3.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0",
     "ws": "^7.4.1"

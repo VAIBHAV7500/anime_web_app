@@ -33,7 +33,7 @@ function Info({movie}) {
 
     useEffect(() => {
         if(movie?.name){
-            document.title = movie.name;
+            document.title = movie.name + ' - Animei TV';
         }
         setWatchStatus(movie?.watchlist ? 'remove from list' : 'Add to List');
         if(movie?.recent){

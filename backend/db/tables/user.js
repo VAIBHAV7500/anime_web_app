@@ -7,9 +7,10 @@ const createTable = (con) => {
             password VARCHAR(255),
             email VARCHAR(255) UNIQUE NOT NULL,
             user_name VARCHAR(255) UNIQUE,
+            name VARCHAR(255),
             status INT,
             mobile VARCHAR(15) UNIQUE,
-            plan_id INT,
+            plan_id INT DEFAULT 0,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             CHECK(email != '')
@@ -39,7 +40,12 @@ const find_by_email = async (email) => {
 
 const create = async (body) => {
     const sql = `INSERT INTO users(${Object.keys(body).join()}) VALUES (?)`;
-    return await runQuery(sql,[Object.values(body)]);
+    return runQuery(sql,[Object.values(body)]);
+}
+
+const getPlan = async (id) => {
+    const sql = `SELECT plan_id FROM users where id = ?`;
+    return runQuery(sql,[id]);
 }
 
 
@@ -48,21 +54,5 @@ module.exports = {
     find,
     create,
     find_by_email,
+    getPlan,
 }
-
-
-/*db = require('../index');
-global.connection = db.getConnection();
-body = {
-    "password": "123",
-    "email": "dummy@dmail.com",
-    "status": 1,
-    "mobile": "123456",
-    "plan_id": 12,
-}
-user = require('./user');
-user.create(body)
-*/
-
-
-

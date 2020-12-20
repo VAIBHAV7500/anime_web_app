@@ -11,6 +11,7 @@ import showRoom from './components/showRoom/showRoom';
 import show from './components/show/show';
 import SignIn from './components/welcome/SignIn/SignIn'
 import SignUp from './components/welcome/SignUp/SignUp'
+import Pricing from './components/pricing';
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
@@ -77,6 +78,7 @@ const App = ()=>{
           <Route path="/show/:id" component={show}></Route>
           <Route path="/player/:id" component={player}></Route>
           <Route path="/user" component={Profile}></Route>
+          <Route path="/pricing" component={Pricing}></Route>
           <Redirect to='/'></Redirect>
         </Switch>
       </Router>

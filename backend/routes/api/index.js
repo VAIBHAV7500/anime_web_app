@@ -10,6 +10,7 @@ const characterRouter = require('./characters');
 const reviewRouter = require('./review');
 const listRouter = require('./list');
 const notificationRouter = require('./notification');
+const orderRouter = require('./order');
 const tempRouter = require('./temp');
 
 router.use('/video', videoRouter);
@@ -21,6 +22,7 @@ router.use('/character', characterRouter);
 router.use('/review', reviewRouter);
 router.use('/list', listRouter);
 router.use('/notification',notificationRouter);
+router.use('/order',orderRouter);
 router.use('/temp',tempRouter);
 
 module.exports = router;

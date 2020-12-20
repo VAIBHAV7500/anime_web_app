@@ -10,25 +10,17 @@ import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import 'react-toastify/dist/ReactToastify.css';
+import PulseLoader from "react-spinners/PulseLoader";
 
-function Review({show_id,setState,prev}) {
+function Review({show_id,setState,prev, toastConfig}) {
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
     const [editor, setEditor] = useState(false);
+    const [loading, setLoading] = useState(true);
     let verified = false;
     const [textEditor, setTextEditor] = useState();
     const userId = useSelector(state => state.user_id);
     const {id} = useParams();
-
-    const toastConfig = {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    }
     
     const init = async () => {
         const endPoint = `${requests.reviews}/shows?id=${id}&user_id=${userId}`;
@@ -42,6 +34,7 @@ function Review({show_id,setState,prev}) {
             };
             response.data[i] = e;
         })
+        setLoading(false);
         setReviews(response.data);
         setState(2,response.data);
     }
@@ -133,6 +126,7 @@ function Review({show_id,setState,prev}) {
 
     return (
         <div className={styles.reviews}>
+            {loading && <div className = {styles.loader}><PulseLoader color="#ffff"/></div>}
             <ToastContainer
             position="top-right"
             autoClose={5000}

@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux';
 import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from 'react-toastify';
 
 let episodeArray = [];
 
@@ -85,7 +86,9 @@ function Episodes() {
     const finalfetchSource = async (endPoint) => {
         if(userId && !loading){
             loading = true;
-            const result = await axios.get(endPoint);
+            const result = await axios.get(endPoint).catch((err)=>{
+                toast.error(`O'Oh, looks like there's some issue. Please try again later`);
+            });
             console.log(result);
             loading = false;
             return result;
@@ -174,6 +177,17 @@ function Episodes() {
 
     return (
         <div className={styles.episodes}>
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
            <div className={styles.wrap}>
                 {/* <div className={styles.toggle_switch}>
                     <label className={styles.switch}>

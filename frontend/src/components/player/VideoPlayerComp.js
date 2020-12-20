@@ -66,8 +66,8 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) =>
     },
     plugins: {
       hotkeys: {},
-      eventTracking: true
-    }
+      eventTracking: true,
+    },
   }
 
   var imaOptions = {
@@ -175,6 +175,7 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) =>
     player = videojs(playerRef.current,playerOptions, () => {
       player.src(videoSrc);
       //player.ima(imaOptions);
+      //player.skippy();
       if(!mobileCheck()){
         const videoElement = document.querySelector(".video-js");
         const commentElement = document.querySelector(`.${discussionStyles.body}`);
@@ -198,6 +199,8 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) =>
       player.errors();
 
     });
+
+    //player.mobileUi();
 
     let checkTime;
 

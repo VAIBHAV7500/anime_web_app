@@ -2,24 +2,29 @@ import React, { useState, useEffect } from 'react'
 import styles from './characters.module.css';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Characters({show_id}) {
+function Characters({show_id, toastConfig}) {
     const [characters, setCharacters] = useState([]);
     const [rotateCard, setRotateCard] = useState([]);
+    const [loading, setLoading] = useState(true);
     const {id} = useParams();
 
     const updateCharacters = async () => {
         setCharacters([]);
-        const response = await axios.get(`${requests.characters}?show_id=${id}`);
-        if (response.data) {
+        const response = await axios.get(`${requests.characters}?show_id=${id}`).catch((err)=>{
+            toast.error(`O'Oh, looks like there's some issue. Please try again later`);
+        });
+        if (response?.data) {
             setCharacters(response.data);
             let dummyArr = new Array(response.data.length).fill(false);
             setRotateCard(dummyArr);
             console.log(dummyArr);
-        } else {
-            // Something went Wrong
         }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -38,6 +43,18 @@ function Characters({show_id}) {
     
     return (
         <div className={styles.characters}>
+            {loading && <div className = {styles.loader}><PulseLoader color="#ffff"/></div>}
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
             <div className={styles.character_guideline}>
                 <p>Characters will be shown as the story continues, or you can also reveal a card by clicking on it.</p>
             </div>

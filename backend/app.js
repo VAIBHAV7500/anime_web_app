@@ -19,6 +19,9 @@ const passport = require('passport');
 const connectEnsureLogin = require('connect-ensure-login');
 const keys = require('./config/keys.json');
 const dbConfig = require('./config/dbConfig.json');
+const responseTime = require('response-time');
+const redis = require('redis');
+const {logger} = require('./lib/logger');
 
 var app = express();
 app.oauth = oAuth2Server({
@@ -47,6 +50,15 @@ if(process.env.NODE_ENV === "production"){
     maxAge: 15552000  // 180 days in seconds
   }))
 }
+
+global.redis = redis.createClient();
+
+global.redis.on('error', (err) => {
+  logger.error(err);
+});
+
+// use response-time as a middleware
+app.use(responseTime());
 
 
 global.connection = db.getConnection();

@@ -7,6 +7,10 @@
     flex-direction: column;
 }
 
+.loader{
+    align-items: center;
+}
+
 .editor{
     width: 90%;
     height: 100%;

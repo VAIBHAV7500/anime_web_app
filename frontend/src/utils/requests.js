@@ -31,6 +31,8 @@ const requests = {
     notification: '/api/notification/unread',
     notificationRead: '/api/notification/mark-read',
     userDetails: '/api/user/details',
+    order: '/api/order',
+    captureOrder: '/api/order/capture'
 }
 
 export default requests;

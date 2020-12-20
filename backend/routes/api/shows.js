@@ -40,57 +40,71 @@ router.get('/details',async (req,res,next)=>{
         });
         return;
     }
-    let data = await db.shows.find(id, true);
-    if(!data){
-        res.status(404).json({
-            error: "Show Id not found",
-        });
-        return;
-    }
-    const promiseArray = [];
-    promiseArray.push(new Promise((res,rej)=>{
-        db.genre.bulkFindCategory(id).then((result)=>{
-            res(result);
-        }).catch((err)=>{
-            rej(err);
-        });
-    }));
+    let key = `show_${id}`;
+    global.redis.get(key, async (err, redisResult) => {
+        let data;
+        if(err){
+            res.status(501).json({
+                message: "Something went wrong"
+            })
+        }
+        else if(redisResult){
+            data = JSON.parse(redisResult);
+        }else{
+            data = await db.shows.find(id, true);
+            global.redis.setex(key, 3600, JSON.stringify(data));
+        }
+        if(!data){
+            res.status(404).json({
+                error: "Show Id not found",
+            });
+            return;
+        }
+        const promiseArray = [];
+        promiseArray.push(new Promise((res,rej)=>{
+            db.genre.bulkFindCategory(id).then((result)=>{
+                res(result);
+            }).catch((err)=>{
+                rej(err);
+            });
+        }));
 
-    promiseArray.push(new Promise((res, rej) => {
-        db.shows.getShowsByGroupId(data.group_id).then((result) => {
-            res(result);
-        }).catch((err) => {
-            rej(err);
-        });
-    }));
+        promiseArray.push(new Promise((res, rej) => {
+            db.shows.getShowsByGroupId(data.group_id).then((result) => {
+                res(result);
+            }).catch((err) => {
+                rej(err);
+            });
+        }));
 
-    promiseArray.push(new Promise((res,rej)=>{
-        db.watchlist.exists(id,userId).then((result)=>{
-            res(result);
-        }).catch((err)=>{
-            rej(err);
-        }); 
-    }));
+        promiseArray.push(new Promise((res,rej)=>{
+            db.watchlist.exists(id,userId).then((result)=>{
+                res(result);
+            }).catch((err)=>{
+                rej(err);
+            }); 
+        }));
 
-    promiseArray.push(new Promise((res,rej)=>{
-        db.videos.fetchRecent(id, userId).then((result)=>{
-            if(result.length){
-                res(result[0]);
-            }else{
-                res(null);
-            }
-        }).catch((err)=>{
-            rej(err);
-        })
-    }));
-    const result = await Promise.all(promiseArray).catch((err)=>{
-        res.status(501).json({
-            error: err.message,
-            stack: err.stack
+        promiseArray.push(new Promise((res,rej)=>{
+            db.videos.fetchRecent(id, userId).then((result)=>{
+                if(result.length){
+                    res(result[0]);
+                }else{
+                    res(null);
+                }
+            }).catch((err)=>{
+                rej(err);
+            })
+        }));
+        const result = await Promise.all(promiseArray).catch((err)=>{
+            res.status(501).json({
+                error: err.message,
+                stack: err.stack
+            });
         });
+        [data.genres,data.groups, data.watchlist, data.recent] = result;
+        res.json(data);
     });
-    [data.genres,data.groups, data.watchlist, data.recent] = result;
-    res.json(data);
 });
 
 router.get('/create-group', async (req,res,next)=>{

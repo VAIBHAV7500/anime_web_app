@@ -9,7 +9,7 @@ const runQuery = (sql,params= []) =>{
     return new Promise((res,rej)=>{
         if(global.connection.state === 'disconnected'){
             try{
-                global.connection = getConnection();
+                //global.connection = getConnection();
             }catch(e){
                 logger.error(e.message);
             }
