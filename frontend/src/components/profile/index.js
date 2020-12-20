@@ -17,15 +17,15 @@ function Profile() {
     const nav_items = [
       { 
         title : "currently Watching" ,
-        component : <Watchlist userId={id} endPoint={request.fetchCurrentlyWatching}/>
+        component : <Watchlist userId={id} endPoint={request.fetchCurrentlyWatching} message="Why are you here? Go and Start Watching!"/>,
       },
       { 
         title : "Watchlist",
-        component: <Watchlist userId={id} endPoint={request.fetchWatchlist}/>
+        component: <Watchlist userId={id} endPoint={request.fetchWatchlist} message="Add Series & Movies you would like to watch later and access it from here"/>,
       },
       { 
         title : "Completed",
-        component: <Watchlist userId={id} endPoint={request.fetchCompletedShows}/>
+        component: <Watchlist userId={id} endPoint={request.fetchCompletedShows} message="You haven't completed any series yet. Do you know? It's a bad thing to leave a series uncompleted!"/>
       },
       { 
         title : "Settings",

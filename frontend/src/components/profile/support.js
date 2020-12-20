@@ -1,5 +1,8 @@
 import React from 'react'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const style = {
     width: "100%",

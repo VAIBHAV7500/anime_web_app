@@ -8,6 +8,8 @@ const useDB = (con) =>{
     con.query(`USE ${dbConfig.db_name}`);
 }
 
+
+
 const getConnection = () =>{
     const con = mysql.createConnection({
         host: dbConfig.db_url,
@@ -15,6 +17,20 @@ const getConnection = () =>{
         password: dbConfig.password
     });
     useDB(con);
+
+    con.on('error', function(err) {
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+            global.connection = mysql.createConnection({
+                host: dbConfig.db_url,
+                user: dbConfig.user,
+                password: dbConfig.password
+            });                       // lost due to either server restart, or a
+        } else {                                      // connnection idle timeout (the wait_timeout
+          throw err;                                  // server variable configures this)
+        }
+      });
+
     return con;
 }
 

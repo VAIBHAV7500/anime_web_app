@@ -87,11 +87,19 @@ router.get('/episodes', async(req,res,next)=>{
         const to = from + (latest ? -1 : 1) * offset;
         const promiseArray = [];
         promiseArray.push(new Promise((res,rej)=>{
-            db.videos.getShows(req.query.show_id, from, to, latest).then((result)=>{
-                res(result);
-            }).catch((err)=>{
-                rej(err);
-            })
+            const key = `episode_${showId}_${from}_${to}_${latest}`;
+            global.redis.get(key, async (err, redisResult) => {
+                if(redisResult){
+                    res(JSON.parse(redisResult));
+                }else{
+                    db.videos.getShows(req.query.show_id, from, to, latest).then((result)=>{
+                        global.redis.setex(key, 3600, JSON.stringify(result));
+                        res(result);
+                    }).catch((err)=>{
+                        rej(err);
+                    });
+                }
+            });
         }));
         promiseArray.push(new Promise((res,rej)=>{
             db.user_player_session.findByShowId(showId, userId).then((result)=>{
@@ -272,7 +280,14 @@ router.post('/sessions', async (req,res,next)=>{
                 message: err.message,
                 stack: err.stack
             })
-        })
+        });
+
+        // if(body.covered >= 80){
+        //     db.completed_shows.create({
+        //         user_id: body.user_id,
+        //         show_id: body.show_id
+        //     });
+        // }
         res.json({
             message: "OK"
         })

@@ -39,6 +39,12 @@
     width: 100%;
 }
 
+.loader{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .review:hover{
     background-color: rgb(69, 69, 70);
     

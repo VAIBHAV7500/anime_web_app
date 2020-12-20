@@ -86,6 +86,28 @@
     letter-spacing: 1px;
 }
 
+.loader{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.message{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    color: white;
+    background-color: rebeccapurple;
+    width: fit-content;
+    height: fit-content;
+    padding: 15px 60px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
 @media(max-width:1060px){
     .card{
         width: 250px;

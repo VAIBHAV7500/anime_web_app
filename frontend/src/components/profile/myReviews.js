@@ -4,18 +4,25 @@ import styles from './myReviews.module.css';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import requests from '../../utils/requests';
 import { useHistory } from 'react-router-dom';
+import PulseLoader from "react-spinners/PulseLoader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function MyReviews({userId,endPoint}) {
     const [reviews, setReviews] = useState([]);
+    const [loading, setLoading] = useState(true);
     const history = useHistory();
     const fetchData = async () => {
-        const result = await axios.get(`${endPoint}?id=${userId}`);
+        const result = await axios.get(`${endPoint}?id=${userId}`).catch((err)=>{
+
+        });
         if(result.data){
             setReviews(result.data);
         }else{
             //error
         }
+        setLoading(false);
     }
 
     const toggleShowMore = (index) =>{
@@ -45,6 +52,7 @@ function MyReviews({userId,endPoint}) {
     }, [userId])
     return (
         <div className={styles.reviews}>
+            {loading && <div className = {styles.loader}><PulseLoader color="#ffff"/></div>}
             {
                     reviews?.map((review, index)=> {
                         return <div className={`${styles.review} ${styles.make_flex}`} key={index} onClick={()=>{goToShow(review.show_id)}}>
