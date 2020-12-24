@@ -18,8 +18,7 @@ function Pricing() {
         try {
          const paymentId = response.razorpay_payment_id;
          const url = `${requests.captureOrder}/${paymentId}`;
-         const captureResponse = await axios.post(url, {})
-         console.log(captureResponse.data);
+         const captureResponse = await axios.post(url, {});
         } catch (err) {
           console.log(err);
         }

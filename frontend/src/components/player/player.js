@@ -69,10 +69,8 @@ export class player extends Component {
           
             this.ws.onmessage = evt => {
                 // on receiving a message, add it to the list of messages
-                console.log(evt);
                 const data = JSON.parse(evt.data)
                 if(data.type === "discussion"){
-                    console.log('In Discussion');
                     this.state.messages = data.messages;
                     this.setState(this.state);
                 }
@@ -162,8 +160,6 @@ export class player extends Component {
             id: videoId,
             time
         };
-        console.log(body);
-        //console.log(this.playerRef.current.getCurrentTime());
         if(this.ws){
             this.ws.send(JSON.stringify(body));
         }

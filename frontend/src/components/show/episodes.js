@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 let episodeArray = [];
 
-function Episodes() {
+const Episodes = React.memo(() => {
     const {id} = useParams();
     const userId = useSelector(state => state.user_id);
     let prevUserId = null;
@@ -89,7 +89,6 @@ function Episodes() {
             const result = await axios.get(endPoint).catch((err)=>{
                 toast.error(`O'Oh, looks like there's some issue. Please try again later`);
             });
-            console.log(result);
             loading = false;
             return result;
         }
@@ -128,8 +127,6 @@ function Episodes() {
         if(epNum){
             from = epNum;
             response = await fetchEps(from);
-            console.log('Range');
-            console.log(response);
             if(response?.result){
                 setEpisodes(response.result);
                 episodeArray = response.result;
@@ -236,6 +233,6 @@ function Episodes() {
             </div>
         </div>
     )
-}
+});
 
 export default Episodes;

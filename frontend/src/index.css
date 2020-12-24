@@ -9,6 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   
   background: radial-gradient(ellipse at bottom, #3e3d3f 0%, #090a0f 100%);
+  -webkit-tap-highlight-color: transparent;
 }
 
 code {

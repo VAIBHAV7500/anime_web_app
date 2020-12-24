@@ -54,7 +54,6 @@ function Profile() {
         const result = await axios.get(endPoint).catch((err)=>{
           console.log(err);
         });
-        console.log(result);
         if(result && result.data){
            if(result.data.email){
               setUser(result.data);

@@ -7,7 +7,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Characters({show_id, toastConfig}) {
+const Characters = React.memo(({show_id, toastConfig}) => {
     const [characters, setCharacters] = useState([]);
     const [rotateCard, setRotateCard] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -79,6 +79,6 @@ function Characters({show_id, toastConfig}) {
             }
         </div>
     )
-}
+});
 
 export default Characters;

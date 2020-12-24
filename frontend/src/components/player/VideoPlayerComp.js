@@ -280,7 +280,6 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) =>
       }
       checkSessionDetails();
       removeAllButton();
-      console.log('Disposing Player...');
       player.dispose();
     };
   },[id]);

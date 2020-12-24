@@ -23,7 +23,6 @@ const updateSession = async (body) => {
 }
 
 const getDiscussion = async (body) => {
-  console.log(body);
   const from = body.time + 1;
   let to = from + 60;
   if(body.time == 0){

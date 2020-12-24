@@ -3,7 +3,7 @@ import styles from './review.module.css';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import { Editor } from '@tinymce/tinymce-react';
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart, AiFillStar } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { review_word_limit } from '../../constants';
 import { useParams } from 'react-router-dom';
@@ -11,12 +11,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import 'react-toastify/dist/ReactToastify.css';
 import PulseLoader from "react-spinners/PulseLoader";
+import ReviewStars from './reviewStars';
 
-function Review({show_id,setState,prev, toastConfig}) {
+const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
     const [editor, setEditor] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [rating, setRating] = useState(-1);
     let verified = false;
     const [textEditor, setTextEditor] = useState();
     const userId = useSelector(state => state.user_id);
@@ -57,6 +59,10 @@ function Review({show_id,setState,prev, toastConfig}) {
         setPreview(review);
     }
 
+    const setNewRating = (rating) => {
+        setRating(rating);
+    }
+
     const postReview = async () => {
         const proposedReview = preview?.review;
         if(proposedReview){
@@ -66,6 +72,9 @@ function Review({show_id,setState,prev, toastConfig}) {
                     show_id,
                     user_id: userId,
                     review: proposedReview
+                }
+                if(rating !== -1){
+                    body.rating = rating;
                 }
                 const response = await axios.post(endPoint, body).catch((err) => {
                     toast.error(`O'Oh, looks like there's some issue. Please try again later`);
@@ -175,6 +184,9 @@ function Review({show_id,setState,prev, toastConfig}) {
                             </div>               
                         </div>
                 }
+                {editor && <div className={styles.rating}>
+                    <ReviewStars setRating={setNewRating} /> 
+                </div>}
                 {editor && <div className={styles.captcha_wrapper}>
                     <div className={styles.hcaptcha}>
                         <HCaptcha
@@ -200,6 +212,9 @@ function Review({show_id,setState,prev, toastConfig}) {
                             </div>
                             <div className={styles.review_detail}>
                                 <div className={styles.reviewer}>{review.email} </div>
+                                {review?.rating !== undefined && <div className={styles.stars}>{[1,1,1,1,1].map((x, i) => {
+                                    return <AiFillStar className={i <= review.rating ? styles.star : styles.dull_star} />
+                                })}</div>}
                                 <div className={styles.review_text} dangerouslySetInnerHTML={createMarkup(review)}/>
                                 {review.review.length<=wordLimit? "" : review?.showMore? <p className={styles.showMore} onClick={()=>{toggleShowMore(index)}}>Show Less</p> : <p className={styles.showMore} onClick={()=>{toggleShowMore(index)}}>Show More</p>}
                                 <div className={styles.make_flex}>
@@ -213,6 +228,6 @@ function Review({show_id,setState,prev, toastConfig}) {
             </div>
         </div>
     )
-}
+});
 
 export default Review

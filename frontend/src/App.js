@@ -12,12 +12,14 @@ import show from './components/show/show';
 import SignIn from './components/welcome/SignIn/SignIn'
 import SignUp from './components/welcome/SignUp/SignUp'
 import Pricing from './components/pricing';
+import Terms from './components/footer/Terms';
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { LoginFailure, LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
 import Profile from './components/profile';
+import toc from './components/footer/terms_and_conditions';
 require('dotenv').config();
 
 const handleAccessToken = async (token)=>{
@@ -79,6 +81,7 @@ const App = ()=>{
           <Route path="/player/:id" component={player}></Route>
           <Route path="/user" component={Profile}></Route>
           <Route path="/pricing" component={Pricing}></Route>
+          <Route path="/terms-and-conditions" component={Terms}></Route>
           <Redirect to='/'></Redirect>
         </Switch>
       </Router>
@@ -87,6 +90,7 @@ const App = ()=>{
         <Switch>
           <Route exact path="/signin" component={SignIn}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
+          <Route path="/terms-and-conditions" component={Terms}></Route>
           <Redirect to='/signin'></Redirect>
         </Switch>
       </Router>

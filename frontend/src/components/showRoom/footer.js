@@ -1,13 +1,20 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './footer.css';
-import mainLogo from '../services/logo_transparent.png'
+import mainLogo from '../services/logo_transparent.png';
+import { useHistory } from 'react-router-dom';
 
-function footer() {
+function Footer() {
+    const history = useHistory();
+
+    const goToPath = (path) => {
+        history.push(path);
+    }
+
     return (
         <div className="footer">
             <div className="footer_table">
                 <div>
-                    <p>Terms and Condition</p>
+                    <p onClick={() => { goToPath("/terms-and-conditions")}}>Terms and Condition</p>
                     <p>Support</p>
                     <p>Audio and Subtitles</p>
                 </div>
@@ -24,4 +31,4 @@ function footer() {
     )
 }
 
-export default footer
+export default Footer

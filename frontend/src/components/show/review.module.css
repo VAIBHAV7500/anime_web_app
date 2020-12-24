@@ -25,6 +25,24 @@
     justify-content: flex-end;
 }
 
+.rating{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.stars{
+    padding-top: 10px;
+}
+
+.star{
+    color: #f0b922;
+}
+
+.dull_star{
+    color: rgb(102, 102, 102)
+}
+
 .tiny_editor{
     width: 100%;
     height: 300px;

@@ -12,7 +12,7 @@ import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
 
-function Nav() {
+function Nav({type}) {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
     const [notifications, setNotifications] = useState([{body: "No New Notification",dummy:true}]);
@@ -103,7 +103,7 @@ function Nav() {
 
     return (
         <div className={styles.nav_wrapper}>
-            <div className={`${styles.nav} ${!search && show && styles.nav_black}`}>
+            <div id="nav" className={`${styles.nav} ${!search && show && styles.nav_black} ${type === "dark" ? styles.nav_black:""}`}>
                 <span>
                     <img draggable="false" className={`${styles.nav_logo} ${!search && show  && styles.logo_white}`} onClick={goToHome} src={mainLogo} />
                 </span>
