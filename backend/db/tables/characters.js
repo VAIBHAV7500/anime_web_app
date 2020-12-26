@@ -29,8 +29,8 @@ const find = async (id) => {
 }
 
 const getCharactersByShows = async (show_id) => {
-    const sql = `SELECT characters.* FROM characters JOIN character_show_mapping AS csm ON csm.character_id = characters.id WHERE csm.show_id = ${show_id}`;
-    return runQuery(sql);
+    const sql = `SELECT characters.*,csm.revealed_in FROM characters JOIN character_show_mapping AS csm ON csm.character_id = characters.id WHERE csm.show_id = ?`;
+    return runQuery(sql,[show_id]);
 }
 
 const create = async (body) => {

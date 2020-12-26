@@ -35,7 +35,8 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
                 showMore:false,
             };
             response.data[i] = e;
-        })
+        });
+        console.log(response.data);
         setLoading(false);
         setReviews(response.data);
         setState(2,response.data);
@@ -212,7 +213,7 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
                             </div>
                             <div className={styles.review_detail}>
                                 <div className={styles.reviewer}>{review.email} </div>
-                                {review?.rating !== undefined && <div className={styles.stars}>{[1,1,1,1,1].map((x, i) => {
+                                {review?.rating !== null && <div className={styles.stars}>{[1,1,1,1,1].map((x, i) => {
                                     return <AiFillStar className={i <= review.rating ? styles.star : styles.dull_star} />
                                 })}</div>}
                                 <div className={styles.review_text} dangerouslySetInnerHTML={createMarkup(review)}/>

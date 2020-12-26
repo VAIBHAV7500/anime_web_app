@@ -40,7 +40,7 @@ function Info({movie}) {
             setLatest(movie.recent);
         }
         return () => {
-            document.title = 'Animei TV - An Streaming Platform';
+            document.title = 'Animei TV - An Anime Streaming Platform';
         }
     }, [movie])
 
@@ -111,7 +111,7 @@ function Info({movie}) {
                 </select> 
                 <div className={`${styles.btn_wrapper}`}>
                     <div className={`${styles.play_btn} `} onClick={()=>{goToPlayer(latest?.id)}}>
-                        {latest?.episode_number && (latest.episode_number === 1 ? 'Start Watching' : 'Continue Watching Ep ' + latest.episode_number)}
+                        {latest?.episode_number && (latest.episode_number === 1 && latest.user_id === null ? 'Start Watching' : 'Continue Watching Ep ' + latest.episode_number)}
                     </div>
                     <div className={`${styles.watch_list_btn} ${watchStatus.toLowerCase() === 'remove from list' ? styles.remove: ""}`} onClick={handleWatchList}>
                         {watchStatus}

@@ -1,6 +1,5 @@
 const {getLogger} = require('../lib/logger');
 const logger = getLogger('sql');
-const {getConnection} = require('./index');
 
 const runQuery = (sql,params= []) =>{
     if(process.env.ENV === 'dev'){

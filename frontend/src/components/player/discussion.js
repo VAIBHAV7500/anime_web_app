@@ -34,18 +34,18 @@ function Discussion({discussion,sendMessage}) {
         if(messages){
             messages.forEach((x)=>{
                 const time = moment.utc(parseFloat(x.time)*1000).format('HH:mm:ss');
-                console.log(x.time);
+                console.log(x);
                 console.log(time);
                 if(x.id === userId){
-                    addSenderMessage(x.message);
+                    addSenderMessage(x);
                 }else{
-                    addRecieverMessage(x.message);
+                    addRecieverMessage(x);
                 }
             });
         }
     },[discussion]);
 
-    const addSenderMessage = (message) => {
+    const addSenderMessage = ({message}) => {
         document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.sender_bubble}">${message} </div>`; 
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight); 
@@ -116,7 +116,7 @@ function Discussion({discussion,sendMessage}) {
             <div className={`${styles.footer}  ${emoPicker || mobileCheck() ? styles.footer_translate : "" }`}>
                 <div className={styles.footer_wrapper}>
                 {!mobileCheck() && <FaGrinAlt onClick={openPicker} className={styles.emo_selector_icon}/>}
-                <input onKeyPress={handleSend}  id="send_message" placeholder="Enter your Message"/>
+                <input onKeyPress={handleSend}  id="send_message" placeholder="Enter your Comment"/>
                 <FaPaperPlane onClick={send} className={styles.send_icon}/>
                 </div>
                 {!mobileCheck() && <Picker onEmojiClick={onEmojiClick} />}

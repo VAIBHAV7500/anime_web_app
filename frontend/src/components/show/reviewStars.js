@@ -10,6 +10,12 @@ const ReviewStars = React.memo(({setRating}) => {
     if(motion){
       return;
     }
+    if(currRating === rating){
+      const element = document.getElementById(`star_${rating}`);
+      element.classList.remove(styles.current);
+      setRating(-1);
+      return;
+    }
     motion = true;
     setMotion(true);
     const element = document.getElementById(`star_${rating}`);
