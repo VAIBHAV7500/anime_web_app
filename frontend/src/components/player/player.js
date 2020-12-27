@@ -6,7 +6,8 @@ import requests from '../../utils/requests';
 import PageLoader from '../services/page_loader';
 import { connect } from 'react-redux';
 import Discussion from './discussion';
-import moment from 'moment';
+import checkAdBlocker from '../../utils/adBlocker';
+import { useHistory } from 'react-router-dom';
 
 const URL = process.env.REACT_APP_WEBSOCKET_URL;
 
@@ -15,6 +16,11 @@ export class player extends Component {
     ws = new WebSocket(URL);
     prevTime;
     messageInterval;
+    //history = useHistory();
+
+    goToAdBlockPage = (playerId) => {
+        this.props.history.push(`/ad-blocked?redirect=/player/${playerId}`);
+    }
 
     fetchData = async () => {
         this.setState({
@@ -24,6 +30,13 @@ export class player extends Component {
             window.scrollTo(0, 0);
             const playerId = this.props.match.params.id;
             try {
+                const adBlock = await checkAdBlocker();
+                if(adBlock){
+                    console.log("Using Ad Blocker");
+                   // this.goToAdBlockPage(playerId);
+                }else{
+                    console.log("Not Using Ad Blocker");
+                }
                 const endPoint = `${requests.fetchVideoDetails}?player_id=${playerId}&user_id=${this.props.user_id}`;
                 const result = await axios.get(endPoint);
                 if(result.data){

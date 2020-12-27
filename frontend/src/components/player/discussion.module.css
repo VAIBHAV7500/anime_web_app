@@ -58,11 +58,12 @@
 }
 
 .bubble{
-    width: fit-content;
-    padding: 8px 20px;
+    width: 80%;
+    padding: 10px 20px;
     margin: 3px 10px;
     border-radius: 10px;
     cursor: default;
+    text-align: center;
 }
 
 .receiver_bubble{

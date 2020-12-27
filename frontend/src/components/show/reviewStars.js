@@ -14,6 +14,7 @@ const ReviewStars = React.memo(({setRating}) => {
       const element = document.getElementById(`star_${rating}`);
       element.classList.remove(styles.current);
       setRating(-1);
+      setCurrRating(-1);
       return;
     }
     motion = true;

@@ -28,9 +28,7 @@ function Discussion({discussion,sendMessage}) {
     });
 
     useEffect(()=>{
-        console.log(discussion);
         const messages = discussion;
-        console.log(messages);
         if(messages){
             messages.forEach((x)=>{
                 const time = moment.utc(parseFloat(x.time)*1000).format('HH:mm:ss');
@@ -50,7 +48,7 @@ function Discussion({discussion,sendMessage}) {
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight); 
     }
-    const addRecieverMessage = (message) => {
+    const addRecieverMessage = ({message}) => {
         document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}">${message} </div>`;
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight);  
@@ -104,7 +102,7 @@ function Discussion({discussion,sendMessage}) {
                     /*                         This is the Chat container                         */
                     /* -------------------------------------------------------------------------- */
 
-                    /* <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
+                    /*   <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
                         hey
                     </div>
                     <div className={`${styles.bubble} ${styles.sender_bubble}`}>

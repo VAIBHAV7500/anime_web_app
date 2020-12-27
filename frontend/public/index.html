@@ -44,5 +44,15 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script src="%PUBLIC_URL%/adblocker.js" type="text/javascript"></script>
+    <script>
+      if(document.getElementById('NZmujihsGAqI')){
+        //alert('Blocking Ads: No');
+        window.adBlocker = false;
+      } else {
+        //alert('Blocking Ads: Yes');
+        window.adBlocker = true;
+      }
+    </script>
   </body>
 </html>

@@ -150,8 +150,9 @@ const Login = (props)=>{
         <h1 className={styles.title_name}><strong>Sign In</strong></h1>
         {state.errorShow? errorAdd() : ""}
         <form onSubmit={handleSignIn}>
-          {signInFields.map((field) => (
+          {signInFields.map((field,index) => (
               <FormGroup
+                key ={index}
                 fieldData={field} 
               />
           ))}
