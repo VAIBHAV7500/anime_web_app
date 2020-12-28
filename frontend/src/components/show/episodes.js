@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import styles from './episodes.module.css';
-import { useLocation, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux';
@@ -67,7 +67,7 @@ const Episodes = React.memo(() => {
             prevUserId = userId;
             updateEpisodes();
         }
-    }, [userId])
+    }, [userId,prevUserId]);
 
     const fetchEps = async (from) => {
         if(userId){
@@ -169,8 +169,6 @@ const Episodes = React.memo(() => {
         updateEpisodes();
         setCookie(id, latest , { path: '/' });
     }
-
-    const [switchToggle,setSwitchToggle] = useState(true);
 
     return (
         <div className={styles.episodes}>

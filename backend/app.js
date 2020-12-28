@@ -1,4 +1,6 @@
 const express = require('express');
+const os = require("os");
+const cluster = require("cluster");
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
@@ -21,6 +23,8 @@ const keys = require('./config/keys.json');
 const dbConfig = require('./config/dbConfig.json');
 const responseTime = require('response-time');
 const redis = require('redis');
+
+const clusterWorkerSize = os.cpus().length
 
 var app = express();
 app.oauth = oAuth2Server({
@@ -162,6 +166,7 @@ if(process.env.NODE_ENV === "production"){
 }
 app.use(anyError);
 app.use(errorHandler);
+
 let server;
 // if(process.env.NODE_ENV === "production"){
 //   const https = require("https");
@@ -173,13 +178,32 @@ let server;
   server = http.createServer(app);
 //}
 
-const wss = new WebSocket.Server({ server });
-onLoad(wss);
-
 let port = process.env.PORT || 4200;
 let host = process.env.HOST || 'localhost';
 
-server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
+if (clusterWorkerSize > 1) {
+  if (cluster.isMaster) {
+    for (let i=0; i < clusterWorkerSize; i++) {
+      cluster.fork()
+    }
+
+    cluster.on("exit", function(worker) {
+      console.log("Worker", worker.id, " has exitted.")
+    })
+  } else {
+    console.log("Using Clusters");
+    server = http.createServer(app);
+    const wss = new WebSocket.Server({ server }); 
+    onLoad(wss);
+
+    server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
+  }
+} else {
+  server = http.createServer(app);
+  const wss = new WebSocket.Server({ server }); 
+  onLoad(wss);
+  server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
+}
 
 module.exports = server;
 

@@ -13,15 +13,14 @@ import 'videojs-ima';
 import 'videojs-contrib-quality-levels';
 import 'videojs-hls-quality-selector';
 import 'videojs-errors';
-import { MdAirportShuttle } from 'react-icons/md';
 require('./videoPlayer.css');
 /* eslint import/no-webpack-loader-syntax: off */
 require('!style-loader!css-loader!video.js/dist/video-js.min.css');
 
 const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer}) => {
-  //const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+  const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
   //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
-  const videoSrc = "https://d2zihajmogu5jn.cloudfront.net/elephantsdream/hls/ed_hd.m3u8";
+  //const videoSrc = "https://d2zihajmogu5jn.cloudfront.net/elephantsdream/hls/ed_hd.m3u8";
   const playerRef = useRef();
   const history = useHistory();
   let prevTime = 0;

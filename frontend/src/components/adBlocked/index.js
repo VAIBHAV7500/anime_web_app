@@ -2,12 +2,11 @@ import React, {useEffect} from 'react';
 import checkAdBlocker from '../../utils/adBlocker';
 import Nav from '../services/Nav';
 import styles from './adBlocked.module.css';
-import { useLocation, useParams, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 
 function AdBlocked() {
   const history = useHistory();
-  const params = useParams();
   const location = useLocation();
   useEffect(() => {
     (async () => {

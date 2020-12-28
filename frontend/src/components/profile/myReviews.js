@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../utils/axios';
 import styles from './myReviews.module.css';
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import requests from '../../utils/requests';
+import { AiFillHeart } from "react-icons/ai";
 import { useHistory } from 'react-router-dom';
 import PulseLoader from "react-spinners/PulseLoader";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 

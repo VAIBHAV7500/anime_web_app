@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import styles from './discussion.module.css';
-import { FaArrowLeft, FaGrinAlt, FaPaperPlane, FaUnlock } from "react-icons/fa";
+import { FaArrowLeft, FaGrinAlt, FaPaperPlane } from "react-icons/fa";
 import Picker from 'emoji-picker-react';
 import './emoPickerStyle.css';
 import { useSelector } from 'react-redux';
@@ -9,9 +8,7 @@ import moment from 'moment';
 
 
 function Discussion({discussion,sendMessage}) {
-    const {id} = useParams();
     const [emoPicker,setPicker] = useState(false);
-    const prevTime = 0;
     const userId = useSelector(state => state.user_id);
     
     const closeDiscussion = () => {
@@ -41,7 +38,7 @@ function Discussion({discussion,sendMessage}) {
                 }
             });
         }
-    },[discussion]);
+    },[discussion, userId]);
 
     const addSenderMessage = ({message}) => {
         document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.sender_bubble}">${message} </div>`; 

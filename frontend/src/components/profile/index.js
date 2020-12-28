@@ -43,7 +43,7 @@ function Profile() {
     
     const generateNavField = (name, index) => {
         return (
-            <div key={index} className={`${styles.nav_field_item} ${styles.neumorphism} ${active == index ? styles.active : ""}`} onClick={()=>{setActive(index)}}>
+            <div key={index} className={`${styles.nav_field_item} ${styles.neumorphism} ${active === index ? styles.active : ""}`} onClick={()=>{setActive(index)}}>
                 {name}
             </div>
         );
@@ -72,7 +72,7 @@ function Profile() {
         <Nav />
         <div className={styles.body}>
             <div className={styles.banner}>
-                <img className={styles.user_img} src={userImg}></img>
+                <img className={styles.user_img} alt={user.user_name} src={userImg}></img>
                 <h1 className={styles.user_name}>{user.user_name} {user.email}</h1>
             </div>
             <div className={`${styles.nav} ${styles.neumorphism}`}>

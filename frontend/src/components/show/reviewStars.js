@@ -34,7 +34,7 @@ const ReviewStars = React.memo(({setRating}) => {
       currentStar.classList.add(moveFrom);
       element.classList.add(moveTo);
       const movement = rating < currRating ? animateLeft : animateRight;
-      while (currRating != rating) {
+      while (currRating !== rating) {
         let r = currRating + 1;
         if (movement === animateLeft) {
           r = currRating - 1;

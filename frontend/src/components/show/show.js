@@ -101,7 +101,7 @@ class show extends Component {
     }
 
     async componentDidUpdate(prevProps) {
-      if(this.props.user_id != prevProps.user_id){
+      if(this.props.user_id !== prevProps.user_id){
         this.fetchData();
       }
       if (this.props.match.params.id !== prevProps.match.params.id ) {

@@ -19,7 +19,6 @@ import { useDispatch } from 'react-redux';
 import { LoginFailure, LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
 import Profile from './components/profile';
-import toc from './components/footer/terms_and_conditions';
 import AdBlocked from './components/adBlocked';
 require('dotenv').config();
 
