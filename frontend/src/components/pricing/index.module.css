@@ -1,4 +1,82 @@
 .pricing{
-  width: 100%;
+  padding-top: 80px;
+  color: white;
+}
+
+.pricing h1{
+  margin-top: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.card_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
+  gap: 2em;
+}
+
+.card{
+  height: fit-content;
+  width: fit-content;
+  color:white;
+  background-color: rgba(20, 20, 20, 0.685);
+  text-align: center;
+  transition: 0.3s transform;
+  border-radius: 16px;
+}
+
+.card:hover{
+  transform: scale(1.03);
+}
+
+table{
+  border-collapse: collapse;
+}
+.card_field,th{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 60px;
+  border-bottom: 1px solid rgb(71, 71, 71);
+  border-radius: 6px;
+  gap: 5px;  
+}
+
+.card_field:last-child{
+  border-bottom: none;
+  padding-bottom: 30px;
+}
+
+.card_field h5{
+  color: rgb(168, 161, 161);
+  font-size: 14px;
+}
+.card_field h4{
+  font-size: 16px;
+}
+.column_heading{
+  padding: 25px 60px;
+}
+.column_heading h2{
+  font-weight:700;
+  font-size: 24px;
+}
+
+.buy_btn{
+  margin: 26px auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 10px 56px;
+  background-color: rebeccapurple;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buy_btn:active{
+  position: relative;
+  top: 1px;
 }

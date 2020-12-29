@@ -98,20 +98,28 @@ function Discussion({discussion,sendMessage}) {
                 <h3>Discussion</h3>
             </div>
             <div className={`${styles.discussion_container} ${emoPicker ? styles.discussion_container_translate : ""}`}>
-                {
-
-                    /* -------------------------------------------------------------------------- */
-                    /*                         This is the Chat container                         */
-                    /* -------------------------------------------------------------------------- */
-
-                    /* <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
-                        hey
+                
+                    <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
+                        <div className={styles.bubble_wrapper}>
+                            <div><span className={styles.name}>Anubhav</span></div>
+                            <div className={styles.bubble_detail_wrapper}>
+                                <span className={styles.message}>heyvxcccccccccccccccc</span>
+                                <span className={styles.timestamp}>7:12 PM</span>
+                            </div>                            
+                        </div>
                     </div>
+                    
                     <div className={`${styles.bubble} ${styles.sender_bubble}`}>
-                        hey
-                    </div> */
+                        <div className={styles.bubble_wrapper}>
+                            <div><span className={styles.name}>You</span></div>
+                            <div className={styles.bubble_detail_wrapper}>
+                                <span className={styles.message}>hey</span>
+                                <span className={styles.timestamp}>7:12 PM</span>
+                            </div>                            
+                        </div>
+                    </div>
 
-                }
+                
             </div>
             <div className={`${styles.footer}  ${emoPicker || mobileCheck() ? styles.footer_translate : "" }`}>
                 <div className={styles.footer_wrapper}>

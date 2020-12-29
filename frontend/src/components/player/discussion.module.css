@@ -58,16 +58,44 @@
 }
 
 .bubble{
-    width: fit-content;
-    padding: 8px 20px;
+    width: 87%;
+    padding: 8px 13px;
     margin: 3px 10px;
     border-radius: 10px;
     cursor: default;
+    display: flex;
+    align-self: flex-start;
+}
+.message{
+    word-break: break-word;
+}
+
+.bubble_wrapper{
+    width: 100%;
+}
+
+.bubble_detail_wrapper{
+    display: flex;
+    margin-top: 9px;
+    flex-direction: column;
+}
+
+.name{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.timestamp{
+    margin-left: auto;
+    font-size: 11px;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    white-space: nowrap;
 }
 
 .receiver_bubble{
-    display: flex;
-    align-self: flex-start;
     background-color: #6e1bbdcc;
     color: white;
 }
@@ -79,8 +107,6 @@
 }
 
 .sender_bubble{
-    display: flex;
-    align-self: flex-end;
     background-color: white;
 }
 

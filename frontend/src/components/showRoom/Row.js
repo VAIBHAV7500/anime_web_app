@@ -63,6 +63,8 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
     el.classList.add("card_div_tilt");
   }
 
+  const card_details_key = ["name", "status", "type", "rating", "total Episodes"]
+  const card_details_value = ["haikuu","airing","TV","9.8","24"]
   return (
     <div>
       <div className="row">
@@ -73,10 +75,22 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
           </div>
           {movies && movies.map((movie,index) => (
             <div key={index} index={`${rowIndex}-${index}`} name={movie.name} className={`card_div`}>
-              <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
               <div className="box-shadow"></div>
-              <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown>
+              {/* <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
+              <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown> */}
+
               <p className="show_name">{movie.name}</p>
+              <div className="show_details">
+                {card_details_key?.map((field,index) => (
+                  <div>
+                    <span>{field}</span>
+                    <span> : </span>
+                    <span>{card_details_value[index]}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="go_to_show">Show</div>
+              <div className="more_detail">More Details</div>
               <img
                 loading="lazy"
                 draggable="false"

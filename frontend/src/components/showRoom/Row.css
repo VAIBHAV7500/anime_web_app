@@ -113,9 +113,34 @@
     transform: scale(1);
 }
 
-.card_div:hover .show_name{
+.card_div:hover .show_name,
+.card_div:hover .show_details,
+.card_div:hover .go_to_show,
+.card_div:hover .more_detail{
     opacity: 1;
 }
+
+.go_to_show,
+.more_detail{
+    box-sizing: border-box;
+    position: absolute;
+    transition: 0.3s;
+    bottom: 5%;
+    z-index: 99;
+    padding: 3%;
+    opacity: 0;
+    border: 1px solid white;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.go_to_show{
+    left: 5%;
+}
+.more_detail{
+    right: 5%;
+}
+
 
 .show_name{
     box-sizing: border-box;
@@ -134,6 +159,20 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+}
+
+.show_details{
+    position: absolute;
+    z-index: 99;
+    margin-top: 35%;
+    margin-left: 5%;
+    opacity: 0;
+    transition: 0.3s;
+    font-size: 15px;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 
