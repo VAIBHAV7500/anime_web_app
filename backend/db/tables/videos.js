@@ -64,7 +64,7 @@ const findByEpisodeName = async (name,show_id)=>{
 }
 
 const fetchRecent = async (show_id, user_id) => {
-    const sql = `SELECT id, episode_number
+    const sql = `SELECT id, episode_number,ups.user_id
       FROM videos LEFT JOIN user_player_sessions as ups on ups.video_id = videos.id
       WHERE videos.show_id = ? AND (ups.user_id = ? OR videos.episode_number = 1) order by episode_number desc limit 1
     `;

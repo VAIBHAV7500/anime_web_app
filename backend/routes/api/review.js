@@ -97,11 +97,9 @@ router.delete('/unlike', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
     const body = req.body;
-    console.log(JSON.stringify(body));
     if(body){
         body.likes = 0;
         body.approved = true;
-        console.log(JSON.stringify(body));
         const response = await db.reviews.create(body).catch((err)=>{
             res.status(501).json({
                 error: err.message,
@@ -110,7 +108,6 @@ router.post('/create', async (req, res, next) => {
         });
         if(response){
             const id = response.insertId;
-            console.log(response);
             res.json({
                 id
             });

@@ -32,7 +32,7 @@ function Similar({show_id, toastConfig}) {
         return () => {
         
         }
-    }, [id]);
+    }, [id,show_id]);
 
     const goToShow = (id) => {
         history.push(`/show/${id}`);

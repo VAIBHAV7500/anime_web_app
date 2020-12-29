@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import styles from './discussion.module.css';
-import { FaArrowLeft, FaGrinAlt, FaPaperPlane, FaUnlock } from "react-icons/fa";
+import { FaArrowLeft, FaGrinAlt, FaPaperPlane } from "react-icons/fa";
 import Picker from 'emoji-picker-react';
 import './emoPickerStyle.css';
 import { useSelector } from 'react-redux';
@@ -9,9 +8,7 @@ import moment from 'moment';
 
 
 function Discussion({discussion,sendMessage}) {
-    const {id} = useParams();
     const [emoPicker,setPicker] = useState(false);
-    const prevTime = 0;
     const userId = useSelector(state => state.user_id);
     
     const closeDiscussion = () => {
@@ -28,29 +25,27 @@ function Discussion({discussion,sendMessage}) {
     });
 
     useEffect(()=>{
-        console.log(discussion);
         const messages = discussion;
-        console.log(messages);
         if(messages){
             messages.forEach((x)=>{
                 const time = moment.utc(parseFloat(x.time)*1000).format('HH:mm:ss');
-                console.log(x.time);
+                console.log(x);
                 console.log(time);
                 if(x.id === userId){
-                    addSenderMessage(x.message);
+                    addSenderMessage(x);
                 }else{
-                    addRecieverMessage(x.message);
+                    addRecieverMessage(x);
                 }
             });
         }
-    },[discussion]);
+    },[discussion, userId]);
 
-    const addSenderMessage = (message) => {
+    const addSenderMessage = ({message}) => {
         document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.sender_bubble}">${message} </div>`; 
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight); 
     }
-    const addRecieverMessage = (message) => {
+    const addRecieverMessage = ({message}) => {
         document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}">${message} </div>`;
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight);  
@@ -124,7 +119,7 @@ function Discussion({discussion,sendMessage}) {
             <div className={`${styles.footer}  ${emoPicker || mobileCheck() ? styles.footer_translate : "" }`}>
                 <div className={styles.footer_wrapper}>
                 {!mobileCheck() && <FaGrinAlt onClick={openPicker} className={styles.emo_selector_icon}/>}
-                <input onKeyPress={handleSend}  id="send_message" placeholder="Enter your Message"/>
+                <input onKeyPress={handleSend}  id="send_message" placeholder="Enter your Comment"/>
                 <FaPaperPlane onClick={send} className={styles.send_icon}/>
                 </div>
                 {!mobileCheck() && <Picker onEmojiClick={onEmojiClick} />}

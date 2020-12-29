@@ -10,6 +10,13 @@ const ReviewStars = React.memo(({setRating}) => {
     if(motion){
       return;
     }
+    if(currRating === rating){
+      const element = document.getElementById(`star_${rating}`);
+      element.classList.remove(styles.current);
+      setRating(-1);
+      setCurrRating(-1);
+      return;
+    }
     motion = true;
     setMotion(true);
     const element = document.getElementById(`star_${rating}`);
@@ -27,7 +34,7 @@ const ReviewStars = React.memo(({setRating}) => {
       currentStar.classList.add(moveFrom);
       element.classList.add(moveTo);
       const movement = rating < currRating ? animateLeft : animateRight;
-      while (currRating != rating) {
+      while (currRating !== rating) {
         let r = currRating + 1;
         if (movement === animateLeft) {
           r = currRating - 1;

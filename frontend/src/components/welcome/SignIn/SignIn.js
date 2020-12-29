@@ -1,19 +1,17 @@
 import React,{useState,useEffect} from 'react'
 import styles from './SignIn.module.css';
 import Spinner from '../Spinner/index'
-import { FaUnlock, FaEnvelope, FaUser } from 'react-icons/fa';
+import { FaUnlock, FaEnvelope } from 'react-icons/fa';
 import FormGroup from '../Form-Group/FormGroup'
 import axios from '../../../utils/axios';
 import qs from 'qs';
 import sha256 from 'crypto-js/sha256';
 import { Link } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { LoginSuccess } from '../../../redux/Auth/authAction';
 import { useCookies } from 'react-cookie';
 const Login = (props)=>{
     const appbaseurl = process.env.REACT_APP_BASE_URL;
-    const history = useHistory();
     const dispatch = useDispatch();
     const [state,setState] = useState({
         loader : false,
@@ -28,7 +26,7 @@ const Login = (props)=>{
 
         }
     }, []);
-    const [cookie, setCookie] = useCookies(['token']);
+    const [ _ , setCookie] = useCookies(['token']);
 
     const handleAccessToken = async (token)=>{
         var config = {
@@ -150,8 +148,9 @@ const Login = (props)=>{
         <h1 className={styles.title_name}><strong>Sign In</strong></h1>
         {state.errorShow? errorAdd() : ""}
         <form onSubmit={handleSignIn}>
-          {signInFields.map((field) => (
+          {signInFields.map((field,index) => (
               <FormGroup
+                key ={index}
                 fieldData={field} 
               />
           ))}

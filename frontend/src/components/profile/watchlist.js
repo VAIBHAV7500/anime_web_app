@@ -4,7 +4,6 @@ import {useHistory} from "react-router-dom";
 import axios from '../../utils/axios';
 import { MdPlayCircleOutline } from 'react-icons/md';
 import PulseLoader from "react-spinners/PulseLoader";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Watchlist = ({userId, endPoint, message}) => {

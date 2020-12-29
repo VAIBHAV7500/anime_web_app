@@ -105,7 +105,7 @@ function Nav({type}) {
         <div className={styles.nav_wrapper}>
             <div id="nav" className={`${styles.nav} ${!search && show && styles.nav_black} ${type === "dark" ? styles.nav_black:""}`}>
                 <span>
-                    <img draggable="false" className={`${styles.nav_logo} ${!search && show  && styles.logo_white}`} onClick={goToHome} src={mainLogo} />
+                    <img alt="ANIMEI TV" draggable="false" className={`${styles.nav_logo} ${!search && show  && styles.logo_white}`} onClick={goToHome} src={mainLogo} />
                 </span>
                 < FaSearch 
                     className={styles.search_icon} 

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './info.module.css';
 import {useHistory} from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
-import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function Info({movie}) {
@@ -40,7 +38,7 @@ function Info({movie}) {
             setLatest(movie.recent);
         }
         return () => {
-            document.title = 'Animei TV - An Streaming Platform';
+            document.title = 'Animei TV - An Anime Streaming Platform';
         }
     }, [movie])
 
@@ -65,14 +63,14 @@ function Info({movie}) {
           let finalStatus = '';
           if(watchStatus.toLowerCase() === 'add to list'){
             setWatchStatus('Adding');
-            const response = await axios.post(requests.postWatchlist,body).catch((err)=>{
+            await axios.post(requests.postWatchlist,body).catch((err)=>{
               console.log(err);
               //show error...
             });
             finalStatus = 'Remove from List';
           }else if(watchStatus.toLowerCase() === 'remove from list'){
             setWatchStatus('Removing');
-              const response = await axios.delete(`${requests.removeWatchlist}?show_id=${movie.id}&user_id=${userId}`).catch((err)=>{
+            await axios.delete(`${requests.removeWatchlist}?show_id=${movie.id}&user_id=${userId}`).catch((err)=>{
                 console.log(err);
                 //show error...
             });
@@ -111,7 +109,7 @@ function Info({movie}) {
                 </select> 
                 <div className={`${styles.btn_wrapper}`}>
                     <div className={`${styles.play_btn} `} onClick={()=>{goToPlayer(latest?.id)}}>
-                        {latest?.episode_number && (latest.episode_number === 1 ? 'Start Watching' : 'Continue Watching Ep ' + latest.episode_number)}
+                        {latest?.episode_number && (latest.episode_number === 1 && latest.user_id === null ? 'Start Watching' : 'Continue Watching Ep ' + latest.episode_number)}
                     </div>
                     <div className={`${styles.watch_list_btn} ${watchStatus.toLowerCase() === 'remove from list' ? styles.remove: ""}`} onClick={handleWatchList}>
                         {watchStatus}
