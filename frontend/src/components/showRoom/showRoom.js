@@ -55,6 +55,7 @@ export class showRoom extends Component {
           promiseArray.push(new Promise((res,rej)=>{
             axios.get(row.url).then((result) => {
               this.rows[index].movies = result.data;
+              console.log(result.data);
               res(result.data);
             }).catch((err) => {
               rej(err);

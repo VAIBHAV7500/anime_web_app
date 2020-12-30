@@ -13,16 +13,23 @@
     flex-direction: column;
 }
 
+.advertisement{
+    background-color: rgb(0, 0, 0);
+    min-height: 15vh;
+    width: 98%;
+    margin: 4px;
+    margin-top: 8px;
+}
+
 .discussion_show{
     transform: translateX(0);
 }
 
 .header{
     width: 100%;
-    height: 50px;
+    min-height: 50px;
     background: #641ba8cc;
     background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
-    position: fixed;
     top: 0;
     left: 0;
     border-bottom-left-radius: 15px;
@@ -45,12 +52,10 @@
 .discussion_container{
     overflow: auto;
     overflow-x: hidden;
-    max-height: calc(100vh - 55px - 55px + 2px);
     color : black;
     display: flex;
     flex-direction: column;
-    padding: 55px 5px 5px 5px;
-    transition: max-height 0.5s;
+    padding: 5px;
 }
 
 .discussion_container_translate{
@@ -118,19 +123,21 @@
 
 .footer{
     width: 100%;
-    position: fixed;
+    max-height: 33px;
     bottom: 0;
     left: 0;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     display: flex;
     align-items: center;
-    padding: 0px 0px 10px 0px;
+    padding: 4px 0px 10px 0px;
+    grid-gap: 5px;
     gap: 5px;
-    transform: translateY(330px);
     flex-direction: column;
     transition: 0.5s;
+    margin-top: auto;
 }
+
 .footer_wrapper{
     display: flex;
     align-items: center;
@@ -139,7 +146,7 @@
 }
 
 .footer_translate{
-    transform: translateY(0px) !important;
+    max-height: 100% !important;
 }
 
 .footer_wrapper input{

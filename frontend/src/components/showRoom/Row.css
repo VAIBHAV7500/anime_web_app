@@ -35,19 +35,24 @@
 }
 
 .card_div:hover .see_more{
-    transform: translateX(-50%) scale(1.6,1);
+    transform: scale(1.5,1);
+    opacity: 1;
     -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
     filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
 }
 
+.card_div:hover .row_poster{
+    transform:scale(0.95);
+}
 
 .see_more{
     position: absolute;
-    bottom: 4px;
-    left: 48%;
-    transform: translateX(-68%) scale(0);
-    font-size: 31px;
-    transition: 0.3s;
+    bottom: 8%;
+    right: 15%;
+    transform: scale(2,1);
+    opacity: 0;
+    transition: 0.6s;
+    font-size: 20px;
     z-index: 99;
     cursor: pointer;
 }
@@ -91,18 +96,20 @@
 .play_icon{
     position: absolute;
     z-index: 99;
-    left: 50%;
-    top: 50%;
-    font-size: 70px;
-    transform: translate(-50%, -50%) scale(0);
-    transition: 0.3s;
+    bottom: 5%;
+    left: 15%;
+    font-size: 40px;
+    transform: scale(1.5);
+    opacity: 0;
+    transition: 0.6s;
     cursor: pointer;
     -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
     filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
 }
 
 .card_div:hover .play_icon{
-    transform: translate(-50%, -50%) scale(1.08);
+    transform: scale(1);
+    opacity: 1;
 }
 
 .card_div:hover .row_poster{
@@ -113,22 +120,30 @@
     transform: scale(1);
 }
 
-.card_div:hover .show_name,
-.card_div:hover .show_details,
-.card_div:hover .go_to_show,
-.card_div:hover .more_detail{
+.card_div:hover .card_top{
+    transform: scale(1);
     opacity: 1;
+}
+
+.card_top{
+    transform: scale(1.1);
+    opacity: 0;
+    transition: 0.6s;
+}
+
+.card_description{
+    box-sizing: border-box;
+    font-size: 10px;
+    padding-top: 20px;
 }
 
 .go_to_show,
 .more_detail{
     box-sizing: border-box;
     position: absolute;
-    transition: 0.3s;
     bottom: 5%;
     z-index: 99;
     padding: 3%;
-    opacity: 0;
     border: 1px solid white;
     background-color: transparent;
     cursor: pointer;
@@ -150,8 +165,6 @@
     z-index: 99;
     width: 100%;
     padding: 0 10%;
-    opacity: 0;
-    transition: 0.3s;
     font-size: 14px;
     font-weight: bold;
     text-transform: capitalize;
@@ -163,19 +176,19 @@
 
 .show_details{
     position: absolute;
+    width: 88%;
     z-index: 99;
     margin-top: 35%;
     margin-left: 5%;
-    opacity: 0;
-    transition: 0.3s;
-    font-size: 15px;
+    font-size: 12px;
+    font-weight: bold;
     text-transform: capitalize;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
 
-
+.show_detail_field{
+    --text-align: center;
+    direction:ltr
+}
 .slider{
     position: absolute;
     z-index: 2;

@@ -63,8 +63,20 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
     el.classList.add("card_div_tilt");
   }
 
-  const card_details_key = ["name", "status", "type", "rating", "total Episodes"]
-  const card_details_value = ["haikuu","airing","TV","9.8","24"]
+  const keys = [{
+    "key": "season",
+    "title": "Season"
+  },{
+    "key":"type",
+    "title": "type",
+  },{
+    "key": "total_view",
+    "title":"total view",
+  },{
+    "key":"total_episodes",
+    "title": "Total Episodes"
+  }];
+
   return (
     <div>
       <div className="row">
@@ -76,21 +88,31 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
           {movies && movies.map((movie,index) => (
             <div key={index} index={`${rowIndex}-${index}`} name={movie.name} className={`card_div`}>
               <div className="box-shadow"></div>
-              {/* <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
-              <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown> */}
+              <MdPlayCircleOutline className="play_icon" onClick={()=>{goToVideo(movie)}}></MdPlayCircleOutline>
+              <FaAngleDoubleDown onClick={() => handleClick(movie,index)} className={`see_more`}></FaAngleDoubleDown>
 
-              <p className="show_name">{movie.name}</p>
-              <div className="show_details">
-                {card_details_key?.map((field,index) => (
-                  <div>
-                    <span>{field}</span>
-                    <span> : </span>
-                    <span>{card_details_value[index]}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="go_to_show">Show</div>
-              <div className="more_detail">More Details</div>
+              <p className="show_name card_top">{movie.name}</p>
+
+              <table className="show_details card_top"> 
+              <tbody>
+                {Object.keys(movie).map(function(key) {
+                    const containskey = keys.find(x => x.key === key);
+                    if(containskey){
+                      return  (
+                      <tr>
+                        <td>{containskey.title}</td>
+                        <td className="show_detail_field">{movie[key]}</td>
+                      </tr>
+                    )
+                    } 
+              })}
+                <tr>
+                  <td className="card_description" colSpan="2">{movie.description.length > 200 ? movie.description.substring(0,200) + "..." : movie.description }</td>
+                </tr>
+              </tbody>
+              </table>
+
+
               <img
                 loading="lazy"
                 draggable="false"

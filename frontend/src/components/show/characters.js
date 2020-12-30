@@ -81,7 +81,7 @@ const Characters = React.memo(({show_id, toastConfig, getRecent}) => {
     
     return (
         <div className={styles.characters}>
-            {loading && <div className = {styles.loader}><PulseLoader color="#ffff"/></div>}
+            
             <ToastContainer
             position="top-right"
             autoClose={5000}
@@ -96,6 +96,8 @@ const Characters = React.memo(({show_id, toastConfig, getRecent}) => {
             <div className={styles.character_guideline}>
                 <p>Characters will be shown as the story continues, or you can also reveal a card by clicking on it.</p>
             </div>
+            {loading && <div className = {styles.loader}><PulseLoader color="#ffff"/></div>}
+            <div className={styles.character_container}>
             {
                 characters?.map((character,i)=>{
                     return (    
@@ -115,6 +117,7 @@ const Characters = React.memo(({show_id, toastConfig, getRecent}) => {
                     </div>
                 )})
             }
+            </div>
         </div>
     )
 });

@@ -9,11 +9,11 @@
 }
 
 .show{
-    width: 265px;
+    width: 193px;
+    height: auto;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
     cursor: pointer;
     margin: 23px;
-    height: 386px;
     overflow: hidden;
 }
 
@@ -50,10 +50,9 @@
     overflow: hidden;
 }
 
-@media(max-width:1000px){
+@media(max-width:960px){
     .show{
-        width: 207px;
-        height: 280px;
+        width: 156px;
         margin: 8px;
     }
 }
@@ -61,20 +60,29 @@
 @media(max-width:750px){
     .show{
         width: 170px;
-        height: 230px;
     }
 }
 
 @media(max-width:630px){
     .show{
-        width: 110px;
-        height: 150px;
+        width: 121px;
+    }
+}
+
+@media(max-width:315px){
+    .show{
+        width: 100px;
     }
 }
 
 @media(max-width:300px){
     .show{
         width: 88px;
-        height: 120px;
+    }
+}
+
+@media(max-width:300px){
+    .show{
+        width: 60%;
     }
 }

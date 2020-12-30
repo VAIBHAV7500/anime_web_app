@@ -21,6 +21,9 @@ export class player extends Component {
     goToAdBlockPage = (playerId) => {
         this.props.history.push(`/ad-blocked?redirect=/player/${playerId}`);
     }
+    getCurrentTime = ()=>{
+        return this?.state?.player?.currentTime() || 0;
+    }
 
     fetchData = async () => {
         this.setState({
@@ -33,7 +36,7 @@ export class player extends Component {
                 const adBlock = await checkAdBlocker();
                 if(adBlock){
                     console.log("Using Ad Blocker");
-                   // this.goToAdBlockPage(playerId);
+                    //this.goToAdBlockPage(playerId);
                 }else{
                     console.log("Not Using Ad Blocker");
                 }
@@ -206,7 +209,7 @@ export class player extends Component {
                         updateVideoStatus={this.updateVideoStatus} 
                         updateDiscussion = {this.updateDiscussion}
                     />}
-                    <Discussion discussion = {this?.state?.discussion} sendMessage={this.sendMessage}/>
+                    <Discussion discussion = {this?.state?.discussion} sendMessage={this.sendMessage} getCurrentTime={this.getCurrentTime} />
                  </div>
         )
     }

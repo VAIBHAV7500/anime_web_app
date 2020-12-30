@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 
-function Discussion({discussion,sendMessage}) {
+function Discussion({discussion,sendMessage,getCurrentTime}) {
     const [emoPicker,setPicker] = useState(false);
     const userId = useSelector(state => state.user_id);
     
@@ -30,7 +30,9 @@ function Discussion({discussion,sendMessage}) {
             messages.forEach((x)=>{
                 const time = moment.utc(parseFloat(x.time)*1000).format('HH:mm:ss');
                 console.log(x);
+                x.time = time;
                 console.log(time);
+                console.log(x);
                 if(x.id === userId){
                     addSenderMessage(x);
                 }else{
@@ -40,13 +42,15 @@ function Discussion({discussion,sendMessage}) {
         }
     },[discussion, userId]);
 
-    const addSenderMessage = ({message}) => {
-        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.sender_bubble}">${message} </div>`; 
+    const addSenderMessage = ({message,time}) => {
+        let name = "You";
+        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.sender_bubble}"> <div class="${styles.bubble_wrapper}"> <div><span class="${styles.name}">${name}</span></div> <div class="${styles.bubble_detail_wrapper}"> <span class="${styles.message}">${message}</span> <span class="${styles.timestamp}">${time}</span> </div> </div> </div>`;
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight); 
     }
-    const addRecieverMessage = ({message}) => {
-        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}">${message} </div>`;
+    const addRecieverMessage = ({message,time,email}) => {
+        let name = email;
+        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}"> <div class="${styles.bubble_wrapper}"> <div><span class="${styles.name}">${name}</span></div> <div class="${styles.bubble_detail_wrapper}"> <span class="${styles.message}">${message}</span> <span class="${styles.timestamp}">${time}</span> </div> </div> </div>`;
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight);  
     }
@@ -54,7 +58,8 @@ function Discussion({discussion,sendMessage}) {
         let message = document.getElementById("send_message");
         if(message?.value?.trim()){
             const messageData = message.value.trim();
-            addSenderMessage(messageData);
+            const time = moment.utc(parseFloat(getCurrentTime())*1000).format('HH:mm:ss');
+            addSenderMessage({message: messageData, time});
             if(userId){
                 sendMessage(messageData,userId);
             }
@@ -92,9 +97,11 @@ function Discussion({discussion,sendMessage}) {
                 <FaArrowLeft onClick={closeDiscussion} className={styles.back_icon}/>
                 <h3>Discussion</h3>
             </div>
+            <div className={styles.advertisement}>
+
+            </div>
             <div className={`${styles.discussion_container} ${emoPicker ? styles.discussion_container_translate : ""}`}>
-                
-                    <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
+                    {/* <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
                         <div className={styles.bubble_wrapper}>
                             <div><span className={styles.name}>Anubhav</span></div>
                             <div className={styles.bubble_detail_wrapper}>
@@ -112,9 +119,7 @@ function Discussion({discussion,sendMessage}) {
                                 <span className={styles.timestamp}>7:12 PM</span>
                             </div>                            
                         </div>
-                    </div>
-
-                
+                    </div> */}
             </div>
             <div className={`${styles.footer}  ${emoPicker || mobileCheck() ? styles.footer_translate : "" }`}>
                 <div className={styles.footer_wrapper}>
