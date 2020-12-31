@@ -83,8 +83,8 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
     "key":"type",
     "title": "type",
   },{
-    "key": "total_view",
-    "title":"total view",
+    "key": "age_category",
+    "title":"Minimum Age",
   },{
     "key":"total_episodes",
     "title": "Total Episodes"
