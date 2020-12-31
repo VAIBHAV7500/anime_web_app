@@ -2,6 +2,7 @@
     transform: translateY(-105px);
     margin-left: 10px;
     margin-bottom: 20px;
+    min-height: 200px;
 }
 
 .row{
@@ -47,13 +48,18 @@
     padding: 20px 10px;
 }
 
+
+.card_div,
+.card_wrapper{
+    min-width: 175px;
+    max-width: 175px;
+}
+
+
 .card_wrapper{
     display: flex;
     overflow: hidden;
-    max-width: 215px;
-    min-width: 215px;
-    min-height: 100%;
-    max-height: 100%;
+    height: auto;
     margin-right: 18px;
     transition: max-width 0.5s;
     border-radius: 10px;
@@ -63,12 +69,11 @@
 }
 
 .show_trailer{
-    max-width: 100%;
+    max-width: 100% !important;
     transition: max-width 2s;
 }
 
 .player{
-    min-width: 500px;
     position: relative;
     padding-left: 10px;
     padding-right: 5px;
@@ -76,8 +81,6 @@
 }
 
 .card_div{
-    min-width: 215px;
-    max-width: 215px;
     height: 100%;
     position: relative;
     transition: 1s;
@@ -160,20 +163,24 @@
 .show_details{
     margin-top: 15%;
     width: 90%;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     text-transform: capitalize;
 }
 
 
 .card_description{
-    box-sizing: border-box;
     font-size: 10px;
-    padding-top: 13px;
+    margin: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
 }
 
 
 .top_overlay_btn{
+    padding: 10px 0;
     margin-top: auto;
     margin-bottom: 5px;
     background-color: rgb(80, 14, 141);
@@ -181,10 +188,9 @@
 }
 
 .card_btn{
-    padding: 10px 0;
     border-radius: 7px 7px 10px 10px;
     text-align: center;
-    width: 100%;
+    width: 97%;
     display: flex;
     justify-content: center;
     cursor: pointer;
@@ -212,58 +218,6 @@
 /*                              Card Overlay End                              */
 /* -------------------------------------------------------------------------- */
 
-/* .play_icon{
-    position: absolute;
-    z-index: 99;
-    bottom: 5%;
-    left: 15%;
-    font-size: 40px;
-    transform: scale(1.5);
-    opacity: 0;
-    transition: 0.6s;
-    cursor: pointer;
-    -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
-    filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
-}
-
-.card_div:hover .play_icon{
-    transform: scale(1);
-    opacity: 1;
-}
-
-
-
-.card_div:hover .card_top{
-    transform: scale(1);
-    opacity: 1;
-}
-
-.card_top{
-    transform: scale(1.1);
-    opacity: 0;
-    transition: 0.6s;
-} 
-
-.card_div:hover .see_more{
-    transform: scale(1.5,1);
-    opacity: 1;
-    -webkit-filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
-    filter: drop-shadow( 3px 3px 2px rgb(5, 5, 5));
-}
-
-
-.see_more{
-    position: absolute;
-    bottom: 8%;
-    right: 15%;
-    transform: scale(2,1);
-    opacity: 0;
-    transition: 0.6s;
-    font-size: 20px;
-    z-index: 99;
-    cursor: pointer;
-}
-*/
 
 
 .slider{
@@ -425,119 +379,83 @@
 td{
     vertical-align: initial;
 }
-
-@media (max-width:1540px){
-    .player{
-        z-index: 100;
-    }
-    .info{
-        width: 45%;
-    }
-}
-@media (max-width:1400px) {
-    .info{
-        width: 40%;  
+@media(max-width : 1450px){
+    .card_div,
+    .card_wrapper{
+        min-width: 200px;
+        max-width: 200px;
     }
 }
 
-
-@media (max-width:1240px) {
-    .info{
-        position: relative;
-        margin-left: 0%;
+@media(max-width : 1025px){
+    
+    .show_name{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         width: 100%;
+        font-size: 10px;
+        padding-bottom: 5px;
+        min-height: fit-content;
     }
-    .trailer_name{
-        padding-top: 496px;
+
+    .card_description{
+        font-size: 10px;
+        -webkit-line-clamp: 4;
     }
+
     .player{
-        width: 100% !important;
-        height: 468px !important;
-    } 
+        max-width: 400px;
+    }
+    .show_details{
+        margin-top: 5px;
+        font-size: 9px;
+    }
+
+    .card_div,
+    .card_wrapper{
+        min-width: 150px;
+        max-width: 150px;
+    }
+    .card_btn span{
+        font-size: 12px;
+    }
+    .top_overlay_btn{
+        padding: 7px 0;
+    }
+    .watch_now_icon{
+        font-size: 20px;
+    }
 }
 
-@media (max-width:948px){
-    .player{
-        height: 400px !important;
-    }
-    .info{
-        width: 110%;
-    } 
-    .trailer_name{
-        padding-top: 425px;
-    }
-}
 
-@media(max-width : 800px){
+@media(max-width : 770px){
+
     .slider{
         display: none;
     }
+    .card_description{
+        -webkit-line-clamp: 3;
+    }
+
+    .card_div,
+    .card_wrapper{
+        min-width: 135px;
+        max-width: 135px;
+    }
+}
+@media(max-width : 425px){
     .card_overlay{
         display: none;
     }
-    .card_div:hover .row_poster{
-        filter: blur(0px);
-    }
-    .row_posters{
-        height: 180px;
-    }
-    .card_div{
+}
+
+
+@media(max-width : 375px){
+    .card_div,
+    .card_wrapper{
         min-width: 126px;
-    }
-}
-
-@media (max-width:731px){
-    .player{
-        height: 350px !important;
-    }
-    .trailer_name{
-        padding-top: 380px;
-    }
-    .info{
-        width: 115%;
-    } 
-}
-@media (max-width:608px){
-    .player{
-        height: 300px !important;
-    }
-    .trailer_name{
-        padding-top: 325px;
-    }
-}
-@media (max-width:541px){
-    .player{
-        height: 250px !important;
-    }
-    .trailer_name{
-        padding-top: 280px;
-    }
-    .info{
-        width: 130%;
-    } 
-}
-
-@media (max-width:514px){
-    .player{
-        height: 200px !important;
-    }
-    .info_table{
-        display: none;
-    }
-    .trailer_name{
-        display: none;
-    }
-    .trailer_btn{
-        width: auto;
-    }
-}
-
-@media(max-width:320px){
-    .row_posters{
-        height: 160px;
-    }
-    .card_div{
-        min-width: 112px;
+        max-width: 126px;
     }
 }
 

@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import "./Row.css";
 import ReactPlayer from 'react-player/lazy';
-import { MdClose, MdPlayCircleOutline, MdTv } from "react-icons/md";
+import { MdPlayCircleOutline, MdTv } from "react-icons/md";
 import {useHistory} from "react-router-dom";
-import { FaAngleDoubleDown, FaAngleLeft, FaAngleRight, FaTimes, FaYoutube} from 'react-icons/fa';
+import { FaAngleLeft, FaAngleRight, FaTimes } from 'react-icons/fa';
 
 let prevIndex;
 
 function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray }) {
   const [trailer, setTrailer] = trailerArray;
   const [showIndex,setShowIndex] = showIndexArray;
-  const [showTrailer, setShowTrailer] = useState(false);
   const history = useHistory();
   let keyId = 1;
-  let curTimeOut;
   const handleClick = (movie,index) => {  
       movie.rating = Math.round(((Math.random() * (10 - 8 + 1)) + 8) * 9) / 10;
       let description = movie.description;
@@ -63,16 +61,18 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
   
   const trailerShow = (index) => {
     let prevIndex = showIndex.current;
-    setShowTrailer(true);
     setShowIndex({
       current : `${rowIndex}-${index}`,
       prev : prevIndex
     });
     let el = document.querySelector(`[index="${rowIndex}-${index}"]`);
     el.classList.add("show_trailer");
-    setTimeout(()=>{
-     const plr =  el.querySelector(".player");
-     plr.scrollIntoView({behavior: "smooth", block: "nearest", inline: "center"});
+    const plyrElementCheckInterval = setInterval(()=>{
+      const plr =  el.querySelector(".player");
+      if(plr){
+        plr.scrollIntoView({behavior: "smooth", block: "nearest", inline: "center"});
+        clearInterval(plyrElementCheckInterval);
+      }  
     },300)
   }
 
@@ -90,7 +90,9 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
     "title": "Total Episodes"
   }];
 
-  const genCardOverlay = (movie,index) => {
+  const genCardOverlay =  (movie,index) => {
+    const descriptionLength =  window.screen.width > 1024 ? 150 : 80 ;
+
     return (
       <div className={`card_overlay ${`${rowIndex}-${index}`=== trailer?.index ? "card_overlay_show" : ""} `}>
         <div className="card_overlay_container">
@@ -108,11 +110,9 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
                     )
                   } 
               })}
-              <tr>
-                <td className="card_description" colSpan="2">{movie.description.length > 150 ? movie.description.substring(0,150) + "..." : movie.description }</td>
-              </tr>
             </tbody>
           </table>
+          <div className="card_description">{ movie.description }</div>
           <div onClick={() => { handleClick(movie,index)  }} className="card_btn top_overlay_btn">
             {`${rowIndex}-${index}`=== trailer?.index ? <FaTimes/> : <MdTv/>}
             <span>{`${rowIndex}-${index}`=== trailer?.index ? "Close" : "Play"} Trailer</span>

@@ -66,11 +66,16 @@ export class showRoom extends Component {
            // redirect in this case
            console.log(err);
         })
-        this.state.pageLoader = false;
         this.state.rows = this.rows;
         this.state.trailer = "";
         this.state.showIndex = {current : "" , prev : ""};
-        this.setState(this.state);      
+        this.setState(this.state);   
+        await new Promise((res,rej)=>{
+          setTimeout(()=>{
+              this.state.pageLoader = false;
+              this.setState(this.state);
+          },1000);
+        })   
     }
 
     changeTrailer = (newTrailerData) => {
