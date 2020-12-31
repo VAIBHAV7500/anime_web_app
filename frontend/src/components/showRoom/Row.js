@@ -155,7 +155,7 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
                 />
               </div>
               {
-                `${rowIndex}-${index}`=== trailer?.index &&
+                `${rowIndex}-${index}`=== trailer?.index && trailer?.trailer_url &&
                 <ReactPlayer  
                   url={`${trailer?.trailer_url}`} 
                   width="500px"
