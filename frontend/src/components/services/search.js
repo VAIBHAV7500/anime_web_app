@@ -43,7 +43,8 @@ const Search = (props) => {
         }
         setLoading(true);
         setSearchSet([]);
-        let request = await axios.post(baseUrl, body);
+        const axiosInstance = axios.createInstance();
+        let request = await axiosInstance.post(baseUrl, body);
         setSearchSet(request.data);
         setLoading(false);
     }

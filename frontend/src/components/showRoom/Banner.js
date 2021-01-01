@@ -47,7 +47,8 @@ function Banner() {
 
     useEffect(() => {
         async function fetchData(){
-            const request = await axios.get(requests.fetchBanner);
+          const axiosInstance = axios.createInstance();
+            const request = await axiosInstance.get(requests.fetchBanner);
             setMovies(
                 request.data
             );

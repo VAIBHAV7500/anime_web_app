@@ -51,7 +51,8 @@ function Profile() {
 
     const fetchUserDetails = async () => {
         const endPoint = `${requests.userDetails}?id=${id}`;
-        const result = await axios.get(endPoint).catch((err)=>{
+        const axiosInstance = axios.createInstance();
+        const result = await axiosInstance.get(endPoint).catch((err)=>{
           console.log(err);
         });
         if(result && result.data){

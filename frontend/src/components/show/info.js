@@ -61,16 +61,17 @@ function Info({movie}) {
             show_id: movie.id
           };
           let finalStatus = '';
+          const axiosInstance = axios.createInstance();
           if(watchStatus.toLowerCase() === 'add to list'){
             setWatchStatus('Adding');
-            await axios.post(requests.postWatchlist,body).catch((err)=>{
+            await axiosInstance.post(requests.postWatchlist,body).catch((err)=>{
               console.log(err);
               //show error...
             });
             finalStatus = 'Remove from List';
           }else if(watchStatus.toLowerCase() === 'remove from list'){
             setWatchStatus('Removing');
-            await axios.delete(`${requests.removeWatchlist}?show_id=${movie.id}&user_id=${userId}`).catch((err)=>{
+            await axiosInstance.delete(`${requests.removeWatchlist}?show_id=${movie.id}&user_id=${userId}`).catch((err)=>{
                 console.log(err);
                 //show error...
             });

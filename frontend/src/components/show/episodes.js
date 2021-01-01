@@ -86,7 +86,8 @@ const Episodes = React.memo(() => {
     const finalfetchSource = async (endPoint) => {
         if(userId && !loading){
             loading = true;
-            const result = await axios.get(endPoint).catch((err)=>{
+            const axiosInstance = axios.createInstance();
+            const result = await axiosInstance.get(endPoint).catch((err)=>{
                 toast.error(`O'Oh, looks like there's some issue. Please try again later`);
             });
             loading = false;

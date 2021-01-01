@@ -26,7 +26,8 @@ function Nav({type}) {
     const handleNotification = async () => {
         if(userId){
             const endpoint = `${requests.notification}?user_id=${userId}`;
-            const result = await axios.get(endpoint).catch((err)=>{
+            const axiosInstance = axios.createInstance();
+            const result = await axiosInstance.get(endpoint).catch((err)=>{
                 //do something
             });
             if(result){
@@ -94,7 +95,8 @@ function Nav({type}) {
             const body={
                 user_id: userId
             };
-            const result = await axios.patch(endPoint,body);
+            const axiosInstance = axios.createInstance();
+            const result = await axiosInstance.patch(endPoint,body);
             if(result.status === 200){
                 setUnread(0);
             }

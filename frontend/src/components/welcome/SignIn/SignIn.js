@@ -37,7 +37,8 @@ const Login = (props)=>{
             'Authorization': 'Bearer '+ token
             }
         };
-        var response = await axios(config);
+        const axiosInstance = axios.createInstance();
+        var response = await axiosInstance(config);
         if(response.data.message === "Successfully Entered"){
             return {
                 check : true,
@@ -83,8 +84,8 @@ const Login = (props)=>{
             },
             data : payload
         };
-        
-        const response = await axios(config).catch(err=>{
+        const axiosInstance = axios.createInstance();
+        const response = await axiosInstance(config).catch(err=>{
             console.log(err);
             setState(prevState=>({
                 ...prevState,

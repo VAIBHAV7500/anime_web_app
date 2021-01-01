@@ -18,7 +18,8 @@ const Watchlist = ({userId, endPoint, message}) => {
     }, [endPoint,userId]);
 
     const getWatchlist = async () => {
-        return axios.get(`${endPoint}?id=${userId}`);
+        const axiosInstance = axios.createInstance();
+        return axiosInstance.get(`${endPoint}?id=${userId}`);
     }
     
     const generateWatchlist = async () => {

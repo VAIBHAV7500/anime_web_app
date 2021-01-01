@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db/index');
+const {geoBlockCheckMiddleware} = require('../services/middleware');
 
 module.exports = (app)=>{
     
-    router.post('/register',async (req, res, next) => {
+    router.post('/register',geoBlockCheckMiddleware, async (req, res, next) => {
         res.status(200).json({
             message : "Registration Successfull"
         });
@@ -38,8 +39,7 @@ module.exports = (app)=>{
         // }
     });
     
-    router.post('/login',app.oauth.grant(),(req,res,next)=>{
-
+    router.post('/login', geoBlockCheckMiddleware, app.oauth.grant(),(req,res,next)=>{
     });
     
     return router;

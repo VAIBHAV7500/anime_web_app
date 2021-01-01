@@ -26,7 +26,8 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
     
     const init = async () => {
         const endPoint = `${requests.reviews}/shows?id=${id}&user_id=${userId}`;
-        const response = await axios.get(endPoint);
+        const axiosInstance = axios.createInstance();
+        const response = await axiosInstance.get(endPoint);
         response.data = response.data.reverse();
         //response.data = {...response.data,showMore : false};
         (response.data).forEach((e,i)=>{
@@ -77,7 +78,8 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
                 if(rating !== -1){
                     body.rating = rating;
                 }
-                await axios.post(endPoint, body).catch((err) => {
+                const axiosInstance = axios.createInstance();
+                await axiosInstance.post(endPoint, body).catch((err) => {
                     toast.error(`O'Oh, looks like there's some issue. Please try again later`);
                     //Something went wrong
                 });
@@ -100,11 +102,12 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
         const className = styles.red_heart;
         const element = document.getElementById(review_id);
         const likeNumber = document.getElementById(`like_${review_id}`);
+        const axiosInstance = axios.createInstance();
         if(element.classList.contains(className)){
             element.classList.remove(className);
             likeNumber.innerText = (parseInt(likeNumber.innerText) - 1).toString();
             const endPoint = `${requests.reviews}/unlike?id=${review_id}&user_id=${userId}`;
-            axios.delete(endPoint);
+            axiosInstance.delete(endPoint);
         }else{
             element.classList.add(className);
             likeNumber.innerText = (parseInt(likeNumber.innerText) + 1).toString();
@@ -114,7 +117,7 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
                 review_id
             }
             const endPoint = `${requests.reviews}/like`;
-            axios.post(endPoint, body);
+            axiosInstance.post(endPoint, body);
         }
     }
     

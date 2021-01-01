@@ -41,7 +41,8 @@ export class player extends Component {
                     console.log("Not Using Ad Blocker");
                 }
                 const endPoint = `${requests.fetchVideoDetails}?player_id=${playerId}&user_id=${this.props.user_id}`;
-                const result = await axios.get(endPoint);
+                const axiosInstance = axios.createInstance();
+                const result = await axiosInstance.get(endPoint);
                 if(result.data){
                     result.data.intro_start_time = 0;
                     result.data.intro_end_time = 22;

@@ -92,7 +92,8 @@ export default function SignUp() {
             },
             data : data
         };
-        axios(config)
+        const axiosInstance = axios.createInstance();
+        axiosInstance(config)
         .then(function (response) {
             stopLoader();
             if(response.data.message === "Registration Successfull"){

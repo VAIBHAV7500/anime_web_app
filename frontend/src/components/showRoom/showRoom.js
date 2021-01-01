@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import Row from './Row';
+import React, { Component, lazy, Suspense } from 'react'
 import Banner from './Banner';
 import requests from '../../utils/requests';
 import Nav from '../services/Nav';
@@ -8,6 +7,7 @@ import PageLoader from '../services/page_loader';
 import styles from './showRoom.module.css';
 import axios from '../../utils/axios';
 import {useHistory} from "react-router-dom";
+const Row = React.lazy(() => import('./Row'));
 
 export class showRoom extends Component {
     constructor(props) {
@@ -47,13 +47,12 @@ export class showRoom extends Component {
     ]
     }
 
-    loadData = async () => {
-        this.state.pageLoader = true;
-        this.setState(this.state);
-        const promiseArray = [];
+    getShows = async () => {
+      const promiseArray = [];
         this.rows.forEach((row, index) => {
           promiseArray.push(new Promise((res,rej)=>{
-            axios.get(row.url).then((result) => {
+            const axiosInstance = axios.createInstance();
+            axiosInstance.get(row.url).then((result) => {
               this.rows[index].movies = result.data;
               console.log(result.data);
               res(result.data);
@@ -65,17 +64,34 @@ export class showRoom extends Component {
         await Promise.all(promiseArray).catch((err) => {
            // redirect in this case
            console.log(err);
+           throw err;
         })
+    }
+
+    loadData = async () => {
+        this.state.pageLoader = true;
+        this.setState(this.state);
+        let retry = 0;
+        do{
+          try{
+            await this.getShows();
+            retry = -1;
+          }catch(err){
+            console.log(err);
+          }
+          retry++;
+        }while(retry > 0 && retry < 10)
+        this.state.pageLoader = false;
         this.state.rows = this.rows;
         this.state.trailer = "";
         this.state.showIndex = {current : "" , prev : ""};
         this.setState(this.state);   
-        await new Promise((res,rej)=>{
-          setTimeout(()=>{
-              this.state.pageLoader = false;
-              this.setState(this.state);
-          },1000);
-        })   
+        // await new Promise((res,rej)=>{
+        //   setTimeout(()=>{
+        //       this.state.pageLoader = false;
+        //       this.setState(this.state);
+        //   },1000);
+        // })   
     }
 
     changeTrailer = (newTrailerData) => {
@@ -108,7 +124,9 @@ export class showRoom extends Component {
               <div className={styles.rows_wrapper}>
               {
                 this.state.rows?.map((row,index)=>{
-                  return <Row rowIndex={index} showIndexArray={[this.state.showIndex,this.changeShowIndex]} trailerArray={[this.state.trailer,this.changeTrailer]} title = {row.name} movies = {row.movies} isLargeRow  key={index} className={styles.row}/>
+                  return <Suspense  key={index} fallback={<PageLoader className={styles.shadow} />}>
+                  <Row rowIndex={index} showIndexArray={[this.state.showIndex,this.changeShowIndex]} trailerArray={[this.state.trailer,this.changeTrailer]} title = {row.name} movies = {row.movies} isLargeRow className={styles.row}/>
+                </Suspense> 
                 })
               }
               </div>

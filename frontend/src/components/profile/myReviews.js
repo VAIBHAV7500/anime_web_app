@@ -12,7 +12,8 @@ function MyReviews({userId,endPoint}) {
     const [loading, setLoading] = useState(true);
     const history = useHistory();
     const fetchData = async () => {
-        const result = await axios.get(`${endPoint}?id=${userId}`).catch((err)=>{
+        const axiosInstance = axios.createInstance();
+        const result = await axiosInstance.get(`${endPoint}?id=${userId}`).catch((err)=>{
 
         });
         if(result.data){

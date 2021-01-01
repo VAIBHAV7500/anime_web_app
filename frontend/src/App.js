@@ -31,7 +31,8 @@ const handleAccessToken = async (token)=>{
       'Authorization': 'Bearer '+ token
       }
   };
-  var response = await axios(config);
+  const axiosInstance = axios.createInstance();
+  var response = await axiosInstance(config);
   if(response.data.message === "Successfully Entered"){
       return {
           check : true,

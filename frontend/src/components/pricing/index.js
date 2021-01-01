@@ -8,7 +8,8 @@ function Pricing() {
   const paymentHandler = async (e) => {
     e.preventDefault();
     const orderUrl = `api/order`;
-    const response = await axios.get(requests.order);
+    const axiosInstance = axios.createInstance();
+    const response = await axiosInstance.get(requests.order);
     const { data } = response;
     const options = {
       key: "rzp_test_NBD5PIK1a8cjiN",
@@ -19,7 +20,7 @@ function Pricing() {
         try {
          const paymentId = response.razorpay_payment_id;
          const url = `${requests.captureOrder}/${paymentId}`;
-         const captureResponse = await axios.post(url, {});
+         const captureResponse = await axiosInstance.post(url, {});
         } catch (err) {
           console.log(err);
         }

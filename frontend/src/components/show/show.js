@@ -79,7 +79,8 @@ class show extends Component {
             loading:true
         });
         promiseArray.push(new Promise((res, rej) => {
-            axios.get(`${requests.fetchShowDetails}?id=${showId}&user_id=${this.props.user_id}`).then((result) => {
+          const axiosInstance = axios.createInstance();
+            axiosInstance.get(`${requests.fetchShowDetails}?id=${showId}&user_id=${this.props.user_id}`).then((result) => {
                 res(result);
             }).catch((err) => {
                 rej(err)

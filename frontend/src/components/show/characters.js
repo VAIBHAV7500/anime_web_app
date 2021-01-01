@@ -28,7 +28,8 @@ const Characters = React.memo(({show_id, toastConfig, getRecent}) => {
 
     const updateCharacters = async () => {
         setCharacters([]);
-        const response = await axios.get(`${requests.characters}?show_id=${id}`).catch((err)=>{
+        const axiosInstance = axios.createInstance();
+        const response = await axiosInstance.get(`${requests.characters}?show_id=${id}`).catch((err)=>{
             toast.error(`O'Oh, looks like there's some issue. Please try again later`);
         });
         if (response?.data) {
