@@ -89,3 +89,6 @@ API Paths: Snake Case
 
 ## Spinners
 https://www.davidhu.io/react-spinners/
+
+## [Nginx Reverse Proxy [Production]](https://gist.github.com/basharovV/e25989cc918f0b21ded26c8bf3be8400)
+
