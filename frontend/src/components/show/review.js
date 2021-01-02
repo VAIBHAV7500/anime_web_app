@@ -71,7 +71,7 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
             if(verified){
                 const endPoint = `${requests.reviews}/create`;
                 const body = {
-                    show_id,
+                    show_id: id,
                     user_id: userId,
                     review: proposedReview
                 }

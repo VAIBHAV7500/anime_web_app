@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./Row.css";
-import ReactPlayer from 'react-player/lazy';
+import ReactPlayer from 'react-player';
 import { MdPlayCircleOutline, MdTv } from "react-icons/md";
 import {useHistory} from "react-router-dom";
 import { FaAngleLeft, FaAngleRight, FaTimes } from 'react-icons/fa';
