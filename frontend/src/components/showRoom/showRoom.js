@@ -1,13 +1,13 @@
-import React, { Component, lazy, Suspense } from 'react'
+import React, { Component } from 'react'
 import Banner from './Banner';
 import requests from '../../utils/requests';
 import Nav from '../services/Nav';
+import Row from './Row';
 import Footer from './footer';
 import PageLoader from '../services/page_loader';
 import styles from './showRoom.module.css';
 import axios from '../../utils/axios';
 import {useHistory} from "react-router-dom";
-const Row = React.lazy(() => import('./Row'));
 
 export class showRoom extends Component {
     constructor(props) {
@@ -124,9 +124,7 @@ export class showRoom extends Component {
               <div className={styles.rows_wrapper}>
               {
                 this.state.rows?.map((row,index)=>{
-                  return <Suspense  key={index} fallback={<PageLoader className={styles.shadow} />}>
-                  <Row rowIndex={index} showIndexArray={[this.state.showIndex,this.changeShowIndex]} trailerArray={[this.state.trailer,this.changeTrailer]} title = {row.name} movies = {row.movies} isLargeRow className={styles.row}/>
-                </Suspense> 
+                  return <Row rowIndex={index} showIndexArray={[this.state.showIndex,this.changeShowIndex]} trailerArray={[this.state.trailer,this.changeTrailer]} key={index} title = {row.name} movies = {row.movies} isLargeRow className={styles.row}/> 
                 })
               }
               </div>
