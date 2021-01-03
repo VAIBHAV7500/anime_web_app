@@ -32,7 +32,7 @@ app.oauth = oAuth2Server({
   grants: ['password'],
   debug: true
 })
-var { anyError, errorHandler, }  = require('./services/middleware');
+var { anyError, errorHandler, apiMiddleware }  = require('./services/middleware');
 require('dotenv').config();
 
 // if(process.env.NODE_ENV === "production"){
@@ -149,7 +149,7 @@ const { onLoad } = require('./routes/socket');
 
 app.use('/auth',authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
-app.use('/api', apiRouter);
+app.use('/api',apiMiddleware, app.oauth.authorise(), apiRouter);
 app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));

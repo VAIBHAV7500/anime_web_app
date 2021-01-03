@@ -10,7 +10,8 @@ module.exports = (app)=>{
             message : "Registration Successfull"
         });
         //Disabling Signup
-        // const resp = await db.user.create(req.body).catch(err=>{
+        //let body = req.body;
+        // const resp = await db.user.create(body).catch(err=>{
         //     errMessage = err.sqlMessage;
         //     if(errMessage.includes("email")){
         //         res.status(409).json({

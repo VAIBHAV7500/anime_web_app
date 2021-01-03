@@ -11,7 +11,7 @@ const createInstance = () => {
         baseURL: process.env.REACT_APP_SERVER_URL,
         headers: {
             'Content-Type': 'application/JSON',
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + token
             }
     });
 }

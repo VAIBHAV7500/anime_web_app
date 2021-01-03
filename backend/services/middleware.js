@@ -1,5 +1,5 @@
 const whiteList = require('../config/list/whitelist');
-const blackList = require('../config/list/blacklist');
+const axios = require('axios');
 
 const anyError = (req, res, next) => {
     const error = new Error(`${req.originalUrl} not found!!!`);
@@ -41,8 +41,38 @@ const apiMiddleware = (req,res,next) => {
     }
 }
 
-const geoBlockCheckMiddleware = (req,res,next) => {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+const checkIp = async (ip, retry = 0) => {
+    const baseUrl = 'https://api.ipgeolocationapi.com/';
+        const endPoint = `${baseUrl}geolocate/${ip}`;
+        console.log(endPoint);
+        const response = await axios.get(endPoint).catch((err)=>{
+            console.log(JSON.stringify(err));
+    });
+    if(!response){
+        if(retry <3){
+            console.log('Retrying GeoLocation');
+            checkIp(ip,retry+1);
+        }
+    }
+    return response;
+}
+
+const geoBlockCheckMiddleware = async (req,res,next) => {
+    const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
+    console.log(ip);
+    if(ip){
+        const response = await checkIp(ip);
+        if(response){
+            console.log(response.data.alpha2);
+            const country = response.data.alpha2;
+            console.log(country);
+            // if(country !== "IN"){
+            //     res.status(403).json({
+            //         message: "Geo Blocked!!"
+            //     });
+            // }
+        }
+    }
     console.log('Checking Geo Block ' + ip);
     next();
 }

@@ -1,63 +1,41 @@
-// Load the AWS SDK for Node.js
-const AWS = require('aws-sdk');
-const awsConfig = require('../../config/awsConfig.json');
+const keys = require('../../config/keys.json');
 const mailConfig = require('../../config/mail.json');
-// Set the region 
-AWS.config.update({region: awsConfig.region});
+const sgMail = require('@sendgrid/mail')
 
-// Create sendBulkTemplatedEmail params 
+const sendgridAPIKey = keys.sendgrid.key;
+sgMail.setApiKey(sendgridAPIKey);
 
 const sendMail = async (body) => {
-    let destination = {};
-    if(body.cc_address){
-        destination.CcAddresses = body.cc_address;
-    }
-    if(body.to_address){
-        destination.ToAddresses = body.to_address;
-    }
+    const to = body.to;
+    const subject = body.subject;
+    const text = body.text;
+    const html = body.html;
 
-    let message = {};
-    if(body.data){
-        message = {
-            Body: {
-                Html: {
-                    Charset: "UTF-8",
-                    Data: body.data
-                }
-            }
-        };
-    };
-
-    if(body.subject){
-        message.Subject = {
-            Charset: "UTF-8",
-            Data: body.subject
-        }
+    const msg = {
+        to, // Change to your recipient
+        from: 'staging@animei.tv', // Change to your verified sender
+        subject,
+        text,
+        html,
     }
-    let source = mailConfig.default_reply_to;
-    if(body.source){
-        source = body.source;
-    }
-    let replyTo = [];
-    if(body.reply_to){
-        replyTo = body.reply_to
-    }else{
-        replyTo = [source];
-    }
-
-    const params = {
-        Destination: destination,
-        Message: message,
-        Source: source,
-        ReplyToAddresses: replyTo
-    }
-
-    // Create the promise and SES service object
-    var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
-
-    // Handle promise's fulfilled/rejected states
-    return sendPromise;
+      
+    sgMail
+    .send(msg)
+    .then(() => {
+        console.log('Email sent')
+    })
+    .catch((error) => {
+        console.error(error)
+    })
 }
+
+const body = {
+    to : "vbhvsolanki7500@gmail.com",
+    subject: "Greetings from Animei TV",
+    text: "OTP: 123",
+    html: "Hi this is <strong>Animei TV</strong>"
+}
+sendMail(body);
 
 module.exports = {
     sendMail
