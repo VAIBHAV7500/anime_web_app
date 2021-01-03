@@ -12,3 +12,7 @@
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
+
+.modal::-webkit-scrollbar {
+    display: none;
+}

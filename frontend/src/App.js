@@ -20,6 +20,8 @@ import { LoginFailure, LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
 import Profile from './components/profile';
 import AdBlocked from './components/adBlocked';
+import SignUpVerification from './components/welcome/SignUpVerification';
+import Welcome from './components/welcome';
 require('dotenv').config();
 
 const handleAccessToken = async (token)=>{
@@ -90,10 +92,9 @@ const App = ()=>{
       :
       <Router>
         <Switch>
-          <Route exact path="/signin" component={SignIn}></Route>
-          <Route exact path="/signup" component={SignUp}></Route>
+          <Route exact path="/welcome" component={Welcome}></Route>
           <Route path="/terms-and-conditions" component={Terms}></Route>
-          <Redirect to='/signin'></Redirect>
+          <Redirect to='/welcome'></Redirect>
         </Switch>
       </Router>
       }

@@ -9,7 +9,9 @@
 }
 
 .show{
-    width: 193px;
+    --width:193px;
+    min-width: var(--width);
+    max-width: var(--width);
     height: auto;
     background-color: radial-gradient(ellipse , #1e1e1f 10%, #090a0f 100%);
     cursor: pointer;
@@ -52,37 +54,37 @@
 
 @media(max-width:960px){
     .show{
-        width: 156px;
+        --width: 156px;
         margin: 8px;
     }
 }
 
 @media(max-width:750px){
     .show{
-        width: 170px;
+        --width: 170px;
     }
 }
 
 @media(max-width:630px){
     .show{
-        width: 121px;
+        --width: 121px;
     }
 }
 
 @media(max-width:315px){
     .show{
-        width: 100px;
+        --width: 100px;
     }
 }
 
 @media(max-width:300px){
     .show{
-        width: 88px;
+        --width: 88px;
     }
 }
 
 @media(max-width:300px){
     .show{
-        width: 60%;
+        --width: 60%;
     }
 }

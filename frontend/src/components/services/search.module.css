@@ -36,8 +36,8 @@
 
 .close_search_icon{
     position: fixed;
-    right: 50px;
-    top: 67px;
+    right: 6px;
+    top: 9px;
     font-size: 41px;
     color: grey;
     cursor: pointer;

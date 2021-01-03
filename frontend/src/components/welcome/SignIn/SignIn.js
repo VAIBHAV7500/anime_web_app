@@ -12,6 +12,7 @@ import { LoginSuccess } from '../../../redux/Auth/authAction';
 import { useCookies } from 'react-cookie';
 const Login = (props)=>{
     const appbaseurl = process.env.REACT_APP_BASE_URL;
+    const [,setActive] = props.activeArray;
     const dispatch = useDispatch();
     const [state,setState] = useState({
         loader : false,
@@ -19,13 +20,7 @@ const Login = (props)=>{
         password:"",
         errorShow:false
     });
-    useEffect(() => {
-        document.body.classList.add(styles.body);
-        return () => {
-            document.body.classList.remove(styles.body);
-
-        }
-    }, []);
+    
     const [ _ , setCookie] = useCookies(['token']);
 
     const handleAccessToken = async (token)=>{
@@ -155,13 +150,10 @@ const Login = (props)=>{
                 fieldData={field} 
               />
           ))}
-          <div className={styles.forgot}>
-            <a href="/#" className={styles.link} >Forgot Password?</a>
-            <p className={styles.para}><input type="checkbox" />Remember Me</p>
-          </div>
         <button className={styles.btn} type="submit" >{ state.loader? <Spinner/> : <strong>Sign In</strong>}</button>
         </form>
-        <p className={`${styles.sign_up_p} ${styles.para}`}>Don't have an account? <Link className={`${styles.sign_up} ${styles.link}`} to="/signup"><strong>Sign Up</strong></Link> </p>
+        <p className={`${styles.sign_up_p} ${styles.para}`}>Don't have an account? <span onClick={()=>{setActive(1)}} className={`${styles.sign_up} ${styles.link}`} ><strong>Sign Up</strong></span> </p>
+        <div className={`${styles.link} ${styles.forgot_password}`}>Forgot Password?</div>
       </div>
     )
 }

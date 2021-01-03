@@ -1,0 +1,50 @@
+.body{
+    padding: 3em;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    width: 100%;
+    padding: 3em;
+}
+.back{
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.heading{
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;  
+    color: #d2d2d2;
+    gap: 25px;
+}
+.time{
+    text-align: center;
+    font-size: 25px;
+}
+
+.input{
+    height: 30px;
+    outline: none;
+    padding: 0 10px;
+}
+.input:valid + .submit{
+    background-color: rebeccapurple;
+}
+
+.submit{
+    background-color: grey;
+    padding: 5px 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.submit:active{
+    position: relative;
+    top: 1px;
+}

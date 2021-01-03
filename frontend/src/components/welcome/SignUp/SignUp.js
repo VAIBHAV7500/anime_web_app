@@ -9,13 +9,9 @@ import sha256 from 'crypto-js/sha256';
 import Spinner from '../Spinner/index'
 import { Link } from 'react-router-dom';
 
-export default function SignUp() {
-    useEffect(() => {
-        document.body.classList.add(styles2.body);
-        return () => {
-            document.body.classList.remove(styles2.body);
-        }
-    }, []);
+export default function SignUp(props) {
+    const [,setActive] = props.activeArray;
+    const [email,setEmail] = props.emailDetail;
     const passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$"
     console.log(new RegExp(passwordRegex).test("Hello@123") ? "match" : "not match");
     const appbaseurl = process.env.REACT_APP_BASE_URL;
@@ -97,7 +93,8 @@ export default function SignUp() {
         .then(function (response) {
             stopLoader();
             if(response.data.message === "Registration Successfull"){
-                window.open("/signin","_self");
+                setEmail(state.regEmail);
+                setActive(2);
             }else{
                 setState(prevState =>({
                     ...prevState,
@@ -148,15 +145,15 @@ export default function SignUp() {
             pattern : passwordRegex,
             title : "must be 8 letters [A-Z,a-z,0-9,special characters]"
         },
-        {
-            id : "regMobileNo",
-            name : "Mobile No.",
-            component : <FaMobile/>,
-            type : "tel",
-            value : state.regMobileNo,
-            onChange : handleChange,
-            pattern : "^(\+\d{1,3}[- ]?)?\d{10}$",
-        }
+        // {
+        //     id : "regMobileNo",
+        //     name : "Mobile No.",
+        //     component : <FaMobile/>,
+        //     type : "tel",
+        //     value : state.regMobileNo,
+        //     onChange : handleChange,
+        //     pattern : "^(\+\d{1,3}[- ]?)?\d{10}$",
+        // }
     ]
 
     return (
@@ -170,8 +167,9 @@ export default function SignUp() {
                         fieldData={field} 
                     />
                 ))}
+                <p className={styles.check_para}><input type="checkbox" required /><span className={styles.checkbox}>I agree to the <Link to="/terms-and-conditions" className={styles.tandc}>terms and condition and privacy policy</Link> </span></p>
                 <button className={styles2.btn} type="submit">{ state.loader? <Spinner/> : <strong>Sign Up</strong>}</button>
-                <p className={`${styles.sign_in_p} ${styles2.para}`}>Already have an account? <Link  className={`${styles.sign_in} ${styles2.link}`} to="/signin"><strong>Sign In</strong></Link></p>
+                <p className={`${styles.sign_in_p} ${styles2.para}`}>Already have an account? <span onClick={()=>{setActive(0)}} className={`${styles.sign_in} ${styles2.link}`} ><strong>Sign In</strong></span></p>
             </form>
         </div>
     )

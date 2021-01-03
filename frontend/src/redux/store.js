@@ -1,4 +1,4 @@
-import {createStore,applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import authReducer from './Auth/authReducer';
 import logger from 'redux-logger';
 

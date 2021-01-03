@@ -1,14 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
 
 .sign_up_form {
-    background: rgba(0, 0, 0, 0.4117647058823529);
-    max-width: 500px;
-    margin: 0 auto;
+    width: 100%;
     padding: 3em;
-    border-radius: 10px;
     box-sizing: border-box;
-    margin-top: 91px;
-    margin-left: 136px;
     overflow-y: scroll;
 }
 
@@ -17,6 +12,7 @@ p.sign_in_p {
     font-size: 13px;
     text-align: center;
     margin-top: 2em;
+    cursor: pointer;
 }
 
 .sign_in {
@@ -25,6 +21,26 @@ p.sign_in_p {
 }
 
 .sign_in:hover {
+    text-decoration: underline;
+}
+.check_para{
+    color: #eee;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.checkbox{
+    padding-left: 5px;
+    text-align: left;
+}
+
+.tandc{
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+.tandc:hover{
     text-decoration: underline;
 }
 
