@@ -1,3 +1,5 @@
+echo "Setting Permissions"
+git remote set-url origin git@github.com:VAIBHAV7500/anime_web_app.git
 echo "Pulling repository"
 git status
 echo "Stashing Current Changes"
@@ -23,4 +25,5 @@ forever stopall || true
 echo "Updating Config"
 sh config.sh 
 echo "Creating Server"
+cd backend
 forever start app.js
