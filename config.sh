@@ -1,5 +1,7 @@
 echo "Getting Configs"
 cd ../animei_config
+echo "Setting Permissions"
+git remote set-url origin git@github.com:animei-tv/animei_config.git
 echo "Stashing previous changes"
 git stash
 echo "Fetching"
