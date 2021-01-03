@@ -25,4 +25,5 @@ forever stopall || true
 echo "Updating Config"
 sh config.sh 
 echo "Creating Server"
-forever start ./backend/app.js
+cd backend
+forever start app.js
