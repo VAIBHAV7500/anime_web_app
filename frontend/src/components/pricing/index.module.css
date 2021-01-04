@@ -25,10 +25,17 @@
   text-align: center;
   transition: 0.3s transform;
   border-radius: 16px;
+  cursor: pointer
+}
+
+.current_plan{
+  box-shadow: 1px 2px 19px 9px rgba(255,218,8,0.85);
+  -webkit-box-shadow: 1px 2px 19px 9px rgba(255,218,8,0.85);
+  -moz-box-shadow: 1px 2px 19px 9px rgba(255,218,8,0.85);
 }
 
 .card:hover{
-  transform: scale(1.03);
+  transform: scale(1.09);
 }
 
 table{
@@ -58,6 +65,8 @@ table{
 }
 .column_heading{
   padding: 25px 60px;
+  background: #641ba8a8;
+  background-image: linear-gradient(to bottom, #641ba8b6, #3a0968a4);
 }
 .column_heading h2{
   font-weight:700;
@@ -65,6 +74,7 @@ table{
 }
 
 .buy_btn{
+  clear: both;
   margin: 26px auto;
   width: -moz-fit-content;
   width: fit-content;

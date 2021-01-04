@@ -1,0 +1,38 @@
+module.exports = [
+  {
+    "id": 1,
+    "name" : "Basic",
+    "Simulcasts" : "No",
+    "Ad on Videos" : "Yes",
+    "Quality" : "480p",
+    "Subtitle Languages" : "English",
+    "Dubbed Languages" : "Japanese, Hindi",
+    "Price" : "Free",
+    "Duration" : "Unlimited",
+    "Awesome Premium Features": "No",
+  },
+  {
+    "id": 2,
+    "name" : "Weeb",
+    "Simulcasts" : "On Time",
+    "Ad on Videos" : "No",
+    "Quality" : "480p, 720p, 1080p",
+    "Subtitle Languages" : "English",
+    "Dubbed Languages" : "English, Hindi, Japanese",
+    "Price" : "200 INR",
+    "Duration" : "1 month",
+    "Awesome Premium Features": "Yes",
+  },
+  {
+    "id": 3,
+    "name" : "Otaku",
+    "Simulcasts" : "On Time",
+    "Ad on Videos" : "No",
+    "Quality" : "480p, 720p, 1080p",
+    "Subtitle Languages" : "English",
+    "Dubbed Languages" : "English, Hindi, Japanese",
+    "Price [Avoid Hikes]" : "2200 INR (Save INR 200)",
+    "Duration" : "12 months",
+    "Awesome Premium Features": "Yes",
+  }
+]

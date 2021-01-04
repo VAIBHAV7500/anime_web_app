@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.css';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import Nav from '../services/Nav';
+import plans from './plans';
 
 function Pricing() {
+  const [planId, setPlan] = useState(2);
+
   const paymentHandler = async (e) => {
     e.preventDefault();
-    const orderUrl = `api/order`;
     const axiosInstance = axios.createInstance();
-    const response = await axiosInstance.get(requests.order);
+    const response = await axiosInstance.get(`${requests.order}?id=${planId}`);
     const { data } = response;
     const options = {
       key: "rzp_test_NBD5PIK1a8cjiN",
@@ -33,30 +35,11 @@ function Pricing() {
     rzp1.open();
   };
 
-  const plans = [
-    {
-      "name" : "Basic",
-      "Simulcasts" : "Delayed",
-      "Advertisement" : "Yes",
-      "Quality" : "480p",
-      "Subtitle Languages" : "Japanese,English",
-      "Dubbed Languages" : "English, Hindi, Japanese",
-      "Support" : "Standard Support",
-      "Price" : "Free",
-      "Duration" : "Unlimited"
-    },
-    {
-      "name" : "Premium",
-      "Simulcasts" : "No Delay",
-      "Advertisement" : "Yes",
-      "Quality" : "480p, 720p",
-      "Subtitle Languages" : "Japanese,English",
-      "Dubbed Languages" : "English, Hindi, Japanese",
-      "Support" : "Standard Support",
-      "Price" : "250 Rs.",
-      "Duration" : "1 month"
+  const setNewPlan = (id) => {
+    if(id != 1){
+      setPlan(id);
     }
-  ]
+  }
 
   return (
     <>
@@ -67,22 +50,25 @@ function Pricing() {
       <div className={styles.card_container}>
         {plans.map(plan => (
           <div>
-          <table className={styles.card}> 
-            {Object.keys(plan).map(field => (
+          <table className={`${styles.card} ${planId === plan["id"] ? styles.current_plan : ""}`} onClick={()=>{setNewPlan(plan["id"])}}> 
+            {Object.keys(plan).map(field => {
+              if(["id"].includes(field)){
+                return;
+              }
+              return (
               field!=="name" ?
-                <tr className={styles.card_field}>
+                <tr className={`${styles.card_field}`}>
                   <h5>{field}</h5>
                   <h4>{plan[field]}</h4>
                 </tr>
-              : <th className={styles.column_heading}>
+              : <th className={`${styles.column_heading} ${plan[field]}`}>
                   <h2>{plan[field]}</h2>
                 </th>
-            ))}
+            )})}
           </table>
-          <div className={styles.buy_btn}>Buy Now</div>
           </div>
         ))}
-
+        <div className={styles.buy_btn} onClick={paymentHandler}>Buy Now</div>
       </div>    
     </div>
     </>

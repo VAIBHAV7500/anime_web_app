@@ -6,15 +6,38 @@ const sendgridAPIKey = keys.sendgrid.key;
 sgMail.setApiKey(sendgridAPIKey);
 
 const sendMail = async (body) => {
+    const toMail = [];
+    if(body.to){
+        body.to.forEach((mail)=>{
+            toMail.push({
+                "email": mail
+            });
+        })
+    }
+    const ccMail = [];
+    if(body.cc){
+        body.cc.forEach((mail)=>{
+            ccMail.push({
+                "email": mail
+            });
+        })
+    }
+
     const to = body.to;
     const subject = body.subject;
     const text = body.text;
     const html = body.html;
+    const personalizations = [{
+        "to": toMail,
+        "cc": ccMail,
+        "subject": subject
+    }];
 
     const msg = {
-        to, // Change to your recipient
-        from: 'staging@animei.tv', // Change to your verified sender
-        subject,
+        from: {
+            "email": 'staging@animei.tv'
+        }, // Change to your verified sender
+        personalizations,
         text,
         html,
     }
@@ -29,13 +52,13 @@ const sendMail = async (body) => {
     })
 }
 
-const body = {
-    to : "vbhvsolanki7500@gmail.com",
-    subject: "Greetings from Animei TV",
-    text: "OTP: 123",
-    html: "Hi this is <strong>Animei TV</strong>"
-}
-sendMail(body);
+// const body = {
+//     to : ["vaibhav@animei.tv"],
+//     subject: "Greetings from Animei TV",
+//     text: "OTP: 123",
+//     html: "Hi this is <strong>Animei TV</strong>"
+// }
+// sendMail(body);
 
 module.exports = {
     sendMail

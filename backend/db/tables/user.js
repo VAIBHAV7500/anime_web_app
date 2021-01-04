@@ -10,7 +10,7 @@ const createTable = (con) => {
             name VARCHAR(255),
             status INT,
             mobile VARCHAR(15) UNIQUE,
-            plan_id INT DEFAULT 0,
+            plan_id INT DEFAULT 1,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             CHECK(email != '')
