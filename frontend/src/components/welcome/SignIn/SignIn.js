@@ -38,6 +38,7 @@ const Login = (props)=>{
             return {
                 check : true,
                 user_id : response.data.user_id,
+                plan_id : response.data.plan_id
             };
         }
         return {
@@ -96,9 +97,10 @@ const Login = (props)=>{
                 }));
             }else{
                 const userId = status.user_id;
+                const planId = status.plan_id;
                 stopLoader();
                 setCookie('token', response.data.access_token , { path: '/' });
-                dispatch(LoginSuccess(userId));
+                dispatch(LoginSuccess(userId,planId));
             }
         }
         stopLoader();

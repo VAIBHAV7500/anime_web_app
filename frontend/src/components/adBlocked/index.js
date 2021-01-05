@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import checkAdBlocker from '../../utils/adBlocker';
 import Nav from '../services/Nav';
 import styles from './adBlocked.module.css';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, Link } from 'react-router-dom';
+import { FaSadCry } from 'react-icons/fa';
 
 
 function AdBlocked() {
@@ -35,13 +36,20 @@ function AdBlocked() {
 
   return (
     <div>
-      <Nav type="dark" />
-      <div className={styles.ad_block}>
-        <p>We are detecting Ad blocker!!! Please remove it to continue the service
-        If its wrong, please raise an issue at support@animei.tv</p>
-          <div>
-          <button onClick={reloadPage}> Retry </button>
-        </div>
+      <Nav type="dark"></Nav>
+      <div className={styles.body}>
+        <div className={styles.container}>
+            <p><h2 className={styles.heading}>Don't Like Ads ?</h2></p>
+            <section>
+              <Link to={'/pricing'} className={styles.plan_btn}>GO PREMIUM</Link>
+              <p className={styles.or}>
+                <h3>OR</h3>
+              </p>
+              <p>Turn Off the Ad Blocker and Refresh the page</p>
+              <div onClick={reloadPage} className={styles.refresh_btn}>Refresh</div>
+            </section>
+          </div>
+        <p mailTo={"support@animei.tv"} className={styles.notice}>If it's wrong, please raise an issue at <a className={styles.link} href={"mailto:support@animei.tv"}>support@animei.tv</a></p>
       </div>
     </div>
   )

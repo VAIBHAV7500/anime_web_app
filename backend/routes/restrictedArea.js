@@ -51,6 +51,7 @@ module.exports = (app)=>{
             res.status(200).json({
                 message : "Successfully Entered",
                 user_id : req.oauth.bearerToken.user.id,
+                plan_id : 1 /*dummy plan id */
             });
         }
     });

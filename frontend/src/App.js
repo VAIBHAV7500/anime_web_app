@@ -9,8 +9,6 @@ import {
 import player from './components/player/player';
 import showRoom from './components/showRoom/showRoom';
 import show from './components/show/show';
-import SignIn from './components/welcome/SignIn/SignIn'
-import SignUp from './components/welcome/SignUp/SignUp'
 import Pricing from './components/pricing';
 import Terms from './components/footer/Terms';
 import { useSelector } from 'react-redux';
@@ -20,7 +18,6 @@ import { LoginFailure, LoginSuccess } from './redux/Auth/authAction';
 import axios from './utils/axios';
 import Profile from './components/profile';
 import AdBlocked from './components/adBlocked';
-import SignUpVerification from './components/welcome/SignUpVerification';
 import Welcome from './components/welcome';
 require('dotenv').config();
 
@@ -39,6 +36,7 @@ const handleAccessToken = async (token)=>{
       return {
           check : true,
           user_id : response.data.user_id,
+          plan_id : response.data.plan_id
       };
   }
   return {
@@ -50,7 +48,7 @@ const check = (token,dispatch,removeCookie)=>{
   if(token){
     return handleAccessToken(token).then((result)=>{
       if(result.check){
-        dispatch(LoginSuccess(result.user_id));
+        dispatch(LoginSuccess(result.user_id,result.plan_id));
       }else{
         removeCookie('token', { path: '/' });
         dispatch(LoginFailure());

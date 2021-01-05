@@ -1,13 +1,64 @@
-.ad_block{
-  position:fixed;
-  padding:0;
-  margin:0;
-
-  top:0;
-  left:0;
-
-  width: 100%;
-  height: 100%;
-  background-color: white;
+.body{
   padding-top: 80px;
+  height: calc(100vh - 80px);
+}
+
+.container{
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.heading{
+  color: red;
+  font-size: 62px;
+  margin-bottom: 50px;
+}
+.or{
+  margin: 40px auto;
+  font-size: 50px;
+}
+section{
+  font-size: 22px;
+}
+.plan_btn{
+  text-decoration: none;
+  background-color: gold;
+  width: fit-content;
+  padding: 20px 50px;
+  margin: 0px auto;
+  border-radius: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.refresh_btn{
+  background-color: gray;
+  width: fit-content;
+  padding: 10px 50px;
+  margin: 20px auto;
+  color: black;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.notice{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: rtl;
+  color: white;
+}
+
+.notice a{
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.notice a:hover{
+  text-decoration: underline;
 }
