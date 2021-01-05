@@ -1,6 +1,11 @@
 .pricing{
   padding-top: 80px;
   color: white;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .pricing h1{
@@ -11,10 +16,13 @@
 
 .card_container{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   height: 100%;
   gap: 2em;
+  margin-top: 50px;
+  padding: 0 50px ;
 }
 
 .card{
@@ -28,14 +36,15 @@
   cursor: pointer
 }
 
+
 .current_plan{
   box-shadow: 1px 2px 19px 9px rgba(255,218,8,0.85);
-  -webkit-box-shadow: 1px 2px 19px 9px rgba(255,218,8,0.85);
+  -webkit-box-shadow: 0px 0px 14px 3px rgba(255,218,8,0.85);
   -moz-box-shadow: 1px 2px 19px 9px rgba(255,218,8,0.85);
 }
 
 .card:hover{
-  transform: scale(1.09);
+  transform: scale(1.04);
 }
 
 table{
@@ -64,6 +73,9 @@ table{
   font-size: 16px;
 }
 .column_heading{
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 25px 60px;
   background: #641ba8a8;
   background-image: linear-gradient(to bottom, #641ba8b6, #3a0968a4);
@@ -73,17 +85,27 @@ table{
   font-size: 24px;
 }
 
+
 .buy_btn{
   clear: both;
-  margin: 26px auto;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 10px 56px;
+  margin: 40px auto;
+  width: 50%;
+  padding: 15px 56px;
   background-color: rebeccapurple;
   border-radius: 8px;
   color: white;
   font-weight: bold;
   cursor: pointer;
+  font-size: 25px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.buy_btn svg{
+  padding-left: 5px;
 }
 
 .buy_btn:active{

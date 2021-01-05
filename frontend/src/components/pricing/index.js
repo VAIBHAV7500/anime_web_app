@@ -4,6 +4,7 @@ import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import Nav from '../services/Nav';
 import plans from './plans';
+import { FaAngleRight, FaArrowRight } from 'react-icons/fa';
 
 function Pricing() {
   const [planId, setPlan] = useState(2);
@@ -46,10 +47,9 @@ function Pricing() {
     <Nav type="dark"/>
     <div className={styles.pricing}>
       {/* <button onClick={paymentHandler}>Pay Now</button> */}
-      <h1>Select Your Plan</h1>
+      {/* <h1>Select Your Plan</h1> */}
       <div className={styles.card_container}>
         {plans.map(plan => (
-          <div>
           <table className={`${styles.card} ${planId === plan["id"] ? styles.current_plan : ""}`} onClick={()=>{setNewPlan(plan["id"])}}> 
             {Object.keys(plan).map(field => {
               if(["id"].includes(field)){
@@ -66,10 +66,9 @@ function Pricing() {
                 </th>
             )})}
           </table>
-          </div>
-        ))}
-        <div className={styles.buy_btn} onClick={paymentHandler}>Buy Now</div>
+          ))}
       </div>    
+      <div className={styles.buy_btn} onClick={paymentHandler}>Proceed with {plans[planId-1]?.name} <FaAngleRight/> </div>
     </div>
     </>
   )
