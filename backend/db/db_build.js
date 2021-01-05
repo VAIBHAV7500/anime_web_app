@@ -24,6 +24,7 @@ const user_player_session = require('./tables/user_player_session');
 const notification = require('./tables/notifications');
 const notification_engagements = require('./tables/notification_engagements');
 const discussions = require('./tables/discussions');
+const razorpay_orders = require('./tables/razorpay_orders');
 
 var con = mysql.createConnection({
     host: dbConfig.db_url,
@@ -104,6 +105,8 @@ con.connect(async (err)=>{
         console.log((`Created notification_engagements`));
         response = await discussions.createTable(con);
         console.log((`Created Discussions`));
+        response = await razorpay_orders.createTable(con);
+        console.log(`Created razorpay_orders`);
 
         console.log('\n############## Running Migrations ##############');
         console.log('If ERR => ER_DUP_FIELDNAME then it is already in the DB.')

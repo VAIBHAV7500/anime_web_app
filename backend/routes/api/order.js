@@ -7,9 +7,21 @@ const request = require('request');
 
 const instance = new Razorpay(keys.razorpay);
 
+const cleanJson = (js) => {
+  let newJs = {};
+  Object.keys(js).forEach((key)=>{
+    if(js[key]){
+      newJs[key] = js[key];
+    }
+  });
+  return newJs;
+}
+
 
 router.get("/", (req, res) => {
   try {
+    const plan_id = req.query.id;
+    console.log(plan_id);
     const options = {
       amount: 10 * 100, // amount == Rs 10
       currency: "INR",
@@ -23,6 +35,14 @@ router.get("/", (req, res) => {
         message: "Something Went Wrong",
       });
     }
+    console.log(order);
+    const body = {
+      id: order.id,
+      amount: (order.amount/100),
+      status: order.status
+    }
+    console.log(body);
+    await db.razorpay_orders.create(body);
   return res.status(200).json(order);
  });
 } catch (err) {
@@ -45,16 +65,30 @@ router.post("/capture/:paymentId", (req, res) => {
         currency: "INR",
       },
     },
-   async function (err, response, body) {
+   async function (err, response, stringBody) {
      if (err) {
        console.log('Error');
       return res.status(500).json({
          message: "Something Went Wrong",
        }); 
      }
-      console.log("Status:", response.statusCode);
-      console.log("Headers:", JSON.stringify(response.headers));
-      console.log("Response:", body);
+      const body = JSON.parse(stringBody);
+      let updateBody = {
+        transaction_id: body.id,
+        amount: body.amount / 100,
+        invoice_id: body.invoice_id,
+        method: body.method,
+        amount_refunded: body.amount_refunded,
+        refund_status: body.refund_status,
+        card_id: body.card_id,
+        bank: body.bank,
+        wallet: body.wallet,
+        vpa: body.vpa,
+        email: body.email,
+        contact: body.contact
+      };
+      updateBody = cleanJson(updateBody);
+      await db.razorpay_orders.onTransactionComplete(updateBody,body.order_id);
       return res.status(200).json(body);
     });
   } catch (err) {

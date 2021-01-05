@@ -1,17 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db/index');
+const redis = require('../../lib/redis');
 
 router.get('/', async (req,res,next)=>{
     const show_id = req.query.show_id;
-    const result = await db.characters.getCharactersByShows(show_id).catch((err)=>{
-        res.status(401).json({
-            err: err.message,
-            stack: err.stack
-        });
-    })
-    if(result){
-        res.json(result);
+    if(show_id){
+        const key = `character_${show_id}`;
+        const redisResult = await redis.getValue(key);
+        if(redisResult){
+            res.json(redisResult);
+        }else{
+            const result = await db.characters.getCharactersByShows(show_id).catch((err)=>{
+                res.status(401).json({
+                    err: err.message,
+                    stack: err.stack
+                });
+            });
+            if(result){
+                redis.setValue(key,result);
+                res.json(result);
+            }
+        }
+    }else{
+        res.status(401);
     }
 });
 
