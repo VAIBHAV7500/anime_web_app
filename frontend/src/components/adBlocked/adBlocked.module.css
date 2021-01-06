@@ -1,64 +1,80 @@
-.body{
-  padding-top: 80px;
-  height: calc(100vh - 80px);
+.body {
+    padding-top: 80px;
+    height: calc(100vh - 80px);
+    background-color: rebeccapurple;
 }
 
-.container{
-  height: 100%;
-  width: 100%;
-  color: white;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.container {
+    height: 100%;
+    width: 100%;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.heading{
-  color: red;
-  font-size: 62px;
-  margin-bottom: 50px;
-}
-.or{
-  margin: 40px auto;
-  font-size: 50px;
-}
-section{
-  font-size: 22px;
-}
-.plan_btn{
-  text-decoration: none;
-  background-color: gold;
-  width: fit-content;
-  padding: 20px 50px;
-  margin: 0px auto;
-  border-radius: 16px;
-  font-weight: bold;
-  color: black;
+.heading {
+    font-size: 62px;
+    margin-bottom: 30px;
 }
 
-.refresh_btn{
-  background-color: gray;
-  width: fit-content;
-  padding: 10px 50px;
-  margin: 20px auto;
-  color: black;
-  border-radius: 16px;
-  cursor: pointer;
+.para{
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.notice{
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  display: rtl;
-  color: white;
+.or {
+    display: flex;
+    margin: 20px auto;
+    font-size: 40px;
+}
+.or::after,
+.or::before{
+    content: "";
+    border-top: .3rem solid white;
+    width: 6rem;
+    transform: translateY(50%);
+    margin: 0 1rem;
+}
+section {
+    font-size: 22px;
+}
+.plan_btn {
+    text-decoration: none;
+    background-color: gold;
+    width: fit-content;
+    padding: 20px 50px;
+    margin: 0 auto;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: black;
 }
 
-.notice a{
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
+.refresh_btn {
+    background-color: rgb(202, 200, 200);
+    width: fit-content;
+    font-weight: bold;
+    padding: 10px 50px;
+    margin: 8px auto;
+    color: black;
+    border-radius: 16px;
+    cursor: pointer;
 }
 
-.notice a:hover{
-  text-decoration: underline;
+.notice {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: rtl;
+    color: white;
+}
+
+.notice a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.notice a:hover {
+    text-decoration: underline;
 }

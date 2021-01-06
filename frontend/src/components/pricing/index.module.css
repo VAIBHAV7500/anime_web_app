@@ -1,6 +1,7 @@
 .pricing{
   padding-top: 80px;
   color: white;
+  background-color: rebeccapurple;
   min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
@@ -29,7 +30,7 @@
   height: fit-content;
   width: fit-content;
   color:white;
-  background-color: rgba(20, 20, 20, 0.685);
+  background-color: rgb(248, 245, 245);
   text-align: center;
   transition: 0.3s transform;
   border-radius: 16px;
@@ -66,34 +67,33 @@ table{
 }
 
 .card_field h5{
-  color: rgb(168, 161, 161);
+  color: black;
   font-size: 14px;
 }
 .card_field h4{
   font-size: 16px;
+  color: black;
 }
 .column_heading{
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 25px 60px;
-  background: #641ba8a8;
-  background-image: linear-gradient(to bottom, #641ba8b6, #3a0968a4);
+  
 }
 .column_heading h2{
   font-weight:700;
   font-size: 24px;
 }
 
-
 .buy_btn{
   clear: both;
   margin: 40px auto;
-  width: 50%;
+  width: fit-content;
   padding: 15px 56px;
-  background-color: rebeccapurple;
+  background-color: white;
   border-radius: 8px;
-  color: white;
+  color: rebeccapurple;
   font-weight: bold;
   cursor: pointer;
   font-size: 25px;
@@ -101,6 +101,7 @@ table{
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid white;
   
 }
 
@@ -111,4 +112,19 @@ table{
 .buy_btn:active{
   position: relative;
   top: 1px;
+}
+
+.basic{
+  background-color: #995a1b;
+  background-image: linear-gradient(to bottom,#eeab68, #9c5003);
+}
+
+.weeb{
+  background-color: silver;
+  background-image: linear-gradient(to bottom,rgb(233, 232, 232), rgb(105, 102, 102));
+}
+
+.otaku{
+  background-color: gold;
+  background-image: linear-gradient(to bottom,rgb(247, 216, 45),rgb(236, 197, 22));
 }

@@ -1,4 +1,6 @@
-module.exports = [
+import styles from "./index.module.css";
+
+export default [
   {
     "id": 1,
     "name" : "Basic",
@@ -10,6 +12,7 @@ module.exports = [
     "Price" : "Free",
     "Duration" : "Unlimited",
     "Awesome Premium Features": "No",
+    "custom_class" : styles.basic,
   },
   {
     "id": 2,
@@ -22,6 +25,7 @@ module.exports = [
     "Price" : "200 INR",
     "Duration" : "1 month",
     "Awesome Premium Features": "Yes",
+    "custom_class" : styles.weeb,
   },
   {
     "id": 3,
@@ -34,5 +38,6 @@ module.exports = [
     "Price [Avoid Hikes]" : "2200 INR (Save INR 200)",
     "Duration" : "12 months",
     "Awesome Premium Features": "Yes",
+    "custom_class" : styles.otaku,
   }
 ]

@@ -149,6 +149,7 @@
 .show_name{
     text-align: center;
     box-sizing: border-box;
+    height: fit-content;
     padding: 0 6%;
     margin-top: 7%;
     font-size: 14px;

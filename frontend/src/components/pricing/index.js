@@ -46,13 +46,11 @@ function Pricing() {
     <>
     <Nav type="dark"/>
     <div className={styles.pricing}>
-      {/* <button onClick={paymentHandler}>Pay Now</button> */}
-      {/* <h1>Select Your Plan</h1> */}
       <div className={styles.card_container}>
         {plans.map(plan => (
           <table className={`${styles.card} ${planId === plan["id"] ? styles.current_plan : ""}`} onClick={()=>{setNewPlan(plan["id"])}}> 
             {Object.keys(plan).map(field => {
-              if(["id"].includes(field)){
+              if(["id","custom_class"].includes(field)){
                 return;
               }
               return (
@@ -61,7 +59,7 @@ function Pricing() {
                   <h5>{field}</h5>
                   <h4>{plan[field]}</h4>
                 </tr>
-              : <th className={`${styles.column_heading} ${plan[field]}`}>
+              : <th className={`${styles.column_heading} ${plan[field]} ${plan["custom_class"]}`}>
                   <h2>{plan[field]}</h2>
                 </th>
             )})}

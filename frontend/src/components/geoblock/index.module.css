@@ -1,0 +1,51 @@
+.body{
+    color: white;
+    display: flex;
+    position: relative;
+    min-height: calc(100vh);
+    align-items: center;
+    background-color: rebeccapurple;
+}
+.container{
+    margin: 0 auto;
+}
+
+.heading{
+    color: white;
+    font-size: 60px;
+}
+
+section{
+    margin: 20px auto;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.email_input{
+    width: 250px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+}
+
+.container h3{
+    font-size: 20px;
+}
+
+.submit_btn{
+    border: 1px solid white;
+    width: fit-content;
+    padding: 5px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit_btn:active{
+    position: relative;
+    top: 1px;
+}

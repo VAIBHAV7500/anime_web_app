@@ -19,6 +19,7 @@ import axios from './utils/axios';
 import Profile from './components/profile';
 import AdBlocked from './components/adBlocked';
 import Welcome from './components/welcome';
+import GeoBlock from './components/geoblock';
 require('dotenv').config();
 
 const handleAccessToken = async (token)=>{
@@ -84,6 +85,7 @@ const App = ()=>{
           <Route path="/pricing" component={Pricing}></Route>
           <Route path="/terms-and-conditions" component={Terms}></Route>
           <Route path="/ad-blocked" component={AdBlocked}></Route>
+          <Route path="/geo-block" component={GeoBlock}></Route>
           <Redirect to='/'></Redirect>
         </Switch>
       </Router>

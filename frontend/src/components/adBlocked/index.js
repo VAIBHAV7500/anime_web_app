@@ -45,7 +45,7 @@ function AdBlocked() {
               <p className={styles.or}>
                 <h3>OR</h3>
               </p>
-              <p>Turn Off the Ad Blocker and Refresh the page</p>
+              <p className={styles.para}>Turn Off the Ad Blocker and Refresh the page</p>
               <div onClick={reloadPage} className={styles.refresh_btn}>Refresh</div>
             </section>
           </div>

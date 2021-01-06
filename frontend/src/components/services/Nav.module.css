@@ -212,13 +212,15 @@
     max-height: calc(95% - 80px);
 }
 
-
 .notification_node {
     box-sizing: border-box;
     padding: 11px 20px;
     border-bottom: 2px solid black;
     font-weight: bold;
     width: 100%;
+}
+.notification_node:only-child{
+    border-bottom: none;
 }
 
 .notification_node:hover{
