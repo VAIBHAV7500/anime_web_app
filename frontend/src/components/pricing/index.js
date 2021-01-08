@@ -5,14 +5,16 @@ import requests from '../../utils/requests';
 import Nav from '../services/Nav';
 import plans from './plans';
 import { FaAngleRight, FaArrowRight } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 function Pricing() {
   const [planId, setPlan] = useState(2);
+  const userId = useSelector(state => state.user_id);
 
   const paymentHandler = async (e) => {
     e.preventDefault();
     const axiosInstance = axios.createInstance();
-    const response = await axiosInstance.get(`${requests.order}?id=${planId}`);
+    const response = await axiosInstance.get(`${requests.order}?id=${planId}&user_id=${userId}`);
     const { data } = response;
     const options = {
       key: "rzp_test_NBD5PIK1a8cjiN",
@@ -23,7 +25,10 @@ function Pricing() {
         try {
          const paymentId = response.razorpay_payment_id;
          const url = `${requests.captureOrder}/${paymentId}`;
-         const captureResponse = await axiosInstance.post(url, {});
+         const captureResponse = await axiosInstance.post(url, {
+           plan_id: planId,
+           user_id: userId
+         });
         } catch (err) {
           console.log(err);
         }

@@ -12,7 +12,6 @@ const { updateList } = require('./lib/search');
 const { logger } = require('./lib/logger');
 const oAuth2Server = require('node-oauth2-server')
 const oAuthModel = require('./services/accessTokenModel');
-const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 const WebSocket = require('ws');
 const fs = require('fs');
 const session = require('express-session');
@@ -23,6 +22,7 @@ const keys = require('./config/keys.json');
 const dbConfig = require('./config/dbConfig.json');
 const responseTime = require('response-time');
 const redis = require('redis');
+const {executeOnce} = require('./services/slave');
 
 const clusterWorkerSize = os.cpus().length
 
@@ -34,19 +34,6 @@ app.oauth = oAuth2Server({
 })
 var { anyError, errorHandler, apiMiddleware }  = require('./services/middleware');
 require('dotenv').config();
-
-// if(process.env.NODE_ENV === "production"){
-//   app.use(expressCspHeader({
-//    directives: {
-//       'default-src': ['*'],
-//       'script-src': ['*'],
-//        'style-src': ['*'],
-//       'img-src': [SELF , '*'],
-//       'worker-src': ['*'],
-//       'block-all-mixed-content': false
-//   }
-// }));
-// }
 
 if(process.env.NODE_ENV === "production"){
   app.use(hsts({
@@ -156,9 +143,6 @@ if(process.env.NODE_ENV === "production"){
   app.get('*', function (req, res) {
     //Facing issues on reloading...
     res.redirect(`/?redirect=${req.originalUrl}`);
-    // console.log('Going to that path');
-    // console.log(__dirname);
-    // res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
   
 }else{
@@ -181,24 +165,43 @@ let server;
 let port = process.env.PORT || 4200;
 let host = process.env.HOST || 'localhost';
 
+let isMainWorker = false;
+
 if (clusterWorkerSize > 1) {
   if (cluster.isMaster) {
     for (let i=0; i < clusterWorkerSize; i++) {
       cluster.fork()
     }
 
+    cluster.on('listening', (worker, address) => {
+      console.log("cluster listening new worker", worker.id, " ", address);
+      if(!isMainWorker) {
+          console.log("Making worker " + worker.id + " to main worker");
+          isMainWorker = true;
+          worker.send({order: "oneTimeExecution"});
+      }
+  });
+
     cluster.on("exit", function(worker) {
       console.log("Worker", worker.id, " has exitted.")
     })
   } else {
-    console.log("Using Clusters");
     server = http.createServer(app);
     const wss = new WebSocket.Server({ server }); 
     onLoad(wss);
-
+    process.on('message', function(msg) {
+      console.log('Worker ' + process.pid + ' received message from master.', msg);
+      if(msg.order == "oneTimeExecution") {
+        executeOnce();
+      }
+    });
     server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
   }
 } else {
+  if(!isMainWorker){
+    isMainWorker = true;
+    executeOnce();
+  }
   server = http.createServer(app);
   const wss = new WebSocket.Server({ server }); 
   onLoad(wss);

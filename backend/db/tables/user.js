@@ -48,6 +48,20 @@ const getPlan = async (id) => {
     return runQuery(sql,[id]);
 }
 
+const getExpiryDate = async (id) => {
+    const sql = `SELECT expiry_date FROM users where id = ? limit 1`;
+    return runQuery(sql,[id]);
+}
+
+const updatePlan = async (date,plan_id,ids) => {
+    const sql = `UPDATE users SET expiry_date = ?, plan_id = ?  where id in (?)`;
+    return runQuery(sql,[date,plan_id,ids.join()]);
+}
+
+const expirePlans = (date) => {
+    const sql = `UPDATE users SET plan_id = 1 where date(expiry_date) = ? `;
+    return runQuery(sql,[date]);
+}
 
 module.exports = {
     createTable,
@@ -55,4 +69,7 @@ module.exports = {
     create,
     find_by_email,
     getPlan,
+    getExpiryDate,
+    updatePlan,
+    expirePlans,
 }
