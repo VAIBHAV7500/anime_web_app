@@ -1,6 +1,7 @@
 var express = require('express');
 const db = require('../db');
 var router = express.Router();
+const redis = require('../lib/redis');
 
 const checkIp = async (ip,userId) => {
     const ipObj = {
@@ -41,18 +42,26 @@ const checkIp = async (ip,userId) => {
 module.exports = (app)=>{
     router.post('/enter',app.oauth.authorise(),async (req,res)=>{
         var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        const response = await checkIp(ip,req.oauth.bearerToken.user.id).catch((err)=>{
-          res.status(err.status).json({
-            message : err.message,
-            stack : err.stack,
-          });
-        });
-        if(response){
-            res.status(200).json({
-                message : "Successfully Entered",
-                user_id : req.oauth.bearerToken.user.id,
-                plan_id : 1 /*dummy plan id */
-            });
+        const user_id = req.oauth.bearerToken.user.id;
+        if(user_id){
+            const response = await checkIp(ip,user_id).catch((err)=>{
+                res.status(err.status).json({
+                  message : err.message,
+                  stack : err.stack,
+                });
+              });
+              if(response){
+                  const plan_id = await db.user.getPlan(user_id);
+                  const key = `user_plan_${user_id}`;
+                  redis.setValue(key,plan_id);
+                  res.status(200).json({
+                      message : "Successfully Entered",
+                      user_id,
+                      plan_id,
+                  });
+              }
+        }else{
+            res.status(403);
         }
     });
     return router;

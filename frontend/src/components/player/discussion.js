@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 
-function Discussion({discussion,sendMessage,getCurrentTime}) {
+function Discussion({discussion,sendMessage,getCurrentTime,isPremium}) {
     const [emoPicker,setPicker] = useState(false);
     const userId = useSelector(state => state.user_id);
     
@@ -97,9 +97,9 @@ function Discussion({discussion,sendMessage,getCurrentTime}) {
                 <FaArrowLeft onClick={closeDiscussion} className={styles.back_icon}/>
                 <h3>Discussion</h3>
             </div>
-            <div className={styles.advertisement}>
+            {!isPremium && <div className={styles.advertisement}>
 
-            </div>
+            </div>}
             <div className={`${styles.discussion_container} ${emoPicker ? styles.discussion_container_translate : ""}`}>
                     {/* <div className={`${styles.bubble} ${styles.receiver_bubble}`}>
                         <div className={styles.bubble_wrapper}>

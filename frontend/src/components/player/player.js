@@ -34,12 +34,6 @@ export class player extends Component {
             const playerId = this.props.match.params.id;
             try {
                 const adBlock = await checkAdBlocker();
-                if(adBlock){
-                    console.log("Using Ad Blocker");
-                    //this.goToAdBlockPage(playerId);
-                }else{
-                    console.log("Not Using Ad Blocker");
-                }
                 const endPoint = `${requests.fetchVideoDetails}?player_id=${playerId}&user_id=${this.props.user_id}`;
                 const axiosInstance = axios.createInstance();
                 const result = await axiosInstance.get(endPoint);
@@ -51,10 +45,19 @@ export class player extends Component {
                     result.data.next_show = 20;
                     this.setState({
                         player: result.data,
+                        premium: result.data.premium || false,
                         loading: false
                     });
                     if(result?.data?.name){
                         document.title = result.data.name + '- Animei TV';
+                    }
+                    if(!result?.data?.premium){
+                        if(adBlock){
+                            console.log("Using Ad Blocker");
+                            this.goToAdBlockPage(playerId);
+                        }else{
+                            console.log("Not Using Ad Blocker");
+                        }
                     }
                 }
             } catch (error) {
@@ -209,8 +212,14 @@ export class player extends Component {
                         className={styles.player} 
                         updateVideoStatus={this.updateVideoStatus} 
                         updateDiscussion = {this.updateDiscussion}
+                        isPremium = {this.state?.premium}
                     />}
-                    <Discussion discussion = {this?.state?.discussion} sendMessage={this.sendMessage} getCurrentTime={this.getCurrentTime} />
+                    <Discussion 
+                        discussion = {this?.state?.discussion} 
+                        sendMessage={this.sendMessage} 
+                        getCurrentTime={this.getCurrentTime}
+                        isPremium = {this.state?.premium} 
+                    />
                  </div>
         )
     }

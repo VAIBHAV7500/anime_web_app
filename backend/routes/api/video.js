@@ -6,6 +6,7 @@ const formidable = require("formidable");
 const db = require('../../db');
 const { json } = require('express');
 const banner = require('../../config/banner.json');
+const {isPaid} = require('../../lib/order');
 
 const client = new apiVideo.ClientSandbox({
     apiKey: keys.api_video.apiKey
@@ -78,6 +79,7 @@ router.get('/episodes', async(req,res,next)=>{
         const rows = await db.shows.totalShows(req.query.show_id);
         const showId = req.query.show_id;
         const userId = req.query.user_id;
+        const isPremium = await isPaid(userId);
         if(latest && req.query.from === undefined){
             if(rows && rows.length != 0){
                 from = rows[0].total_episodes;
@@ -121,14 +123,17 @@ router.get('/episodes', async(req,res,next)=>{
         if(episodes && episodes.length){
             episodes = episodes.map((x)=>{
                 const episodeProgress = progress.filter(pr => pr.video_id === x.id);
-                return {
+                const body = {
                     id: x.id,
                     name: x.name,
-                    type: x.type,
                     episode: x.episode_number,
                     thumbnail_url: x.thumbnail_url,
                     progress: episodeProgress.length ? episodeProgress[0].covered_percentage : 0,
                 }
+                if(isPremium){
+                    body.type = x.type;
+                }
+                return body;
             });
         }
         res.json({
@@ -227,11 +232,12 @@ router.get('/genre',async (req,res,next)=>{
 router.get('/details',async (req,res,next)=>{
     const videoId = req.query.player_id;
     const userId = req.query.user_id;
-    if(!videoId){
+    if(!videoId || !userId){
         res.status(401).json({
             message: "Info not sufficient..."
         });
     }else{
+        const isPremium = await isPaid(userId);
         const promiseArray = [];
         promiseArray.push(new Promise((res,rej)=>{
             db.videos.find(videoId).then((result)=>{
@@ -256,6 +262,7 @@ router.get('/details',async (req,res,next)=>{
             return;
         });
         result.progress = progress.length ? progress[0].covered_percentage : 0;
+        result.premium = isPremium;
         res.json(result);
     }
 });

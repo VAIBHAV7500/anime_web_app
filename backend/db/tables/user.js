@@ -44,8 +44,9 @@ const create = async (body) => {
 }
 
 const getPlan = async (id) => {
-    const sql = `SELECT plan_id FROM users where id = ?`;
-    return runQuery(sql,[id]);
+    const sql = `SELECT plan_id FROM users where id = ? limit 1`;
+    const results = await runQuery(sql,[id]);
+    return results[0] && results[0].plan_id
 }
 
 const getExpiryDate = async (id) => {

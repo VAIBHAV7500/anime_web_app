@@ -1,8 +1,15 @@
 const db = require('../../db');
 const { getLogger } = require('../logger');
 const logger = getLogger('order');
+const redis = require('../redis');
 const moment = require('moment'); // require
 const format = 'YYYY-MM-DD';
+const {
+  redis: {
+      USER_PLAN_KEY
+  }
+} = require('../../services/constant');
+const plans = require('../../config/plans');
 
 const updateUserDates = async (duration, user_id,plan_id) => {
   const result = await db.user.getExpiryDate(user_id).catch((err)=>{
@@ -33,8 +40,31 @@ const expirePlans = async () => {
   const results = await db.user.expirePlans(currDate);
 }
 
+const getPlan = async (user_id) => {
+  if(user_id){
+    const key = USER_PLAN_KEY + user_id;
+    const redisResult = await redis.getValue(key);
+    if(redisResult){
+      return redisResult;
+    }else{
+      const plan_id = await db.user.getPlan(user_id);
+      redis.setValue(key,plan_id);
+      return plan_id;
+    }
+  }
+}
+
+const isPaid = async (user_id) => {
+  const plan_id = await getPlan(user_id);
+  console.log(plans.paid_plan_ids);
+  console.log(plan_id);
+  return plans.paid_plan_ids.some(x => x.id === plan_id);
+}
+
 module.exports = {
   updateUserDates,
   planDowngrade,
   expirePlans,
+  getPlan,
+  isPaid
 }
