@@ -65,13 +65,18 @@ const check = (token,dispatch,removeCookie)=>{
   }
 }
 
-const App = ()=>{
+const App = () => {
   const tokenName = 'token';
   const [cookies,,removeCookie] = useCookies([tokenName]);
   const dispatch = useDispatch();
-  const loginStatus = useSelector(state=>state.login) || check(cookies[tokenName],dispatch,removeCookie);
+  let loginStatus = useSelector(state=>state.login) || check(cookies[tokenName],dispatch,removeCookie);
   useEffect(() => {
-    check(cookies[tokenName],dispatch,removeCookie);
+    const token = cookies[tokenName];
+    if(token){
+      console.log('Cookies Token Name: ');
+      console.log(cookies[tokenName]);
+      loginStatus = check(cookies[tokenName],dispatch,removeCookie);
+    }
   },[cookies[tokenName]]);
   return (
     <div className="App">

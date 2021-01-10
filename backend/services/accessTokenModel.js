@@ -1,5 +1,6 @@
 var db = require('../db/index');
 const passport = require('passport');
+const {compareHash} = require('../services/bcrypt');
 
 const getClient = async (clientID, clientSecret, callback) => {
   const client = {
@@ -17,7 +18,13 @@ const grantTypeAllowed = async (clientID, grantType, callback) => {
 
 const getUser = async (email, password, callback) => {
     result = await db.user.find_by_email(email).catch(e=>{callback(null,null); return;});
-    callback(null,result ? result.password == password ? (createPassportSession(result)) : null :null);
+    if(result){
+        const comparePass = await compareHash(result.password, password);
+        if(!comparePass){
+            result = null;
+        }
+    }
+    callback(null,result);
 }
 
 const createPassportSession = (result) => {

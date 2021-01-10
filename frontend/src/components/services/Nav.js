@@ -12,7 +12,7 @@ import axios from '../../utils/axios';
 import requests from '../../utils/requests';
 import { useSelector } from 'react-redux';
 
-function Nav({type}) {
+function Nav({type, guest}) {
     const [show , handleShow] = useState(false);
     const [search, setSearch] = useState(false);
     const [notifications, setNotifications] = useState([{body: "No New Notification",dummy:true}]);
@@ -109,7 +109,7 @@ function Nav({type}) {
                 <span>
                     <img alt="ANIMEI TV" draggable="false" className={`${styles.nav_logo} ${!search && show  && styles.logo_white}`} onClick={goToHome} src={mainLogo} />
                 </span>
-                < FaSearch 
+                {!guest && <>< FaSearch 
                     className={styles.search_icon} 
                     onClick={()=>{
                         showModal("searchModal",setSearch); 
@@ -139,7 +139,7 @@ function Nav({type}) {
                             }
                         </div>
                     </div>
-                </div>
+                </div></>}
             </div>
             {ModalGenerator(<Search searchHook={[search, setSearch]} />,"searchModal",setSearch)}
         </div>

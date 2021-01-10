@@ -21,6 +21,7 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
       }
       movie.description = description;
       console.log(movie);
+      //movie.trailer_url = 'https://vimeo.com/497206261';
       setTrailer({...movie,index : `${rowIndex}-${index}`});
       trailerShow(index);
   }
@@ -162,6 +163,19 @@ function Row({ title, movies, isLargeRow, rowIndex,trailerArray, showIndexArray 
                   height="100%"
                   playing= {true}
                   className="player"
+                  controls = {false}
+                  config={{
+                    youtube: {
+                      playerVars: { showinfo: 1 }
+                    },
+                    vimeo: {
+                      controls: false,
+                      playerOptions:{
+                        controls: false,
+                        color: "6000ef"
+                      }
+                    }
+                  }}
                 />
               }
             </div>

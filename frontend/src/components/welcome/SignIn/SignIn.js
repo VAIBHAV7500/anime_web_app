@@ -32,6 +32,7 @@ const Login = (props)=>{
             'Authorization': 'Bearer '+ token
             }
         };
+        console.log('Enter call from Sigin.js');
         const axiosInstance = axios.createInstance();
         var response = await axiosInstance(config);
         if(response.data.message === "Successfully Entered"){
@@ -67,7 +68,7 @@ const Login = (props)=>{
         }));
         const payload = qs.stringify({
             'username': (state.email).trim(),
-            'password': sha256(state.password + process.env.REACT_PRIVATE_KEY).toString(),
+            'password': state.password,
             'grant_type': 'password',
             'client_id': 'null',
             'client_secret': 'null'
@@ -82,7 +83,12 @@ const Login = (props)=>{
         };
         const axiosInstance = axios.createInstance();
         const response = await axiosInstance(config).catch(err=>{
-            console.log(err);
+            //console.log(err.response.data);
+            let message = 'Something went Wrong!';
+            if(err?.response?.data?.error_description){
+                message = err.response.data.error_description;
+            }
+            console.log(message);
             setState(prevState=>({
                 ...prevState,
                 errorShow : true

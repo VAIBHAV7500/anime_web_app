@@ -36,7 +36,7 @@ function AdBlocked() {
 
   return (
     <div>
-      <Nav type="dark"></Nav>
+      <Nav type="dark" guest={true}></Nav>
       <div className={styles.body}>
         <div className={styles.container}>
             <p><h2 className={styles.heading}>Don't Like Ads ?</h2></p>

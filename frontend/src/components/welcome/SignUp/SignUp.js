@@ -5,15 +5,14 @@ import FormGroup from '../Form-Group/FormGroup'
 import { FaUnlock, FaMobile, FaEnvelope, FaUser} from 'react-icons/fa';
 import axios from '../../../utils/axios';
 import qs from 'qs';
-import sha256 from 'crypto-js/sha256';
 import Spinner from '../Spinner/index'
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function SignUp(props) {
     const [,setActive] = props.activeArray;
     const [email,setEmail] = props.emailDetail;
     const passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$"
-    console.log(new RegExp(passwordRegex).test("Hello@123") ? "match" : "not match");
     const appbaseurl = process.env.REACT_APP_BASE_URL;
     const [state,setState] = useState({
         loader : false,
@@ -75,10 +74,11 @@ export default function SignUp(props) {
             return;
         }
         var data = qs.stringify({
-            'password': sha256(state.regPassword + process.env.REACT_PRIVATE_KEY).toString(),
+            'password': state.regPassword,
             'email': (state.regEmail).trim(),
             'plan_id' : 0,
-            'mobile' : (state.regMobileNo).trim().substr(-10),
+            //'mobile' : (state.regMobileNo).trim().substr(-10),
+            'name' : (state.name).trim()
         });
         var config = {
             method: 'post',
@@ -89,9 +89,20 @@ export default function SignUp(props) {
             data : data
         };
         const axiosInstance = axios.createInstance();
-        axiosInstance(config)
-        .then(function (response) {
-            stopLoader();
+        const response = await axiosInstance(config)
+        .catch(function (error) {
+            console.log(error.response);
+            const data = error.response.data;
+            let message = 'Something went wrong!';
+            if(data.details){
+                message = data.details[0].message;
+            }else if(data.message){
+                message = data.message;
+            }
+            toast.error(message);
+        }); 
+        stopLoader();
+        if(response){
             if(response.data.message === "Registration Successfull"){
                 setEmail(state.regEmail);
                 setActive(2);
@@ -102,10 +113,7 @@ export default function SignUp(props) {
                     showerror : true
                 }));
             }
-        })
-        .catch(function (error) {
-            console.log(error);
-        }); 
+        }
     }
     
     const signUpFields = [
@@ -158,6 +166,16 @@ export default function SignUp(props) {
 
     return (
         <div className={styles.sign_up_form}>
+            <ToastContainer
+            position="top-right"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
             <h1 className={styles2.title_name}><strong>Sign Up</strong></h1>
             {state.showerror? errorAdd() : ""}
             <form onSubmit={handleSignUp}>

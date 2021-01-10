@@ -90,6 +90,7 @@ export class showRoom extends Component {
           setTimeout(()=>{
               this.state.pageLoader = false;
               this.setState(this.state);
+              res(true);
           },1000);
         })   
     }

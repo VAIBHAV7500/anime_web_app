@@ -194,6 +194,7 @@
     width: 97%;
     display: flex;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 .watch_now_btn{

@@ -12,9 +12,13 @@ const {
 const plans = require('../../config/plans');
 
 const updateUserDates = async (duration, user_id,plan_id) => {
-  const result = await db.user.getExpiryDate(user_id).catch((err)=>{
-    logger.error(`User Id: ${user_id} | error: ${err.message} | stack: ${err.stack}`);
-  });
+  let result = [];
+  const isPremium = isPaid(user_id,plan_id);
+  if(isPremium){
+    result = await db.user.getExpiryDate(user_id).catch((err)=>{
+      logger.error(`User Id: ${user_id} | error: ${err.message} | stack: ${err.stack}`);
+    });
+  }
   let expiryDate;
   if(result && result.length){
     expiryDate = result[0].expiry_date;
@@ -54,10 +58,13 @@ const getPlan = async (user_id) => {
   }
 }
 
-const isPaid = async (user_id) => {
-  const plan_id = await getPlan(user_id);
-  console.log(plans.paid_plan_ids);
-  console.log(plan_id);
+const isPaid = async (user_id, plan_id_arg = null) => {
+  let plan_id = 1;
+  if(plan_id_arg){
+    plan_id = plan_id_arg;
+  }else{
+    plan_id = await getPlan(user_id);
+  }
   return plans.paid_plan_ids.some(x => x.id === plan_id);
 }
 

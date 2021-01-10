@@ -17,7 +17,7 @@ function Terms() {
 
   return (
     <div className={styles.toc}>
-      <Nav type="dark"/>
+      <Nav type="dark" guest={true}/>
       <a href="/"> Back</a>
       <h1 className={styles.title}>{toc.title}</h1>
       {toc.sections.map((section, index)=>{

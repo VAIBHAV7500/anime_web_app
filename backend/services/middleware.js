@@ -1,5 +1,27 @@
 const whiteList = require('../config/list/whitelist');
 const axios = require('axios');
+const Joi = require('joi');
+
+const userSchema = Joi.object({
+    name: Joi.string().required().max(100),
+
+    password: Joi.string()
+        .pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$')).required(),
+
+
+    plan_id: Joi.number()
+        .integer(),
+
+    email: Joi.string()
+        .email({ 
+            multiple: false,
+            allowUnicode: false,
+            tlds : {
+                allow: true
+            }
+        })
+        .required()
+})
 
 const anyError = (req, res, next) => {
     const error = new Error(`${req.originalUrl} not found!!!`);
@@ -77,9 +99,23 @@ const geoBlockCheckMiddleware = async (req,res,next) => {
     next();
 }
 
+const userSchemaCheck = (req,res,next) => {
+    const body = req.body;
+    const { error, value } = userSchema.validate(body);
+    console.log('User Schema Check');
+    console.log(error);
+    console.log(value);
+    if(error){
+        res.status(401).json(error);
+    }else{
+        next();
+    }
+}
+
 module.exports = {
     anyError,
     errorHandler,
     apiMiddleware,
-    geoBlockCheckMiddleware
+    geoBlockCheckMiddleware,
+    userSchemaCheck
 }

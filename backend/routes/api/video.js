@@ -261,6 +261,9 @@ router.get('/details',async (req,res,next)=>{
             });   
             return;
         });
+        if(!isPremium){
+            result.type = null;
+        }
         result.progress = progress.length ? progress[0].covered_percentage : 0;
         result.premium = isPremium;
         res.json(result);
