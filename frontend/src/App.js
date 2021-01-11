@@ -20,6 +20,7 @@ import Profile from './components/profile';
 import AdBlocked from './components/adBlocked';
 import Welcome from './components/welcome';
 import GeoBlock from './components/geoblock';
+import ScrollTop from './components/ScrollToTop';
 require('dotenv').config();
 
 const handleAccessToken = async (token)=>{
@@ -82,6 +83,7 @@ const App = () => {
     <div className="App">
       {loginStatus ? 
       <Router>
+        <ScrollTop/>
         <Switch>
           <Route exact path="/" component={showRoom}/>
           <Route path="/show/:id" component={show}></Route>

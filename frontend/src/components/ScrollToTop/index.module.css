@@ -1,0 +1,26 @@
+.scrollTop{
+    display: block;
+    color: white;
+    background: #641ba8cc;
+    background-image: linear-gradient(to bottom, #641ba8cc, #3a0968cc);
+    border-radius: 10px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 9;
+    height: 62px;
+    width: 62px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(0px);
+    transition: 0.5s;
+    cursor: pointer;
+}
+.scrollTop svg{
+    font-size: 25px;
+    font-weight: bold;
+}
+.scrollHide{
+    transform: translateX(120px);
+}
