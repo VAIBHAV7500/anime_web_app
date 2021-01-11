@@ -17,7 +17,7 @@ const updateSession = async (body) => {
     await db.user_player_session.upsertRecord(recordBody).catch((err)=>{
         console.log(err);
         logger.error(`${JSON.stringify(err) || $JSON.stringify(body)}`);
-    })
+    });
     logger.info(`Succesfully Updated Sessions for user ID: ${body.user_id} & Player Id: ${body.video_id}`);
   }
 }

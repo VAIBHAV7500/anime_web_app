@@ -1,5 +1,7 @@
 const { runQuery } = require('../db_utils');
 
+const COMPLETE_PERCENTAGE_SPLIT = 80;
+
 const createTable = (con) => {
     const sql = `
         CREATE TABLE IF NOT EXISTS user_player_sessions (
@@ -44,11 +46,13 @@ const findByVideoId = async (video_id, userId) => {
 }
 
 const findByUserId = async (userId) => {
-    const sql = `SELECT DISTINCT shows.id as id,
-    shows.name as name,
-    shows.description as description,
-    shows.poster_landscape_url as poster FROM user_player_sessions as ups inner join shows ON shows.id = ups.show_id WHERE user_id = ?`;
+    const sql = `SELECT shows.id as id,shows.name as name, ups.video_id, videos.episode_number, shows.total_episodes, ups.covered_percentage, shows.description as description, shows.poster_landscape_url as poster  FROM user_player_sessions as ups inner join shows ON shows.id = ups.show_id inner join videos on videos.id = ups.video_id WHERE user_id = ? group by shows.name having (videos.episode_number <> shows.total_episodes or covered_percentage < ${COMPLETE_PERCENTAGE_SPLIT});`;
     return runQuery(sql,[userId]);
+}
+
+const completedShows = async (userId) => {
+    const sql = `SELECT shows.id as id,shows.name as name, ups.video_id, videos.episode_number, shows.total_episodes, ups.covered_percentage, shows.description as description, shows.poster_landscape_url as poster FROM user_player_sessions as ups inner join shows ON shows.id = ups.show_id inner join videos on videos.id = ups.video_id WHERE user_id = ? group by shows.name having (videos.episode_number = shows.total_episodes and covered_percentage >= ${COMPLETE_PERCENTAGE_SPLIT});`;
+    return runQuery(sql,[userId]); 
 }
 
 module.exports = {
@@ -58,4 +62,5 @@ module.exports = {
     findByVideoId,
     upsertRecord,
     findByUserId,
+    completedShows,
 }

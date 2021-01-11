@@ -122,7 +122,7 @@ router.post('/add-completed', async (req,res) => {
 router.get('/completed', async (req,res) => {
     const user_id = req.query.id;
     if(user_id){
-      const result = await db.completed_shows.getAllShowIdByUserId(user_id).catch(err => {
+      const result = await db.user_player_session.completedShows(user_id).catch(err => {
         res.status(501).json({
             message : err.message,
             stack : err.stack,

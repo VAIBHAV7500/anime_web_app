@@ -42,9 +42,15 @@ const getAllShowIdByUserId = async (userId) => {
     return result;   
 }
 
+const remove = (id) => {
+    const sql = `DELETE FROM currently_watching where id = ?`;
+    return runQuery(sql,[id]);
+}
+
 
 module.exports = {
     createTable,
     create,
     getAllShowIdByUserId,
+    remove,
 }
