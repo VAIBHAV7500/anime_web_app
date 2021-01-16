@@ -23,6 +23,8 @@ const dbConfig = require('./config/dbConfig.json');
 const responseTime = require('response-time');
 const redis = require('redis');
 const {executeOnce} = require('./services/slave');
+const https = require("https");
+const http = require("http");
 
 const clusterWorkerSize = os.cpus().length
 
@@ -155,12 +157,10 @@ let server;
 let key;
 let cert;
 if(process.env.NODE_ENV === "production"){
-  const https = require("https");
   key = fs.readFileSync('./certificates/privkey.pem');
   cert = fs.readFileSync('./certificates/fullchain.pem'); 
   server = https.createServer({key,cert},app);
 }else{
-  const http = require("http");
   server = http.createServer(app);
 }
 
