@@ -178,7 +178,7 @@ router.get('/trending',async (req,res,next)=>{
             message: "API KEY is missing or incorrect"
         })
     }
-    const videos = [25,30,5,124,114,122,62,10,58,127];
+    const videos = [25,30,124,114,122,10,58,127,77,84];
     const promiseArray = [];
     videos.forEach((id)=>{
         promiseArray.push(new Promise((res,rej)=>{
