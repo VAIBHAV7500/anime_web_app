@@ -107,8 +107,9 @@ export default function SignUp(props) {
             console.log(response);
             if(response.status === 200){
                 setEmail(state.regEmail);
-                console.log(response.data.user_id);
-                setUser(response.data.user_id);
+                console.log('Setting User');
+                console.log(response.data);
+                setUser(response.data.id);
                 setActive(2);
             }else{
                 setState(prevState =>({

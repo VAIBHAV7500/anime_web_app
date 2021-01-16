@@ -29,10 +29,7 @@ function Discussion({discussion,sendMessage,getCurrentTime,isPremium}) {
         if(messages){
             messages.forEach((x)=>{
                 const time = moment.utc(parseFloat(x.time)*1000).format('HH:mm:ss');
-                console.log(x);
                 x.time = time;
-                console.log(time);
-                console.log(x);
                 if(x.id === userId){
                     addSenderMessage(x);
                 }else{

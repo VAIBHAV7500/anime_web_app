@@ -28,9 +28,7 @@ const sendOTP = async (otp, user_id) => {
   const user = await db.user.find(user_id);
   if(user){
     const email = user.email;
-    console.log(email);
   }
-  console.log(html);
   const mail = {
     to: ['vbhvsolanki7500@gmail.com'],
     subject: 'Your OTP by Animei TV',

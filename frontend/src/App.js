@@ -74,8 +74,6 @@ const App = () => {
   useEffect(() => {
     const token = cookies[tokenName];
     if(token){
-      console.log('Cookies Token Name: ');
-      console.log(cookies[tokenName]);
       loginStatus = check(cookies[tokenName],dispatch,removeCookie);
     }
   },[cookies[tokenName]]);

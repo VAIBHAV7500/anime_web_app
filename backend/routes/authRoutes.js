@@ -14,11 +14,7 @@ module.exports = (app)=>{
             const password = body.password;
             const email = body.email;
             const existingInactiveUser = await db.user.find_by_email(email,false);
-            console.log('Existing User');
-            console.log(existingInactiveUser);
             if(existingInactiveUser){
-                console.log('Destroying User');
-                console.log(existingInactiveUser.id);
                 await db.user.destroyInactiveUser(existingInactiveUser.id);
             }
             const hash = await createHash(password);
@@ -87,7 +83,7 @@ module.exports = (app)=>{
         }
     });
 
-    router.get('/verify/resend/:user', async (req,res,next) => {
+    router.get('/verification-resend/:user', async (req,res,next) => {
         try{
             const user_id = req.params.user;
             await resendOTP(user_id);

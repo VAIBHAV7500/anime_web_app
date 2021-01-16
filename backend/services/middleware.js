@@ -1,6 +1,7 @@
 const whiteList = require('../config/list/whitelist');
 const axios = require('axios');
 const Joi = require('joi');
+const {logger} = require('../lib/logger');
 
 const userSchema = Joi.object({
     name: Joi.string().required().max(100),
@@ -47,11 +48,11 @@ const apiMiddleware = (req,res,next) => {
         const splits = referrer.split('/');
         if(splits.length >= 2){
             const origin = splits[2];
-            console.log(origin);
             if(whiteList.includes(origin)){
                 next();
             }else {
                 const error = new Error(`${req.originalUrl} not found!!!`);
+                logger.error(error);
                 res.status(404);
                 next(error);
             }
@@ -66,9 +67,8 @@ const apiMiddleware = (req,res,next) => {
 const checkIp = async (ip, retry = 0) => {
     const baseUrl = 'https://api.ipgeolocationapi.com/';
         const endPoint = `${baseUrl}geolocate/${ip}`;
-        console.log(endPoint);
         const response = await axios.get(endPoint).catch((err)=>{
-            console.log(JSON.stringify(err));
+            logger.error(err);
     });
     if(!response){
         if(retry <3){
@@ -81,7 +81,6 @@ const checkIp = async (ip, retry = 0) => {
 
 const geoBlockCheckMiddleware = async (req,res,next) => {
     const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
-    console.log(ip);
     if(ip){
         const response = await checkIp(ip); 
         if(response){

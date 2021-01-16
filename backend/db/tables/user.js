@@ -73,7 +73,7 @@ const destroyInactiveUser = async (user_id) => {
 }
 
 const makeUserActive = (user_id) => {
-    const sql = `UPDATE users set is_active = true where user_id = ?`;
+    const sql = `UPDATE users set is_active = true where id = ?`;
     return runQuery(sql,[user_id]);
 }
 

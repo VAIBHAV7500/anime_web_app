@@ -34,6 +34,7 @@ const requests = {
     order: '/api/order',
     captureOrder: '/api/order/capture',
     verify: '/auth/verify',
+    verifyResend: '/auth/verification-resend/',
 }
 
 export default requests;
