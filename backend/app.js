@@ -154,8 +154,8 @@ app.use(errorHandler);
 let server;
 if(process.env.NODE_ENV === "production"){
   const https = require("https");
-  const key = fs.readFileSync('./certificates/fullchain.pem');
-  const cert = fs.readFileSync('./certificates/privkey.pem');
+  const key = fs.readFileSync('./certificates/privkey.pem');
+  const cert = fs.readFileSync('./certificates/fullchain.pem'); 
   server = https.createServer({key,cert},app);
 }else{
   const http = require("http");
