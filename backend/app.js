@@ -152,15 +152,15 @@ app.use(anyError);
 app.use(errorHandler);
 
 let server;
-// if(process.env.NODE_ENV === "production"){
-//   const https = require("https");
-//   const key = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.key');
-//   const cert = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.crt');
-//   server = https.createServer({key,cert},app);
-// }else{
+if(process.env.NODE_ENV === "production"){
+  const https = require("https");
+  const key = fs.readFileSync('\\etc\\letsencrypt\\live\\animeistag.net\\fullchain.pem');
+  const cert = fs.readFileSync('\\etc\\letsencrypt\\live\\animeistag.net\\privkey.pem');
+  server = https.createServer({key,cert},app);
+}else{
   const http = require("http");
   server = http.createServer(app);
-//}
+}
 
 let port = process.env.PORT || 4200;
 let host = process.env.HOST || 'localhost';
