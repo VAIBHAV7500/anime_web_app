@@ -7,20 +7,28 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Similar({show_id, toastConfig}) {
+function Similar({show_id, toastConfig, getCache, setState}) {
     const [similar, setSimilar] = useState([]);
     const [loading, setLoading] = useState(true);
     const history = useHistory();
     const {id} = useParams();
 
     const getSimilarShows = async () => {   
-        const endPoint = `${requests.relatedShows}?id=${id}`;
-        const axiosInstance = axios.createInstance();
-        const response = await axiosInstance.get(endPoint).catch((err)=>{
-            toast.error(`O'Oh, looks like there's some issue. Please try again later`);
-        });
-        if(response.data){
-            setSimilar(response.data);
+        let finalData;
+        const cachedData = getCache(3);
+        if(cachedData){
+            finalData = cachedData;
+        }else{
+            const endPoint = `${requests.relatedShows}?id=${id}`;
+            const axiosInstance = axios.createInstance();
+            const response = await axiosInstance.get(endPoint).catch((err)=>{
+                toast.error(`O'Oh, looks like there's some issue. Please try again later`);
+            });
+            setState(3,response?.data);
+            finalData = response?.data;
+        }
+        if(finalData){
+            setSimilar(finalData);
         }
         setLoading(false);
     }

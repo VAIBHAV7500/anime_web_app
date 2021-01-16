@@ -14,7 +14,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import ReviewStars from './reviewStars';
 
 let verified = false;
-const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
+const Review = React.memo(({show_id,setState,getCache, toastConfig}) => {
     const [reviews, setReviews] = useState([]);
     const [preview, setPreview] = useState();
     const [editor, setEditor] = useState(false);
@@ -25,31 +25,31 @@ const Review = React.memo(({show_id,setState,prev, toastConfig}) => {
     const {id} = useParams();
     
     const init = async () => {
+        if(userId){
+            return;
+        }
         const endPoint = `${requests.reviews}/shows?id=${id}&user_id=${userId}`;
         const axiosInstance = axios.createInstance();
-        const response = await axiosInstance.get(endPoint);
-        response.data = response.data.reverse();
-        //response.data = {...response.data,showMore : false};
-        (response.data).forEach((e,i)=>{
-            e = { 
-                ...e,
-                showMore:false,
-            };
-            response.data[i] = e;
-        });
-        console.log(response.data);
-        setLoading(false);
-        setReviews(response.data);
-        setState(2,response.data);
-    }
-
-    useEffect(() => {
-        if(!prev){
-            init();
+        const cachedData = getCache(2);
+        let finalResult;
+        if(cachedData){
+            finalResult = cachedData;
         }else{
-            setReviews(prev);
+            const response = await axiosInstance.get(endPoint);
+            response.data = response.data.reverse();
+            (response.data).forEach((e,i)=>{
+                e = { 
+                    ...e,
+                    showMore:false,
+                };
+                response.data[i] = e;
+            });
+            finalResult = response?.data;
+            setState(2,finalResult);
         }
-    },[id,prev]);
+        setLoading(false);
+        setReviews(finalResult);
+    }
 
     const handleEditorChange = (content, editor) => {
         setTextEditor(editor);

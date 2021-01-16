@@ -7,7 +7,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Characters = React.memo(({show_id, toastConfig, getRecent}) => {
+const Characters = React.memo(({show_id, toastConfig, getRecent, setState, getCache}) => {
     const [characters, setCharacters] = useState([]);
     const [rotateCard, setRotateCard] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,17 +28,25 @@ const Characters = React.memo(({show_id, toastConfig, getRecent}) => {
 
     const updateCharacters = async () => {
         setCharacters([]);
-        const axiosInstance = axios.createInstance();
-        const response = await axiosInstance.get(`${requests.characters}?show_id=${id}`).catch((err)=>{
-            toast.error(`O'Oh, looks like there's some issue. Please try again later`);
-        });
-        if (response?.data) {
+        const cachedData = getCache(1);
+        let finalData;
+        if(!cachedData){
+            const axiosInstance = axios.createInstance();
+            const response = await axiosInstance.get(`${requests.characters}?show_id=${id}`).catch((err)=>{
+                toast.error(`O'Oh, looks like there's some issue. Please try again later`);
+            });
+            finalData = response?.data;
+            setState(1,finalData);
+        }else{
+            finalData = cachedData;
+        }
+        if (finalData) {
             const recentData = getRecent();
             let recent = 0;
             if(recentData && recentData.user_id){
                 recent = recentData?.episode_number || 0;
             }
-            const data = sortCharacters(response.data,recent);
+            const data = sortCharacters(finalData,recent);
             setCharacters(data);
             let dummyArr = [];
             data.forEach((character)=>{
