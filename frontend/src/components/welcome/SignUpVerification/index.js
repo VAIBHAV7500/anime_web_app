@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 import styles from './index.module.css'
 import moment from 'moment';
+import requests from  '../../../utils/requests';
+import axios from '../../../utils/axios';
 
 const SignUpVerification = (props) => {
     const [, setActive] = props.activeArray;
     const [email, setEmail] = props.emailDetail;
+    const [user,setUser] = props.userDetail;
     const [showResend, setShowResend] = useState(false);
     const resendTime = 120;
     let interval;
@@ -26,6 +29,7 @@ const SignUpVerification = (props) => {
 
     const handleResend = async () => {
         setShowResend(false);
+        await retry();
         interval = setInterval(() => {
             if(timer==1){
                 setShowResend(true);
@@ -36,6 +40,26 @@ const SignUpVerification = (props) => {
         }, 1000);
     }
 
+    const verifyUser = async () => {
+        const otp = document.getElementById('otp').textContent;
+        console.log(otp);
+        const endPoint = requests.verify + `/${user}/${otp}`;
+        const axiosInstance = axios.createInstance();
+        const response = await axiosInstance.get(endPoint);
+        if(response.status === 200){
+            setActive(0);
+        }
+    }
+
+    const retry = async () => {
+        const endPoint = requests.verify + `/resend/${user}`;
+        const axiosInstance = axios.createInstance();
+        const response = await axiosInstance.get(endPoint);
+        if(response.status === 200){
+            console.log('OTP Resent!');
+        }
+    }
+
     return (
         <div className={styles.body}>
             <FaArrowLeft className={styles.back} onClick={()=>{setActive(1)}}/>
@@ -43,8 +67,8 @@ const SignUpVerification = (props) => {
                 <h1 className={styles.heading}>OTP Verification</h1>    
                 <div className={styles.info}>We've sent a verification code to your email - {email}</div>
                 <div className={styles.time}>{moment.utc(timer * 1000).format("mm:ss")}</div>
-                <input type="number" className={styles.input} required placeholder="Enter verification code"/>
-                <div className={styles.submit}>Submit</div>
+                <input type="number" className={styles.input} id="otp" required placeholder="Enter verification code"/>
+                <div className={styles.submit} onClick={verifyUser}>Submit</div>
                 {showResend && <div className={styles.submit} onClick={handleResend}>Resend</div>}
             </div>
             

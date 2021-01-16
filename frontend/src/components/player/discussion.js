@@ -48,9 +48,9 @@ function Discussion({discussion,sendMessage,getCurrentTime,isPremium}) {
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight); 
     }
-    const addRecieverMessage = ({message,time,email}) => {
-        let name = email;
-        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}"> <div class="${styles.bubble_wrapper}"> <div><span class="${styles.name}">${name}</span></div> <div class="${styles.bubble_detail_wrapper}"> <span class="${styles.message}">${message}</span> <span class="${styles.timestamp}">${time}</span> </div> </div> </div>`;
+    const addRecieverMessage = ({message,time,email,name,user_name}) => {
+        let showName = user_name || name || email;
+        document.getElementsByClassName(styles.discussion_container)[0].innerHTML+=`<div class="${styles.bubble} ${styles.receiver_bubble}"> <div class="${styles.bubble_wrapper}"> <div><span class="${styles.name}">${showName}</span></div> <div class="${styles.bubble_detail_wrapper}"> <span class="${styles.message}">${message}</span> <span class="${styles.timestamp}">${time}</span> </div> </div> </div>`;
         const discussContainer = document.querySelector("." + styles.discussion_container);
         discussContainer.scrollTo(0,discussContainer.scrollHeight);  
     }

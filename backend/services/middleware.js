@@ -83,7 +83,7 @@ const geoBlockCheckMiddleware = async (req,res,next) => {
     const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
     console.log(ip);
     if(ip){
-        const response = await checkIp(ip);
+        const response = await checkIp(ip); 
         if(response){
             console.log(response.data.alpha2);
             const country = response.data.alpha2;
@@ -102,9 +102,6 @@ const geoBlockCheckMiddleware = async (req,res,next) => {
 const userSchemaCheck = (req,res,next) => {
     const body = req.body;
     const { error, value } = userSchema.validate(body);
-    console.log('User Schema Check');
-    console.log(error);
-    console.log(value);
     if(error){
         res.status(401).json(error);
     }else{

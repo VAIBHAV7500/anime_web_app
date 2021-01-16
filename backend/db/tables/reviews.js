@@ -38,7 +38,9 @@ const create = async (body) => {
 
 const findByShows = async (show_id, user_id) => {
     const sql = `SELECT reviews.*,
-    users.email AS email
+    users.email AS email,
+    users.name as name,
+    users.user_name as user_name
     FROM reviews 
     inner join users ON users.id = reviews.user_id 
     WHERE reviews.show_id = ${show_id}
