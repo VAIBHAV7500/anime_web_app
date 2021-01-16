@@ -25,6 +25,7 @@ const redis = require('redis');
 const {executeOnce} = require('./services/slave');
 const https = require("https");
 const http = require("http");
+const rateLimit = require("express-rate-limit");
 
 const clusterWorkerSize = os.cpus().length
 
@@ -121,6 +122,15 @@ app.use(
   })
 );
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10
+});
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20
+});
 
 /* -------------------------------------------------------------------------- */
 /*                          Routers Declaration Start                         */
@@ -136,12 +146,15 @@ const { onLoad } = require('./routes/socket');
 /*                           Routers Declaration End                          */
 /* -------------------------------------------------------------------------- */
 
-app.use('/auth',authRouter);
+app.use('/auth',authLimiter,authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
 app.use('/api',apiMiddleware, app.oauth.authorise(), apiRouter);
 app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));
+  app.get('/*',limiter, (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
   app.get('*', function (req, res) {
     //Facing issues on reloading...
     res.redirect(`/?redirect=${req.originalUrl}`);

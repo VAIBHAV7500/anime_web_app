@@ -23,6 +23,7 @@
     "express": "~4.16.1",
     "express-csp-header": "^4.0.0",
     "express-mysql-session": "^2.1.4",
+    "express-rate-limit": "^5.2.3",
     "express-session": "^1.17.1",
     "file-encryptor": "^0.1.1",
     "formidable": "^1.2.2",
