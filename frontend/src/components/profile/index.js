@@ -9,9 +9,10 @@ import MyReviews from './myReviews';
 import userImg from '../../images/default_user_profile.png';
 import axios from '../../utils/axios';
 import requests from '../../utils/requests';
+import Setting from './setting';
 
 function Profile() {
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(3);
     const [user,setUser] = useState({email:"",user_name:""});
     let id = useSelector(state=>state.user_id);
     const nav_items = [
@@ -29,7 +30,7 @@ function Profile() {
       },
       { 
         title : "Settings",
-        component: null
+        component: <Setting/>
       },
       { 
         title : "My Reviews",

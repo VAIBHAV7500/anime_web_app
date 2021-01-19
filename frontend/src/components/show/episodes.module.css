@@ -178,7 +178,7 @@ input[type=number] {
 }
 
 .episode_description {
-  margin-top: 3%;
+  margin-top: 10px;
   text-transform: none;
   font-weight: normal;
   font-family: Sans-serif;

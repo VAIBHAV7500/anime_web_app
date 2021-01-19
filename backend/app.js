@@ -23,9 +23,8 @@ const dbConfig = require('./config/dbConfig.json');
 const responseTime = require('response-time');
 const redis = require('redis');
 const {executeOnce} = require('./services/slave');
-
+const discord = require('./services/pushNotification');
 const clusterWorkerSize = os.cpus().length
-
 var app = express();
 app.oauth = oAuth2Server({
   model: oAuthModel,
@@ -38,9 +37,8 @@ require('dotenv').config();
 if(process.env.NODE_ENV === "production"){
   app.use(hsts({
     maxAge: 15552000  // 180 days in seconds
-  }))
+  })) 
 }
-
 global.redis = redis.createClient();
 
 global.redis.on('error', (err) => {

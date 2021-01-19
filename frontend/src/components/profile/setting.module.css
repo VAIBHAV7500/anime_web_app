@@ -1,0 +1,38 @@
+.body{
+    display: flex;
+    width: 80%;
+}
+
+.field_container{
+    color: rgb(163, 162, 162);
+    margin-top: 28px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    width: 160px;
+    height: fit-content;
+}
+
+.field_container > *{
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.field_container > *:hover,
+.active_nav{
+    background-color: rgb(113, 65, 161);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.container{
+    min-height: 500px;
+    width: 100%;
+    border-radius: 6px;
+    margin: 28px 0 28px 50px;
+    padding: 15px;
+}
