@@ -54,7 +54,6 @@ export class showRoom extends Component {
             const axiosInstance = axios.createInstance();
             axiosInstance.get(row.url).then((result) => {
               this.rows[index].movies = result.data;
-              console.log(result.data);
               res(result.data);
             }).catch((err) => {
               rej(err);
@@ -63,7 +62,6 @@ export class showRoom extends Component {
         });
         await Promise.all(promiseArray).catch((err) => {
            // redirect in this case
-           console.log(err);
            throw err;
         })
     }

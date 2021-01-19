@@ -1,6 +1,7 @@
 const whiteList = require('../config/list/whitelist');
 const axios = require('axios');
 const Joi = require('joi');
+const {logger} = require('../lib/logger');
 
 const userSchema = Joi.object({
     name: Joi.string().required().max(100),
@@ -47,11 +48,11 @@ const apiMiddleware = (req,res,next) => {
         const splits = referrer.split('/');
         if(splits.length >= 2){
             const origin = splits[2];
-            console.log(origin);
             if(whiteList.includes(origin)){
                 next();
             }else {
                 const error = new Error(`${req.originalUrl} not found!!!`);
+                logger.error(error);
                 res.status(404);
                 next(error);
             }
@@ -66,9 +67,8 @@ const apiMiddleware = (req,res,next) => {
 const checkIp = async (ip, retry = 0) => {
     const baseUrl = 'https://api.ipgeolocationapi.com/';
         const endPoint = `${baseUrl}geolocate/${ip}`;
-        console.log(endPoint);
         const response = await axios.get(endPoint).catch((err)=>{
-            console.log(JSON.stringify(err));
+            logger.error(err);
     });
     if(!response){
         if(retry <3){
@@ -80,23 +80,18 @@ const checkIp = async (ip, retry = 0) => {
 }
 
 const geoBlockCheckMiddleware = async (req,res,next) => {
-    if(process.env.NODE_ENV !== "production"){
-        next();
-    }else{
-        const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
-        console.log(ip);
-        if(ip){
-            const response = await checkIp(ip);
-            if(response){
-                console.log(response.data.alpha2);
-                const country = response.data.alpha2;
-                console.log(country);
-                // if(country !== "IN"){
-                //     res.status(403).json({
-                //         message: "Geo Blocked!!"
-                //     });
-                // }
-            }
+    const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
+    if(ip){
+        const response = await checkIp(ip); 
+        if(response){
+            console.log(response.data.alpha2);
+            const country = response.data.alpha2;
+            console.log(country);
+            // if(country !== "IN"){
+            //     res.status(403).json({
+            //         message: "Geo Blocked!!"
+            //     });
+            // }
         }
         console.log('Checking Geo Block ' + ip);
         next();
@@ -106,9 +101,6 @@ const geoBlockCheckMiddleware = async (req,res,next) => {
 const userSchemaCheck = (req,res,next) => {
     const body = req.body;
     const { error, value } = userSchema.validate(body);
-    console.log('User Schema Check');
-    console.log(error);
-    console.log(value);
     if(error){
         res.status(401).json(error);
     }else{

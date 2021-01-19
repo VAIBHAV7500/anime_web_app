@@ -47,25 +47,43 @@ class show extends Component {
     }
   }
 
+  getDataCache = (index) => {
+    if(this.state){
+      switch(index){
+        case 0:
+          return this.state.episodes;
+        case 1:
+          return this.state.characters;
+        case 2:
+          return this.state.reviews;
+        case 3:
+          return this.state.similar; 
+        default:
+          break;
+      }
+    }
+    return null;
+  }
+
   getRecent = () => {
     return this?.state?.show?.recent;
   }
 
   navItems = [{
       title: 'Episodes',
-      component: <Episodes show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.episodes} toastConfig = {this.toastConfig}/>
+      component: <Episodes show_id={this.props.match.params.id} setState = {this.setDataCache} getCache = {this.getDataCache} toastConfig = {this.toastConfig}/>
     },
     {
       title: 'Characters',
-      component: <Characters show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.characters} toastConfig = {this.toastConfig} getRecent={this.getRecent} />
+      component: <Characters show_id={this.props.match.params.id} setState = {this.setDataCache} getCache = {this.getDataCache} toastConfig = {this.toastConfig} getRecent={this.getRecent} />
     },
     {
       title: 'Reviews',
-      component: <Review show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.reviews} toastConfig = {this.toastConfig}/> 
+      component: <Review show_id={this.props.match.params.id} setState = {this.setDataCache} getCache = {this.getDataCache} toastConfig = {this.toastConfig}/> 
     },
     {
       title: 'Similar Shows & Movies',
-      component: <Similar show_id={this.props.match.params.id} setState = {this.setDataCache} prev = {this?.state?.similar} toastConfig = {this.toastConfig}/>
+      component: <Similar show_id={this.props.match.params.id} setState = {this.setDataCache} getCache = {this.getDataCache} toastConfig = {this.toastConfig}/>
     }
   ] ;
 

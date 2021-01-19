@@ -32,7 +32,9 @@ const requests = {
     notificationRead: '/api/notification/mark-read',
     userDetails: '/api/user/details',
     order: '/api/order',
-    captureOrder: '/api/order/capture'
+    captureOrder: '/api/order/capture',
+    verify: '/auth/verify',
+    verifyResend: '/auth/verification-resend/',
 }
 
 export default requests;

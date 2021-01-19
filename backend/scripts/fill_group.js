@@ -8,7 +8,6 @@ global.connection = db.getConnection();
 (async ()=>{
   let sql = `SELECT id,name FROM animeApp.shows where group_id = 0`;
   let result = await runQuery(sql);
-  console.log(result);
   result.forEach(async (row) => {
       let name = row.name;
       sql = `INSERT INTO animeApp.show_group(name) VALUES('${name}')`;

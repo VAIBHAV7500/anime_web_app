@@ -12,7 +12,6 @@ const createHash = async (value) => {
       if(err){
         rej(err);
       }else{
-        console.log(hash);
         res(hash);
       }
     });
@@ -29,7 +28,6 @@ const compareHash = async (hash, value) => {
         rej(err);
       }
       else if (result) {
-        console.log(result);
         res(true);
       }
       else {

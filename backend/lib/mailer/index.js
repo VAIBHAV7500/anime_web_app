@@ -1,11 +1,26 @@
 const keys = require('../../config/keys.json');
 const mailConfig = require('../../config/mail.json');
-const sgMail = require('@sendgrid/mail')
+const sgMail = require('@sendgrid/mail');
+const { logger } = require('handlebars');
+const fs = require('fs');
 
 const sendgridAPIKey = keys.sendgrid.key;
 sgMail.setApiKey(sendgridAPIKey);
 
-const sendMail = async (body) => {
+const generateMailBody = (file) => {
+    const filePath = './lib/mailer/body/' + file + '.html';
+    return new Promise((res,rej) => {
+        fs.readFile(filePath, (err, data) => {
+            if (err){
+                rej(err);
+            }else{
+                res(data.toString());
+            }
+          });
+    });
+}
+
+const sendMail = async (body, retry = 0) => {
     const toMail = [];
     if(body.to){
         body.to.forEach((mail)=>{
@@ -22,8 +37,7 @@ const sendMail = async (body) => {
             });
         })
     }
-
-    const to = body.to;
+    
     const subject = body.subject;
     const text = body.text;
     const html = body.html;
@@ -41,25 +55,26 @@ const sendMail = async (body) => {
         text,
         html,
     }
-      
-    sgMail
-    .send(msg)
-    .then(() => {
-        console.log('Email sent')
-    })
-    .catch((error) => {
-        console.error(error)
-    })
+
+    await new Promise((res,rej) => {
+        sgMail
+        .send(msg)
+        .then((result) => {
+            console.log('Email sent')
+            res(result);
+        })
+        .catch((error) => {
+            rej(error);
+        });
+    }).catch((err) => {
+        logger.error(err);
+        if(retry < 3) {
+            sendMail(body,retry+1);
+        }
+    });
 }
 
-// const body = {
-//     to : ["vaibhav@animei.tv"],
-//     subject: "Greetings from Animei TV",
-//     text: "OTP: 123",
-//     html: "Hi this is <strong>Animei TV</strong>"
-// }
-// sendMail(body);
-
 module.exports = {
-    sendMail
+    sendMail,
+    generateMailBody
 }

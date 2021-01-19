@@ -28,6 +28,16 @@ code {
   width: 6px;
 }
 
+::selection {
+  color: none;
+  background: none;
+}
+/* For Mozilla Firefox */
+::-moz-selection {
+  color: none;
+  background: none;
+}
+
 button{
   cursor: pointer;
 }

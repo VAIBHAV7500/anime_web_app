@@ -36,7 +36,7 @@ const create = async (body) => {
 }
 
 const findByVideo = async (video_id,from,to) => {
-    const sql = `SELECT message,time,users.email,users.id FROM discussions INNER JOIN users on users.id = discussions.user_id where video_id = ? and time BETWEEN ? and ?`;
+    const sql = `SELECT message,time,users.email,users.id, users.name as name, users.user_name as user_name FROM discussions INNER JOIN users on users.id = discussions.user_id where video_id = ? and time BETWEEN ? and ?`;
     return runQuery(sql,[video_id,from,to]);
 }
 

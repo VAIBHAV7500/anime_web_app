@@ -6,6 +6,7 @@ const Razorpay = require('razorpay');
 const request = require('request');
 const plans = require('../../config/plans');
 const { updateUserDates } = require('../../lib/order');
+const {logger} = require('../../lib/logger');
 
 const instance = new Razorpay(keys.razorpay);
 
@@ -49,6 +50,7 @@ router.get("/", (req, res) => {
   return res.status(200).json(order);
  });
 } catch (err) {
+  logger.error(err);
   return res.status(500).json({
     message: "Something Went Wrong",
   });
@@ -57,7 +59,6 @@ router.get("/", (req, res) => {
 
 
 router.post("/capture/:paymentId", (req, res) => {
-  console.log(req.params.paymentId);
   const plan_id = parseInt(req.body.plan_id);
   const user_id = req.body.user_id;
   const currPlan = plans.paid_plan_ids.find(x => x.id === plan_id);
@@ -75,7 +76,6 @@ router.post("/capture/:paymentId", (req, res) => {
     },
    async function (err, response, stringBody) {
      if (err) {
-       console.log('Error');
       return res.status(500).json({
          message: "Something Went Wrong",
        }); 
@@ -102,8 +102,7 @@ router.post("/capture/:paymentId", (req, res) => {
       return res.status(200).json(body);
     });
   } catch (err) {
-    console.log('ERROR 2');
-    console.log(err.stack);
+    logger.error(err);
     return res.status(500).json({
       message: "Something Went Wrong",
    });

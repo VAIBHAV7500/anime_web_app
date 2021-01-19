@@ -7,15 +7,16 @@ import SignUpVerification from './SignUpVerification'
 const Welcome = () => {
     const [active,setActive] = useState(0);
     const [email,setEmail] = useState("");
+    const [user, setUser]= useState();
     const components = [
         {
             component : <SignIn activeArray={[,setActive]}/>,
         },
         {
-            component : <SignUp activeArray={[,setActive]} emailDetail={[email,setEmail] }/>,
+            component : <SignUp activeArray={[,setActive]} emailDetail={[email,setEmail]} userDetail ={[user,setUser]}/>,
         },
         {
-            component : <SignUpVerification activeArray={[,setActive]} emailDetail={[email,setEmail] } />,
+            component : <SignUpVerification activeArray={[,setActive]} emailDetail={[email,setEmail]} userDetail ={[user,setUser]}/>,
         }
     ]
 

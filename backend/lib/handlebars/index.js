@@ -9,11 +9,12 @@ const handlebars = require('handlebars');
 //              "kids": [{"name": "Jimmy", "age": "12"}, {"name": "Sally", "age": "4"}]};
 // var result = template(data);
 
-const generateTemplate = (source) => {
-    return handlebars.compile(source);
+const compileTemplate = (source, data) => {
+    const template = handlebars.compile(source);
+    return template(data);
 }
 
 
 module.exports = {
-    generateTemplate
+    compileTemplate
 }

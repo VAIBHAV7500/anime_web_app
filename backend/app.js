@@ -24,6 +24,10 @@ const responseTime = require('response-time');
 const redis = require('redis');
 const {executeOnce} = require('./services/slave');
 const discord = require('./services/pushNotification');
+const https = require("https");
+const http = require("http");
+const rateLimit = require("express-rate-limit");
+
 const clusterWorkerSize = os.cpus().length
 var app = express();
 app.oauth = oAuth2Server({
@@ -117,6 +121,15 @@ app.use(
   })
 );
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10
+});
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20
+});
 
 /* -------------------------------------------------------------------------- */
 /*                          Routers Declaration Start                         */
@@ -132,12 +145,15 @@ const { onLoad } = require('./routes/socket');
 /*                           Routers Declaration End                          */
 /* -------------------------------------------------------------------------- */
 
-app.use('/auth',authRouter);
+app.use('/auth',authLimiter,authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
 app.use('/api',apiMiddleware, app.oauth.authorise(), apiRouter);
 app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));
+  app.get('/',limiter, (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
   app.get('*', function (req, res) {
     //Facing issues on reloading...
     res.redirect(`/?redirect=${req.originalUrl}`);
@@ -150,15 +166,15 @@ app.use(anyError);
 app.use(errorHandler);
 
 let server;
-// if(process.env.NODE_ENV === "production"){
-//   const https = require("https");
-//   const key = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.key');
-//   const cert = fs.readFileSync('C:\\nginx\\ssl\\dev.animei.tv.crt');
-//   server = https.createServer({key,cert},app);
-// }else{
-  const http = require("http");
+let key;
+let cert;
+if(process.env.NODE_ENV === "production"){
+  key = fs.readFileSync('./certificates/privkey.pem');
+  cert = fs.readFileSync('./certificates/fullchain.pem'); 
+  server = https.createServer({key,cert},app);
+}else{
   server = http.createServer(app);
-//}
+}
 
 let port = process.env.PORT || 4200;
 let host = process.env.HOST || 'localhost';
@@ -184,7 +200,11 @@ if (clusterWorkerSize > 1) {
       console.log("Worker", worker.id, " has exitted.")
     })
   } else {
-    server = http.createServer(app);
+    if(process.env.NODE_ENV === "production"){
+      server = https.createServer({key,cert},app);
+    }else{
+      server = http.createServer(app);
+    }
     const wss = new WebSocket.Server({ server }); 
     onLoad(wss);
     process.on('message', function(msg) {
@@ -200,7 +220,11 @@ if (clusterWorkerSize > 1) {
     isMainWorker = true;
     executeOnce();
   }
-  server = http.createServer(app);
+  if(process.env.NODE_ENV === "production"){
+    server = https.createServer({key,cert},app);
+  }else{
+    server = http.createServer(app);
+  }
   const wss = new WebSocket.Server({ server }); 
   onLoad(wss);
   server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));

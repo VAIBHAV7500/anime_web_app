@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function SignUp(props) {
     const [,setActive] = props.activeArray;
     const [email,setEmail] = props.emailDetail;
+    const [user,setUser] = props.userDetail;
     const passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$"
     const appbaseurl = process.env.REACT_APP_BASE_URL;
     const [state,setState] = useState({
@@ -103,13 +104,17 @@ export default function SignUp(props) {
         }); 
         stopLoader();
         if(response){
-            if(response.data.message === "Registration Successfull"){
+            console.log(response);
+            if(response.status === 200){
                 setEmail(state.regEmail);
+                console.log('Setting User');
+                console.log(response.data);
+                setUser(response.data.id);
                 setActive(2);
             }else{
                 setState(prevState =>({
                     ...prevState,
-                    error : response.data.message,
+                    error : response?.data?.message,
                     showerror : true
                 }));
             }
