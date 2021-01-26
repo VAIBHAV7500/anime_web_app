@@ -1,3 +1,5 @@
+echo "Stopping Server"
+forever stopall || true
 echo "Setting Permissions"
 git remote set-url origin git@github.com:VAIBHAV7500/anime_web_app.git
 echo "Pulling repository"
@@ -20,8 +22,6 @@ npm run db
 echo "Building Frontend"
 cd ..
 sh build.sh
-echo "Stopping Server"
-forever stopall || true
 echo "Updating Config"
 sh config.sh 
 echo "Creating Server"

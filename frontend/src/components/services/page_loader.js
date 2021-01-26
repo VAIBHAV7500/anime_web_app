@@ -11,8 +11,8 @@ const override = `
 function page_loader({title}) {
     return (
         <div className={styles.shadow}>
-                <div className={styles.title}>{title}</div>
-                <GridLoader loading={true} css={override} size={100} color="white"/>
+                {/* <div className={styles.title}>{title}</div> */}
+                {/* <GridLoader loading={true} css={override} size={100} color="white"/> */}
         </div>
     )
 }
