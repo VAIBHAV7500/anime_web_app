@@ -8,9 +8,18 @@ const override = `
     top: 50%;
 `;
 
-function page_loader({title}) {
+function page_loader({title,cover}) {
+
+    const coverBackground = {
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url(${cover})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+    }
+
     return (
-        <div className={styles.shadow}>
+        <div className={styles.shadow} style={coverBackground}>
                 {/* <div className={styles.title}>{title}</div> */}
                 {/* <GridLoader loading={true} css={override} size={100} color="white"/> */}
         </div>

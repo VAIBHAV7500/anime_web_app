@@ -65,13 +65,17 @@ class show extends Component {
     return null;
   }
 
+  getShow = () => {
+    return this?.state?.show
+  }
+
   getRecent = () => {
     return this?.state?.show?.recent;
   }
 
   navItems = [{
       title: 'Episodes',
-      component: <Episodes show_id={this.props.match.params.id} setState = {this.setDataCache} getCache = {this.getDataCache} toastConfig = {this.toastConfig}/>
+      component: <Episodes show_id={this.props.match.params.id} setState = {this.setDataCache} getCache = {this.getDataCache} toastConfig = {this.toastConfig} getShow = {this.getShow} />
     },
     {
       title: 'Characters',

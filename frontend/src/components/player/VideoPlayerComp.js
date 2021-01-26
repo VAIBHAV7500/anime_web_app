@@ -19,7 +19,7 @@ require('!style-loader!css-loader!video.js/dist/video-js.min.css');
 
 let player;
 
-const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPremium}) => {
+const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPremium, getCover}) => {
   const playerRef = useRef();
   const history = useHistory();
   let prevTime = 0;
@@ -118,6 +118,11 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPr
   const goToPlayer = (id, player) => {
     if(id){
       player.dispose();
+      const cover = getCover();
+      history.push({
+          pathname: `/player/${id}`,
+          cover
+      });
       history.push(`/player/${id}`);
       window.location.reload();
     }

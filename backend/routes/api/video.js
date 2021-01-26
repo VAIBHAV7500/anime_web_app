@@ -7,6 +7,7 @@ const db = require('../../db');
 const { json } = require('express');
 const banner = require('../../config/banner.json');
 const {isPaid} = require('../../lib/order');
+const {getValue, setValue} = require('../../lib/redis');
 
 const client = new apiVideo.ClientSandbox({
     apiKey: keys.api_video.apiKey
@@ -244,7 +245,7 @@ router.get('/details',async (req,res,next)=>{
                 res(result);
             }).catch((err)=>{
                 rej(err);
-            })
+            });
         }));
         promiseArray.push(new Promise((res,rej)=>{
             db.user_player_session.findByVideoId(videoId, userId).then((result)=>{

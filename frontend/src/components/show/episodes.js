@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 let episodeArray = [];
 
-const Episodes = React.memo(() => {
+const Episodes = React.memo(({getShow}) => {
     const {id} = useParams();
     const userId = useSelector(state => state.user_id);
     let prevUserId = null;
@@ -161,7 +161,14 @@ const Episodes = React.memo(() => {
     }
 
     const goToPlayer = (id) =>{
-        history.push(`/player/${id}`);
+        console.log(getShow());
+        const show = getShow();
+        const landscape = show.poster_landscape_url;
+        history.push({
+            pathname: `/player/${id}`,
+            search: '?query=abc',
+            cover: landscape
+        });
     }
 
     const setOrderCookie = () => {

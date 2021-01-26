@@ -26,7 +26,12 @@ export class player extends Component {
         return this?.state?.player?.currentTime() || 0;
     }
 
+    getCover = () => {
+        return this?.props?.location?.cover;
+    }
+
     fetchData = async () => {
+        console.log(this.props.location);
         this.setState({
             loading: true
         });
@@ -86,7 +91,7 @@ export class player extends Component {
             this.ws.onmessage = evt => {
                 // on receiving a message, add it to the list of messages
                 const data = JSON.parse(evt.data)
-                if(data.type === "discussion"){
+                if(data.type === "discussion" && this.state){
                     this.state.messages = data.messages;
                     this.setState(this.state);
                 }
@@ -201,7 +206,7 @@ export class player extends Component {
     render() {
         return (
                 <div className={styles.player_wrapper}>
-                    {this.state?.loading && <PageLoader />}
+                    {this.state?.loading && <PageLoader cover = {this.getCover()} />}
                     {this.state?.player && <VideoPlayerComp 
                         src={this.state?.player}
                         setPlayer = {this.setPlayer}
@@ -209,6 +214,7 @@ export class player extends Component {
                         updateVideoStatus={this.updateVideoStatus} 
                         updateDiscussion = {this.updateDiscussion}
                         isPremium = {this.state?.premium}
+                        getCover = {this.getCover}
                         active
                     />}
                     {this?.state?.player && <Discussion 
