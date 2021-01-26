@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 let episodeArray = [];
 
-const Episodes = React.memo(({getShow}) => {
+const Episodes = React.memo(({getShow,setState,getCache}) => {
     const {id} = useParams();
     const userId = useSelector(state => state.user_id);
     let prevUserId = null;
@@ -63,6 +63,13 @@ const Episodes = React.memo(({getShow}) => {
     },[id]);
 
     useEffect(() => {
+        if(hasMore === false){
+            
+            setState(0,episodeArray);
+        }
+    },[hasMore])
+
+    useEffect(() => {
         if(prevUserId !== userId){
             prevUserId = userId;
             updateEpisodes();
@@ -86,12 +93,24 @@ const Episodes = React.memo(({getShow}) => {
     const finalfetchSource = async (endPoint) => {
         if(userId && !loading){
             loading = true;
-            const axiosInstance = axios.createInstance();
-            const result = await axiosInstance.get(endPoint).catch((err)=>{
-                toast.error(`O'Oh, looks like there's some issue. Please try again later`);
-            });
+            const cache = getCache(0);
+            let finalData;
+            if(cache){
+                finalData = {data: {
+                    result: cache
+                }};
+                episodeArray = cache;
+                setMore(false);
+            }else{
+                const axiosInstance = axios.createInstance();
+                const result = await axiosInstance.get(endPoint).catch((err)=>{
+                    toast.error(`O'Oh, looks like there's some issue. Please try again later`);
+                });
+                finalData = result;
+            }
+            
             loading = false;
-            return result;
+            return finalData;
         }
     }
 
