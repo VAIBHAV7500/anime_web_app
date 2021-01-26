@@ -13,3 +13,14 @@
     left:0px;
     z-index:1000;
 }
+
+.title{
+    color: white;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -3em; /*set to a negative number 1/2 of your height*/
+    margin-left: -4em; /*set to a negative number 1/2 of your width*/
+    font-size: 40px;
+    font-weight: bolder;
+}

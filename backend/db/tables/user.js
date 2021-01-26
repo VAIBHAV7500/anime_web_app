@@ -77,6 +77,16 @@ const makeUserActive = (user_id) => {
     return runQuery(sql,[user_id]);
 }
 
+const updatePassword = (user_id,password) => {
+    const sql =`UPDATE users set password = ? where id = ?`;
+    return runQuery(sql,[password,user_id]);
+}
+
+const updateUserName = (user_name) => {
+    const sql = `UPDATE users set user_name = ?`;
+    return runQuery(sql,[user_name]);
+}
+
 module.exports = {
     createTable,
     find,
@@ -87,5 +97,7 @@ module.exports = {
     updatePlan,
     expirePlans,
     destroyInactiveUser,
-    makeUserActive
+    makeUserActive,
+    updatePassword,
+    updateUserName
 }

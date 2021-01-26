@@ -37,11 +37,12 @@ const sendOTP = async (otp, user_id) => {
   sendMail(mail);
 }
 
-const initiateUserVerification = async (user_id) => {
+const initiateUserVerification = async (user_id,temp_password = null) => {
   const otp = generateOTP();
   const body = {
     verification_token: otp,
     user_id,
+    temp_password,
   }
   const result = await db.user_verification.create(body).catch((err) => {
       logger.error(err);
@@ -55,6 +56,9 @@ const verifyUser = async (user_id,otp) => {
   const result = await db.user_verification.find(user_id);
   if(result && result.length){
     if(result[0].verification_token === otp){
+      if(result[0].temp_password){
+        await db.user.updatePassword(user_id,result[0].temp_password);
+      }
       return true;    
     }
   }

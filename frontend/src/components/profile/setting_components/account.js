@@ -27,15 +27,15 @@ const Account = () => {
         },
         {
             name : "Current Password",
-            placeholder : "Enter current password",
+            placeholder : "Enter Current Password",
         },
         {
             name : "New Password",
-            placeholder : "Enter new password",
+            placeholder : "Enter New Password",
         },
         {
             name : "Confirm New Password",
-            placeholder : "Confirm new password",
+            placeholder : "Confirm New Password",
         },
     ]
     return (

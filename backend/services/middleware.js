@@ -7,7 +7,7 @@ const userSchema = Joi.object({
     name: Joi.string().required().max(100),
 
     password: Joi.string()
-        .pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$')).required(),
+        .pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$')).max(255, 'utf8').required(),
 
 
     plan_id: Joi.number()
@@ -22,7 +22,15 @@ const userSchema = Joi.object({
             }
         })
         .required()
-})
+});
+
+const resetPasswordSchema = Joi.object({
+    user_id: Joi.number(),
+
+    password: Joi.string()
+        .pattern(new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#!$%^&*~]).{8,}$')).max(255, 'utf8').required(),
+
+});
 
 const anyError = (req, res, next) => {
     const error = new Error(`${req.originalUrl} not found!!!`);
@@ -108,10 +116,21 @@ const userSchemaCheck = (req,res,next) => {
     }
 }
 
+const resetPasswordSchemaCheck = (req,res,next) => {
+    const body = req.body;
+    const { error, value } = resetPasswordSchema.validate(body);
+    if(error){
+        res.status(401).json(error);
+    }else{
+        next();
+    }
+}
+
 module.exports = {
     anyError,
     errorHandler,
     apiMiddleware,
     geoBlockCheckMiddleware,
-    userSchemaCheck
+    userSchemaCheck,
+    resetPasswordSchemaCheck
 }

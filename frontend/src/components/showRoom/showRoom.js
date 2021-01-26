@@ -79,7 +79,6 @@ export class showRoom extends Component {
           }
           retry++;
         }while(retry > 0 && retry < 10)
-        this.state.pageLoader = false;
         this.state.rows = this.rows;
         this.state.trailer = "";
         this.state.showIndex = {current : "" , prev : ""};
@@ -116,7 +115,7 @@ export class showRoom extends Component {
     render() {
         return (
             <div className={styles.showRoom}>
-              { this.state?.pageLoader && <PageLoader className={styles.shadow} /> }
+              { this.state?.pageLoader && <PageLoader className={styles.shadow} title="Initializing Show Room" /> }
               <Nav />
               <Banner />
               <div  className={styles.spaces}/>

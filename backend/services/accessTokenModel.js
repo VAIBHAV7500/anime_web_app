@@ -1,6 +1,7 @@
 var db = require('../db/index');
 const passport = require('passport');
 const {compareHash} = require('../services/bcrypt');
+const {sendMessage} = require('./pushNotification');
 
 const getClient = async (clientID, clientSecret, callback) => {
   const client = {
@@ -22,6 +23,10 @@ const getUser = async (email, password, callback) => {
         const comparePass = await compareHash(result.password, password);
         if(!comparePass){
             result = null;
+        }else{
+            if(process.env === 'production'){
+                sendMessage(`${email} just log in`);
+            }
         }
     }
     callback(null,result);

@@ -17,16 +17,14 @@ require('./videoPlayer.css');
 /* eslint import/no-webpack-loader-syntax: off */
 require('!style-loader!css-loader!video.js/dist/video-js.min.css');
 
+let player;
+
 const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPremium}) => {
-  const videoSrc = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
-  //const videoSrc = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
-  //const videoSrc = "https://d2zihajmogu5jn.cloudfront.net/elephantsdream/hls/ed_hd.m3u8";
   const playerRef = useRef();
   const history = useHistory();
   let prevTime = 0;
   const userId = useSelector(state => state.user_id);
   const {id} = useParams();
-  let player;
   let tempTime = 0;
 
   const playerOptions = {
@@ -72,7 +70,7 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPr
 
   var imaOptions = {
     adLabel: `Don't Like Ads? Switch to Premium`,
-    adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator='
+    adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator='
   };
 
   var qualityOptions = {
@@ -173,7 +171,8 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPr
   useEffect(()=>{
     document.querySelector("input").blur();
     player = videojs(playerRef.current,playerOptions, () => {
-      player.src(videoSrc);
+      player.src(src?.url);
+
       if(!isPremium){
         player.ima(imaOptions);
       }
@@ -181,8 +180,10 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPr
       if(!mobileCheck()){
         const videoElement = document.querySelector(".video-js");
         const commentElement = document.querySelector(`.${discussionStyles.body}`);
-        videoElement.classList.add("shrink_video");
-        commentElement.classList.add(discussionStyles.discussion_show);
+        if(videoElement && commentElement){
+          videoElement.classList.add("shrink_video");
+          commentElement.classList.add(discussionStyles.discussion_show);
+        }
       }
 
       player.hlsQualitySelector(qualityOptions);
@@ -217,6 +218,11 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPr
         checkSessionDetails();
         checkButtons(player);
       }, 3000);
+    });
+
+    player.on("ended", (e,data) => {
+      console.log('Video Ended');
+      goToPlayer(src.next_show, player);
     });
 
     const checkSessionDetails = () => {
@@ -280,7 +286,7 @@ const VideoPlayerComp = ({src,updateVideoStatus,updateDiscussion, setPlayer,isPr
       if(checkTime){
         clearInterval(checkTime);
       }
-      checkSessionDetails();
+      //checkSessionDetails();
       removeAllButton();
       player.dispose();
     };

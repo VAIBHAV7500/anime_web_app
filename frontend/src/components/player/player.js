@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Discussion from './discussion';
 import checkAdBlocker from '../../utils/adBlocker';
 import { useHistory } from 'react-router-dom';
+import { FaThList } from 'react-icons/fa';
 
 const URL = process.env.REACT_APP_WEBSOCKET_URL;
 
@@ -38,11 +39,6 @@ export class player extends Component {
                 const axiosInstance = axios.createInstance();
                 const result = await axiosInstance.get(endPoint);
                 if(result.data){
-                    result.data.intro_start_time = 0;
-                    result.data.intro_end_time = 22;
-                    result.data.closing_start_time = 828;
-                    result.data.closing_end_time = 880;
-                    result.data.next_show = 20;
                     this.setState({
                         player: result.data,
                         premium: result.data.premium || false,
@@ -206,20 +202,21 @@ export class player extends Component {
         return (
                 <div className={styles.player_wrapper}>
                     {this.state?.loading && <PageLoader />}
-                    {this.state?.player !== undefined && <VideoPlayerComp 
+                    {this.state?.player && <VideoPlayerComp 
                         src={this.state?.player}
                         setPlayer = {this.setPlayer}
                         className={styles.player} 
                         updateVideoStatus={this.updateVideoStatus} 
                         updateDiscussion = {this.updateDiscussion}
                         isPremium = {this.state?.premium}
+                        active
                     />}
-                    <Discussion 
+                    {this?.state?.player && <Discussion 
                         discussion = {this?.state?.discussion} 
                         sendMessage={this.sendMessage} 
                         getCurrentTime={this.getCurrentTime}
                         isPremium = {this.state?.premium} 
-                    />
+                    />}
                  </div>
         )
     }

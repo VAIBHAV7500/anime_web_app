@@ -6,6 +6,7 @@ const createTable = (con) => {
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             user_id BIGINT UNSIGNED,
             verification_token TEXT,
+            temp_password VARCHAR(255),
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY(user_id) REFERENCES users(ID)
         )
@@ -35,9 +36,15 @@ const destroyByDate = async (date) => {
   return runQuery(sql,[date]);
 }
 
+const destroy = (user_id) =>{
+    const sql = `DELETE FROM user_verification WHERE user_id = ?`;
+    return runQuery(sql,[user_id]);
+}
+
 module.exports = {
     createTable,
     create,
     find,
     destroyByDate,
+    destroy
 }

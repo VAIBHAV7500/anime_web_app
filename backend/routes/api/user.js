@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../../db/index');
 const { response } = require('../../app');
+const {resetPasswordSchemaCheck} = require('../../services/middleware');
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
@@ -32,6 +33,16 @@ router.get('/details', async(req,res,next)=>{
             message: "No User Id"
         })
     }
+});
+
+router.get('/reset-password',resetPasswordSchemaCheck,async(req,res,next) => {
+    const user_id = req.body.user_id;
+    const password = req.body.password;
+    await db.user_verification.destroy(user_id);
+    await initiateUserVerification(user_id,password).catch((err) => {
+        res.status(403).send();
+    });
+    res.status(200).send();
 });
 
 module.exports = router;

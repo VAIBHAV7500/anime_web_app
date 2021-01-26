@@ -264,6 +264,16 @@ router.get('/details',async (req,res,next)=>{
         if(!isPremium){
             result.type = null;
         }
+        //================== Temperorary Change ================
+
+        result.intro_start_time = 0;
+        result.intro_end_time = 22;
+        result.closing_start_time = 120;
+        result.closing_end_time = 135;
+        result.next_show = 20;
+        result.url = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
+
+        //=================================================//
         result.progress = progress.length ? progress[0].covered_percentage : 0;
         result.premium = isPremium;
         res.json(result);

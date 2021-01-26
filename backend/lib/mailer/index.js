@@ -60,7 +60,6 @@ const sendMail = async (body, retry = 0) => {
         sgMail
         .send(msg)
         .then((result) => {
-            console.log('Email sent')
             res(result);
         })
         .catch((error) => {
