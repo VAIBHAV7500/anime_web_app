@@ -24,7 +24,7 @@ const getUser = async (email, password, callback) => {
         if(!comparePass){
             result = null;
         }else{
-            if(process.env === 'production'){
+            if(process.env.NODE_ENV === 'production'){
                 sendMessage(`${email} just log in`);
             }
         }
