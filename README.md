@@ -1,6 +1,9 @@
 # Demo
 
-https://animeistag.net (vbhvsolanki7500@gmail.com:Hello@123)
+https://animeistag.net 
+
+Premium: vbhvsolanki7500@gmail.com:Hello@123
+Basic: test@gmail.com:Hello@123
 
 # Installation
 
