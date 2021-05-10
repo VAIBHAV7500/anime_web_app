@@ -1,10 +1,19 @@
-# Demo
+<h1 align='center'>
+  Animei TV
+</h1>
+
+<p align='center'>
+  Animei TV is a full fledged working OTT Platform.
+</p>
+
+![Cover](./images/cover.png)
+# See it in ACTION
 
 https://animeistag.net 
 
-Premium: vbhvsolanki7500@gmail.com:Hello@123
+   Username: vbhvsolanki7500@gmail.com
 
-Basic: test@gmail.com:Hello@123
+   Password: Hello@123
 
 # Installation
 
@@ -76,27 +85,32 @@ npm start
     ```
 
 
-## Code Standardization
-
-Camel Case => helloHowAreYou.
-
-SnakeCase => hello_how_are_you.
+# Images
 
 
-FileNames: Snake Case
+### Landing Page
+![Landing Page](./images/landing_page.png)
 
-JavaScript Code: Camel Case
+### Show Page
+![Show Page](./images/show_page.png)
 
-JSONs: Snake Case
+### Episodes
+![Episodes](./images/episodes.png)
 
-Tables & Columns: Snake Case
+### Characters
+![Characters](./images/characters.png)
 
-CSS: Snake Case
+### Review
+![Review](./images/review.png)
 
-API Paths: Snake Case
+### Search
+![Search](./images/search.png)
 
-## Spinners
-https://www.davidhu.io/react-spinners/
+### Profile
+![Profile](./images/watchlist.png)
 
-## [Nginx Reverse Proxy [Production]](https://gist.github.com/basharovV/e25989cc918f0b21ded26c8bf3be8400)
+### Player
+![Player](./images/player.png)
 
+### Ad Blocked
+![Ads](./images/ads.png)
