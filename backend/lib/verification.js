@@ -28,13 +28,13 @@ const sendOTP = async (otp, user_id) => {
   const user = await db.user.find(user_id);
   if(user){
     const email = user.email;
+    const mail = {
+      to: [email],
+      subject: 'Your AnimeiStag OTP',
+      html,
+    }
+    sendMail(mail);
   }
-  const mail = {
-    to: ['vbhvsolanki7500@gmail.com'],
-    subject: 'Your OTP by Animei TV',
-    html,
-  }
-  sendMail(mail);
 }
 
 const initiateUserVerification = async (user_id,temp_password = null) => {
