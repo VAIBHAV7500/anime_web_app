@@ -168,13 +168,8 @@ app.use(errorHandler);
 let server;
 let key;
 let cert;
-if(process.env.NODE_ENV === "production"){
-  key = fs.readFileSync('./certificates/privkey.pem');
-  cert = fs.readFileSync('./certificates/fullchain.pem'); 
-  server = https.createServer({key,cert},app);
-}else{
-  server = http.createServer(app);
-}
+
+server = http.createServer(app);
 
 let port = process.env.PORT || 4200;
 let host = process.env.HOST || 'localhost';
@@ -200,11 +195,7 @@ if (clusterWorkerSize > 1) {
       console.log("Worker", worker.id, " has exitted.")
     })
   } else {
-    if(process.env.NODE_ENV === "production"){
-      server = https.createServer({key,cert},app);
-    }else{
-      server = http.createServer(app);
-    }
+    server = http.createServer(app);
     const wss = new WebSocket.Server({ server }); 
     onLoad(wss);
     process.on('message', function(msg) {

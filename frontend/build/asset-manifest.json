@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.f4912a9a.chunk.css",
-    "main.js": "/static/js/main.db40599b.chunk.js",
-    "main.js.map": "/static/js/main.db40599b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c8a21426.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c8a21426.js.map",
-    "static/css/2.057b75c7.chunk.css": "/static/css/2.057b75c7.chunk.css",
-    "static/js/2.9c349375.chunk.js": "/static/js/2.9c349375.chunk.js",
-    "static/js/2.9c349375.chunk.js.map": "/static/js/2.9c349375.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.bfa6a36d2a38f6ede28cc17ebed64a4f.js": "/precache-manifest.bfa6a36d2a38f6ede28cc17ebed64a4f.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.057b75c7.chunk.css.map": "/static/css/2.057b75c7.chunk.css.map",
-    "static/css/main.f4912a9a.chunk.css.map": "/static/css/main.f4912a9a.chunk.css.map",
-    "static/js/2.9c349375.chunk.js.LICENSE.txt": "/static/js/2.9c349375.chunk.js.LICENSE.txt",
-    "static/media/styles.css": "/static/media/revicons.2feb69cc.eot"
+    "main.css": "http://animeistag.net/static/css/main.f4912a9a.chunk.css",
+    "main.js": "http://animeistag.net/static/js/main.9ea5583f.chunk.js",
+    "main.js.map": "http://animeistag.net/static/js/main.9ea5583f.chunk.js.map",
+    "runtime-main.js": "http://animeistag.net/static/js/runtime-main.a33d3643.js",
+    "runtime-main.js.map": "http://animeistag.net/static/js/runtime-main.a33d3643.js.map",
+    "static/css/2.5fdae95d.chunk.css": "http://animeistag.net/static/css/2.5fdae95d.chunk.css",
+    "static/js/2.2d38b287.chunk.js": "http://animeistag.net/static/js/2.2d38b287.chunk.js",
+    "static/js/2.2d38b287.chunk.js.map": "http://animeistag.net/static/js/2.2d38b287.chunk.js.map",
+    "index.html": "http://animeistag.net/index.html",
+    "precache-manifest.d15ceca655ad7518e8038f491221e801.js": "http://animeistag.net/precache-manifest.d15ceca655ad7518e8038f491221e801.js",
+    "service-worker.js": "http://animeistag.net/service-worker.js",
+    "static/css/2.5fdae95d.chunk.css.map": "http://animeistag.net/static/css/2.5fdae95d.chunk.css.map",
+    "static/css/main.f4912a9a.chunk.css.map": "http://animeistag.net/static/css/main.f4912a9a.chunk.css.map",
+    "static/js/2.2d38b287.chunk.js.LICENSE.txt": "http://animeistag.net/static/js/2.2d38b287.chunk.js.LICENSE.txt",
+    "static/media/styles.css": "http://animeistag.net/static/media/revicons.2feb69cc.eot"
   },
   "entrypoints": [
-    "static/js/runtime-main.c8a21426.js",
-    "static/css/2.057b75c7.chunk.css",
-    "static/js/2.9c349375.chunk.js",
+    "static/js/runtime-main.a33d3643.js",
+    "static/css/2.5fdae95d.chunk.css",
+    "static/js/2.2d38b287.chunk.js",
     "static/css/main.f4912a9a.chunk.css",
-    "static/js/main.db40599b.chunk.js"
+    "static/js/main.9ea5583f.chunk.js"
   ]
 }
