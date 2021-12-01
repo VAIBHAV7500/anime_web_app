@@ -6,8 +6,8 @@ import default_img from '../../../images/default_user_profile.png'
 const Account = () => {
 
     const userDetail = {
-        email : "anubhavsolanki0@gmail.com",
-        username : "anubhav",
+        email : "dummy@dummy.com",
+        username : "dummy",
     }
     
     const accountFields = [

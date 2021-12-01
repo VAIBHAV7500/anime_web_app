@@ -28,10 +28,10 @@ function Profile() {
         title : "Completed",
         component: <Watchlist userId={id} endPoint={request.fetchCompletedShows} message="You haven't completed any series yet. Do you know? It's a bad thing to leave a series uncompleted!"/>
       },
-      { 
-        title : "Settings",
-        component: <Setting/>
-      },
+      // { 
+      //   title : "Settings",
+      //   component: <Setting/>
+      // },
       { 
         title : "My Reviews",
         component: <MyReviews userId={id} endPoint={request.myReviews} />
