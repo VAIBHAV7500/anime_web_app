@@ -8,7 +8,7 @@ const {logger} = require('../lib/logger');
 
 module.exports = (app)=>{
     
-    router.post('/register',geoBlockCheckMiddleware, userSchemaCheck , async (req, res, next) => {
+    router.post('/register', userSchemaCheck , async (req, res, next) => {
         try{
             let body = req.body;
             const password = body.password;
