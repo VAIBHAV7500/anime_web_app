@@ -48,12 +48,11 @@ const sendMail = async (body, retry = 0) => {
     }];
 
     const msg = {
-        from: {
-            "email": 'staging@animei.tv'
-        }, // Change to your verified sender
-        personalizations,
-        text,
-        html,
+        to: toMail[0],
+        from: 'no-reply@animeistag.net',
+        subject: subject,
+        text: text,
+        html: html,
     }
 
     await new Promise((res,rej) => {

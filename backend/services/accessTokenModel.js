@@ -1,7 +1,7 @@
 var db = require('../db/index');
 const passport = require('passport');
 const {compareHash} = require('../services/bcrypt');
-const {sendMessage} = require('./pushNotification');
+//const {sendMessage} = require('./pushNotification');
 
 const getClient = async (clientID, clientSecret, callback) => {
   const client = {
@@ -25,7 +25,7 @@ const getUser = async (email, password, callback) => {
             result = null;
         }else{
             if(process.env.NODE_ENV === 'production'){
-                sendMessage(`${email} just log in`);
+                //sendMessage(`${email} just log in`);
             }
         }
     }

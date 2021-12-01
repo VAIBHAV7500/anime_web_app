@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@api.video/nodejs-sdk": "^1.8.4",
-    "@sendgrid/mail": "^7.4.0",
+    "@sendgrid/mail": "^7.6.0",
     "aws-sdk": "^2.797.0",
     "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
