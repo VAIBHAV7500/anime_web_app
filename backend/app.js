@@ -211,11 +211,7 @@ if (clusterWorkerSize > 1) {
     isMainWorker = true;
     executeOnce();
   }
-  if(process.env.NODE_ENV === "production"){
-    server = https.createServer({key,cert},app);
-  }else{
-    server = http.createServer(app);
-  }
+  server = http.createServer(app);
   const wss = new WebSocket.Server({ server }); 
   onLoad(wss);
   server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
