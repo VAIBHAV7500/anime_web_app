@@ -6,14 +6,7 @@
   Animei TV is a full fledged working OTT Platform.
 </p>
 
-![Cover](./images/cover.png)
-# See it in ACTION
-
-https://animeistag.net 
-
-   Username: vbhvsolanki7500@gmail.com
-
-   Password: Hello@123
+# [Screenshots](#screenshots)
 
 # Installation
 
@@ -87,6 +80,7 @@ npm start
 
 # Images
 
+<span name="screenshots"></span>
 
 ### Landing Page
 ![Landing Page](./images/landing_page.png)
