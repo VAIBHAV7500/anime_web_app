@@ -77,10 +77,8 @@ npm start
     sh .\build.sh
     ```
 
-
-# Images
-
 <span name="screenshots"></span>
+# Images
 
 ### Landing Page
 ![Landing Page](./images/landing_page.png)
