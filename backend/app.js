@@ -43,7 +43,10 @@ if(process.env.NODE_ENV === "production"){
     maxAge: 15552000  // 180 days in seconds
   })) 
 }
-global.redis = redis.createClient();
+global.redis = redis.createClient({
+  host: 'redis',
+  port: 6379,
+});
 
 global.redis.on('error', (err) => {
   logger.error(err);
