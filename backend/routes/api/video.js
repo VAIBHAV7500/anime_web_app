@@ -272,7 +272,7 @@ router.get('/details',async (req,res,next)=>{
         result.closing_start_time = 120;
         result.closing_end_time = 135;
         result.next_show = 20;
-        result.url = "https://test-animei.s3.ap-south-1.amazonaws.com/The+Simpsons+Movie+-+1080p+Trailer.m3u8";
+        result.url = "https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8";
 
         //=================================================//
         result.progress = progress.length ? progress[0].covered_percentage : 0;

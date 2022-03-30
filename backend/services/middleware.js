@@ -90,19 +90,20 @@ const checkIp = async (ip, retry = 0) => {
 const geoBlockCheckMiddleware = async (req,res,next) => {
     const ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim();
     if(ip){
-        const response = await checkIp(ip); 
-        if(response){
-            console.log(response.data.alpha2);
-            const country = response.data.alpha2;
-            console.log(country);
-            // if(country !== "IN"){
-            //     res.status(403).json({
-            //         message: "Geo Blocked!!"
-            //     });
-            // }
-        }
-        console.log('Checking Geo Block ' + ip);
         next();
+        // const response = await checkIp(ip); 
+        // if(response){
+        //     console.log(response.data.alpha2);
+        //     const country = response.data.alpha2;
+        //     console.log(country);
+        //     // if(country !== "IN"){
+        //     //     res.status(403).json({
+        //     //         message: "Geo Blocked!!"
+        //     //     });
+        //     // }
+        // }
+        // console.log('Checking Geo Block ' + ip);
+        // next();
     }
 }
 

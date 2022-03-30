@@ -13,6 +13,7 @@
     overflow: hidden;
     overflow-x: scroll;
     scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
 .row::-webkit-scrollbar {
