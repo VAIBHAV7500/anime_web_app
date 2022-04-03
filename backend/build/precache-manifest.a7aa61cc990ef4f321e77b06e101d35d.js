@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d9fdb602be1e8a71395b98233e7945bc",
+    "revision": "f7de42aa9e3c159aa8655d4c7028a5cc",
     "url": "https://anime-web-app.herokuapp.com/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://anime-web-app.herokuapp.com/static/css/2.a488b519.chunk.css"
   },
   {
-    "revision": "9cf8e19fb8bf92a31f49",
+    "revision": "8a6a1fdebd08d938e025",
     "url": "https://anime-web-app.herokuapp.com/static/css/main.2708cbec.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://anime-web-app.herokuapp.com/static/js/2.f9d42cbe.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9cf8e19fb8bf92a31f49",
-    "url": "https://anime-web-app.herokuapp.com/static/js/main.f8e680d5.chunk.js"
+    "revision": "8a6a1fdebd08d938e025",
+    "url": "https://anime-web-app.herokuapp.com/static/js/main.784fc11a.chunk.js"
   },
   {
     "revision": "c96052400f17d137ffc9",
