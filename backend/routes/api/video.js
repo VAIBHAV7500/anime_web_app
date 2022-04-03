@@ -5,7 +5,6 @@ const formidable = require("formidable");
 const db = require('../../db');
 const { json } = require('express');
 const {isPaid} = require('../../lib/order');
-const {getValue, setValue} = require('../../lib/redis');
 
 const client = new apiVideo.ClientSandbox({
     apiKey: "1234"
@@ -81,19 +80,9 @@ router.get('/episodes', async(req,res,next)=>{
         const to = from + (latest ? -1 : 1) * offset;
         const promiseArray = [];
         promiseArray.push(new Promise((res,rej)=>{
-            const key = `episode_${showId}_${from}_${to}_${latest}`;
-            global.redis.get(key, async (err, redisResult) => {
-                if(redisResult){
-                    res(JSON.parse(redisResult));
-                }else{
-                    db.videos.getShows(req.query.show_id, from, to, latest).then((result)=>{
-                        global.redis.setex(key, 3600, JSON.stringify(result));
-                        res(result);
-                    }).catch((err)=>{
-                        rej(err);
-                    });
-                }
-            });
+            db.videos.getShows(req.query.show_id, from, to, latest).then((result)=>{
+                res(result);
+            })
         }));
         promiseArray.push(new Promise((res,rej)=>{
             db.user_player_session.findByShowId(showId, userId).then((result)=>{
