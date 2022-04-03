@@ -9,7 +9,9 @@
 # Demo
 
 URL: https://anime-web-app.herokuapp.com/
-Email: test@test.com    
+
+Email: test@test.com
+    
 Password: Hello@123
 
 # [Screenshots](#screenshots)
