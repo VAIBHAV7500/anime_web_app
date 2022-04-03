@@ -6,6 +6,12 @@
   Animei TV is a full fledged working OTT Platform.
 </p>
 
+# Demo
+
+URL: https://anime-web-app.herokuapp.com/
+Email: test@test.com    
+Password: Hello@123
+
 # [Screenshots](#screenshots)
 
 # Installation
