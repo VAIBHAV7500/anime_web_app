@@ -78,7 +78,7 @@ const getLogger = (path) => {
 
   // instantiate a new Winston Logger with the settings defined above
   logger = winston.createLogger({
-    transports: [rotatingTransport, new winston.transports.Console(consoleOptions)],
+    transports: [new winston.transports.Console(consoleOptions)],
     exitOnError: false, // do not exit on handled exceptions
   });
 
