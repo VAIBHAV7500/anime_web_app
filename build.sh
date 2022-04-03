@@ -1,5 +1,5 @@
 ls
 cd frontend
-npm run ci
+npm ci
 npm run build
 cp -R build ../backend/
