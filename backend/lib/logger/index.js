@@ -62,18 +62,6 @@ const getLogger = (path) => {
     format: format.combine(prettyPrintConsole(), format.cli()),
   };
 
-  const rotatingTransport = new winston.transports.DailyRotateFile({
-    filename: path === undefined ? 'app-main-%DATE%.log' : `app-${path.replace(new RegExp('/', 'g'), '_')}-%DATE%.log`,
-    datePattern: 'YYYY-MM-DD',
-    maxSize: '5m',
-    dirname: path !== undefined ? `../logs/${path}` : '../logs/',
-    createSymlink: true,
-    colorize: false,
-    symlinkName: 'app-main-current.log',
-    timestamp: true,
-    format: format.combine(enumerateErrorFormat(), format.errors({ stack: true }), format.timestamp(), format.json()),
-  });
-
   let logger = null;
 
   // instantiate a new Winston Logger with the settings defined above
