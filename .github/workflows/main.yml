@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    description: "Manual Trigger"
+
+jobs:
+  build:
+    name: "Deploy anime-web-app"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Building Frontend
+        run : |
+          sh build.sh
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "anime-web-app" #Must be unique in Heroku
+          heroku_email: "vbhvsolanki7500@gmail.com"
+          appdir: "backend" # <- This will point to the api folder in your project
