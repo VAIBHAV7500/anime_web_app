@@ -36,8 +36,6 @@
 
 * Create a certificate folder and copy the self signed certificate over there.
 
-* Setup config/dbConfig.json file with the user and password of your MySQL.
-
 * Create Database
     ```
     npm run db

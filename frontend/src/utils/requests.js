@@ -1,7 +1,5 @@
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 const requests = {
-    fetchTrending: `api/video/trending?api_key=${API_KEY}`,
+    fetchTrending: `api/video/trending`,
     fetchBanner: `api/video/banner`,
     fetchTopRated: `api/video/genre?genre_id=Supernatural`,
     fetchActionMovies: `api/video/genre?genre_id=action`,
@@ -9,7 +7,7 @@ const requests = {
     fetchHorrorMovies: `api/video/genre?genre_id=horror`,
     fetchRomanceMovies: `api/video/genre?genre_id=romance`,
     fetchDrama: `api/video/genre?genre_id=drama`,
-    fetchDocumentaries: `api/video/trending?api_key=${API_KEY}`,
+    fetchDocumentaries: `api/video/trending`,
     fetchFantasy: `api/video/genre?genre_id=fantasy`,
     fetchAdventure: `api/video/genre?genre_id=adventure`,
     fetchEpisodes: `api/video/episodes`,
