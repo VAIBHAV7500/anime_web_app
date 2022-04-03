@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "https://anime-web-app.herokuapp.com:4200/static/css/main.64a4e5f4.chunk.css",
-    "main.js": "https://anime-web-app.herokuapp.com:4200/static/js/main.5e21506f.chunk.js",
-    "main.js.map": "https://anime-web-app.herokuapp.com:4200/static/js/main.5e21506f.chunk.js.map",
-    "runtime-main.js": "https://anime-web-app.herokuapp.com:4200/static/js/runtime-main.36574bc6.js",
-    "runtime-main.js.map": "https://anime-web-app.herokuapp.com:4200/static/js/runtime-main.36574bc6.js.map",
-    "static/css/2.eb5b55f0.chunk.css": "https://anime-web-app.herokuapp.com:4200/static/css/2.eb5b55f0.chunk.css",
-    "static/js/2.6ab37ca8.chunk.js": "https://anime-web-app.herokuapp.com:4200/static/js/2.6ab37ca8.chunk.js",
-    "static/js/2.6ab37ca8.chunk.js.map": "https://anime-web-app.herokuapp.com:4200/static/js/2.6ab37ca8.chunk.js.map",
-    "index.html": "https://anime-web-app.herokuapp.com:4200/index.html",
-    "precache-manifest.4d7d2efb89d61a8ccd94e51286189f77.js": "https://anime-web-app.herokuapp.com:4200/precache-manifest.4d7d2efb89d61a8ccd94e51286189f77.js",
-    "service-worker.js": "https://anime-web-app.herokuapp.com:4200/service-worker.js",
-    "static/css/2.eb5b55f0.chunk.css.map": "https://anime-web-app.herokuapp.com:4200/static/css/2.eb5b55f0.chunk.css.map",
-    "static/css/main.64a4e5f4.chunk.css.map": "https://anime-web-app.herokuapp.com:4200/static/css/main.64a4e5f4.chunk.css.map",
-    "static/js/2.6ab37ca8.chunk.js.LICENSE.txt": "https://anime-web-app.herokuapp.com:4200/static/js/2.6ab37ca8.chunk.js.LICENSE.txt",
-    "static/media/styles.css": "https://anime-web-app.herokuapp.com:4200/static/media/revicons.2feb69cc.eot"
+    "main.css": "https://anime-web-app.herokuapp.com/static/css/main.64a4e5f4.chunk.css",
+    "main.js": "https://anime-web-app.herokuapp.com/static/js/main.5e21506f.chunk.js",
+    "main.js.map": "https://anime-web-app.herokuapp.com/static/js/main.5e21506f.chunk.js.map",
+    "runtime-main.js": "https://anime-web-app.herokuapp.com/static/js/runtime-main.07f9bd79.js",
+    "runtime-main.js.map": "https://anime-web-app.herokuapp.com/static/js/runtime-main.07f9bd79.js.map",
+    "static/css/2.a488b519.chunk.css": "https://anime-web-app.herokuapp.com/static/css/2.a488b519.chunk.css",
+    "static/js/2.c72e6286.chunk.js": "https://anime-web-app.herokuapp.com/static/js/2.c72e6286.chunk.js",
+    "static/js/2.c72e6286.chunk.js.map": "https://anime-web-app.herokuapp.com/static/js/2.c72e6286.chunk.js.map",
+    "index.html": "https://anime-web-app.herokuapp.com/index.html",
+    "precache-manifest.443619fd93ecdb505322335da818d897.js": "https://anime-web-app.herokuapp.com/precache-manifest.443619fd93ecdb505322335da818d897.js",
+    "service-worker.js": "https://anime-web-app.herokuapp.com/service-worker.js",
+    "static/css/2.a488b519.chunk.css.map": "https://anime-web-app.herokuapp.com/static/css/2.a488b519.chunk.css.map",
+    "static/css/main.64a4e5f4.chunk.css.map": "https://anime-web-app.herokuapp.com/static/css/main.64a4e5f4.chunk.css.map",
+    "static/js/2.c72e6286.chunk.js.LICENSE.txt": "https://anime-web-app.herokuapp.com/static/js/2.c72e6286.chunk.js.LICENSE.txt",
+    "static/media/styles.css": "https://anime-web-app.herokuapp.com/static/media/revicons.2feb69cc.eot"
   },
   "entrypoints": [
-    "static/js/runtime-main.36574bc6.js",
-    "static/css/2.eb5b55f0.chunk.css",
-    "static/js/2.6ab37ca8.chunk.js",
+    "static/js/runtime-main.07f9bd79.js",
+    "static/css/2.a488b519.chunk.css",
+    "static/js/2.c72e6286.chunk.js",
     "static/css/main.64a4e5f4.chunk.css",
     "static/js/main.5e21506f.chunk.js"
   ]
