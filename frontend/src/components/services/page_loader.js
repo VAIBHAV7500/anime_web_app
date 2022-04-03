@@ -20,7 +20,7 @@ function page_loader({title,cover}) {
 
     return (
         <div className={styles.shadow} style={coverBackground}>
-                {/* <div className={styles.title}>{title}</div> */}
+                <div className={styles.title}>{title}</div>
                 {/* <GridLoader loading={true} css={override} size={100} color="white"/> */}
         </div>
     )

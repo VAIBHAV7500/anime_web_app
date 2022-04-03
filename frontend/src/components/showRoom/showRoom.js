@@ -115,7 +115,7 @@ export class showRoom extends Component {
     render() {
         return (
             <div className={styles.showRoom}>
-              { this.state?.pageLoader && <PageLoader className={styles.shadow} title="Initializing Show Room" /> }
+              { this.state?.pageLoader && <PageLoader className={styles.shadow} title="Loading Home..." /> }
               <Nav />
               <Banner />
               <div  className={styles.spaces}/>
