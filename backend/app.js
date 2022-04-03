@@ -42,15 +42,15 @@ if(process.env.NODE_ENV === "production"){
   app.use(hsts({
     maxAge: 15552000  // 180 days in seconds
   })) 
+}else {
+  global.redis = redis.createClient({
+    host: 'redis',
+    port: 6379,
+  });
+  global.redis.on('error', (err) => {
+    logger.error(err);
+  });
 }
-global.redis = redis.createClient({
-  host: 'redis',
-  port: 6379,
-});
-
-global.redis.on('error', (err) => {
-  logger.error(err);
-});
 
 // use response-time as a middleware
 app.use(responseTime());
