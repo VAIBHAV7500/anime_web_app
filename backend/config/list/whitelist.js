@@ -5,5 +5,6 @@ module.exports = [
   'www.animeistag.net',
   '192.168.2.7:3000',
   'localhost:3000',
-  'localhost:4200'
+  'localhost:4200',
+  'anime-web-app.herokuapp.com'
 ]
