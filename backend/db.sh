@@ -1,1 +1,1 @@
-node ./db/db_build
+export $(cat .env | xargs) && node ./db/db_build

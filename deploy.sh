@@ -22,8 +22,6 @@ npm run db
 echo "Building Frontend"
 cd ..
 sh build.sh
-echo "Updating Config"
-sh config.sh 
 echo "Creating Server"
 cd backend
 forever start app.js

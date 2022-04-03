@@ -7,7 +7,7 @@ const createTable = (con) => {
             user_id BIGINT UNSIGNED,
             notification_id BIGINT UNSIGNED,
             read_reciept BOOLEAN DEFAULT FALSE,
-            read_time TIMESTAMP DEFAULT NULL,
+            read_time TIMESTAMP,
             created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY(notification_id) REFERENCES notifications(ID)

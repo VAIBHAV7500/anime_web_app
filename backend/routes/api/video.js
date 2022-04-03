@@ -4,7 +4,6 @@ const apiVideo = require('@api.video/nodejs-sdk');
 const formidable = require("formidable");
 const db = require('../../db');
 const { json } = require('express');
-const banner = require('../../config/banner.json');
 const {isPaid} = require('../../lib/order');
 const {getValue, setValue} = require('../../lib/redis');
 
@@ -187,7 +186,9 @@ router.get('/trending',async (req,res,next)=>{
 });
 
 router.get('/banner', async (req, res, next) => {
-    res.json(banner);
+    result = await db.banners.getBanners();
+    console.log(result);
+    res.json(result);
 });
 
 router.get('/genre',async (req,res,next)=>{

@@ -121,8 +121,6 @@ bin
 
 public/videos/*
 
-config
-
 build
 
 certificates
