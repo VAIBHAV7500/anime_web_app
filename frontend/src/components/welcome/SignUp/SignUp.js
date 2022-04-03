@@ -104,13 +104,10 @@ export default function SignUp(props) {
         }); 
         stopLoader();
         if(response){
-            console.log(response);
             if(response.status === 200){
                 setEmail(state.regEmail);
-                console.log('Setting User');
-                console.log(response.data);
                 setUser(response.data.id);
-                setActive(2);
+                setActive(0);
             }else{
                 setState(prevState =>({
                     ...prevState,
@@ -190,7 +187,7 @@ export default function SignUp(props) {
                         fieldData={field} 
                     />
                 ))}
-                <p className={styles.check_para}><input type="checkbox" required /><span className={styles.checkbox}>I agree to the <Link to="/terms-and-conditions" className={styles.tandc}>terms and condition and privacy policy</Link> </span></p>
+                <p className={styles.check_para}><input type="checkbox" required /><span className={styles.checkbox}>I agree to the <Link to="/terms-and-conditions" className={styles.tandc}><strong>terms and conditions</strong></Link> </span></p>
                 <button className={styles2.btn} type="submit">{ state.loader? <Spinner/> : <strong>Sign Up</strong>}</button>
                 <p className={`${styles.sign_in_p} ${styles2.para}`}>Already have an account? <span onClick={()=>{setActive(0)}} className={`${styles.sign_in} ${styles2.link}`} ><strong>Sign In</strong></span></p>
             </form>

@@ -19,6 +19,8 @@ module.exports = (app)=>{
             }
             const hash = await createHash(password);
             body.password = hash;
+            body.is_active = true;
+            body.plan_id = 2;
             const resp = await db.user.create(body).catch(err=>{
                 errMessage = err.sqlMessage;
                 if(errMessage.includes("email")){
@@ -40,11 +42,11 @@ module.exports = (app)=>{
             }); 
             if(resp){
                 const user_id = resp.insertId;
-                await initiateUserVerification(user_id).catch((err) => {
-                    res.status(403).json({
-                        message : "Verification Initiation Failed",
-                    });
-                });
+                // await initiateUserVerification(user_id).catch((err) => {
+                //     res.status(403).json({
+                //         message : "Verification Initiation Failed",
+                //     });
+                // });
                 res.status(200).json({
                     id: user_id
                 });
