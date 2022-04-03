@@ -25,7 +25,7 @@ const Review = React.memo(({show_id,setState,getCache, toastConfig}) => {
     const {id} = useParams();
     
     const init = async () => {
-        if(userId){
+        if(!userId){
             return;
         }
         const endPoint = `${requests.reviews}/shows?id=${id}&user_id=${userId}`;
@@ -50,6 +50,10 @@ const Review = React.memo(({show_id,setState,getCache, toastConfig}) => {
         setLoading(false);
         setReviews(finalResult);
     }
+
+    useEffect(() => {
+        init()
+    }, [])
 
     const handleEditorChange = (content, editor) => {
         setTextEditor(editor);
