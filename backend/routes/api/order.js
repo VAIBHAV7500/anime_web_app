@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../../db/index');
-const keys = require('../../config/keys.json');
 const Razorpay = require('razorpay');
 const request = require('request');
 const plans = require('../../config/plans');
 const { updateUserDates } = require('../../lib/order');
 const {logger} = require('../../lib/logger');
+
+const keys = {
+  razorpay: {
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+  }
+}
 
 const instance = new Razorpay(keys.razorpay);
 

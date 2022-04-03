@@ -18,7 +18,13 @@ const grantTypeAllowed = async (clientID, grantType, callback) => {
 }
 
 const getUser = async (email, password, callback) => {
-    result = await db.user.find_by_email(email).catch(e=>{callback(null,null); return;});
+    result = await db.user.find_by_email(email).catch(e=>{
+        console.log('Error re error')
+        console.log(e.backtrace);
+        callback(null,null); 
+        return;
+    });
+    console.log(result);
     if(result){
         const comparePass = await compareHash(result.password, password);
         if(!comparePass){

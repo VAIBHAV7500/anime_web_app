@@ -48,5 +48,8 @@
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0",
     "ws": "^7.4.1"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

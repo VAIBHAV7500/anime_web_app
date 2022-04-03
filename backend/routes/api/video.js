@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const apiVideo = require('@api.video/nodejs-sdk');
-const keys = require('../../config/keys.json');
 const formidable = require("formidable");
 const db = require('../../db');
 const { json } = require('express');
@@ -10,7 +9,7 @@ const {isPaid} = require('../../lib/order');
 const {getValue, setValue} = require('../../lib/redis');
 
 const client = new apiVideo.ClientSandbox({
-    apiKey: keys.api_video.apiKey
+    apiKey: "1234"
 });
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -23,7 +22,7 @@ router.post('/',(req,res,next)=>{
     const file_name = 'anniversary2.mp4';
     const video = {
         //videoUrl: `http://gdurl.com/qELA`,
-        videoUrl: `https://cdn.api.video/vod/viksunQEzGp5svYdVtzI5RW/hls/manifest.m3u8`,
+        videoUrl: `https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8`,
         title: 'Vinland Saga Trailer'
     }
     res.json(video);
@@ -51,25 +50,18 @@ router.post('/upload', async (req,res,next)=>{
     form.uploadDir = process.env.UPLOAD_DIR;
     form.parse(req,async (err,fields,files)=>{
         if(err) throw err;
-        if(fields.api_key && fields.api_key === keys.app.apiKey){
-            let startUploadTimer = new Date().toLocaleString();
+        let startUploadTimer = new Date().toLocaleString();
 
-            let result = await client.videos.upload(files.source.path, {
-                title: fields.title,
-                mp4Support: true
-            });
-            startUploadTimer = new Date().toLocaleString();
-            fields["url"] = result.assets.hls,
-            db.videos.create(fields);
-            res.json({
-                message: "Happy Uploading!. Verify the video at Dashboard"
-            });
-        }
-        else{
-           res.status(401).json({
-               message: "API KEY is missing or incorrect"
-           })
-        }
+        let result = await client.videos.upload(files.source.path, {
+            title: fields.title,
+            mp4Support: true
+        });
+        startUploadTimer = new Date().toLocaleString();
+        fields["url"] = result.assets.hls,
+        db.videos.create(fields);
+        res.json({
+            message: "Happy Uploading!. Verify the video at Dashboard"
+        });
     });
 });
 
@@ -174,11 +166,6 @@ router.post('/create', async (req, res, next)=>{
 });
 
 router.get('/trending',async (req,res,next)=>{
-    if(!req.query.api_key || req.query.api_key !== keys.app.apiKey){
-        res.status(401).json({
-            message: "API KEY is missing or incorrect"
-        })
-    }
     const videos = [25,30,124,114,122,10,58,127,77,84];
     const promiseArray = [];
     videos.forEach((id)=>{

@@ -17,9 +17,6 @@ const fs = require('fs');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const passport = require('passport');
-const connectEnsureLogin = require('connect-ensure-login');
-const keys = require('./config/keys.json');
-const dbConfig = require('./config/dbConfig.json');
 const responseTime = require('response-time');
 const redis = require('redis');
 const {executeOnce} = require('./services/slave');
@@ -38,7 +35,10 @@ app.oauth = oAuth2Server({
 var { anyError, errorHandler, apiMiddleware }  = require('./services/middleware');
 require('dotenv').config();
 
+console.log(process.env.NODE_ENV)
+
 if(process.env.NODE_ENV === "production"){
+  console.log("Running Production...")
   app.use(hsts({
     maxAge: 15552000  // 180 days in seconds
   })) 
@@ -74,16 +74,16 @@ if(process.env.NODE_ENV === "production"){
 }
 
 var sessionStore = new MySQLStore({
-  host: dbConfig.host,
-  port: dbConfig.port,
-  user: dbConfig.user,
-  password: dbConfig.password,
-  database: dbConfig.db_name,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB,
 });
 
 var sess = {
-  key: keys.session.key,
-  secret: keys.session.secret,
+  key: process.env.SESSION_KEY,
+  secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
   store: sessionStore,
   resave: false,
@@ -179,46 +179,51 @@ let host = process.env.HOST || 'localhost';
 
 let isMainWorker = false;
 
-if (clusterWorkerSize > 1) {
-  if (cluster.isMaster) {
-    for (let i=0; i < clusterWorkerSize; i++) {
-      cluster.fork()
-    }
+server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
+const wss = new WebSocket.Server({ server }); 
+onLoad(wss);
+executeOnce();
 
-    cluster.on('listening', (worker, address) => {
-      console.log("cluster listening new worker", worker.id, " ", address);
-      if(!isMainWorker) {
-          console.log("Making worker " + worker.id + " to main worker");
-          isMainWorker = true;
-          worker.send({order: "oneTimeExecution"});
-      }
-  });
+// if (clusterWorkerSize > 1) {
+//   if (cluster.isMaster) {
+//     for (let i=0; i < clusterWorkerSize; i++) {
+//       cluster.fork()
+//     }
 
-    cluster.on("exit", function(worker) {
-      console.log("Worker", worker.id, " has exitted.")
-    })
-  } else {
-    server = http.createServer(app);
-    const wss = new WebSocket.Server({ server }); 
-    onLoad(wss);
-    process.on('message', function(msg) {
-      console.log('Worker ' + process.pid + ' received message from master.', msg);
-      if(msg.order == "oneTimeExecution") {
-        executeOnce();
-      }
-    });
-    server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
-  }
-} else {
-  if(!isMainWorker){
-    isMainWorker = true;
-    executeOnce();
-  }
-  server = http.createServer(app);
-  const wss = new WebSocket.Server({ server }); 
-  onLoad(wss);
-  server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
-}
+//     cluster.on('listening', (worker, address) => {
+//       console.log("cluster listening new worker", worker.id, " ", address);
+//       if(!isMainWorker) {
+//           console.log("Making worker " + worker.id + " to main worker");
+//           isMainWorker = true;
+//           worker.send({order: "oneTimeExecution"});
+//       }
+//   });
+
+//     cluster.on("exit", function(worker) {
+//       console.log("Worker", worker.id, " has exitted.")
+//     })
+//   } else {
+//     server = http.createServer(app);
+//     const wss = new WebSocket.Server({ server }); 
+//     onLoad(wss);
+//     process.on('message', function(msg) {
+//       console.log('Worker ' + process.pid + ' received message from master.', msg);
+//       if(msg.order == "oneTimeExecution") {
+//         executeOnce();
+//       }
+//     });
+//     server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
+//   }
+// } else {
+//   if(!isMainWorker){
+//     isMainWorker = true;
+//     executeOnce();
+//   }
+//   server = http.createServer(app);
+//   const wss = new WebSocket.Server({ server }); 
+//   onLoad(wss);
+//   server.listen(port,host,() => console.log(`Listening on port http://${host}:${port}`));
+// }
 
 module.exports = server;
 

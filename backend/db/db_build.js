@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const dbConfig = require('../config/dbConfig.json');
 const fs = require('fs');
 const user = require('./tables/user');
 const player_sessions = require('./tables/player_sessions');
@@ -28,14 +27,15 @@ const razorpay_orders = require('./tables/razorpay_orders');
 const user_verification = require('./tables/user_verification');
 
 var con = mysql.createConnection({
-    host: dbConfig.db_url,
-    user: dbConfig.user,
-    password: dbConfig.password
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB
 });
 
 const migrationFolder = `./db/migrations`;
 
-const db_name = dbConfig.db_name;
+const db_name = process.env.DB;
 
 const createDB = async () => {
     return new Promise((res,rej)=>{

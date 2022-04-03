@@ -1,10 +1,8 @@
-const keys = require('../../config/keys.json');
-const mailConfig = require('../../config/mail.json');
 const sgMail = require('@sendgrid/mail');
 const { logger } = require('handlebars');
 const fs = require('fs');
 
-const sendgridAPIKey = keys.sendgrid.key;
+const sendgridAPIKey = process.env.SENDGRID_KEY;
 sgMail.setApiKey(sendgridAPIKey);
 
 const generateMailBody = (file) => {
