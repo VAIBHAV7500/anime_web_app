@@ -5,7 +5,7 @@
 <p align='center'>
   Animei TV is a full fledged working OTT Platform.
 
-![Landing Page](./images/landing_page.png)
+![Cover Page](./images/cover.png)
 </p>
 
 # Demo
@@ -88,6 +88,8 @@ npm start
 <span name="screenshots"></span>
 # Images
 
+### Landing Page
+![Landing Page](./images/landing_page.png)
 ### Show Page
 ![Show Page](./images/show_page.png)
 
