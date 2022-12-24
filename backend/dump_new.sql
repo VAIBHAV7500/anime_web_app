@@ -21,7 +21,7 @@
 
 -- CREATE DATABASE /*!32312 IF NOT EXISTS*/ `animeApp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `u826560735_animei`;
+USE `ani-db`;
 
 --
 -- Table structure for table `access_tokens`
