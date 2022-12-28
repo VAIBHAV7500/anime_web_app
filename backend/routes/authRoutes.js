@@ -58,7 +58,7 @@ module.exports = (app)=>{
         }
     });
     
-    router.post('/login', geoBlockCheckMiddleware, app.oauth.grant(),(req,res,next)=>{
+    router.post('/login', app.oauth.grant(),(req,res,next)=>{
     });
 
     router.get('/verify/:user/:otp', async (req,res,next) => {

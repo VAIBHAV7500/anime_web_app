@@ -54,6 +54,12 @@ function Info({movie}) {
         }
     }
 
+    const createMarkup = (description) => {
+        return {
+            __html: description
+        };
+    }
+
     const handleWatchList = async () => {
         if(!['Adding','Removing'].includes(watchStatus)){
           const body = {
@@ -94,8 +100,7 @@ function Info({movie}) {
                         return <div className={styles.genre_card}  key={index}>{genre}</div>
                     })}
                 </div>
-                <div className={styles.synopsis}>
-                    {moreSyn ? movie?.description : truncate(movie?.description,400)}<p className={styles.see_more} onClick={toggleSyn} >{moreSyn? " See Less" : "See More"}</p>
+                <div className={styles.synopsis} dangerouslySetInnerHTML={createMarkup(movie?.description)}>
                 </div>
             </div>
             <div className={`${styles.group_change}`}>

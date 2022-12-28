@@ -20,7 +20,7 @@ router.post('/',(req,res,next)=>{
     const file_name = 'anniversary2.mp4';
     const video = {
         //videoUrl: `http://gdurl.com/qELA`,
-        videoUrl: `https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8`,
+        videoUrl: `https://moctobpltc-i.akamaihd.net/hls/live/571329/eight/playlist.m3u8`,
         title: 'Vinland Saga Trailer'
     }
     res.json(video);
@@ -175,8 +175,26 @@ router.get('/trending',async (req,res,next)=>{
 });
 
 router.get('/banner', async (req, res, next) => {
-    result = await db.banners.getBanners();
-    console.log(result);
+    // result = await db.banners.getBanners();
+    // console.log(result);
+    // res.json(result);
+    const videos = [25,30,124,114,122,10,58,127,77,84];
+    const promiseArray = [];
+    videos.forEach((id)=>{
+        promiseArray.push(new Promise((res,rej)=>{
+            db.shows.find(id).then((show)=>{
+                res(show);
+            }).catch((err)=>{
+                rej(err);
+            });
+        }));
+    });
+    const result = await Promise.all(promiseArray).catch((err)=>{
+        res.status(500).json({
+            error: err.message,
+            stack: err.stack
+        })
+    });
     res.json(result);
 });
 
@@ -249,7 +267,7 @@ router.get('/details',async (req,res,next)=>{
         result.closing_start_time = 120;
         result.closing_end_time = 135;
         result.next_show = 20;
-        result.url = "https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8";
+        result.url = "https://moctobpltc-i.akamaihd.net/hls/live/571329/eight/playlist.m3u8";
 
         //=================================================//
         result.progress = progress.length ? progress[0].covered_percentage : 0;

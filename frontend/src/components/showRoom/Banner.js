@@ -77,7 +77,7 @@ function Banner() {
               {
                 backgroundRepeat: 'no-repeat',
                 backgroundImage: `url(
-                      "${movie?.src}"
+                      "${movie?.src || movie?.poster_landscape_url}"
                   )`,
                 backgroundPosition: "center center",
               }

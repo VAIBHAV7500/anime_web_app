@@ -150,7 +150,8 @@ const { onLoad } = require('./routes/socket');
 
 app.use('/auth',authLimiter,authRouter);
 app.use('/restrictedArea',restrictedAreaRouter)
-app.use('/api',apiMiddleware, app.oauth.authorise(), apiRouter);
+//app.use('/api',apiMiddleware, app.oauth.authorise(), apiRouter);
+app.use('/api', apiRouter);
 app.use(app.oauth.errorHandler());
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname, 'build')));

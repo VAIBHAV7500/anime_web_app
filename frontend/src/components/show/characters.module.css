@@ -133,6 +133,26 @@
     background-color: transparent;
 }
 
+.toggle_all{
+    background-color: rgb(80, 14, 141);
+    text-align: center;
+    color: white;
+    font-size: 11px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 15px 10px;
+    margin: 5px;
+    border: none;
+    letter-spacing: 1px;
+    width: auto;
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media(max-width:1000px){
     .character_card{
         width: 207px;

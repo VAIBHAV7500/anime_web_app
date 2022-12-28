@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Characters = React.memo(({show_id, toastConfig, getRecent, setState, getCache}) => {
     const [characters, setCharacters] = useState([]);
     const [rotateCard, setRotateCard] = useState([]);
+    const [showCards, setShowCards] = useState(true);
     const [loading, setLoading] = useState(true);
     const {id} = useParams();
 
@@ -87,6 +88,15 @@ const Characters = React.memo(({show_id, toastConfig, getRecent, setState, getCa
         //dummyArr[index] = !rotateCard[index]
         setRotateCard(dummyArr);
     }
+
+    const toggleAll = () => {
+        let dummArr = []
+        characters.forEach((c,i) => {
+            dummArr[i] = showCards;
+        });
+        setShowCards(!showCards);
+        setRotateCard(dummArr);
+    }
     
     return (
         <div className={styles.characters}>
@@ -106,8 +116,9 @@ const Characters = React.memo(({show_id, toastConfig, getRecent, setState, getCa
                 <p>Characters will be shown as the story continues, or you can also reveal a card by clicking on it.</p>
             </div>
             {loading && <div className = {styles.loader}><PulseLoader color="#ffff"/></div>}
+            <button onClick={toggleAll} className={styles.toggle_all}>Toggle All</button>
             <div className={styles.character_container}>
-            {
+            {   
                 characters?.map((character,i)=>{
                     return (    
                     <div key={i} onClick={()=>{rotateOnClick(i)}} className={`${styles.character_card} `}>
