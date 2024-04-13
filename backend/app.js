@@ -44,7 +44,7 @@ if(process.env.NODE_ENV === "production"){
   })) 
 }else {
   global.redis = redis.createClient({
-    host: 'redis',
+    host: 'localhost',
     port: 6379,
   });
   global.redis.on('error', (err) => {

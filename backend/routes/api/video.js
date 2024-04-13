@@ -20,7 +20,7 @@ router.post('/',(req,res,next)=>{
     const file_name = 'anniversary2.mp4';
     const video = {
         //videoUrl: `http://gdurl.com/qELA`,
-        videoUrl: `https://moctobpltc-i.akamaihd.net/hls/live/571329/eight/playlist.m3u8`,
+        videoUrl: `https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8`,
         title: 'Vinland Saga Trailer'
     }
     res.json(video);
@@ -267,7 +267,7 @@ router.get('/details',async (req,res,next)=>{
         result.closing_start_time = 120;
         result.closing_end_time = 135;
         result.next_show = 20;
-        result.url = "https://moctobpltc-i.akamaihd.net/hls/live/571329/eight/playlist.m3u8";
+        result.url = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
 
         //=================================================//
         result.progress = progress.length ? progress[0].covered_percentage : 0;

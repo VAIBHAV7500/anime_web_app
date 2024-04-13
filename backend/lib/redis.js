@@ -1,6 +1,6 @@
 const setValue = (key,value) => {
   if(global.redis){
-    global.redis.setex(key, 3600, JSON.stringify(value));
+    //global.redis.setex(key, 3600, JSON.stringify(value));
   }
 }
 

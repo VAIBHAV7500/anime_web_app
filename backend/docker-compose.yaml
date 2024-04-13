@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./animeApp.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      MYSQL_DATABASE: animeApp
+      MYSQL_ROOT_PASSWORD: pwd
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:6.0
+    ports:
+      - "6379:6379"
+  
+  phpMyAdmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+
+volumes:
+  mysql_data: {}

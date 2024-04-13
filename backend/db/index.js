@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const fs = require('fs');
 const util = require('util');
 const {getLogger} = require('../lib/logger');

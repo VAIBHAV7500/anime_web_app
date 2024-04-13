@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const fs = require('fs');
 const user = require('./tables/user');
 const player_sessions = require('./tables/player_sessions');
