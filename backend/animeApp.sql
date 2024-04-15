@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Apr 13, 2024 at 05:56 PM
+-- Generation Time: Apr 15, 2024 at 06:51 PM
 -- Server version: 8.0.36
 -- PHP Version: 8.2.8
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `access_tokens` (
-  `access_token` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  `access_token` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,7 +38,7 @@ CREATE TABLE `access_tokens` (
 
 INSERT INTO `access_tokens` (`access_token`, `user_id`) VALUES
 ('a08567f2e936f94988811486b4f0c6ac4276a5fc', 1),
-('74ad37f81f4c85d0dabf6835d55ba5ed659b52d7', 2);
+('94f8097232f25ea8dfc464106d4c929283ae5335', 2);
 
 -- --------------------------------------------------------
 
@@ -48,11 +48,11 @@ INSERT INTO `access_tokens` (`access_token`, `user_id`) VALUES
 
 CREATE TABLE `audios` (
   `id` bigint UNSIGNED NOT NULL,
-  `url` text COLLATE utf8mb4_general_ci,
+  `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `audio_length` time DEFAULT NULL,
   `show_id` bigint DEFAULT NULL,
   `video_id` bigint DEFAULT NULL,
-  `language` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `language` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -78,12 +78,12 @@ CREATE TABLE `banners` (
 
 CREATE TABLE `characters` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_general_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `image_url` text COLLATE utf8mb4_general_ci,
-  `role` text COLLATE utf8mb4_general_ci
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `role` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `completed_shows` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `show_id` bigint UNSIGNED NOT NULL,
-  `image_url` text COLLATE utf8mb4_general_ci,
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -151,7 +151,7 @@ CREATE TABLE `currently_watching` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `show_id` bigint UNSIGNED NOT NULL,
-  `image_url` text COLLATE utf8mb4_general_ci,
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -164,7 +164,7 @@ CREATE TABLE `currently_watching` (
 
 CREATE TABLE `discussions` (
   `id` bigint UNSIGNED NOT NULL,
-  `message` text COLLATE utf8mb4_general_ci,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `video_id` bigint UNSIGNED DEFAULT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `time` double DEFAULT NULL,
@@ -189,7 +189,7 @@ INSERT INTO `discussions` (`id`, `message`, `video_id`, `user_id`, `time`, `crea
 
 CREATE TABLE `genre` (
   `id` bigint UNSIGNED NOT NULL,
-  `category` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -780,9 +780,9 @@ INSERT INTO `genre_show_mapping` (`id`, `genre_id`, `show_id`) VALUES
 
 CREATE TABLE `notifications` (
   `id` bigint UNSIGNED NOT NULL,
-  `image_url` text COLLATE utf8mb4_general_ci,
-  `body` text COLLATE utf8mb4_general_ci,
-  `link` text COLLATE utf8mb4_general_ci,
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `link` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -839,20 +839,20 @@ CREATE TABLE `player_sessions` (
 --
 
 CREATE TABLE `razorpay_orders` (
-  `id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `amount` double DEFAULT NULL,
-  `invoice_id` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `method` text COLLATE utf8mb4_general_ci,
+  `invoice_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `method` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `amount_refunded` double DEFAULT NULL,
-  `refund_status` text COLLATE utf8mb4_general_ci,
-  `email` text COLLATE utf8mb4_general_ci,
-  `contact` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `card_id` text COLLATE utf8mb4_general_ci,
-  `bank` text COLLATE utf8mb4_general_ci,
-  `wallet` text COLLATE utf8mb4_general_ci,
-  `vpa` text COLLATE utf8mb4_general_ci,
-  `transaction_id` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `refund_status` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `email` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `contact` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `card_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `bank` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `wallet` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `vpa` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `transaction_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -866,7 +866,7 @@ CREATE TABLE `razorpay_orders` (
 
 CREATE TABLE `reviews` (
   `id` bigint UNSIGNED NOT NULL,
-  `review` text COLLATE utf8mb4_general_ci,
+  `review` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `show_id` bigint UNSIGNED DEFAULT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `likes` bigint DEFAULT NULL,
@@ -910,20 +910,20 @@ CREATE TABLE `sessions` (
 
 CREATE TABLE `shows` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_general_ci NOT NULL,
-  `original_name` text COLLATE utf8mb4_general_ci,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `original_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `group_id` bigint NOT NULL,
   `next_show_id` bigint DEFAULT NULL,
-  `trailer_url` text COLLATE utf8mb4_general_ci,
-  `poster_portrait_url` text COLLATE utf8mb4_general_ci,
-  `poster_landscape_url` text COLLATE utf8mb4_general_ci,
+  `trailer_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `poster_portrait_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `poster_landscape_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `season` int DEFAULT NULL,
   `total_view` bigint DEFAULT '0',
   `release_date` date DEFAULT NULL,
   `age_category` int DEFAULT NULL,
   `plan_id` bigint DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_general_ci,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `total_episodes` int DEFAULT NULL,
@@ -1083,7 +1083,7 @@ INSERT INTO `shows` (`id`, `name`, `original_name`, `group_id`, `next_show_id`, 
 
 CREATE TABLE `show_group` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_general_ci NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1212,10 +1212,10 @@ INSERT INTO `show_group` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `subtitles` (
   `id` bigint UNSIGNED NOT NULL,
-  `url` text COLLATE utf8mb4_general_ci,
+  `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `show_id` bigint DEFAULT NULL,
   `video_id` bigint DEFAULT NULL,
-  `language` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `language` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1228,25 +1228,25 @@ CREATE TABLE `subtitles` (
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` int DEFAULT NULL,
-  `mobile` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mobile` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `plan_id` int DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_active` tinyint(1) DEFAULT '0',
-  `name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `user_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
-) ;
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `password`, `email`, `status`, `mobile`, `plan_id`, `created_at`, `updated_at`, `is_active`, `name`, `user_name`) VALUES
-(1, '90d3bd566c0bebf257a7ba07986f2a8300a577d749c72d8f22bcf784be6d99df', 'test@gmail.com', NULL, '8218425476', 0, '2020-10-12 04:58:14', '2022-03-30 12:24:54', 1, NULL, NULL),
-(2, '$2b$10$8ntGolXglpXXd.0mwA7g6.TzVqeFFuZOp.Re5Jod.wqSGtnlha.La', 'test@test.com', NULL, NULL, 0, '2022-03-30 12:26:37', '2022-03-30 12:26:54', 1, 'Vaibhav', NULL);
+(1, '90d3bd566c0bebf257a7ba07986f2a8300a577d749c72d8f22bcf784be6d99df', 'test@gmail.com', NULL, '', 0, '2020-10-12 04:58:14', '2024-04-15 18:50:16', 1, NULL, NULL),
+(2, '$2b$10$8ntGolXglpXXd.0mwA7g6.TzVqeFFuZOp.Re5Jod.wqSGtnlha.La', 'test@test.com', NULL, NULL, 2, '2022-03-30 12:26:37', '2024-04-15 18:47:49', 1, 'Vaibhav', NULL);
 
 -- --------------------------------------------------------
 
@@ -1256,7 +1256,7 @@ INSERT INTO `users` (`id`, `password`, `email`, `status`, `mobile`, `plan_id`, `
 
 CREATE TABLE `user_ip` (
   `id` bigint UNSIGNED NOT NULL,
-  `ip` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -1268,7 +1268,8 @@ CREATE TABLE `user_ip` (
 
 INSERT INTO `user_ip` (`id`, `ip`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, '127.0.0.1', 2, '2022-03-30 12:27:16', '2022-03-30 12:27:16'),
-(2, '::1', 2, '2024-04-13 17:31:49', '2024-04-13 17:31:49');
+(2, '::1', 2, '2024-04-13 17:31:49', '2024-04-13 17:31:49'),
+(3, '192.168.65.1', 2, '2024-04-15 17:24:11', '2024-04-15 17:24:11');
 
 -- --------------------------------------------------------
 
@@ -1290,7 +1291,7 @@ CREATE TABLE `user_player_sessions` (
 
 INSERT INTO `user_player_sessions` (`show_id`, `video_id`, `user_id`, `covered_percentage`, `updated_at`) VALUES
 (15, 282, 2, 7.419719745905476, '2024-04-13 17:50:41'),
-(114, 1849, 2, 7.634913498290083, '2022-03-30 12:39:11'),
+(114, 1849, 2, 7.875993078745035, '2024-04-15 18:48:14'),
 (124, 1985, 2, 40.035368349498675, '2024-04-13 17:52:47');
 
 -- --------------------------------------------------------
@@ -1315,8 +1316,8 @@ CREATE TABLE `user_review` (
 CREATE TABLE `user_verification` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `verification_token` text COLLATE utf8mb4_general_ci,
-  `temp_password` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `verification_token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `temp_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1336,9 +1337,9 @@ INSERT INTO `user_verification` (`id`, `user_id`, `verification_token`, `temp_pa
 CREATE TABLE `videos` (
   `id` bigint UNSIGNED NOT NULL,
   `episode_number` int DEFAULT NULL,
-  `name` text COLLATE utf8mb4_general_ci,
-  `url` text COLLATE utf8mb4_general_ci,
-  `thumbnail_url` text COLLATE utf8mb4_general_ci,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `thumbnail_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `video_length` time DEFAULT NULL,
   `intro_start_time` time DEFAULT NULL,
   `intro_end_time` time DEFAULT NULL,
@@ -1347,7 +1348,7 @@ CREATE TABLE `videos` (
   `closing_start_time` time DEFAULT NULL,
   `closing_end_time` time DEFAULT NULL,
   `quality` int DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `show_id` bigint DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -3471,7 +3472,7 @@ CREATE TABLE `watchlist` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `show_id` bigint UNSIGNED NOT NULL,
-  `image_url` text COLLATE utf8mb4_general_ci,
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -3779,13 +3780,13 @@ ALTER TABLE `subtitles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_ip`
 --
 ALTER TABLE `user_ip`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_review`
@@ -3809,7 +3810,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `watchlist`
 --
 ALTER TABLE `watchlist`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
