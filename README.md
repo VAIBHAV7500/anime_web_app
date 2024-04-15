@@ -26,6 +26,8 @@ Requirements: Docker & Docker Compose
 sh setup.sh && sh start.sh
 ```
 
+App : http://localhost:4200
+
 # Development
 
 ## Requirements
