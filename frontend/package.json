@@ -7,7 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "@tinymce/tinymce-react": "^3.14.0",
+    "@tinymce/tinymce-react": "^5.0.1",
     "@videojs/http-streaming": "^2.16.3",
     "axios": "^0.20.0",
     "crypto-js": "^4.2.0",
