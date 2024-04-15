@@ -4,7 +4,12 @@ services:
     image: mysql:8.0
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./animeApp.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./backend/animeApp.sql:/docker-entrypoint-initdb.d/dump.sql
+    healthcheck:
+      test: mysqladmin ping --user=$MYSQL_USER --password=$MYSQL_ROOT_PASSWORD
+      interval: 10s
+      timeout: 5s
+      retries: 100
     environment:
       MYSQL_DATABASE: animeApp
       MYSQL_ROOT_PASSWORD: pwd
@@ -23,6 +28,13 @@ services:
       PMA_PORT: 3306
     ports:
       - "8080:80"
+  
+  app:
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
 
 volumes:
   mysql_data: {}

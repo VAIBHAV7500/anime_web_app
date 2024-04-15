@@ -1,13 +1,9 @@
-FROM node:16
+FROM node:20-alpine
 WORKDIR /app
 COPY . .
-WORKDIR /app/backend
-RUN npm install
-WORKDIR /app/frontent
-RUN npm install
 
-WORKDIR /app
-RUN sh ./build.sh
-WORKDIR /app/backend
-EXPOSE 8080
-CMD ["node", "app.js"]
+RUN npm install --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+
+EXPOSE 3000
+CMD ["npm", "start"]

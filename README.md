@@ -8,9 +8,7 @@
 ![Cover Page](./images/cover.png)
 </p>
 
-# Demo
-
-URL: https://anime-web-app.herokuapp.com/
+# Test Account
 
 Email: test@test.com
     
@@ -18,7 +16,17 @@ Password: Hello@123
 
 # [Screenshots](#screenshots)
 
-# Installation
+
+## Quick Demo
+
+Requirements: Docker & Docker Compose
+
+```
+
+sh setup.sh && sh start.sh
+```
+
+# Development
 
 ## Requirements
 
@@ -26,9 +34,6 @@ Password: Hello@123
 
 * Node - Setup Node from [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-* Self Signed SSL - [here](https://zeropointdevelopment.com/how-to-get-https-working-in-windows-10-localhost-dev-environment/)
-
-* Redis - [here](https://linuxize.com/post/how-to-install-and-configure-redis-on-ubuntu-18-04/)
 
 ## Backend:
 * Install packages required.
@@ -36,19 +41,6 @@ Password: Hello@123
     ```
     cd backend
     npm install
-    ```
-* Check for MySQL
-    ```
-    which mysqld
-    ```
-    If it shows the path then continue otherwise install MySQL.
-* Create a config folder and copy config files in that folder
-
-* Create a certificate folder and copy the self signed certificate over there.
-
-* Create Database
-    ```
-    npm run db
     ```
 
 * Crate a .env file and copy the required content.
