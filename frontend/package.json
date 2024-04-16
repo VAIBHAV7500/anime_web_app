@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@tinymce/tinymce-react": "^5.0.1",
     "@videojs/http-streaming": "^2.16.3",
-    "axios": "^0.20.0",
+    "axios": "^0.28.0",
     "crypto-js": "^4.2.0",
     "dotenv": "^8.6.0",
     "emoji-picker-react": "^3.6.5",
